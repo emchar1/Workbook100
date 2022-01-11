@@ -11,7 +11,7 @@ import FirebaseStorage
 
 // MARK: - Collection Model - for the object used in the Cell
 
-struct CollectionModel: Equatable, Identifiable, Comparable, CustomStringConvertible { //removed CustomStringConvertible, Equatable, when I converted it from a struct to a class
+class CollectionModel: NSItemProvider, Identifiable, Comparable { //removed CustomStringConvertible, Equatable, when I converted it from a struct to a class
     
     struct Size: CustomStringConvertible {
         static let sm = "SM"
@@ -41,7 +41,6 @@ struct CollectionModel: Equatable, Identifiable, Comparable, CustomStringConvert
     let image: StorageReference?
     var id = UUID()
     
-    /*
     init(showNew: Bool, showEssential: Bool, labelTitle: String, labelSubtitle: String, imageName: String, sizes: [Size], image: StorageReference?) {
         self.showNew = showNew
         self.showEssential = showEssential
@@ -53,9 +52,8 @@ struct CollectionModel: Equatable, Identifiable, Comparable, CustomStringConvert
         
         super.init()
     }
-     */
     
-    var description: String {
+    override var description: String {
         return imageName
     }
     
