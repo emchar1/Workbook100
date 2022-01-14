@@ -26,7 +26,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28.985507246376812" y="83.705357142857139"/>
+            <point key="canvasLocation" x="2" y="1043"/>
         </scene>
         <!--Workbook Detail ControllerNEW-->
         <scene sceneID="gnK-Cl-aci">
@@ -395,7 +395,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HO8-hX-qp4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1645.8984375" y="82.576866764275252"/>
+            <point key="canvasLocation" x="1646" y="217"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="E3s-Hw-hCj">
@@ -518,7 +518,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HS-Fc-LA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-879" y="83"/>
+            <point key="canvasLocation" x="-909" y="1043"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Qf-Ob-tYl">
@@ -541,7 +541,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsJ-Nj-uiB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920.50781249999989" y="82.576866764275252"/>
+            <point key="canvasLocation" x="921" y="217"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mnS-DG-2gR">

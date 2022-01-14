@@ -172,7 +172,7 @@ extension WorkbookViewController {
     }
     
     
-    // MARK: - Delegate
+    // MARK: - Collection View Delegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showDetailsNEW", sender: nil)
