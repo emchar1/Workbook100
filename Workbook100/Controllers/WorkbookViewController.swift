@@ -51,6 +51,39 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             
             for itemSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
                 if let obj = itemSnapshot.value as? [String: AnyObject] {
+                    let item = CollectionModel(division: obj[K.FIR.division] as! String,
+                                               collection: obj[K.FIR.collection] as! String,
+                                               productNameDescription: obj[K.FIR.productNameDescription] as! String,
+                                               productCategory: obj[K.FIR.productCategory] as! String,
+                                               colorway: obj[K.FIR.colorway] as! String,
+                                               carryOver: (obj[K.FIR.carryOver] as! String) == "TRUE",
+                                               essential: (obj[K.FIR.essential] as! String) == "TRUE",
+                                               skuCode: obj[K.FIR.skuCode] as! String,
+                                               sizes: [
+                                                CollectionModel.Size(size: obj[K.FIR.size0] as? String,
+                                                                     colorwaySKU: obj[K.FIR.colorwaySKU0] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size1] as? String,
+                                                                     colorwaySKU: obj[K.FIR.colorwaySKU1] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size2] as? String,
+                                                                     colorwaySKU: obj[K.FIR.colorwaySKU2] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size3] as? String,
+                                                                     colorwaySKU: obj[K.FIR.colorwaySKU3] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size4] as? String,
+                                                                     colorwaySKU: obj[K.FIR.colorwaySKU4] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size5] as? String,
+                                                                     colorwaySKU: obj[K.FIR.colorwaySKU5] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size6] as? String,
+                                                                     colorwaySKU: obj[K.FIR.colorwaySKU6] as? String),
+                                               ],
+                                               usMSRP: (obj[K.FIR.usRetailMSRP] as! NSNumber).doubleValue,
+                                               euMSRP: (obj[K.FIR.euRetailMSRP] as! NSNumber).doubleValue,
+                                               countryCode: obj[K.FIR.countryCode] as! String,
+                                               composition: obj[K.FIR.composition] as! String,
+                                               productDescription: obj[K.FIR.productDescription] as! String,
+                                               productFeatures: obj[K.FIR.productFeatures] as! String,
+                                               //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
+                                               image: nil)
+                    /*
                     let item = CollectionModel(showNew: (obj["showNew"] as! String) == "TRUE",
                                                showEssential: (obj["showEssential"] as! String) == "TRUE",
                                                labelTitle: obj["labelTitle"] as! String,
@@ -64,6 +97,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                 CollectionModel.Size(size: CollectionModel.Size.xxl, sku: obj[CollectionModel.Size.xxl] as? String),
                                                ],
                                                image: Storage.storage().reference().child((obj["imageName"] as! String) + ".jpg"))
+                     */
 
                     K.items.append(item)
                 }
@@ -121,7 +155,7 @@ extension WorkbookViewController {
     
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         // FIXME: - item should be the entire model, not just the label title?
-        let item = K.items[indexPath.row].labelTitle
+        let item = K.items[indexPath.row].productNameDescription
         let itemProvider = NSItemProvider(object: item as NSString)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         

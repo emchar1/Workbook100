@@ -96,7 +96,7 @@ class CollectionCellLabel: UILabel {
         super.init(frame: frame)
 
         self.text = text
-        self.numberOfLines = 0
+        self.numberOfLines = 1
         
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false
@@ -206,8 +206,10 @@ class CollectionCell: UICollectionViewCell {
     // MARK: - Helper Functions
     
     func setViews() {
-        labelTitle.text = model.labelTitle
-        labelSubtitle.text = model.labelSubtitle
+        labelTitle.text = model.productNameDescription
+        labelSubtitle.text = model.colorway
+        
+        // FIXME: - NO NO NO NO NO!
         labelSizes.text = "\(model.sizes[0])\n\(model.sizes[1])"
         labelSizes2.text = "\(model.sizes[2])\n\(model.sizes[3])\n\(model.sizes[4])"
         
@@ -217,13 +219,14 @@ class CollectionCell: UICollectionViewCell {
 
         
         // FIXME: - This is sooo clunky - hStackTop
-        hStackTop.subviews[0].isHidden = !model.showNew
-        hStackTop.subviews[1].isHidden = !model.showEssential
-        hStackTop.subviews[2].isHidden = !(!model.showNew && !model.showEssential)
+        hStackTop.subviews[0].isHidden = model.carryOver
+        hStackTop.subviews[1].isHidden = !model.essential
+        hStackTop.subviews[2].isHidden = !(model.carryOver && !model.essential)
     }
     
     
     private func setupViews() {
+        /*
         self.model = CollectionModel(showNew: true,
                                      showEssential: true,
                                      labelTitle: "Product Title",
@@ -237,20 +240,47 @@ class CollectionCell: UICollectionViewCell {
                                         CollectionModel.Size.init(size: nil, sku: "00000-00005")
                                      ],
                                      image: nil)
+         */
+        
+        self.model = CollectionModel(division: "Division",
+                                     collection: "SP23",
+                                     productNameDescription: "Product Name Description",
+                                     productCategory: "Product Category",
+                                     colorway: "Color",
+                                     carryOver: false,
+                                     essential: true,
+                                     skuCode: "00000-00000",
+                                     sizes: [
+                                        CollectionModel.Size(size: "Size 0", colorwaySKU: "00000-00000"),
+                                        CollectionModel.Size(size: "Size 1", colorwaySKU: "00000-00001"),
+                                        CollectionModel.Size(size: "Size 2", colorwaySKU: "00000-00002"),
+                                        CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003"),
+                                        CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004"),
+                                        CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005"),
+                                        CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006")
+                                     ],
+                                     usMSRP: 9.99,
+                                     euMSRP: 10.01,
+                                     countryCode: "US",
+                                     composition: "Composition",
+                                     productDescription: "Product Description",
+                                     productFeatures: "Product Features",
+                                     image: nil)
         
         vStack = CollectionCellStack(distribution: .fill, alignment: .fill, axis: .vertical)
         hStackTop = CollectionCellStack(spacing: 2, distribution: .fillEqually, alignment: .fill, axis: .horizontal)
         labelNew = CollectionCellLabelBubble(type: .new)
         labelEssential = CollectionCellLabelBubble(type: .essential)
         labelNothing = CollectionCellLabelBubble(type: .nothing)
-        labelTitle = CollectionCellLabel(type: .title, text: model.labelTitle)
-        labelSubtitle = CollectionCellLabel(type: .subtitle, text: model.labelSubtitle)
+        labelTitle = CollectionCellLabel(type: .title, text: model.productNameDescription)
+        labelSubtitle = CollectionCellLabel(type: .subtitle, text: model.colorway)
         productImage = UIImageView()
         ruleLine = RuleLine(frame: CGRect(x: 0, y: 0, width: K.CollectionCell.width, height: 20))
         hStackBottom = CollectionCellStack(distribution: .fillEqually, alignment: .fill, axis: .horizontal)
+        
+        // FIXME: - NO NO NO NO NO!
         labelSizes =  CollectionCellLabel(type: .productSize, text: "\(model.sizes[0])\n\(model.sizes[1])")
         labelSizes2 =  CollectionCellLabel(type: .productSize, text: "\(model.sizes[2])\n\(model.sizes[3])\n\(model.sizes[4])")
-        
         
         let padding: CGFloat = 0//K.CollectionCell.padding
 
@@ -291,6 +321,7 @@ class CollectionCell: UICollectionViewCell {
 }
 
 
+/*
 // MARK: - TEST!!!
 
 class CollectionCell2: UICollectionViewCell {
@@ -309,3 +340,4 @@ class CollectionCell2: UICollectionViewCell {
         fatalError("DOH!")
     }
 }
+*/

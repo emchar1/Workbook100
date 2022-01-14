@@ -4,7 +4,7 @@
 //
 //  Created by Eddie Char on 12/27/21.
 //
-
+/*
 import UIKit
 
 class WorkbookDetailController: UIViewController {
@@ -108,3 +108,4 @@ class WorkbookDetailController: UIViewController {
         hStackBottom.addArrangedSubview(labelSizes2)
     }
 }
+*/

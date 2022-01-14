@@ -16,7 +16,6 @@
 		EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D53127859964006C12CF /* WorkbookDetailControllerNEW.swift */; };
 		EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9A276D200F00D22042 /* CollectionCell.swift */; };
 		EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9C276D211000D22042 /* ImageLoader.swift */; };
-		EA91E06E2790ED1500DE630E /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91E06D2790ED1500DE630E /* Test.swift */; };
 		EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF742769573F00943912 /* AppDelegate.swift */; };
 		EAA0CF772769573F00943912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF762769573F00943912 /* SceneDelegate.swift */; };
 		EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF782769573F00943912 /* WorkbookViewController.swift */; };
@@ -37,7 +36,6 @@
 		EA22D53127859964006C12CF /* WorkbookDetailControllerNEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookDetailControllerNEW.swift; sourceTree = "<group>"; };
 		EA53FF9A276D200F00D22042 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		EA53FF9C276D211000D22042 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
-		EA91E06D2790ED1500DE630E /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		EAA0CF712769573F00943912 /* Workbook100.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workbook100.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA0CF742769573F00943912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAA0CF762769573F00943912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				EA22D4DF27754129006C12CF /* Constants.swift */,
 				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
 				EA22D4E127759DA4006C12CF /* CollectionModel.swift */,
-				EA91E06D2790ED1500DE630E /* Test.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -263,7 +260,6 @@
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
 				EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */,
 				EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */,
-				EA91E06E2790ED1500DE630E /* Test.swift in Sources */,
 				EAA0CF772769573F00943912 /* SceneDelegate.swift in Sources */,
 				EA22D4E627770BE3006C12CF /* LoginController.swift in Sources */,
 				EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */,
@@ -420,7 +416,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -435,7 +431,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,7 +449,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -468,7 +464,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";

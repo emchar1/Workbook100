@@ -17,7 +17,7 @@ import UniformTypeIdentifiers
     
     // MARK: - Properties
     
-    
+    /*
     let showNew: Bool
     let showEssential: Bool
     let labelTitle: String
@@ -25,24 +25,56 @@ import UniformTypeIdentifiers
     let imageName: String
     let sizes: [Size]
     let image: StorageReference?
+     */
+    
+    let division: String
+    let collection: String
+    let productNameDescription: String
+    let productCategory: String
+    let colorway: String
+    let carryOver: Bool
+    let essential: Bool
+    let skuCode: String
+    let sizes: [Size]
+    let usMSRP: Double
+    let euMSRP: Double
+    let countryCode: String
+    let composition: String
+    let productDescription: String
+    let productFeatures: String
+    let image: StorageReference?
     var id = UUID()
     
     var description: String {
-        return imageName
+        return skuCode
     }
 
     struct Size: Codable, CustomStringConvertible {
+        /*
         static let sm = "SM"
         static let md = "MD"
         static let lg = "LG"
         static let xl = "XL"
         static let xxl = "XXL"
+         
 
         let size: String?
         let sku: String?
 
         var description: String {
             guard let size = size, let sku = sku, sku.count > 0 else {
+                return ""
+            }
+
+            return size + ": " + sku
+        }
+         */
+        
+        let size: String?
+        let colorwaySKU: String?
+
+        var description: String {
+            guard let size = size, let sku = colorwaySKU, sku.count > 0 else {
                 return ""
             }
 
@@ -72,11 +104,11 @@ import UniformTypeIdentifiers
 
 extension CollectionModel: Comparable {
     static func < (lhs: CollectionModel, rhs: CollectionModel) -> Bool {
-        return lhs.imageName < rhs.imageName
+        return lhs.skuCode < rhs.skuCode
     }
 
     static func == (lhs: CollectionModel, rhs: CollectionModel) -> Bool {
-        return lhs.imageName == rhs.imageName
+        return lhs.skuCode == rhs.skuCode
     }
 }
 

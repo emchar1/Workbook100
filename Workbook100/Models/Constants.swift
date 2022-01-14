@@ -24,4 +24,35 @@ struct K {
         static let width: CGFloat = 200
         static let height: CGFloat = CollectionCell.width * 3 / 2
     }
+    
+    struct FIR {
+        static let division = "Division"
+        static let collection = "Collection"
+        static let productNameDescription = "ProductNameDescription"
+        static let productCategory = "ProductCategory"
+        static let colorway = "Colorway"
+        static let carryOver = "CarryOver"
+        static let essential = "Essential"
+        static let skuCode = "SKUCode"
+        static let colorwaySKU0 = "ColorwaySKU0"
+        static let colorwaySKU1 = "ColorwaySKU1"
+        static let colorwaySKU2 = "ColorwaySKU2"
+        static let colorwaySKU3 = "ColorwaySKU3"
+        static let colorwaySKU4 = "ColorwaySKU4"
+        static let colorwaySKU5 = "ColorwaySKU5"
+        static let colorwaySKU6 = "ColorwaySKU6"
+        static let size0 = "Size0"
+        static let size1 = "Size1"
+        static let size2 = "Size2"
+        static let size3 = "Size3"
+        static let size4 = "Size4"
+        static let size5 = "Size5"
+        static let size6 = "Size6"
+        static let usRetailMSRP = "USRetailMSRP"
+        static let euRetailMSRP = "EURetailMSRP"
+        static let countryCode = "CountryCode"
+        static let composition = "Composition"
+        static let productDescription = "ProductDescription"
+        static let productFeatures = "ProductFeatures"
+    }
 }
