@@ -277,13 +277,13 @@ class CollectionCell: UICollectionViewCell {
         labelSizesLeft =  CollectionCellLabel(type: .productSize, text: layoutSizes().left)
         labelSizesRight =  CollectionCellLabel(type: .productSize, text: layoutSizes().right)
         
-        let padding: CGFloat = K.CollectionCell.padding
+//        let padding: CGFloat = K.CollectionCell.padding
 
         contentView.addSubview(vStack)
-        NSLayoutConstraint.activate([vStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-                                     vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-                                     contentView.trailingAnchor.constraint(equalTo: vStack.trailingAnchor, constant: padding),
-                                     contentView.bottomAnchor.constraint(equalTo: vStack.bottomAnchor, constant: padding)])
+        NSLayoutConstraint.activate([vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+                                     vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                                     contentView.trailingAnchor.constraint(equalTo: vStack.trailingAnchor),
+                                     contentView.bottomAnchor.constraint(equalTo: vStack.bottomAnchor)])
         
         //New and Essential
         vStack.addArrangedSubview(hStackTop)

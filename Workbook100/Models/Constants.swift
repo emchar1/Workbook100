@@ -21,7 +21,7 @@ struct K {
     
     struct CollectionCell {
         static let identifier = "CVCell"
-        static let padding: CGFloat = 0
+        static let padding: CGFloat = 8
         static let width: CGFloat = 200
         static let height: CGFloat = CollectionCell.width * 3 / 2
     }
