@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Workbook View Controller-->
+        <!--Workbook-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="WorkbookViewController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,6 +19,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Workbook" id="Cc4-pe-DPn">
+                        <barButtonItem key="leftBarButtonItem" image="line.3.horizontal.circle" catalog="system" id="vzw-Ae-vga">
+                            <color key="tintColor" systemColor="labelColor"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="iFX-ne-hgK" kind="presentation" identifier="showDetails" id="GM9-wz-OKi"/>
                         <segue destination="LVv-C1-W7p" kind="presentation" identifier="showDetailsNEW" id="dGL-6y-kuy"/>
@@ -26,7 +33,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2" y="1043"/>
+            <point key="canvasLocation" x="727.1484375" y="1042.7525622254757"/>
         </scene>
         <!--Workbook Detail ControllerNEW-->
         <scene sceneID="gnK-Cl-aci">
@@ -591,7 +598,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I7X-cw-5HB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1645.8984375" y="1042.7525622254757"/>
+            <point key="canvasLocation" x="2371.2890625" y="1042.7525622254757"/>
         </scene>
         <!--Workbook Detail Controller-->
         <scene sceneID="9o9-9K-gue">
@@ -612,7 +619,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HO8-hX-qp4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1646" y="217"/>
+            <point key="canvasLocation" x="2371" y="217"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="E3s-Hw-hCj">
@@ -730,7 +737,7 @@
                         <outlet property="loginErrorLabel" destination="6r6-0S-Rnd" id="YU5-GL-ENg"/>
                         <outlet property="passwordField" destination="rzj-7a-SUw" id="PN2-4h-RvU"/>
                         <outlet property="peekPasswordButton" destination="h1Q-CE-Z1C" id="5im-3U-sc6"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="tB3-0d-gV1"/>
+                        <segue destination="nXQ-o2-mWc" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="tB3-0d-gV1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HS-Fc-LA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -758,7 +765,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsJ-Nj-uiB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="921" y="217"/>
+            <point key="canvasLocation" x="1646" y="217"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mnS-DG-2gR">
@@ -776,11 +783,33 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PTD-e5-a5h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="921" y="1043"/>
+            <point key="canvasLocation" x="1645.8984375" y="1042.7525622254757"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="huj-QQ-Uuc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nXQ-o2-mWc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gt9-ij-rqs">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ysn-VO-Jlc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mvW-Im-Krd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1.7578124999999998" y="1042.7525622254757"/>
         </scene>
     </scenes>
     <resources>
         <image name="eye" catalog="system" width="128" height="81"/>
+        <image name="line.3.horizontal.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

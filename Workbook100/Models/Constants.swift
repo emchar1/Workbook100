@@ -16,11 +16,12 @@ struct K {
         static let title = UIFont(name: "AvenirNext-Bold", size: 14)
         static let subtitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 9)
         static let footerTitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 10)
+        static let noimg = UIFont(name: "AvenirNext", size: 16)
     }
     
     struct CollectionCell {
         static let identifier = "CVCell"
-        static let padding: CGFloat = 8
+        static let padding: CGFloat = 0
         static let width: CGFloat = 200
         static let height: CGFloat = CollectionCell.width * 3 / 2
     }

@@ -96,7 +96,8 @@ class CollectionCellLabel: UILabel {
         super.init(frame: frame)
 
         self.text = text
-        self.numberOfLines = 1
+        self.textColor = .black
+        self.numberOfLines = (type != .productSize) ? 1 : 0
         
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false
@@ -176,8 +177,8 @@ class CollectionCell: UICollectionViewCell {
     var productImage: UIImageView!
     var ruleLine: RuleLine!
     var hStackBottom: CollectionCellStack!
-    var labelSizes: CollectionCellLabel!
-    var labelSizes2: CollectionCellLabel!
+    var labelSizesLeft: CollectionCellLabel!
+    var labelSizesRight: CollectionCellLabel!
     var model: CollectionModel!
 
     
@@ -198,8 +199,6 @@ class CollectionCell: UICollectionViewCell {
         
 //        productImage.image = nil
 //        productImage.cancelImageLoad()
-//        imageView.image = nil
-//        imageView.cancelImageLoad()
     }
     
     
@@ -209,15 +208,13 @@ class CollectionCell: UICollectionViewCell {
         labelTitle.text = model.productNameDescription
         labelSubtitle.text = model.colorway
         
-        // FIXME: - NO NO NO NO NO!
-        labelSizes.text = "\(model.sizes[0])\n\(model.sizes[1])"
-        labelSizes2.text = "\(model.sizes[2])\n\(model.sizes[3])\n\(model.sizes[4])"
+        labelSizesLeft.text = layoutSizes().left
+        labelSizesRight.text = layoutSizes().right
         
         if let image = model.image {
             productImage.sd_setImage(with: image)
         }
 
-        
         // FIXME: - This is sooo clunky - hStackTop
         hStackTop.subviews[0].isHidden = model.carryOver
         hStackTop.subviews[1].isHidden = !model.essential
@@ -277,12 +274,10 @@ class CollectionCell: UICollectionViewCell {
         productImage = UIImageView()
         ruleLine = RuleLine(frame: CGRect(x: 0, y: 0, width: K.CollectionCell.width, height: 20))
         hStackBottom = CollectionCellStack(distribution: .fillEqually, alignment: .fill, axis: .horizontal)
+        labelSizesLeft =  CollectionCellLabel(type: .productSize, text: layoutSizes().left)
+        labelSizesRight =  CollectionCellLabel(type: .productSize, text: layoutSizes().right)
         
-        // FIXME: - NO NO NO NO NO!
-        labelSizes =  CollectionCellLabel(type: .productSize, text: "\(model.sizes[0])\n\(model.sizes[1])")
-        labelSizes2 =  CollectionCellLabel(type: .productSize, text: "\(model.sizes[2])\n\(model.sizes[3])\n\(model.sizes[4])")
-        
-        let padding: CGFloat = 0//K.CollectionCell.padding
+        let padding: CGFloat = K.CollectionCell.padding
 
         contentView.addSubview(vStack)
         NSLayoutConstraint.activate([vStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
@@ -312,10 +307,49 @@ class CollectionCell: UICollectionViewCell {
         
         // FIXME: - Sizes
         vStack.addArrangedSubview(hStackBottom)
-        hStackBottom.addArrangedSubview(labelSizes)
+        hStackBottom.addArrangedSubview(labelSizesLeft)
         hStackBottom.alignment = .top
-        labelSizes2.textAlignment = .right
-        hStackBottom.addArrangedSubview(labelSizes2)
+        labelSizesRight.textAlignment = .right
+        hStackBottom.addArrangedSubview(labelSizesRight)
+    }
+    
+    private func layoutSizes() -> (left: String, right: String) {
+        var leftReturn = ""
+        var rightReturn = ""
+        var sizesCount = 0
+        var sizesCountHalved: Int {
+            Int(ceil(Double(sizesCount) / 2.0))
+        }
+        var maxSizesCountHalved: Int {
+            Int(ceil(Double(model.sizes.count) / 2.0))
+        }
+        
+        //Get the number of viable sizes
+        for (i, size) in model.sizes.enumerated() {
+            if size.size == "" && size.colorwaySKU == "" {
+                sizesCount = i
+                break
+            }
+        }
+        
+        //Populate left side
+        for i in 0..<sizesCountHalved {
+            leftReturn += "\(model.sizes[i])"
+            leftReturn += (i < sizesCountHalved - 1) ? "\n" : ""
+        }
+        
+        //Populate right side
+        for i in sizesCountHalved..<sizesCount {
+            rightReturn += "\(model.sizes[i])"
+            rightReturn += (i < sizesCount - 1) ? "\n" : ""
+        }
+        
+        //Add "padding"
+        for _ in sizesCountHalved..<maxSizesCountHalved {
+            leftReturn += "\n"
+        }
+        
+        return (leftReturn, rightReturn)
     }
     
 }

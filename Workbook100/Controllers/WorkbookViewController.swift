@@ -21,6 +21,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         layout.sectionInset = UIEdgeInsets(top: K.CollectionCell.padding, left: K.CollectionCell.padding, bottom: K.CollectionCell.padding, right: K.CollectionCell.padding)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier)
         return collectionView
@@ -38,7 +39,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-                                     collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),//, constant: view.frame.height / 2),
+                                     collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                      view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
                                      view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
         
@@ -82,7 +83,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                productDescription: obj[K.FIR.productDescription] as! String,
                                                productFeatures: obj[K.FIR.productFeatures] as! String,
                                                //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
-                                               image: nil)
+                                               image: Storage.storage().reference().child((obj[K.FIR.skuCode] as! String) + ".jpg"))
                     /*
                     let item = CollectionModel(showNew: (obj["showNew"] as! String) == "TRUE",
                                                showEssential: (obj["showEssential"] as! String) == "TRUE",
