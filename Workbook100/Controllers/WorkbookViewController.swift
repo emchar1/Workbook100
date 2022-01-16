@@ -216,3 +216,45 @@ extension WorkbookViewController {
     }
     
 }
+
+// FIXME: - Test for delegation from side panel
+extension WorkbookViewController: ProductFilterControllerDelegate {
+    func youDonePressedDone(_ tfVar: Int) {
+        guard K.items.count > 0 else {
+            print("Items still loading. Exiting early")
+            delegate?.collapsePanel()
+            return
+        }
+        
+        
+        let mohdel = K.items[0]
+
+        //SO HOKEY
+        K.items[0] = CollectionModel(division: mohdel.division,
+                                     collection: mohdel.collection,
+                                     productNameDescription: mohdel.productNameDescription,
+                                     productCategory: mohdel.productCategory,
+                                     colorway: mohdel.colorway,
+                                     carryOver: mohdel.carryOver,
+                                     essential: mohdel.essential,
+                                     skuCode: mohdel.skuCode,
+                                     sizes: [
+                                        CollectionModel.Size(size: mohdel.sizes[0].size, colorwaySKU: "\(tfVar)"),
+                                        CollectionModel.Size(size: mohdel.sizes[1].size, colorwaySKU: mohdel.sizes[1].colorwaySKU),
+                                        CollectionModel.Size(size: mohdel.sizes[2].size, colorwaySKU: mohdel.sizes[2].colorwaySKU),
+                                        CollectionModel.Size(size: mohdel.sizes[3].size, colorwaySKU: mohdel.sizes[3].colorwaySKU),
+                                        CollectionModel.Size(size: mohdel.sizes[4].size, colorwaySKU: mohdel.sizes[4].colorwaySKU),
+                                        CollectionModel.Size(size: mohdel.sizes[5].size, colorwaySKU: mohdel.sizes[5].colorwaySKU),
+                                        CollectionModel.Size(size: mohdel.sizes[6].size, colorwaySKU: mohdel.sizes[6].colorwaySKU)
+                                     ],
+                                     usMSRP: mohdel.usMSRP,
+                                     euMSRP: mohdel.euMSRP,
+                                     countryCode: mohdel.countryCode,
+                                     composition: mohdel.composition,
+                                     productDescription: mohdel.productDescription,
+                                     productFeatures: mohdel.productFeatures,
+                                     image: mohdel.image)
+        
+        delegate?.collapsePanel()
+    }
+}

@@ -76,4 +76,9 @@ extension UIStoryboard {
     static var centerViewController: WorkbookViewController? {
         mainStoryboard.instantiateViewController(withIdentifier: "WorkbookViewController") as? WorkbookViewController
     }
+    
+    // FIXME: - Test
+    static var leftNavigationController: UINavigationController? {
+        mainStoryboard.instantiateViewController(withIdentifier: "Nav2") as? UINavigationController
+    }
 }
