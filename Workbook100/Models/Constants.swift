@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 
+
+// MARK: - Constant
+
 struct K {
     static var items: [CollectionModel] = []
     
@@ -55,5 +58,22 @@ struct K {
         static let composition = "Composition"
         static let productDescription = "ProductDescription"
         static let productFeatures = "ProductFeatures"
+    }
+}
+
+
+// MARK: - UIStoryboard
+
+extension UIStoryboard {
+    static var mainStoryboard: UIStoryboard {
+        UIStoryboard(name: "Main", bundle: Bundle.main)
+    }
+    
+    static var leftViewController: ProductFilterController? {
+        mainStoryboard.instantiateViewController(withIdentifier: "ProductFilterController") as? ProductFilterController
+    }
+    
+    static var centerViewController: WorkbookViewController? {
+        mainStoryboard.instantiateViewController(withIdentifier: "WorkbookViewController") as? WorkbookViewController
     }
 }

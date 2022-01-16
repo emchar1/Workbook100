@@ -8,11 +8,17 @@
 import UIKit
 import Firebase
 
+protocol WorkbookViewControllerDelegate {
+    func expandPanel()
+    func collapsePanel()
+}
+
 class WorkbookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
     // MARK: - Properties
     
     var ref: DatabaseReference!
+    var delegate: WorkbookViewControllerDelegate?
     //var items: [CollectionModel] = []
     
     let collectionView: UICollectionView = {
@@ -27,6 +33,9 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         return collectionView
     }()
     
+    @IBAction func productFilterTapped(_ sender: Any) {
+        delegate?.expandPanel()
+    }
     
     // MARK: - Initialization
     
@@ -61,20 +70,13 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                essential: (obj[K.FIR.essential] as! String) == "TRUE",
                                                skuCode: obj[K.FIR.skuCode] as! String,
                                                sizes: [
-                                                CollectionModel.Size(size: obj[K.FIR.size0] as? String,
-                                                                     colorwaySKU: obj[K.FIR.colorwaySKU0] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size1] as? String,
-                                                                     colorwaySKU: obj[K.FIR.colorwaySKU1] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size2] as? String,
-                                                                     colorwaySKU: obj[K.FIR.colorwaySKU2] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size3] as? String,
-                                                                     colorwaySKU: obj[K.FIR.colorwaySKU3] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size4] as? String,
-                                                                     colorwaySKU: obj[K.FIR.colorwaySKU4] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size5] as? String,
-                                                                     colorwaySKU: obj[K.FIR.colorwaySKU5] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size6] as? String,
-                                                                     colorwaySKU: obj[K.FIR.colorwaySKU6] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size0] as? String, colorwaySKU: obj[K.FIR.colorwaySKU0] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size1] as? String, colorwaySKU: obj[K.FIR.colorwaySKU1] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size2] as? String, colorwaySKU: obj[K.FIR.colorwaySKU2] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size3] as? String, colorwaySKU: obj[K.FIR.colorwaySKU3] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size4] as? String, colorwaySKU: obj[K.FIR.colorwaySKU4] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size5] as? String, colorwaySKU: obj[K.FIR.colorwaySKU5] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size6] as? String, colorwaySKU: obj[K.FIR.colorwaySKU6] as? String),
                                                ],
                                                usMSRP: (obj[K.FIR.usRetailMSRP] as! NSNumber).doubleValue,
                                                euMSRP: (obj[K.FIR.euRetailMSRP] as! NSNumber).doubleValue,

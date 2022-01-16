@@ -55,10 +55,7 @@ class LoginController: UIViewController {
             UserDefaults.standard.set(email, forKey: "loginEmail")
             UserDefaults.standard.set(password, forKey: "loginPassword")
 
-//            print("user: \(authResult?.user.uid)")
-
             self.performSegue(withIdentifier: "LoginSegue", sender: nil)
-            
         }
     }
 

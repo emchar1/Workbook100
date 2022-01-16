@@ -56,21 +56,6 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                          productDescription: "Product Description",
                                          productFeatures: "Product Features",
                                          image: nil)
-            /*
-            self.model = CollectionModel(showNew: true,
-                                         showEssential: true,
-                                         labelTitle: "Product Title",
-                                         labelSubtitle: "Product Subtitle",
-                                         imageName: "20026-20",
-                                         sizes: [
-                                            CollectionModel.Size(size: CollectionModel.Size.sm, sku: "00000-00001"),
-                                            CollectionModel.Size(size: CollectionModel.Size.md, sku: "00000-00002"),
-                                            CollectionModel.Size(size: CollectionModel.Size.lg, sku: "00000-00003"),
-                                            CollectionModel.Size(size: CollectionModel.Size.xl, sku: "00000-00004"),
-                                            CollectionModel.Size(size: nil, sku: "00000-00005")
-                                         ],
-                                         image: nil)
-             */
         }
         
         title = model.productNameDescription
@@ -96,15 +81,6 @@ class WorkbookDetailControllerNEW: UITableViewController {
         tfSKU5.text = model.sizes[5].colorwaySKU
         tfSKU6.text = model.sizes[6].colorwaySKU
 
-        
-        /*
-        tfSmall.text = model.sizes.filter({ $0.size == CollectionModel.Size.sm }).first?.sku
-        tfMedium.text = model.sizes.filter({ $0.size == CollectionModel.Size.md }).first?.sku
-        tfLarge.text = model.sizes.filter({ $0.size == CollectionModel.Size.lg }).first?.sku
-        tfXL.text = model.sizes.filter({ $0.size == CollectionModel.Size.xl }).first?.sku
-        tfXXL.text = model.sizes.filter({ $0.size == CollectionModel.Size.xxl }).first?.sku
-*/
-        
         if let image = model.image {
             imageView.sd_setImage(with: image)
         }
@@ -129,7 +105,6 @@ class WorkbookDetailControllerNEW: UITableViewController {
     }
     
     @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
-        print("Cancel pressed")
         dismiss(animated: true, completion: nil)
     }
     
@@ -164,22 +139,6 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                            productFeatures: K.items[row].productFeatures,
                                            //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
                                            image: nil)
- 
-            /*
-            let newModel = CollectionModel(showNew: switchNew.isOn,
-                                           showEssential: switchEssential.isOn,
-                                           labelTitle: tfTitle.text!,
-                                           labelSubtitle: tfSubtitle.text!,
-                                           imageName: K.items[row].imageName,
-                                           sizes: [
-                                            CollectionModel.Size(size: CollectionModel.Size.sm, sku: tfSmall.text!),
-                                            CollectionModel.Size(size: CollectionModel.Size.md, sku: tfMedium.text!),
-                                            CollectionModel.Size(size: CollectionModel.Size.lg, sku: tfLarge.text!),
-                                            CollectionModel.Size(size: CollectionModel.Size.xl, sku: tfXL.text!),
-                                            CollectionModel.Size(size: CollectionModel.Size.xxl, sku: tfXXL.text!),
-                                           ],
-                                           image: Storage.storage().reference().child(K.items[row].imageName + ".jpg"))
-             */
             K.items[row] = newModel
             
             //Update Firebase
@@ -212,24 +171,9 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                           K.FIR.productDescription: model.productDescription,
                                           K.FIR.productFeatures: model.productFeatures]
             let ref = Database.database().reference().child(K.items[row].skuCode)
-            
-            /*
-             let itemRef: [String: Any] = ["showNew": String(switchNew.isOn).uppercased(),//String(item.showNew).uppercased(),
-                                           "showEssential": String(switchEssential.isOn).uppercased(),
-                                           "labelTitle": tfTitle.text!,//item.labelTitle,
-                                           "labelSubtitle": tfSubtitle.text!,// item.labelSubtitle,
-                                           "imageName": K.items[row].imageName,
-                                           CollectionModel.Size.sm: newModel.sizes.filter({ $0.size == CollectionModel.Size.sm }).first?.sku ?? "",
-                                           CollectionModel.Size.md: newModel.sizes.filter({ $0.size == CollectionModel.Size.md }).first?.sku ?? "",
-                                           CollectionModel.Size.lg: newModel.sizes.filter({ $0.size == CollectionModel.Size.lg }).first?.sku ?? "",
-                                           CollectionModel.Size.xl: newModel.sizes.filter({ $0.size == CollectionModel.Size.xl }).first?.sku ?? "",
-                                           CollectionModel.Size.xxl: newModel.sizes.filter({ $0.size == CollectionModel.Size.xxl }).first?.sku ?? ""]
-             let ref = Database.database().reference().child(K.items[row].imageName)
-             */
             ref.setValue(itemRef)
         }
         
-        print("Done pressed")
         dismiss(animated: true, completion: nil)
     }
 }

@@ -12,7 +12,7 @@
         <!--Workbook-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WorkbookViewController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkbookViewController" id="BYZ-38-t0r" customClass="WorkbookViewController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,6 +23,9 @@
                     <navigationItem key="navigationItem" title="Workbook" id="Cc4-pe-DPn">
                         <barButtonItem key="leftBarButtonItem" image="line.3.horizontal.circle" catalog="system" id="vzw-Ae-vga">
                             <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="productFilterTapped:" destination="BYZ-38-t0r" id="cfL-7z-8xb"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -35,12 +38,82 @@
             </objects>
             <point key="canvasLocation" x="727.1484375" y="1042.7525622254757"/>
         </scene>
+        <!--Container View Controller-->
+        <scene sceneID="DRM-TN-gnC">
+            <objects>
+                <viewController storyboardIdentifier="ContainerViewController" id="J0a-zK-Af6" customClass="ContainerViewController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y74-XM-1S5">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="BvJ-AJ-EiO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aga-ht-Elx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1058" y="1043"/>
+        </scene>
+        <!--Product Filter Controller-->
+        <scene sceneID="5DC-2U-51t">
+            <objects>
+                <tableViewController storyboardIdentifier="ProductFilterController" id="P7X-Ty-DWw" customClass="ProductFilterController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="hSv-ca-FHd">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <sections>
+                            <tableViewSection headerTitle="Product Category" id="scS-HZ-z41">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="xoL-Wf-sTc">
+                                        <rect key="frame" x="20" y="49.5" width="984" height="51.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xoL-Wf-sTc" id="7sd-LP-CfM">
+                                            <rect key="frame" x="0.0" y="0.0" width="984" height="51.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Collection" id="EDl-Ak-8aj">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="HuC-6h-MUj">
+                                        <rect key="frame" x="20" y="151" width="984" height="51.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HuC-6h-MUj" id="Hde-cQ-t9A">
+                                            <rect key="frame" x="0.0" y="0.0" width="984" height="51.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Colorway" id="AyQ-nO-DlL">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0N7-Re-p8h">
+                                        <rect key="frame" x="20" y="252.5" width="984" height="51.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0N7-Re-p8h" id="PdZ-mR-D4C">
+                                            <rect key="frame" x="0.0" y="0.0" width="984" height="51.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="P7X-Ty-DWw" id="j1l-gv-WM8"/>
+                            <outlet property="delegate" destination="P7X-Ty-DWw" id="cfC-pt-Nfi"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jkm-iq-hR3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-38" y="1857"/>
+        </scene>
         <!--Workbook Detail ControllerNEW-->
         <scene sceneID="gnK-Cl-aci">
             <objects>
                 <tableViewController id="A10-Pv-fzG" customClass="WorkbookDetailControllerNEW" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="8ip-nL-Kwt">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
                             <tableViewSection headerTitle="Status" id="ZZn-sz-Qp1">
@@ -605,7 +678,7 @@
             <objects>
                 <viewController id="2Cb-Xa-ql8" customClass="WorkbookDetailController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hIi-Cm-JLh">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="wL9-iC-RRp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -737,12 +810,12 @@
                         <outlet property="loginErrorLabel" destination="6r6-0S-Rnd" id="YU5-GL-ENg"/>
                         <outlet property="passwordField" destination="rzj-7a-SUw" id="PN2-4h-RvU"/>
                         <outlet property="peekPasswordButton" destination="h1Q-CE-Z1C" id="5im-3U-sc6"/>
-                        <segue destination="nXQ-o2-mWc" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="tB3-0d-gV1"/>
+                        <segue destination="J0a-zK-Af6" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="zRC-gU-NbM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HS-Fc-LA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-909" y="1043"/>
+            <point key="canvasLocation" x="-1869" y="1043"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Qf-Ob-tYl">
@@ -788,10 +861,10 @@
         <!--Navigation Controller-->
         <scene sceneID="huj-QQ-Uuc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nXQ-o2-mWc" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="nXQ-o2-mWc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gt9-ij-rqs">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="50"/>
+                        <rect key="frame" x="0.0" y="24" width="1024" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -801,7 +874,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mvW-Im-Krd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1.7578124999999998" y="1042.7525622254757"/>
+            <point key="canvasLocation" x="-48" y="1043"/>
         </scene>
     </scenes>
     <resources>
