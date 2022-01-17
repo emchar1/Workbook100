@@ -219,7 +219,7 @@ extension WorkbookViewController {
 
 // FIXME: - Test for delegation from side panel
 extension WorkbookViewController: ProductFilterControllerDelegate {
-    func youDonePressedDone(_ tfVar: Int) {
+    func youDonePressedDone() {
         guard K.items.count > 0 else {
             print("Items still loading. Exiting early")
             delegate?.collapsePanel()
@@ -239,7 +239,7 @@ extension WorkbookViewController: ProductFilterControllerDelegate {
                                      essential: mohdel.essential,
                                      skuCode: mohdel.skuCode,
                                      sizes: [
-                                        CollectionModel.Size(size: mohdel.sizes[0].size, colorwaySKU: "\(tfVar)"),
+                                        CollectionModel.Size(size: mohdel.sizes[0].size, colorwaySKU: "9999"),
                                         CollectionModel.Size(size: mohdel.sizes[1].size, colorwaySKU: mohdel.sizes[1].colorwaySKU),
                                         CollectionModel.Size(size: mohdel.sizes[2].size, colorwaySKU: mohdel.sizes[2].colorwaySKU),
                                         CollectionModel.Size(size: mohdel.sizes[3].size, colorwaySKU: mohdel.sizes[3].colorwaySKU),

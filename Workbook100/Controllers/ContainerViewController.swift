@@ -14,7 +14,6 @@ class ContainerViewController: UIViewController {
     let centerPanelExpandedOffset: CGFloat = 60
     var centerNavigationController: UINavigationController!
     var centerViewController: WorkbookViewController!
-    var leftNavigationController: UINavigationController? //TEST
     var leftViewController: ProductFilterController?
     
     enum SlideOutState {
@@ -60,14 +59,20 @@ class ContainerViewController: UIViewController {
                 showShadowForCenterViewController(true)
             }
         case .changed:
-            if let rView = recognizer.view {
-                rView.center.x = rView.center.x + recognizer.translation(in: view).x
-                recognizer.setTranslation(.zero, in: view)
-            }
+            guard let rView = recognizer.view else { break }
+
+            rView.center.x = rView.center.x + recognizer.translation(in: view).x
+            recognizer.setTranslation(.zero, in: view)
         case .ended:
-            if let _ = leftViewController, let rView = recognizer.view {
+            guard let rView = recognizer.view else { break }
+            
+            if rView.frame.origin.x < 0 {
+                animatePanel(shouldExpand: false)
+            }
+            
+            if let _ = leftViewController {
                 //Animate the side panel open or closed based on whether the view has moved more or less than halfway
-                let hasMovedGreaterThanHalfway = rView.center.x > view.bounds.size.width
+                let hasMovedGreaterThanHalfway = rView.center.x > view.bounds.width
                 animatePanel(shouldExpand: hasMovedGreaterThanHalfway)
             }
         default:
@@ -120,6 +125,22 @@ extension ContainerViewController: WorkbookViewControllerDelegate {
      Helper function that adds adds the panel and handles any transferring of data between view controllers.
      */
     private func addPanelViewController() {
+        //v3
+        guard leftViewController == nil else { return }
+
+        if let vc = UIStoryboard.leftViewController {
+            addChild(vc)
+            vc.didMove(toParent: self)
+            view.insertSubview(vc.view, at: 0)
+            
+            vc.delegate = centerViewController
+            leftViewController = vc
+        }
+
+
+
+        /*
+         //v2
         guard leftNavigationController == nil else { return }
         
         // FIXME: - Test using Navigation Controller so I can have a Done button.
@@ -133,8 +154,10 @@ extension ContainerViewController: WorkbookViewControllerDelegate {
             let vc = nc.topViewController as! ProductFilterController
             vc.delegate = centerViewController
         }
+         */
         
         /*
+         //v1
         guard leftViewController == nil else { return }
         
         if let vc = UIStoryboard.leftViewController {

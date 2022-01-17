@@ -8,21 +8,31 @@
 import UIKit
 
 protocol ProductFilterControllerDelegate {
-    func youDonePressedDone(_ tfVar: Int)
+    func youDonePressedDone()
 }
 
-class ProductFilterController: UITableViewController {
-    @IBOutlet weak var tf: UITextField!
-    
-    var tfVar: Int = 0
+class ProductFilterController: UIViewController {
     var delegate: ProductFilterControllerDelegate?
     
-    @IBAction func donePressed(_ sender: UIBarButtonItem) {
-        tfVar = Int(tf.text!)!
-        delegate?.youDonePressedDone(tfVar)
+    var doneButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Done", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(donePressed(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func donePressed(_ sender: UIButton) {
+        delegate?.youDonePressedDone()
     }
     
     override func viewDidLoad() {
-        
+        view.addSubview(doneButton)
+        NSLayoutConstraint.activate([doneButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+                                     doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                                     doneButton.widthAnchor.constraint(equalToConstant: 60),
+                                     doneButton.heightAnchor.constraint(equalToConstant: 40)])
     }
 }
