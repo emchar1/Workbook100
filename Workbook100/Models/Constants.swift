@@ -19,6 +19,8 @@ struct K {
         static let title = UIFont(name: "AvenirNext-Bold", size: 14)
         static let subtitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 9)
         static let footerTitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 10)
+        static let menuTitle = UIFont(name: "AvenirNext-DemiBold", size: 12)
+        static let menuSelection = UIFont(name: "AvenirNext-Regular", size: 12)
         static let noimg = UIFont(name: "AvenirNext", size: 16)
     }
     

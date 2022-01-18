@@ -73,7 +73,7 @@
             <objects>
                 <tableViewController id="A10-Pv-fzG" customClass="WorkbookDetailControllerNEW" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="8ip-nL-Kwt">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
                             <tableViewSection headerTitle="Status" id="ZZn-sz-Qp1">
@@ -638,7 +638,7 @@
             <objects>
                 <viewController id="2Cb-Xa-ql8" customClass="WorkbookDetailController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hIi-Cm-JLh">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="wL9-iC-RRp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
