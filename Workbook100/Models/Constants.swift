@@ -24,6 +24,10 @@ struct K {
         static let noimg = UIFont(name: "AvenirNext", size: 16)
     }
     
+    struct Colors {
+        static let superLightGray = UIColor(named: "superLightGray")
+    }
+    
     struct CollectionCell {
         static let identifier = "CVCell"
         static let padding: CGFloat = 8

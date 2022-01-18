@@ -297,7 +297,7 @@ class CollectionCell: UICollectionViewCell {
 
         // FIXME: - Product Image
         productImage.contentMode = .scaleAspectFit
-        productImage.backgroundColor = .gray
+        productImage.backgroundColor = K.Colors.superLightGray
         productImage.translatesAutoresizingMaskIntoConstraints = false
         vStack.addArrangedSubview(productImage)
         NSLayoutConstraint.activate([productImage.heightAnchor.constraint(equalToConstant: K.CollectionCell.width)])

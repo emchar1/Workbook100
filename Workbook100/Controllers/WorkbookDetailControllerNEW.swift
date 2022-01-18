@@ -111,7 +111,6 @@ class WorkbookDetailControllerNEW: UITableViewController {
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
         if let row = K.items.firstIndex(where: { $0.id == model.id }) {
 
-            // FIXME: Need to update K.items with edited model/item
             //Update Model
             let newModel = CollectionModel(division: K.items[row].division,
                                            collection: K.items[row].collection,
