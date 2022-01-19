@@ -42,7 +42,9 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        collectionView.dragInteractionEnabled = true
         collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -157,9 +159,8 @@ extension WorkbookViewController {
     // MARK: - Drag Delegate
     
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        // FIXME: - item should be the entire model, not just the label title?
-        let item = K.items[indexPath.row].productNameDescription
-        let itemProvider = NSItemProvider(object: item as NSString)
+        let item = K.items[indexPath.row]
+        let itemProvider = NSItemProvider(object: item)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         
         dragItem.localObject = item
@@ -194,7 +195,7 @@ extension WorkbookViewController {
         }
     }
     
-    fileprivate func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
+    private func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
         if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
             collectionView.performBatchUpdates({
                 K.items.remove(at: sourceIndexPath.item)

@@ -13,7 +13,19 @@ import UniformTypeIdentifiers
 
 // MARK: - CollectionModel
 
-/*final*/ struct CollectionModel: /*NSObject, Codable,*/CustomStringConvertible, Identifiable { //removed CustomStringConvertible, Equatable, when I converted it from a struct to a class
+final class CollectionModel: NSObject, /*Codable, CustomStringConvertible,*/ Identifiable, NSItemProviderWriting {
+    //removed CustomStringConvertible, Equatable, when I converted it from a struct to a class
+
+    
+    // MARK: - NSItemProviderWriting
+    
+    static var writableTypeIdentifiersForItemProvider: [String] {
+        return []
+    }
+    
+    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        return nil
+    }
     
     // MARK: - Properties
     
@@ -45,7 +57,7 @@ import UniformTypeIdentifiers
     let image: StorageReference?
     var id = UUID()
     
-    var description: String {
+    override var description: String {
         return skuCode
     }
 
@@ -82,9 +94,9 @@ import UniformTypeIdentifiers
         }
     }
     
-    /*
-    // MARK: - Initialization
     
+    // MARK: - Initialization
+    /*
     init(showNew: Bool, showEssential: Bool, labelTitle: String, labelSubtitle: String, imageName: String, sizes: [Size], image: StorageReference?) {
         self.showNew = showNew
         self.showEssential = showEssential
@@ -97,6 +109,29 @@ import UniformTypeIdentifiers
         super.init()
     }
      */
+    
+    init(division: String, collection: String, productNameDescription: String, productCategory: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, image: StorageReference?) {
+
+        self.division = division
+        self.collection = collection
+        self.productNameDescription = productNameDescription
+        self.productCategory = productCategory
+        self.colorway = colorway
+        self.carryOver = carryOver
+        self.essential = essential
+        self.skuCode = skuCode
+        self.sizes = sizes
+        self.usMSRP = usMSRP
+        self.euMSRP = euMSRP
+        self.countryCode = countryCode
+        self.composition = composition
+        self.productDescription = productDescription
+        self.productFeatures = productFeatures
+        self.image = image
+        
+        super.init()
+    }
+     
 }
 
 
