@@ -7,11 +7,18 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController {
+class ContainerViewController: UIViewController, WorkbookViewControllerDelegate {
     
     // MARK: - Properties
     
     let centerPanelExpandedOffset: CGFloat = 60
+    let maxPanelSize: CGFloat = 300
+    var expandDistance: CGFloat = 0 {
+        didSet {
+            expandDistance = min(expandDistance, maxPanelSize)
+        }
+    }
+
     var centerNavigationController: UINavigationController!
     var centerViewController: WorkbookViewController!
     var leftViewController: ProductFilterController?
@@ -52,27 +59,33 @@ class ContainerViewController: UIViewController {
         
         switch recognizer.state {
         case .began:
-            if currentState == .productFilterCollapsed {
-                if gestureIsDragging {
-                    addPanelViewController()
-                }
-                showShadowForCenterViewController(true)
+            //enter drag queen
+            guard gestureIsDragging else { break }
+            
+            let notAlreadyExpanded = currentState != .productFilterExpanded
+            if notAlreadyExpanded {
+                addPanelViewController()
             }
+            showShadowForCenterViewController(true)
         case .changed:
+            //start drag show
             guard let rView = recognizer.view else { break }
 
             rView.center.x = rView.center.x + recognizer.translation(in: view).x
             recognizer.setTranslation(.zero, in: view)
         case .ended:
+            //end drag show
             guard let rView = recognizer.view else { break }
             
-            if rView.frame.origin.x < 0 {
-                animatePanel(shouldExpand: false)
-            }
-            
-            if let _ = leftViewController {
+            let peekOffset: CGFloat = 20
+            let notAlreadyExpanded = currentState != .productFilterExpanded
+            if notAlreadyExpanded {//let _ = leftViewController {
                 //Animate the side panel open or closed based on whether the view has moved more or less than halfway
-                let hasMovedGreaterThanHalfway = rView.center.x > view.bounds.width
+                let hasMovedGreaterThanHalfway = rView.frame.origin.x > peekOffset
+                animatePanel(shouldExpand: hasMovedGreaterThanHalfway)
+            }
+            else {
+                let hasMovedGreaterThanHalfway = rView.frame.origin.x > maxPanelSize - peekOffset
                 animatePanel(shouldExpand: hasMovedGreaterThanHalfway)
             }
         default:
@@ -84,7 +97,7 @@ class ContainerViewController: UIViewController {
 
 // MARK: - WorkbookViewControllerDelegate
 
-extension ContainerViewController: WorkbookViewControllerDelegate {
+extension ContainerViewController {
     /**
      If the panel is not already expanded, call the addPanelViewController() and animatePanel(shouldExpand:) methods.
      */
@@ -107,6 +120,10 @@ extension ContainerViewController: WorkbookViewControllerDelegate {
         case .productFilterCollapsed: break
         }
     }
+    
+    
+    
+    // MARK: - Delegate Helper files
     
     /**
      Shows a shadow in the panel. (This isn't working.)
@@ -190,7 +207,10 @@ extension ContainerViewController: WorkbookViewControllerDelegate {
     private func animatePanel(shouldExpand: Bool) {
         if shouldExpand {
             currentState = .productFilterExpanded
-            animateCenterPanelXPosition(targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
+            
+            
+            expandDistance = centerNavigationController.view.frame.width - centerPanelExpandedOffset
+            animateCenterPanelXPosition(targetPosition: expandDistance)
         }
         else {
             animateCenterPanelXPosition(targetPosition: 0) { _ in

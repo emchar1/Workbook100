@@ -188,6 +188,7 @@ class CollectionCell: UICollectionViewCell {
         super.init(frame: frame)
 
         setupViews()
+        backgroundColor = .purple
     }
     
     required init?(coder: NSCoder) {
