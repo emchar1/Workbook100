@@ -37,11 +37,11 @@ class CollectionCellStack: UIStackView {
 // MARK: - Collection Cell Label Bubble
 
 class CollectionCellLabelBubble: UILabel {
-    enum LabelBubbvarype {
+    enum LabelBubbleType {
         case new, essential, nothing
     }
     
-    init(frame: CGRect = .zero, type: LabelBubbvarype) {
+    init(frame: CGRect = .zero, type: LabelBubbleType) {
         super.init(frame: frame)
 
         self.text = text
@@ -62,7 +62,7 @@ class CollectionCellLabelBubble: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func customizeType(_ type: LabelBubbvarype) {
+    private func customizeType(_ type: LabelBubbleType) {
         switch type {
         case .new:
             self.backgroundColor = .red
@@ -76,12 +76,12 @@ class CollectionCellLabelBubble: UILabel {
         }
     }
     
-    func setConstraints(to view: UIView, padding: CGFloat) {
-        NSLayoutConstraint.activate([topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-                                     leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-                                     view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: padding),
-                                     view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
-    }
+//    func setConstraints(to view: UIView, padding: CGFloat) {
+//        NSLayoutConstraint.activate([topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+//                                     leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+//                                     view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: padding),
+//                                     view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
+//    }
 }
 
 
@@ -167,19 +167,22 @@ class CollectionCell: UICollectionViewCell {
     
     
     //new properties
+    var model: CollectionModel!
     var vStack: CollectionCellStack!
+    
     var hStackTop: CollectionCellStack!
     var labelNew: CollectionCellLabelBubble!
     var labelEssential: CollectionCellLabelBubble!
     var labelNothing: CollectionCellLabelBubble!
+    
     var labelTitle: CollectionCellLabel!
     var labelSubtitle: CollectionCellLabel!
     var productImage: UIImageView!
+    
     var ruleLine: RuleLine!
     var hStackBottom: CollectionCellStack!
     var labelSizesLeft: CollectionCellLabel!
     var labelSizesRight: CollectionCellLabel!
-    var model: CollectionModel!
 
     
     // MARK: - Initialization
@@ -240,30 +243,7 @@ class CollectionCell: UICollectionViewCell {
                                      image: nil)
          */
         
-        self.model = CollectionModel(division: "Division",
-                                     collection: "SP23",
-                                     productNameDescription: "Product Name Description",
-                                     productCategory: "Product Category",
-                                     colorway: "Color",
-                                     carryOver: false,
-                                     essential: true,
-                                     skuCode: "00000-00000",
-                                     sizes: [
-                                        CollectionModel.Size(size: "Size 0", colorwaySKU: "00000-00000"),
-                                        CollectionModel.Size(size: "Size 1", colorwaySKU: "00000-00001"),
-                                        CollectionModel.Size(size: "Size 2", colorwaySKU: "00000-00002"),
-                                        CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003"),
-                                        CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004"),
-                                        CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005"),
-                                        CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006")
-                                     ],
-                                     usMSRP: 9.99,
-                                     euMSRP: 10.01,
-                                     countryCode: "US",
-                                     composition: "Composition",
-                                     productDescription: "Product Description",
-                                     productFeatures: "Product Features",
-                                     image: nil)
+        self.model = CollectionModel.getBlankModel()
         
         vStack = CollectionCellStack(distribution: .fill, alignment: .fill, axis: .vertical)
         hStackTop = CollectionCellStack(spacing: 2, distribution: .fillEqually, alignment: .fill, axis: .horizontal)
@@ -301,7 +281,7 @@ class CollectionCell: UICollectionViewCell {
         productImage.backgroundColor = K.Colors.superLightGray
         productImage.translatesAutoresizingMaskIntoConstraints = false
         vStack.addArrangedSubview(productImage)
-        NSLayoutConstraint.activate([productImage.heightAnchor.constraint(equalToConstant: K.CollectionCell.width)])
+        NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)])//K.CollectionCell.width)])//K.CollectionCell.adjustedHeight(in: contentView))])
         
         //Rule Line
         vStack.addArrangedSubview(ruleLine)

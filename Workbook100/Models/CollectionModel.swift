@@ -13,32 +13,12 @@ import UniformTypeIdentifiers
 
 // MARK: - CollectionModel
 
-final class CollectionModel: NSObject, /*Codable, CustomStringConvertible,*/ Identifiable, NSItemProviderWriting {
+final class CollectionModel: NSObject, Comparable,/*Codable, CustomStringConvertible,*/ Identifiable, NSItemProviderWriting {
     //removed CustomStringConvertible, Equatable, when I converted it from a struct to a class
 
     
-    // MARK: - NSItemProviderWriting
-    
-    static var writableTypeIdentifiersForItemProvider: [String] {
-        return []
-    }
-    
-    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
-        return nil
-    }
-    
     // MARK: - Properties
-    
-    /*
-    let showNew: Bool
-    let showEssential: Bool
-    let labelTitle: String
-    let labelSubtitle: String
-    let imageName: String
-    let sizes: [Size]
-    let image: StorageReference?
-     */
-    
+
     let division: String
     let collection: String
     let productNameDescription: String
@@ -62,26 +42,6 @@ final class CollectionModel: NSObject, /*Codable, CustomStringConvertible,*/ Ide
     }
 
     struct Size: Codable, CustomStringConvertible {
-        /*
-        static let sm = "SM"
-        static let md = "MD"
-        static let lg = "LG"
-        static let xl = "XL"
-        static let xxl = "XXL"
-         
-
-        let size: String?
-        let sku: String?
-
-        var description: String {
-            guard let size = size, let sku = sku, sku.count > 0 else {
-                return ""
-            }
-
-            return size + ": " + sku
-        }
-         */
-        
         let size: String?
         let colorwaySKU: String?
 
@@ -96,19 +56,6 @@ final class CollectionModel: NSObject, /*Codable, CustomStringConvertible,*/ Ide
     
     
     // MARK: - Initialization
-    /*
-    init(showNew: Bool, showEssential: Bool, labelTitle: String, labelSubtitle: String, imageName: String, sizes: [Size], image: StorageReference?) {
-        self.showNew = showNew
-        self.showEssential = showEssential
-        self.labelTitle = labelTitle
-        self.labelSubtitle = labelSubtitle
-        self.imageName = imageName
-        self.sizes = sizes
-        self.image = image
-        
-        super.init()
-    }
-     */
     
     init(division: String, collection: String, productNameDescription: String, productCategory: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, image: StorageReference?) {
 
@@ -131,13 +78,40 @@ final class CollectionModel: NSObject, /*Codable, CustomStringConvertible,*/ Ide
         
         super.init()
     }
-     
+    
+    static func getBlankModel() -> CollectionModel {
+        let model = CollectionModel(division: "Division",
+                                    collection: "SP23",
+                                    productNameDescription: "Product Name Description",
+                                    productCategory: "Product Category",
+                                    colorway: "Color",
+                                    carryOver: false,
+                                    essential: true,
+                                    skuCode: "00000-00000",
+                                    sizes: [
+                                       CollectionModel.Size(size: "Size 0", colorwaySKU: "00000-00000"),
+                                       CollectionModel.Size(size: "Size 1", colorwaySKU: "00000-00001"),
+                                       CollectionModel.Size(size: "Size 2", colorwaySKU: "00000-00002"),
+                                       CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003"),
+                                       CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004"),
+                                       CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005"),
+                                       CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006")
+                                    ],
+                                    usMSRP: 9.99,
+                                    euMSRP: 10.01,
+                                    countryCode: "US",
+                                    composition: "Composition",
+                                    productDescription: "Product Description",
+                                    productFeatures: "Product Features",
+                                    image: nil)//Storage.storage().reference().child("10000-00000.jpg"))
+        return model
+    }
 }
 
 
 // MARK: - Comparable
 
-extension CollectionModel: Comparable {
+extension CollectionModel {
     static func < (lhs: CollectionModel, rhs: CollectionModel) -> Bool {
         return lhs.skuCode < rhs.skuCode
     }
@@ -147,50 +121,15 @@ extension CollectionModel: Comparable {
     }
 }
 
-/*
+
 // MARK: - NSItemProviderWriting
 
-extension CollectionModel: NSItemProviderWriting {
+extension CollectionModel {
     static var writableTypeIdentifiersForItemProvider: [String] {
-        return [kUTTypeData as String]
-    }
-
-    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
-        
-        let progress = Progress(totalUnitCount: 100)
-        
-        do {
-            //Here the object is encoded to a JSON data object and sent to the completion handler
-            let data = try JSONEncoder().encode(self)
-            progress.completedUnitCount = 100
-            completionHandler(data, nil)
-        } catch {
-            completionHandler(nil, error)
-        }
-        
-        return progress
-    }
-}
-
-
-// MARK: - NSItemProviderReading
-
-extension CollectionModel: NSItemProviderReading {
-    static var readableTypeIdentifiersForItemProvider: [String] {
-        return [kUTTypeData as String]
+        return []
     }
     
-    //This function actually has a return type of Self, but that really messes things up when you are trying to return your object, so if you mark your class as final as I've done above, then you can change the return type to return your class type.
-    static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> CollectionModel {
-        let decoder = JSONDecoder()
-        
-        do {
-            //Here we decode the object back to it's class representation and return it
-            let subject = try decoder.decode(CollectionModel.self, from: data)
-            return subject
-        } catch {
-            fatalError("\(error)")
-        }
+    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        return nil
     }
 }
-*/

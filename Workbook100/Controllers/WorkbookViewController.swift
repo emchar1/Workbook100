@@ -32,12 +32,35 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier)
         return collectionView
     }()
-    
+
     @IBAction func productFilterTapped(_ sender: Any) {
         delegate?.expandPanel()
     }
     
+    @IBAction func addBlankTapped(_ sender: Any) {
+        collectionView.performBatchUpdates ({
+            K.items.insert(CollectionModel.getBlankModel(), at: 0)
+            collectionView.insertItems(at: [IndexPath(item: 0, section: 0)])
+        }, completion: nil)
+        
+        
+    }
+    
     // MARK: - Initialization
+    
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        print("Trait collection changes")
+//    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate { _ in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        } completion: { _ in
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,6 +154,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
 
 extension WorkbookViewController {
     
+    
     // MARK: - Data Source
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -146,13 +170,24 @@ extension WorkbookViewController {
         return K.items.count
     }
     
+    
+    // MARK: - Collection View Delegate
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showDetailsNEW", sender: nil)
+    }
+    
 
     // MARK: - Delegate Flow Layout
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let multiplier: CGFloat = 1
+//        let multiplier: CGFloat = 1
         
-        return CGSize(width: K.CollectionCell.width * multiplier, height: K.CollectionCell.height * multiplier)
+        // FIXME: - adaptable cell size doesn't work!!
+        print(K.CollectionCell.adjustedWidth(in: collectionView))
+        return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView), height: K.CollectionCell.adjustedHeight(in: collectionView))
+        //but this one does...
+//        return CGSize(width: K.CollectionCell.width * multiplier, height: K.CollectionCell.height * multiplier)
     }
     
     
@@ -209,14 +244,8 @@ extension WorkbookViewController {
         }
     }
     
-    
-    // MARK: - Collection View Delegate
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showDetailsNEW", sender: nil)
-    }
-    
 }
+
 
 // FIXME: - Test for delegation from side panel
 extension WorkbookViewController: ProductFilterControllerDelegate {

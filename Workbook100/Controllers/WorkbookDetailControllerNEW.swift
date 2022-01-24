@@ -32,30 +32,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
     
     override func viewDidLoad() {
         if model == nil {
-            self.model = CollectionModel(division: "Division",
-                                         collection: "SP23",
-                                         productNameDescription: "Product Name Description",
-                                         productCategory: "Product Category",
-                                         colorway: "Color",
-                                         carryOver: false,
-                                         essential: true,
-                                         skuCode: "00000-00000",
-                                         sizes: [
-                                            CollectionModel.Size(size: "Size 0", colorwaySKU: "00000-00000"),
-                                            CollectionModel.Size(size: "Size 1", colorwaySKU: "00000-00001"),
-                                            CollectionModel.Size(size: "Size 2", colorwaySKU: "00000-00002"),
-                                            CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003"),
-                                            CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004"),
-                                            CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005"),
-                                            CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006")
-                                         ],
-                                         usMSRP: 9.99,
-                                         euMSRP: 10.01,
-                                         countryCode: "US",
-                                         composition: "Composition",
-                                         productDescription: "Product Description",
-                                         productFeatures: "Product Features",
-                                         image: nil)
+            self.model = CollectionModel.getBlankModel()
         }
         
         title = model.productNameDescription

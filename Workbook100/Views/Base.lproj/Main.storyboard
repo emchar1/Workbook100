@@ -27,6 +27,11 @@
                                 <action selector="productFilterTapped:" destination="BYZ-38-t0r" id="cfL-7z-8xb"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="P9D-VW-Dvi">
+                            <connections>
+                                <action selector="addBlankTapped:" destination="BYZ-38-t0r" id="tGx-A0-UKg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -657,7 +662,7 @@
         <!--Login Controller-->
         <scene sceneID="E3s-Hw-hCj">
             <objects>
-                <viewController id="bZc-S1-Ykv" customClass="LoginController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginController" id="bZc-S1-Ykv" customClass="LoginController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fj1-eF-D3S">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
