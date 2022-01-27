@@ -375,7 +375,16 @@ class CollectionCell2: UICollectionViewCell {
 extension CollectionCell {
     override var isSelected: Bool {
         didSet {
-            contentView.backgroundColor = isSelected ? .systemYellow : nil
+            if isSelected {
+                contentView.layer.cornerRadius = 8
+                contentView.layer.borderColor = K.Colors.isSelected!.cgColor
+                contentView.layer.borderWidth = 4
+            }
+            else {
+                contentView.layer.cornerRadius = 0
+                contentView.layer.borderColor = nil
+                contentView.layer.borderWidth = 0
+            }
         }
     }
 }

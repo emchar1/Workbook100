@@ -26,6 +26,7 @@ struct K {
     
     struct Colors {
         static let superLightGray = UIColor(named: "superLightGray")
+        static let isSelected = UIColor(named: "isSelected")
     }
     
     struct CollectionCell {
