@@ -49,6 +49,7 @@ struct K {
         static let division = "Division"
         static let collection = "Collection"
         static let productNameDescription = "ProductNameDescription"
+        static let productNameDescriptionSecondary = "ProductNameDescriptionSecondary"
         static let productCategory = "ProductCategory"
         static let colorway = "Colorway"
         static let carryOver = "CarryOver"

@@ -12,7 +12,7 @@ import FirebaseStorageUI
 // MARK: - Collection Cell Stack
 
 class CollectionCellStack: UIStackView {
-    init(frame: CGRect = .zero, backgroundColor: UIColor = .clear, spacing: CGFloat = 0, distribution: Distribution, alignment: Alignment, axis: NSLayoutConstraint.Axis) {
+    init(frame: CGRect = .zero, backgroundColor: UIColor? = nil, spacing: CGFloat = 0, distribution: Distribution, alignment: Alignment, axis: NSLayoutConstraint.Axis) {
         super.init(frame: frame)
 
         //Convenient properties to initialize
@@ -191,7 +191,7 @@ class CollectionCell: UICollectionViewCell {
         super.init(frame: frame)
 
         setupViews()
-        backgroundColor = .purple
+//        backgroundColor = .purple
     }
     
     required init?(coder: NSCoder) {
@@ -211,6 +211,13 @@ class CollectionCell: UICollectionViewCell {
     func setViews() {
         labelTitle.text = model.productNameDescription
         labelSubtitle.text = model.colorway
+        
+        if contentView.frame.width > 150 {
+            hStackBottom.isHidden = false
+        }
+        else {
+            hStackBottom.isHidden = true
+        }
         
         labelSizesLeft.text = layoutSizes().left
         labelSizesRight.text = layoutSizes().right
@@ -281,10 +288,10 @@ class CollectionCell: UICollectionViewCell {
         productImage.backgroundColor = K.Colors.superLightGray
         productImage.translatesAutoresizingMaskIntoConstraints = false
         vStack.addArrangedSubview(productImage)
-        NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)])//K.CollectionCell.width)])//K.CollectionCell.adjustedHeight(in: contentView))])
+        NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)]) //K.CollectionCell.width)])//K.CollectionCell.adjustedHeight(in: contentView))])
         
         //Rule Line
-        vStack.addArrangedSubview(ruleLine)
+//        vStack.addArrangedSubview(ruleLine)
         
         // FIXME: - Sizes
         vStack.addArrangedSubview(hStackBottom)
@@ -336,7 +343,7 @@ class CollectionCell: UICollectionViewCell {
 }
 
 
-/*
+
 // MARK: - TEST!!!
 
 class CollectionCell2: UICollectionViewCell {
@@ -347,12 +354,28 @@ class CollectionCell2: UICollectionViewCell {
         
         label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
         label.text = "Test"
+        label.backgroundColor = .systemYellow
         label.textColor = .black
         contentView.addSubview(label)
+        contentView.backgroundColor = .systemGreen
     }
     
     required init?(coder: NSCoder) {
         fatalError("DOH!")
     }
+    
+    override var isSelected: Bool {
+        didSet {
+            contentView.backgroundColor = isSelected ? .cyan : .blue
+        }
+    }
 }
-*/
+
+
+extension CollectionCell {
+    override var isSelected: Bool {
+        didSet {
+            contentView.backgroundColor = isSelected ? .systemYellow : nil
+        }
+    }
+}

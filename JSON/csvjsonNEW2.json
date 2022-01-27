@@ -2,7 +2,8 @@
   "10000-00000": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "AIRMATIC Gloves",
+    "ProductNameDescription": "AIRMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black/Charcoal",
     "CarryOver": "TRUE",
@@ -32,7 +33,8 @@
   "10000-00005": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "AIRMATIC Gloves",
+    "ProductNameDescription": "AIRMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Blue",
     "CarryOver": "TRUE",
@@ -62,7 +64,8 @@
   "10000-00010": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "AIRMATIC Gloves",
+    "ProductNameDescription": "AIRMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow/Black",
     "CarryOver": "TRUE",
@@ -92,7 +95,8 @@
   "10000-00015": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "AIRMATIC Gloves",
+    "ProductNameDescription": "AIRMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Navy/White",
     "CarryOver": "TRUE",
@@ -122,7 +126,8 @@
   "10000-00025": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "AIRMATIC Gloves",
+    "ProductNameDescription": "AIRMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Red/Black",
     "CarryOver": "TRUE",
@@ -152,7 +157,8 @@
   "10001-00000": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "AIRMATIC Youth Gloves",
+    "ProductNameDescription": "AIRMATIC",
+    "ProductNameDescriptionSecondary": "Youth Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black/Charcoal",
     "CarryOver": "TRUE",
@@ -182,7 +188,8 @@
   "10001-00004": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "AIRMATIC Youth Gloves",
+    "ProductNameDescription": "AIRMATIC",
+    "ProductNameDescriptionSecondary": "Youth Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow/Black",
     "CarryOver": "TRUE",
@@ -212,7 +219,8 @@
   "10001-00008": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "AIRMATIC Youth Gloves",
+    "ProductNameDescription": "AIRMATIC",
+    "ProductNameDescriptionSecondary": "Youth Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Red/Black",
     "CarryOver": "TRUE",
@@ -242,7 +250,8 @@
   "10008-00005": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "ITRACK Gloves",
+    "ProductNameDescription": "ITRACK",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -272,7 +281,8 @@
   "10008-00010": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "ITRACK Gloves",
+    "ProductNameDescription": "ITRACK",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow",
     "CarryOver": "TRUE",
@@ -302,7 +312,8 @@
   "10008-00015": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "ITRACK Gloves",
+    "ProductNameDescription": "ITRACK",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Red",
     "CarryOver": "TRUE",
@@ -332,7 +343,8 @@
   "10009-00000": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "ITRACK Youth Gloves",
+    "ProductNameDescription": "ITRACK",
+    "ProductNameDescriptionSecondary": "Youth Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -362,7 +374,8 @@
   "10009-00004": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "ITRACK Youth Gloves",
+    "ProductNameDescription": "ITRACK",
+    "ProductNameDescriptionSecondary": "Youth Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow",
     "CarryOver": "TRUE",
@@ -392,7 +405,8 @@
   "10010-00000": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDEFIT Gloves",
+    "ProductNameDescription": "RIDEFIT",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black/White",
     "CarryOver": "TRUE",
@@ -422,7 +436,8 @@
   "10010-00005": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDEFIT Gloves",
+    "ProductNameDescription": "RIDEFIT",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Orange",
     "CarryOver": "TRUE",
@@ -452,7 +467,8 @@
   "10010-00025": {
     "Division": "Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDEFIT Gloves",
+    "ProductNameDescription": "RIDEFIT",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Navy",
     "CarryOver": "TRUE",
@@ -482,7 +498,8 @@
   "10011-00000": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDECAMP Gloves",
+    "ProductNameDescription": "RIDECAMP",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Army Green/Black",
     "CarryOver": "TRUE",
@@ -512,7 +529,8 @@
   "10011-00005": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDECAMP Gloves",
+    "ProductNameDescription": "RIDECAMP",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -542,7 +560,8 @@
   "10011-00010": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDECAMP Gloves",
+    "ProductNameDescription": "RIDECAMP",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow",
     "CarryOver": "TRUE",
@@ -572,7 +591,8 @@
   "10011-00015": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDECAMP Gloves",
+    "ProductNameDescription": "RIDECAMP",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Navy/Slate Blue",
     "CarryOver": "TRUE",
@@ -602,7 +622,8 @@
   "10011-00020": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDECAMP Gloves",
+    "ProductNameDescription": "RIDECAMP",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Red",
     "CarryOver": "TRUE",
@@ -632,7 +653,8 @@
   "10012-00000": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDECAMP Youth Gloves",
+    "ProductNameDescription": "RIDECAMP",
+    "ProductNameDescriptionSecondary": "Youth Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black/Charcoal",
     "CarryOver": "TRUE",
@@ -662,7 +684,8 @@
   "10012-00004": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "RIDECAMP Youth Gloves",
+    "ProductNameDescription": "RIDECAMP",
+    "ProductNameDescriptionSecondary": "Youth Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Red",
     "CarryOver": "TRUE",
@@ -692,7 +715,8 @@
   "10017-00000": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "HYDROMATIC Gloves",
+    "ProductNameDescription": "HYDROMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -722,7 +746,8 @@
   "10017-00005": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "HYDROMATIC Gloves",
+    "ProductNameDescription": "HYDROMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow",
     "CarryOver": "TRUE",
@@ -752,7 +777,8 @@
   "10018-00000": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "HYDROMATIC BRISKER Gloves",
+    "ProductNameDescription": "HYDROMATIC BRISKER",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -782,7 +808,8 @@
   "10018-00005": {
     "Division": "Bike, Moto",
     "Collection": "SP23",
-    "ProductNameDescription": "HYDROMATIC BRISKER Gloves",
+    "ProductNameDescription": "HYDROMATIC BRISKER",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Blue",
     "CarryOver": "TRUE",
@@ -812,7 +839,8 @@
   "10019-00000": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING Bike Gloves",
+    "ProductNameDescription": "SLING",
+    "ProductNameDescriptionSecondary": "Bike Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -842,7 +870,8 @@
   "10019-00005": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING Bike Gloves",
+    "ProductNameDescription": "SLING",
+    "ProductNameDescriptionSecondary": "Bike Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Grey",
     "CarryOver": "TRUE",
@@ -872,7 +901,8 @@
   "10019-00010": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING Bike Gloves",
+    "ProductNameDescription": "SLING",
+    "ProductNameDescriptionSecondary": "Bike Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Navy",
     "CarryOver": "TRUE",
@@ -902,7 +932,8 @@
   "10021-00000": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING Bike Short Finger Gloves",
+    "ProductNameDescription": "SLING",
+    "ProductNameDescriptionSecondary": "Bike Short Finger Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -932,7 +963,8 @@
   "10021-00005": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING Bike Short Finger Gloves",
+    "ProductNameDescription": "SLING",
+    "ProductNameDescriptionSecondary": "Bike Short Finger Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Grey",
     "CarryOver": "TRUE",
@@ -962,7 +994,8 @@
   "10021-00010": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING Bike Short Finger Gloves",
+    "ProductNameDescription": "SLING",
+    "ProductNameDescriptionSecondary": "Bike Short Finger Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Navy",
     "CarryOver": "TRUE",
@@ -992,7 +1025,8 @@
   "10023-00000": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING MX Gloves",
+    "ProductNameDescription": "SLING MX",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -1022,7 +1056,8 @@
   "10023-00005": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING MX Gloves",
+    "ProductNameDescription": "SLING MX",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow",
     "CarryOver": "TRUE",
@@ -1052,7 +1087,8 @@
   "10023-00010": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING MX Gloves",
+    "ProductNameDescription": "SLING MX",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Navy",
     "CarryOver": "TRUE",
@@ -1082,7 +1118,8 @@
   "10023-00015": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "SLING MX Gloves",
+    "ProductNameDescription": "SLING MX",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Grey",
     "CarryOver": "TRUE",
@@ -1112,7 +1149,8 @@
   "10024-00000": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "EXCEEDA Gel Short Finger Gloves",
+    "ProductNameDescription": "EXCEEDA",
+    "ProductNameDescriptionSecondary": "Gel Short Finger Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -1142,7 +1180,8 @@
   "10024-00005": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "EXCEEDA Gel Short Finger Gloves",
+    "ProductNameDescription": "EXCEEDA",
+    "ProductNameDescriptionSecondary": "Gel Short Finger Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow",
     "CarryOver": "TRUE",
@@ -1172,7 +1211,8 @@
   "10026-00000": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "GEOMATIC Gloves",
+    "ProductNameDescription": "GEOMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black/Charcoal",
     "CarryOver": "TRUE",
@@ -1202,7 +1242,8 @@
   "10026-00005": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "GEOMATIC Gloves",
+    "ProductNameDescription": "GEOMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow",
     "CarryOver": "TRUE",
@@ -1232,7 +1273,8 @@
   "10026-00015": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "GEOMATIC Gloves",
+    "ProductNameDescription": "GEOMATIC",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Red",
     "CarryOver": "TRUE",
@@ -1262,7 +1304,8 @@
   "10027-00000": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "R-CORE Gloves",
+    "ProductNameDescription": "R-CORE",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Black",
     "CarryOver": "TRUE",
@@ -1292,7 +1335,8 @@
   "10027-00010": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "R-CORE Gloves",
+    "ProductNameDescription": "R-CORE",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Fluo Yellow",
     "CarryOver": "TRUE",
@@ -1322,7 +1366,8 @@
   "10027-00015": {
     "Division": "Bike",
     "Collection": "SP23",
-    "ProductNameDescription": "R-CORE Gloves",
+    "ProductNameDescription": "R-CORE",
+    "ProductNameDescriptionSecondary": "Gloves",
     "ProductCategory": "Gloves",
     "Colorway": "Racer Red",
     "CarryOver": "TRUE",

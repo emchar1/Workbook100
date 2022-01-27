@@ -24,6 +24,7 @@
 		EAA0CF7C2769573F00943912 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA0CF7A2769573F00943912 /* Main.storyboard */; };
 		EAA0CF7E2769574100943912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAA0CF7D2769574100943912 /* Assets.xcassets */; };
 		EAA0CF812769574100943912 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA0CF7F2769574100943912 /* LaunchScreen.storyboard */; };
+		EAE242B327A0B96400B009A1 /* RightMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE242B227A0B96400B009A1 /* RightMenuController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		EAA0CF7D2769574100943912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAA0CF802769574100943912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAA0CF822769574100943912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAE242B227A0B96400B009A1 /* RightMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMenuController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				EA91E071279366DC00DE630E /* ContainerViewController.swift */,
 				EA91E07327936A6200DE630E /* ProductFilterController.swift */,
 				EAA0CF782769573F00943912 /* WorkbookViewController.swift */,
+				EAE242B227A0B96400B009A1 /* RightMenuController.swift */,
 				EA22D4E7277A5FD6006C12CF /* WorkbookDetailController.swift */,
 				EA22D53127859964006C12CF /* WorkbookDetailControllerNEW.swift */,
 			);
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE242B327A0B96400B009A1 /* RightMenuController.swift in Sources */,
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
 				EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,

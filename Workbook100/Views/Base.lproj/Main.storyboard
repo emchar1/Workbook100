@@ -27,14 +27,13 @@
                                 <action selector="productFilterTapped:" destination="BYZ-38-t0r" id="cfL-7z-8xb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="P9D-VW-Dvi">
-                            <connections>
-                                <action selector="addBlankTapped:" destination="BYZ-38-t0r" id="tGx-A0-UKg"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" image="gearshape" catalog="system" id="P9D-VW-Dvi">
+                            <color key="tintColor" systemColor="labelColor"/>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="rightMenu" destination="P9D-VW-Dvi" id="3ty-Iz-RGQ"/>
                         <segue destination="iFX-ne-hgK" kind="presentation" identifier="showDetails" id="GM9-wz-OKi"/>
                         <segue destination="LVv-C1-W7p" kind="presentation" identifier="showDetailsNEW" id="dGL-6y-kuy"/>
                     </connections>
@@ -844,6 +843,7 @@
     </scenes>
     <resources>
         <image name="eye" catalog="system" width="128" height="81"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="line.3.horizontal.circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

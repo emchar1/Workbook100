@@ -92,6 +92,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
             let newModel = CollectionModel(division: K.items[row].division,
                                            collection: K.items[row].collection,
                                            productNameDescription: tfTitle.text!,
+                                           productNameDescriptionSecondary: K.items[row].productNameDescriptionSecondary,
                                            productCategory: K.items[row].productCategory,
                                            colorway: tfSubtitle.text!,
                                            carryOver: !switchNew.isOn,

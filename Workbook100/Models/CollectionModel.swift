@@ -13,7 +13,7 @@ import UniformTypeIdentifiers
 
 // MARK: - CollectionModel
 
-final class CollectionModel: NSObject, Comparable,/*Codable, CustomStringConvertible,*/ Identifiable, NSItemProviderWriting {
+final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderWriting {
     //removed CustomStringConvertible, Equatable, when I converted it from a struct to a class
 
     
@@ -22,6 +22,7 @@ final class CollectionModel: NSObject, Comparable,/*Codable, CustomStringConvert
     let division: String
     let collection: String
     let productNameDescription: String
+    let productNameDescriptionSecondary: String
     let productCategory: String
     let colorway: String
     let carryOver: Bool
@@ -57,11 +58,12 @@ final class CollectionModel: NSObject, Comparable,/*Codable, CustomStringConvert
     
     // MARK: - Initialization
     
-    init(division: String, collection: String, productNameDescription: String, productCategory: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, image: StorageReference?) {
+    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, image: StorageReference?) {
 
         self.division = division
         self.collection = collection
         self.productNameDescription = productNameDescription
+        self.productNameDescriptionSecondary = productNameDescriptionSecondary
         self.productCategory = productCategory
         self.colorway = colorway
         self.carryOver = carryOver
@@ -83,6 +85,7 @@ final class CollectionModel: NSObject, Comparable,/*Codable, CustomStringConvert
         let model = CollectionModel(division: "Division",
                                     collection: "SP23",
                                     productNameDescription: "Product Name Description",
+                                    productNameDescriptionSecondary: "Product Name Description Secondary",
                                     productCategory: "Product Category",
                                     colorway: "Color",
                                     carryOver: false,

@@ -13,9 +13,11 @@ protocol WorkbookViewControllerDelegate {
     func collapsePanel()
 }
 
-class WorkbookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+class WorkbookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIPopoverPresentationControllerDelegate {
     
     // MARK: - Properties
+    
+    @IBOutlet weak var rightMenu: UIBarButtonItem!
     
     var ref: DatabaseReference!
     var delegate: WorkbookViewControllerDelegate?
@@ -29,7 +31,9 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier + "0")
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier)
+        collectionView.register(CollectionCell2.self, forCellWithReuseIdentifier: K.CollectionCell.identifier + "2")
         return collectionView
     }()
 
@@ -37,33 +41,21 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         delegate?.expandPanel()
     }
     
-    @IBAction func addBlankTapped(_ sender: Any) {
-        collectionView.performBatchUpdates ({
-            K.items.insert(CollectionModel.getBlankModel(), at: 0)
-            collectionView.insertItems(at: [IndexPath(item: 0, section: 0)])
-        }, completion: nil)
-        
-        
-    }
     
     // MARK: - Initialization
-    
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        print("Trait collection changes")
-//    }
-    
+        
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        coordinator.animate { _ in
+        coordinator.animate(alongsideTransition: { _ in
             self.collectionView.collectionViewLayout.invalidateLayout()
-        } completion: { _ in
-            
-        }
+        }, completion: nil)        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupRightMenu()
 
         collectionView.dragInteractionEnabled = true
         collectionView.dragDelegate = self
@@ -89,6 +81,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                     let item = CollectionModel(division: obj[K.FIR.division] as! String,
                                                collection: obj[K.FIR.collection] as! String,
                                                productNameDescription: obj[K.FIR.productNameDescription] as! String,
+                                               productNameDescriptionSecondary: obj[K.FIR.productNameDescriptionSecondary] as! String,
                                                productCategory: obj[K.FIR.productCategory] as! String,
                                                colorway: obj[K.FIR.colorway] as! String,
                                                carryOver: (obj[K.FIR.carryOver] as! String) == "TRUE",
@@ -133,6 +126,41 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             self.collectionView.reloadData()
         }
     }
+    
+    func setupRightMenu() {
+        let menuItems: [UIAction] = [
+            UIAction(title: "Add Blank", image: nil, handler: { action in
+                print("Blank")
+                
+                guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
+
+                self.collectionView.performBatchUpdates ({
+                    K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+                    self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
+                }, completion: nil)
+            }),
+            UIAction(title: "Multi-Select", image: nil, handler: { action in
+                self.collectionView.allowsMultipleSelection = true
+
+                print("Multi")
+            }),
+            UIAction(title: "Cancel", image: nil, handler: { action in
+                self.collectionView.allowsMultipleSelection = false
+                
+                
+                for i in self.collectionView.indexPathsForVisibleItems {
+                    self.collectionView.deselectItem(at: i, animated: true)
+                }
+                print("Cancel")
+
+            }),
+            UIAction(title: "Export", image: nil, handler: { action in
+                
+            })
+        ]
+        
+        rightMenu.menu = UIMenu(title: "Settings", image: nil, options: .displayInline, children: menuItems)
+    }
         
     
     // MARK: - Navigation
@@ -158,11 +186,23 @@ extension WorkbookViewController {
     // MARK: - Data Source
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier, for: indexPath) as! CollectionCell
+        switch K.items[indexPath.row].productCategory {
+        case "Apparel", "Gloves", "Accessories", "Gear":
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier, for: indexPath) as! CollectionCell
+            cell.model = K.items[indexPath.row]
+            cell.setViews()
+            return cell
+        case "Geart":
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier + "2", for: indexPath) as! CollectionCell2
+            cell.label.text = K.items[indexPath.row].productDescription
+            return cell
+        default:
+            break
+        }
 
-        cell.model = K.items[indexPath.row]
-        cell.setViews()
-
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier + "0", for: indexPath)
+        cell.backgroundColor = .clear
         return cell
     }
 
@@ -174,7 +214,7 @@ extension WorkbookViewController {
     // MARK: - Collection View Delegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showDetailsNEW", sender: nil)
+//        performSegue(withIdentifier: "showDetailsNEW", sender: nil)
     }
     
 
@@ -184,8 +224,11 @@ extension WorkbookViewController {
 //        let multiplier: CGFloat = 1
         
         // FIXME: - adaptable cell size doesn't work!!
-        print(K.CollectionCell.adjustedWidth(in: collectionView))
-        return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView), height: K.CollectionCell.adjustedHeight(in: collectionView))
+//        print(K.CollectionCell.adjustedWidth(in: collectionView))
+        let productCategory = K.items[indexPath.row].productCategory
+        let multiplix: CGFloat = (productCategory == "Apparel" || productCategory == "Gloves" || productCategory == "Accessories") ? 1 : 1
+        return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView) * multiplix,
+                      height: K.CollectionCell.adjustedHeight(in: collectionView) * multiplix)
         //but this one does...
 //        return CGSize(width: K.CollectionCell.width * multiplier, height: K.CollectionCell.height * multiplier)
     }
@@ -243,7 +286,40 @@ extension WorkbookViewController {
             coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
         }
     }
-    
+}
+
+
+// MARK: - Right Menu Controls
+extension WorkbookViewController {
+    func menuItemTapped(_ item: RightMenuController.MenuItem) {
+        switch item {
+        case .addBlank:
+            print("Blank")
+            
+            guard let cell = collectionView.visibleCells.first, let indexPath = collectionView.indexPath(for: cell) else { return }
+
+            collectionView.performBatchUpdates ({
+                K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+                collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
+            }, completion: nil)
+        case .multiSelect:
+            collectionView.allowsMultipleSelection = true
+
+            print("Multi")
+        case .cancel:
+            collectionView.allowsMultipleSelection = false
+            
+            
+            for i in collectionView.indexPathsForVisibleItems {
+                collectionView.deselectItem(at: i, animated: true)
+            }
+            print("Cancel")
+        case .export:
+            
+
+            print("Export")
+        }
+    }
 }
 
 
@@ -263,6 +339,7 @@ extension WorkbookViewController: ProductFilterControllerDelegate {
         K.items[0] = CollectionModel(division: mohdel.division,
                                      collection: mohdel.collection,
                                      productNameDescription: mohdel.productNameDescription,
+                                     productNameDescriptionSecondary: mohdel.productNameDescriptionSecondary,
                                      productCategory: mohdel.productCategory,
                                      colorway: mohdel.colorway,
                                      carryOver: mohdel.carryOver,
