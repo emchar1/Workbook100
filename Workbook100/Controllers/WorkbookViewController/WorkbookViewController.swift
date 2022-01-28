@@ -34,8 +34,8 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier + "0")
-        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier)
+        collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: K.CollectionCell.identifier0)
+        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier1)
         return collectionView
     }()
 
@@ -72,6 +72,8 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             
             for itemSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
                 if let obj = itemSnapshot.value as? [String: AnyObject] {
+                    let imageRef = Storage.storage().reference().child((obj[K.FIR.skuCode] as! String) + ".jpg")
+                    
                     let item = CollectionModel(division: obj[K.FIR.division] as! String,
                                                collection: obj[K.FIR.collection] as! String,
                                                productNameDescription: obj[K.FIR.productNameDescription] as! String,
@@ -96,7 +98,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                composition: obj[K.FIR.composition] as! String,
                                                productDescription: obj[K.FIR.productDescription] as! String,
                                                productFeatures: obj[K.FIR.productFeatures] as! String,
-                                               image: Storage.storage().reference().child((obj[K.FIR.skuCode] as! String) + ".jpg"))
+                                               image: imageRef)
 
                     K.items.append(item)
                 }
@@ -186,18 +188,14 @@ extension WorkbookViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch K.items[indexPath.row].productCategory {
         case "Apparel", "Gloves", "Accessories", "Gear":
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier, for: indexPath) as! CollectionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier1, for: indexPath) as! CollectionCell
             cell.model = K.items[indexPath.row]
             cell.setViews()
             return cell
         default:
-            break
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier0, for: indexPath) as! CollectionCellBlank
+            return cell
         }
-
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier + "0", for: indexPath)
-        cell.backgroundColor = .clear
-        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -27,6 +27,7 @@
 		EAB133E027A47BFD007F6553 /* WorkbookViewController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133DF27A47BFD007F6553 /* WorkbookViewController+DragDrop.swift */; };
 		EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */; };
 		EAB133E527A494A0007F6553 /* CollectionCell+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */; };
+		EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */; };
 		EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2BA0727A2306500CD4856 /* CSVMake.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		EAB133DF27A47BFD007F6553 /* WorkbookViewController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookViewController+DragDrop.swift"; sourceTree = "<group>"; };
 		EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookViewController+MailCompose.swift"; sourceTree = "<group>"; };
 		EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+Views.swift"; sourceTree = "<group>"; };
+		EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellBlank.swift; sourceTree = "<group>"; };
 		EAF2BA0727A2306500CD4856 /* CSVMake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMake.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				EAA0CF7A2769573F00943912 /* Main.storyboard */,
+				EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */,
 				EA53FF9A276D200F00D22042 /* CollectionCell.swift */,
 				EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */,
 			);
@@ -148,9 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				EA22D4DF27754129006C12CF /* Constants.swift */,
+				EAF2BA0727A2306500CD4856 /* CSVMake.swift */,
 				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
 				EA22D4E127759DA4006C12CF /* CollectionModel.swift */,
-				EAF2BA0727A2306500CD4856 /* CSVMake.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
 				EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
+				EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */,
 				EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */,
 				EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */,
 				EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */,

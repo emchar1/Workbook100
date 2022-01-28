@@ -30,7 +30,8 @@ struct K {
     }
     
     struct CollectionCell {
-        static let identifier = "CVCell"
+        static let identifier0 = "CVCell0"
+        static let identifier1 = "CVCell1"
         static var cellMultiplier: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
         static let padding: CGFloat = 8
         static let width: CGFloat = 200
@@ -98,5 +99,23 @@ extension UIStoryboard {
     // FIXME: - Test
     static var leftNavigationController: UINavigationController? {
         mainStoryboard.instantiateViewController(withIdentifier: "Nav2") as? UINavigationController
+    }
+}
+
+
+// MARK: - UICollectionViewCell
+
+extension UICollectionViewCell {
+    func setSelected(_ isSelected: Bool, in contentView: UIView) {
+        if isSelected {
+            contentView.layer.cornerRadius = 6
+            contentView.layer.borderColor = K.Colors.isSelected!.cgColor
+            contentView.layer.borderWidth = 4
+        }
+        else {
+            contentView.layer.cornerRadius = 0
+            contentView.layer.borderColor = nil
+            contentView.layer.borderWidth = 0
+        }
     }
 }

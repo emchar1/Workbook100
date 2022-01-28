@@ -23,26 +23,25 @@ class CollectionCell: UICollectionViewCell {
     var labelTitle: CollectionCellLabel!
     var labelSubtitle: CollectionCellLabel!
     var productImage: UIImageView!
+    var productImageNoImg: UILabel = {
+        let noimg = UILabel()
+        noimg.text = "No Image"
+        noimg.textColor = .gray
+        noimg.translatesAutoresizingMaskIntoConstraints = false
+        return noimg
+    }()
     
-    var ruleLine: RuleLine!
-    var hStackBottom: CollectionCellStack!
-    var labelSizesLeft: CollectionCellLabel!
-    var labelSizesRight: CollectionCellLabel!
+//    var ruleLine: RuleLine!
+//    var hStackBottom: CollectionCellStack!
+//    var labelSizesLeft: CollectionCellLabel!
+//    var labelSizesRight: CollectionCellLabel!
 
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                contentView.layer.cornerRadius = 6
-                contentView.layer.borderColor = K.Colors.isSelected!.cgColor
-                contentView.layer.borderWidth = 4
-            }
-            else {
-                contentView.layer.cornerRadius = 0
-                contentView.layer.borderColor = nil
-                contentView.layer.borderWidth = 0
-            }
+            setSelected(isSelected, in: contentView)
         }
     }
+    
     
     // MARK: - Initialization
     
@@ -65,21 +64,26 @@ class CollectionCell: UICollectionViewCell {
     
     func setViews() {
         labelTitle.text = model.productNameDescription
-        labelSubtitle.text = model.colorway
+        labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
         
-        if contentView.frame.width >= 200 {
-            hStackBottom.isHidden = false
-            ruleLine.isHidden = false
-        }
-        else {
-            hStackBottom.isHidden = true
-            ruleLine.isHidden = true
-        }
-        
-        labelSizesLeft.text = layoutSizes().left
-        labelSizesRight.text = layoutSizes().right
-        
+//
+//        if contentView.frame.width >= 200 {
+//            hStackBottom.isHidden = false
+//            ruleLine.isHidden = false
+//        }
+//        else {
+//            hStackBottom.isHidden = true
+//            ruleLine.isHidden = true
+//        }
+//
+//        labelSizesLeft.text = layoutSizes().left
+//        labelSizesRight.text = layoutSizes().right
+//
         if let image = model.image {
+            image.downloadURL { (url, error) in
+                self.productImageNoImg.isHidden = (url != nil ? true : false)
+            }
+            
             productImage.sd_setImage(with: image)
         }
 
@@ -103,10 +107,10 @@ class CollectionCell: UICollectionViewCell {
         labelTitle = CollectionCellLabel(type: .title, text: model.productNameDescription)
         labelSubtitle = CollectionCellLabel(type: .subtitle, text: model.colorway)
         productImage = UIImageView()
-        ruleLine = RuleLine(frame: CGRect(x: 0, y: 0, width: K.CollectionCell.width, height: 20))
-        hStackBottom = CollectionCellStack(distribution: .fillEqually, alignment: .fill, axis: .horizontal)
-        labelSizesLeft =  CollectionCellLabel(type: .productSize, text: layoutSizes().left)
-        labelSizesRight =  CollectionCellLabel(type: .productSize, text: layoutSizes().right)
+//        ruleLine = RuleLine(frame: CGRect(x: 0, y: 0, width: K.CollectionCell.width, height: 20))
+//        hStackBottom = CollectionCellStack(distribution: .fillEqually, alignment: .fill, axis: .horizontal)
+//        labelSizesLeft =  CollectionCellLabel(type: .productSize, text: layoutSizes().left)
+//        labelSizesRight =  CollectionCellLabel(type: .productSize, text: layoutSizes().right)
         
 //        let padding: CGFloat = K.CollectionCell.padding
 
@@ -127,60 +131,65 @@ class CollectionCell: UICollectionViewCell {
         vStack.addArrangedSubview(labelSubtitle)
 
         // FIXME: - Product Image
-        productImage.contentMode = .scaleAspectFit
+        productImage.contentMode = .scaleAspectFill
+        productImage.clipsToBounds = true
         productImage.backgroundColor = K.Colors.superLightGray
         productImage.translatesAutoresizingMaskIntoConstraints = false
         vStack.addArrangedSubview(productImage)
         NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)]) //K.CollectionCell.width)])//K.CollectionCell.adjustedHeight(in: contentView))])
-        
+        productImage.addSubview(productImageNoImg)
+        NSLayoutConstraint.activate([productImageNoImg.centerXAnchor.constraint(equalTo: productImage.centerXAnchor),
+                                     productImageNoImg.centerYAnchor.constraint(equalTo: productImage.centerYAnchor)])
+
         //Rule Line
-        vStack.addArrangedSubview(ruleLine)
+//        vStack.addArrangedSubview(ruleLine)
         
         // FIXME: - Sizes
-        vStack.addArrangedSubview(hStackBottom)
-        hStackBottom.addArrangedSubview(labelSizesLeft)
-        hStackBottom.alignment = .top
-        labelSizesRight.textAlignment = .right
-        hStackBottom.addArrangedSubview(labelSizesRight)
+//        vStack.addArrangedSubview(hStackBottom)
+//        hStackBottom.addArrangedSubview(labelSizesLeft)
+//        hStackBottom.alignment = .top
+//        labelSizesRight.textAlignment = .right
+//        hStackBottom.addArrangedSubview(labelSizesRight)
     }
     
-    private func layoutSizes() -> (left: String, right: String) {
-        var leftReturn = ""
-        var rightReturn = ""
-        var sizesCount = 0
-        var sizesCountHalved: Int {
-            Int(ceil(Double(sizesCount) / 2.0))
-        }
-        var maxSizesCountHalved: Int {
-            Int(ceil(Double(model.sizes.count) / 2.0))
-        }
-        
-        //Get the number of viable sizes
-        for (i, size) in model.sizes.enumerated() {
-            if size.size == "" && size.colorwaySKU == "" {
-                sizesCount = i
-                break
-            }
-        }
-        
-        //Populate left side
-        for i in 0..<sizesCountHalved {
-            leftReturn += "\(model.sizes[i])"
-            leftReturn += (i < sizesCountHalved - 1) ? "\n" : ""
-        }
-        
-        //Populate right side
-        for i in sizesCountHalved..<sizesCount {
-            rightReturn += "\(model.sizes[i])"
-            rightReturn += (i < sizesCount - 1) ? "\n" : ""
-        }
-        
-        //Add "padding"
-        for _ in sizesCountHalved..<maxSizesCountHalved {
-            leftReturn += "\n"
-        }
-        
-        return (leftReturn, rightReturn)
-    }
+    
+//    private func layoutSizes() -> (left: String, right: String) {
+//        var leftReturn = ""
+//        var rightReturn = ""
+//        var sizesCount = 0
+//        var sizesCountHalved: Int {
+//            Int(ceil(Double(sizesCount) / 2.0))
+//        }
+//        var maxSizesCountHalved: Int {
+//            Int(ceil(Double(model.sizes.count) / 2.0))
+//        }
+//
+//        //Get the number of viable sizes
+//        for (i, size) in model.sizes.enumerated() {
+//            if size.size == "" && size.colorwaySKU == "" {
+//                sizesCount = i
+//                break
+//            }
+//        }
+//
+//        //Populate left side
+//        for i in 0..<sizesCountHalved {
+//            leftReturn += "\(model.sizes[i])"
+//            leftReturn += (i < sizesCountHalved - 1) ? "\n" : ""
+//        }
+//
+//        //Populate right side
+//        for i in sizesCountHalved..<sizesCount {
+//            rightReturn += "\(model.sizes[i])"
+//            rightReturn += (i < sizesCount - 1) ? "\n" : ""
+//        }
+//
+//        //Add "padding"
+//        for _ in sizesCountHalved..<maxSizesCountHalved {
+//            leftReturn += "\n"
+//        }
+//
+//        return (leftReturn, rightReturn)
+//    }
     
 }

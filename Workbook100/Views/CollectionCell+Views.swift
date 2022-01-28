@@ -96,7 +96,7 @@ class CollectionCellLabel: UILabel {
 
         self.text = text
         self.textColor = .black
-        self.numberOfLines = (type != .productSize) ? 1 : 0
+        self.numberOfLines = (type != .title) ? 0 : 1
         
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false
