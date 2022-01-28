@@ -9,164 +9,9 @@ import UIKit
 import FirebaseStorageUI
 
 
-// MARK: - Collection Cell Stack
-
-class CollectionCellStack: UIStackView {
-    init(frame: CGRect = .zero, backgroundColor: UIColor? = nil, spacing: CGFloat = 0, distribution: Distribution, alignment: Alignment, axis: NSLayoutConstraint.Axis) {
-        super.init(frame: frame)
-
-        //Convenient properties to initialize
-        self.backgroundColor = backgroundColor
-        self.spacing = spacing
-        self.distribution = distribution
-        self.alignment = alignment
-        self.axis = axis
-        
-        //Assumes user intends to use NSLayoutConstraints
-        if frame == .zero {
-            self.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-
-// MARK: - Collection Cell Label Bubble
-
-class CollectionCellLabelBubble: UILabel {
-    enum LabelBubbleType {
-        case new, essential, nothing
-    }
-    
-    init(frame: CGRect = .zero, type: LabelBubbleType) {
-        super.init(frame: frame)
-
-        self.text = text
-        self.textColor = .white
-        self.textAlignment = .center
-        self.font = K.Fonts.bubbleTitle
-        self.layer.cornerRadius = 6
-        self.clipsToBounds = true
-        
-        if frame == .zero {
-            self.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        customizeType(type)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func customizeType(_ type: LabelBubbleType) {
-        switch type {
-        case .new:
-            self.backgroundColor = .red
-            self.text = "New"
-        case .essential:
-            self.backgroundColor = .black
-            self.text = "Essential"
-        case .nothing:
-            self.backgroundColor = .clear
-            self.text = ""
-        }
-    }
-    
-//    func setConstraints(to view: UIView, padding: CGFloat) {
-//        NSLayoutConstraint.activate([topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-//                                     leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-//                                     view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: padding),
-//                                     view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
-//    }
-}
-
-
-// MARK: - Collection Cell Label
-
-class CollectionCellLabel: UILabel {
-    enum LabelType {
-        case title, subtitle, productSize
-    }
-    
-    init(frame: CGRect = .zero, type: LabelType, text: String) {
-        super.init(frame: frame)
-
-        self.text = text
-        self.textColor = .black
-        self.numberOfLines = (type != .productSize) ? 1 : 0
-        
-        if frame == .zero {
-            self.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        customizeType(type)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func customizeType(_ type: LabelType) {
-        switch type {
-        case .title:
-            self.font = K.Fonts.title
-        case .subtitle:
-            self.font = K.Fonts.subtitle
-        case .productSize:
-            self.font = K.Fonts.footerTitle
-        }
-    }
-}
-
-
-// MARK: - Rule Line
-
-class RuleLine: UIView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        let ruleLine = CAShapeLayer()
-        let linePath = UIBezierPath()
-        linePath.move(to: CGPoint(x: 0, y: frame.height / 2))
-        linePath.addLine(to: CGPoint(x: frame.width, y: frame.height / 2))
-        ruleLine.path = linePath.cgPath
-        ruleLine.strokeColor = UIColor.black.cgColor
-        ruleLine.lineWidth = 0.5
-        layer.addSublayer(ruleLine)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-
-// MARK: - Collection Cell
-
 class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
-    
-    //are these needed???
-//    static var identifier = "CVCell"
-//    static var padding: CGFloat = 8.0
-//    static var widthImageView: CGFloat = UIScreen.main.bounds.width / 3 - padding * 1.5
-//    static var heightImageView: CGFloat = widthImageView
-//    static var heightDescriptionLabel: CGFloat = 60
-//    static var heightStack: CGFloat = heightImageView * heightDescriptionLabel
-//    var imageView: UIImageView = {
-//        var imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.backgroundColor = .cyan
-//        return imageView
-//    }()
-    
-    
-    //new properties
     var model: CollectionModel!
     var vStack: CollectionCellStack!
     
@@ -184,6 +29,20 @@ class CollectionCell: UICollectionViewCell {
     var labelSizesLeft: CollectionCellLabel!
     var labelSizesRight: CollectionCellLabel!
 
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                contentView.layer.cornerRadius = 6
+                contentView.layer.borderColor = K.Colors.isSelected!.cgColor
+                contentView.layer.borderWidth = 4
+            }
+            else {
+                contentView.layer.cornerRadius = 0
+                contentView.layer.borderColor = nil
+                contentView.layer.borderWidth = 0
+            }
+        }
+    }
     
     // MARK: - Initialization
     
@@ -191,32 +50,30 @@ class CollectionCell: UICollectionViewCell {
         super.init(frame: frame)
 
         setupViews()
-//        backgroundColor = .purple
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented.")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//
 //        productImage.image = nil
 //        productImage.cancelImageLoad()
-    }
-    
-    
-    // MARK: - Helper Functions
+//    }
     
     func setViews() {
         labelTitle.text = model.productNameDescription
         labelSubtitle.text = model.colorway
         
-        if contentView.frame.width > 150 {
+        if contentView.frame.width >= 200 {
             hStackBottom.isHidden = false
+            ruleLine.isHidden = false
         }
         else {
             hStackBottom.isHidden = true
+            ruleLine.isHidden = true
         }
         
         labelSizesLeft.text = layoutSizes().left
@@ -233,23 +90,9 @@ class CollectionCell: UICollectionViewCell {
     }
     
     
+    // MARK: - Helper Functions
+    
     private func setupViews() {
-        /*
-        self.model = CollectionModel(showNew: true,
-                                     showEssential: true,
-                                     labelTitle: "Product Title",
-                                     labelSubtitle: "Product Subtitle",
-                                     imageName: "20026-20",
-                                     sizes: [
-                                        CollectionModel.Size.init(size: "SM", sku: "00000-00001"),
-                                        CollectionModel.Size.init(size: "MD", sku: "00000-00002"),
-                                        CollectionModel.Size.init(size: "LG", sku: "00000-00003"),
-                                        CollectionModel.Size.init(size: "XL", sku: "00000-00004"),
-                                        CollectionModel.Size.init(size: nil, sku: "00000-00005")
-                                     ],
-                                     image: nil)
-         */
-        
         self.model = CollectionModel.getBlankModel()
         
         vStack = CollectionCellStack(distribution: .fill, alignment: .fill, axis: .vertical)
@@ -291,7 +134,7 @@ class CollectionCell: UICollectionViewCell {
         NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)]) //K.CollectionCell.width)])//K.CollectionCell.adjustedHeight(in: contentView))])
         
         //Rule Line
-//        vStack.addArrangedSubview(ruleLine)
+        vStack.addArrangedSubview(ruleLine)
         
         // FIXME: - Sizes
         vStack.addArrangedSubview(hStackBottom)
@@ -340,51 +183,4 @@ class CollectionCell: UICollectionViewCell {
         return (leftReturn, rightReturn)
     }
     
-}
-
-
-
-// MARK: - TEST!!!
-
-class CollectionCell2: UICollectionViewCell {
-    var label: UILabel!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-        label.text = "Test"
-        label.backgroundColor = .systemYellow
-        label.textColor = .black
-        contentView.addSubview(label)
-        contentView.backgroundColor = .systemGreen
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("DOH!")
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            contentView.backgroundColor = isSelected ? .cyan : .blue
-        }
-    }
-}
-
-
-extension CollectionCell {
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                contentView.layer.cornerRadius = 8
-                contentView.layer.borderColor = K.Colors.isSelected!.cgColor
-                contentView.layer.borderWidth = 4
-            }
-            else {
-                contentView.layer.cornerRadius = 0
-                contentView.layer.borderColor = nil
-                contentView.layer.borderWidth = 0
-            }
-        }
-    }
 }

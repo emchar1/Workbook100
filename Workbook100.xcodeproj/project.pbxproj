@@ -24,6 +24,9 @@
 		EAA0CF7C2769573F00943912 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA0CF7A2769573F00943912 /* Main.storyboard */; };
 		EAA0CF7E2769574100943912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAA0CF7D2769574100943912 /* Assets.xcassets */; };
 		EAA0CF812769574100943912 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA0CF7F2769574100943912 /* LaunchScreen.storyboard */; };
+		EAB133E027A47BFD007F6553 /* WorkbookViewController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133DF27A47BFD007F6553 /* WorkbookViewController+DragDrop.swift */; };
+		EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */; };
+		EAB133E527A494A0007F6553 /* CollectionCell+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */; };
 		EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2BA0727A2306500CD4856 /* CSVMake.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +52,9 @@
 		EAA0CF7D2769574100943912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAA0CF802769574100943912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAA0CF822769574100943912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAB133DF27A47BFD007F6553 /* WorkbookViewController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookViewController+DragDrop.swift"; sourceTree = "<group>"; };
+		EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookViewController+MailCompose.swift"; sourceTree = "<group>"; };
+		EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+Views.swift"; sourceTree = "<group>"; };
 		EAF2BA0727A2306500CD4856 /* CSVMake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMake.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,10 +90,10 @@
 		EA53FF98276D137900D22042 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EAB133E127A47C93007F6553 /* WorkbookViewController */,
 				EA22D4E527770BE3006C12CF /* LoginController.swift */,
 				EA91E071279366DC00DE630E /* ContainerViewController.swift */,
 				EA91E07327936A6200DE630E /* ProductFilterController.swift */,
-				EAA0CF782769573F00943912 /* WorkbookViewController.swift */,
 				EA22D4E7277A5FD6006C12CF /* WorkbookDetailController.swift */,
 				EA22D53127859964006C12CF /* WorkbookDetailControllerNEW.swift */,
 			);
@@ -99,6 +105,7 @@
 			children = (
 				EAA0CF7A2769573F00943912 /* Main.storyboard */,
 				EA53FF9A276D200F00D22042 /* CollectionCell.swift */,
+				EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -146,6 +153,16 @@
 				EAF2BA0727A2306500CD4856 /* CSVMake.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EAB133E127A47C93007F6553 /* WorkbookViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EAA0CF782769573F00943912 /* WorkbookViewController.swift */,
+				EAB133DF27A47BFD007F6553 /* WorkbookViewController+DragDrop.swift */,
+				EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */,
+			);
+			path = WorkbookViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */,
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
 				EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
@@ -273,6 +291,8 @@
 				EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */,
 				EAA0CF772769573F00943912 /* SceneDelegate.swift in Sources */,
 				EA22D4E627770BE3006C12CF /* LoginController.swift in Sources */,
+				EAB133E527A494A0007F6553 /* CollectionCell+Views.swift in Sources */,
+				EAB133E027A47BFD007F6553 /* WorkbookViewController+DragDrop.swift in Sources */,
 				EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */,
 				EA22D4E8277A5FD7006C12CF /* WorkbookDetailController.swift in Sources */,
 				EA22D4E027754129006C12CF /* Constants.swift in Sources */,

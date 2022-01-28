@@ -25,7 +25,6 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var ref: DatabaseReference!
     var delegate: WorkbookViewControllerDelegate?
-    //var items: [CollectionModel] = []
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,7 +36,6 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier + "0")
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier)
-        collectionView.register(CollectionCell2.self, forCellWithReuseIdentifier: K.CollectionCell.identifier + "2")
         return collectionView
     }()
 
@@ -47,15 +45,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     
     // MARK: - Initialization
-        
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate(alongsideTransition: { _ in
-            self.collectionView.collectionViewLayout.invalidateLayout()
-        }, completion: nil)        
-    }
-    
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,23 +96,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                composition: obj[K.FIR.composition] as! String,
                                                productDescription: obj[K.FIR.productDescription] as! String,
                                                productFeatures: obj[K.FIR.productFeatures] as! String,
-                                               //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
                                                image: Storage.storage().reference().child((obj[K.FIR.skuCode] as! String) + ".jpg"))
-                    /*
-                    let item = CollectionModel(showNew: (obj["showNew"] as! String) == "TRUE",
-                                               showEssential: (obj["showEssential"] as! String) == "TRUE",
-                                               labelTitle: obj["labelTitle"] as! String,
-                                               labelSubtitle: obj["labelSubtitle"] as! String,
-                                               imageName: obj["imageName"] as! String,
-                                               sizes: [
-                                                CollectionModel.Size(size: CollectionModel.Size.sm, sku: obj[CollectionModel.Size.sm] as? String),
-                                                CollectionModel.Size(size: CollectionModel.Size.md, sku: obj[CollectionModel.Size.md] as? String),
-                                                CollectionModel.Size(size: CollectionModel.Size.lg, sku: obj[CollectionModel.Size.lg] as? String),
-                                                CollectionModel.Size(size: CollectionModel.Size.xl, sku: obj[CollectionModel.Size.xl] as? String),
-                                                CollectionModel.Size(size: CollectionModel.Size.xxl, sku: obj[CollectionModel.Size.xxl] as? String),
-                                               ],
-                                               image: Storage.storage().reference().child((obj["imageName"] as! String) + ".jpg"))
-                     */
 
                     K.items.append(item)
                 }
@@ -143,11 +117,13 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                     self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
                 }, completion: nil)
             }),
+            
             UIAction(title: "Multi-Select", image: nil, handler: { action in
                 self.collectionView.allowsMultipleSelection = true
 
                 print("Multi")
             }),
+            
             UIAction(title: "Cancel", image: nil, handler: { action in
                 self.collectionView.allowsMultipleSelection = false
                 
@@ -158,6 +134,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 print("Cancel")
 
             }),
+            
             UIAction(title: "Export", image: nil, handler: { action in
                 var csv: [[String]] = [["SKUCode", "productNameDescription", "productCategory", "Colorway", "CarryOver", "Essential", "USRetailMSRP", "EURetailMSRP", "CountryCode"]]
                 
@@ -167,11 +144,23 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 self.mailOrder(for: CSVMake.commaSeparatedValueDataForLines(csv))
             })
+            
         ]
         
         rightMenu.menu = UIMenu(title: "Settings", image: nil, options: .displayInline, children: menuItems)
     }
+    
+    
+    // MARK: - Orientation Transition
         
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { _ in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }, completion: nil)
+    }
+
     
     // MARK: - Navigation
     
@@ -187,40 +176,10 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
 }
 
-
-// MARK: - MF Mail Compose View Controller Delegate
-
-extension WorkbookViewController {
-    func mailOrder(for data: Data) {
-        guard MFMailComposeViewController.canSendMail() else {
-            print("Unable to export from Simulator. Try it on a device.")
-            return
-        }
-        
-        let mail = MFMailComposeViewController()
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy h:mm a"
-        
-        mail.mailComposeDelegate = self
-        mail.setCcRecipients(["eddie@100percent.com"])
-        mail.setSubject("Gloves Export \(formatter.string(from: date))")
-        mail.setMessageBody("Here's your file", isHTML: true)
-        mail.addAttachmentData(data, mimeType: "text/csv", fileName: "GlovesLineSheet.csv")
-        
-        present(mail, animated: true)
-    }
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true)
-    }
-}
-
        
-// MARK: - Collection View Extensions
+// MARK: - Data Source, Delegate, Flow Layout
 
 extension WorkbookViewController {
-    
     
     // MARK: - Data Source
     
@@ -230,10 +189,6 @@ extension WorkbookViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier, for: indexPath) as! CollectionCell
             cell.model = K.items[indexPath.row]
             cell.setViews()
-            return cell
-        case "Geart":
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier + "2", for: indexPath) as! CollectionCell2
-            cell.label.text = K.items[indexPath.row].productDescription
             return cell
         default:
             break
@@ -271,61 +226,12 @@ extension WorkbookViewController {
         //but this one does...
 //        return CGSize(width: K.CollectionCell.width * multiplier, height: K.CollectionCell.height * multiplier)
     }
-    
-    
-    // MARK: - Drag Delegate
-    
-    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let item = K.items[indexPath.row]
-        let itemProvider = NSItemProvider(object: item)
-        let dragItem = UIDragItem(itemProvider: itemProvider)
-        
-        dragItem.localObject = item
-
-        return [dragItem]
-    }
-    
-    
-    // MARK: - Drop Delegate
-    
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        if collectionView.hasActiveDrag {
-            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-        }
-        
-        return UICollectionViewDropProposal(operation: .forbidden)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        var destinationIndexPath: IndexPath
-        
-        if let indexPath = coordinator.destinationIndexPath {
-            destinationIndexPath = indexPath
-        }
-        else {
-            let row = collectionView.numberOfItems(inSection: 0)
-            destinationIndexPath = IndexPath(item: row - 1, section: 0)
-        }
-        
-        if coordinator.proposal.operation == .move {
-            self.reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
-        }
-    }
-    
-    private func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
-        if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
-            collectionView.performBatchUpdates({
-                K.items.remove(at: sourceIndexPath.item)
-                K.items.insert(item.dragItem.localObject as! CollectionModel, at: destinationIndexPath.item)
-                
-                collectionView.deleteItems(at: [sourceIndexPath])
-                collectionView.insertItems(at: [destinationIndexPath])
-            }, completion: nil)
-
-            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
-        }
-    }
 }
+
+
+
+
+
 
 // FIXME: - Test for delegation from side panel
 extension WorkbookViewController: ProductFilterControllerDelegate {
