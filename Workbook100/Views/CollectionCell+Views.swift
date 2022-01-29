@@ -47,7 +47,7 @@ class CollectionCellLabelBubble: UILabel {
         self.textColor = .white
         self.textAlignment = .center
         self.font = K.Fonts.bubbleTitle
-        self.layer.cornerRadius = 6
+        self.layer.cornerRadius = 8
         self.clipsToBounds = true
         
         if frame == .zero {

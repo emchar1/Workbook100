@@ -99,6 +99,10 @@ class CollectionCell: UICollectionViewCell {
     private func setupViews() {
         self.model = CollectionModel.getBlankModel()
         
+        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
+//        contentView.backgroundColor = .white
+        contentView.clipsToBounds = true
+        
         vStack = CollectionCellStack(distribution: .fill, alignment: .fill, axis: .vertical)
         hStackTop = CollectionCellStack(spacing: 2, distribution: .fillEqually, alignment: .fill, axis: .horizontal)
         labelNew = CollectionCellLabelBubble(type: .new)

@@ -34,6 +34,7 @@ struct K {
         static let identifier1 = "CVCell1"
         static var cellMultiplier: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
         static let padding: CGFloat = 8
+        static let cornerRadius: CGFloat = 8
         static let width: CGFloat = 200
         static var height: CGFloat { width * 3 / 2 }
 
@@ -107,15 +108,43 @@ extension UIStoryboard {
 
 extension UICollectionViewCell {
     func setSelected(_ isSelected: Bool, in contentView: UIView) {
+        let overlayTag = 100
+        
+        let selectedOverlay: UIView = {
+            let view = UIView()
+            view.tag = overlayTag
+            view.translatesAutoresizingMaskIntoConstraints = false
+            
+            let checkmarkView = UIImageView()
+            checkmarkView.image = UIImage(systemName: "checkmark.circle.fill")
+            checkmarkView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(checkmarkView)
+            NSLayoutConstraint.activate([checkmarkView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+                                         view.trailingAnchor.constraint(equalTo: checkmarkView.trailingAnchor, constant: 0),
+                                         checkmarkView.widthAnchor.constraint(equalToConstant: 30),
+                                         checkmarkView.heightAnchor.constraint(equalToConstant: 30)])
+
+            return view
+        }()
+        
+        func removeOverlay() {
+            if let viewWithTag = contentView.viewWithTag(overlayTag) {
+                viewWithTag.removeFromSuperview()
+            }
+        }
+
+        
         if isSelected {
-            contentView.layer.cornerRadius = 6
-            contentView.layer.borderColor = K.Colors.isSelected!.cgColor
-            contentView.layer.borderWidth = 4
+            removeOverlay()
+            
+            contentView.addSubview(selectedOverlay)
+            NSLayoutConstraint.activate([selectedOverlay.topAnchor.constraint(equalTo: contentView.topAnchor),
+                                         selectedOverlay.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                                         contentView.trailingAnchor.constraint(equalTo: selectedOverlay.trailingAnchor),
+                                         contentView.bottomAnchor.constraint(equalTo: selectedOverlay.bottomAnchor)])
         }
         else {
-            contentView.layer.cornerRadius = 0
-            contentView.layer.borderColor = nil
-            contentView.layer.borderWidth = 0
+            removeOverlay()
         }
     }
 }

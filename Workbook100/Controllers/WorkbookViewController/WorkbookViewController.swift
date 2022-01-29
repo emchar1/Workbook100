@@ -25,6 +25,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var ref: DatabaseReference!
     var delegate: WorkbookViewControllerDelegate?
+    var multiSelect = false
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -109,9 +110,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     func setupRightMenu() {
         let menuItems: [UIAction] = [
-            UIAction(title: "Add Blank", image: nil, handler: { action in
-                print("Blank")
-                
+            UIAction(title: "Insert Blank", image: nil, handler: { action in
                 guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
 
                 self.collectionView.performBatchUpdates ({
@@ -120,21 +119,40 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 }, completion: nil)
             }),
             
-            UIAction(title: "Multi-Select", image: nil, handler: { action in
-                self.collectionView.allowsMultipleSelection = true
+            UIAction(title: "Multi/Single Select", image: nil, handler: { action in
+                self.multiSelect = !self.multiSelect
+                self.collectionView.allowsMultipleSelection = self.multiSelect
 
-                print("Multi")
-            }),
-            
-            UIAction(title: "Cancel", image: nil, handler: { action in
-                self.collectionView.allowsMultipleSelection = false
-                
-                
-                for i in self.collectionView.indexPathsForVisibleItems {
-                    self.collectionView.deselectItem(at: i, animated: true)
+                if !self.multiSelect {
+                    //If toggling back to single selection, remove all selections. Need to make it loop through ALL cells - visible and not visible
+                    for i in self.collectionView.indexPathsForVisibleItems {
+//                        let cell = self.collectionView.cellForItem(at: i)!
+//                        self.collectionView.deselectItem(at: i, animated: true)
+//                        if let viewWTag = cell.viewWithTag(200) {
+//                            viewWTag.removeFromSuperview()
+//                        }
+                        
+                        self.collectionView.deselectItem(at: i, animated: false)
+                    }
                 }
-                print("Cancel")
-
+                else {
+//                    for i in self.collectionView.indexPathsForVisibleItems {
+//                        let cell = self.collectionView.cellForItem(at: IndexPath(row: i, section: 0))
+//                        let checkmarkView = UIImageView()
+//                        checkmarkView.viewWithTag(200)
+//                        checkmarkView.image = UIImage(systemName: "circle")
+//                        checkmarkView.translatesAutoresizingMaskIntoConstraints = false
+//
+//                        if let cell = cell {
+//                        cell.addSubview(checkmarkView)
+//                        NSLayoutConstraint.activate([checkmarkView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 20),
+//                                                     cell.trailingAnchor.constraint(equalTo: checkmarkView.trailingAnchor, constant: 0),
+//                                                     checkmarkView.widthAnchor.constraint(equalToConstant: 30),
+//                                                     checkmarkView.heightAnchor.constraint(equalToConstant: 30)])
+//                        }
+//                }
+                    
+                }
             }),
             
             UIAction(title: "Export", image: nil, handler: { action in

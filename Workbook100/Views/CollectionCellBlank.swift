@@ -18,6 +18,8 @@ class CollectionCellBlank: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+//        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
     }
     
     required init?(coder: NSCoder) {
