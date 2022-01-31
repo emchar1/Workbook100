@@ -113,16 +113,17 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             UIAction(title: "Insert Blank", image: nil, handler: { action in
                 guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
 
-                self.collectionView.performBatchUpdates ({
+                self.collectionView.performBatchUpdates({
                     K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
                     self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
                 }, completion: nil)
             }),
             
+            // FIXME: - Multi Select Needs Love
             UIAction(title: "Multi/Single Select", image: nil, handler: { action in
                 self.multiSelect = !self.multiSelect
                 self.collectionView.allowsMultipleSelection = self.multiSelect
-
+                
                 if !self.multiSelect {
                     //If toggling back to single selection, remove all selections. Need to make it loop through ALL cells - visible and not visible
                     for i in self.collectionView.indexPathsForVisibleItems {
@@ -204,11 +205,36 @@ extension WorkbookViewController {
     // MARK: - Data Source
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // FIXME: - How Do I Get the Circle To Toggle On Multi/Single Select?
         switch K.items[indexPath.row].productCategory {
         case "Apparel", "Gloves", "Accessories", "Gear":
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier1, for: indexPath) as! CollectionCell
             cell.model = K.items[indexPath.row]
             cell.setViews()
+
+//            if multiSelect {
+//                let checkmarkView = UIImageView()
+//                checkmarkView.viewWithTag(200)
+//                checkmarkView.image = UIImage(systemName: "circle")
+//                checkmarkView.translatesAutoresizingMaskIntoConstraints = false
+//
+//                cell.addSubview(checkmarkView)
+//                NSLayoutConstraint.activate([checkmarkView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 20),
+//                                             cell.trailingAnchor.constraint(equalTo: checkmarkView.trailingAnchor, constant: 0),
+//                                             checkmarkView.widthAnchor.constraint(equalToConstant: 30),
+//                                             checkmarkView.heightAnchor.constraint(equalToConstant: 30)])
+//            }
+//            else {
+//                if let viewWithTag = cell.viewWithTag(200) {
+//                    print("Removing...")
+//                    viewWithTag.removeFromSuperview()
+//                }
+//                else {
+//                    print("not Removing...")
+//                }
+//            }
+
+
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier0, for: indexPath) as! CollectionCellBlank
@@ -224,7 +250,10 @@ extension WorkbookViewController {
     // MARK: - Collection View Delegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "showDetailsNEW", sender: nil)
+        if !multiSelect {
+            performSegue(withIdentifier: "showDetailsNEW", sender: nil)
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
     }
     
 

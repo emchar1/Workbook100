@@ -121,6 +121,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
             let itemRef: [String: Any] = [K.FIR.division: newModel.division,
                                           K.FIR.collection: newModel.collection,
                                           K.FIR.productNameDescription: tfTitle.text!,
+                                          K.FIR.productNameDescriptionSecondary: model.productNameDescriptionSecondary,
                                           K.FIR.productCategory: model.productCategory,
                                           K.FIR.colorway: tfSubtitle.text!,
                                           K.FIR.carryOver: String(!switchNew.isOn).uppercased(),
