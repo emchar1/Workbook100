@@ -27,6 +27,15 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     var delegate: WorkbookViewControllerDelegate?
     var multiSelect = false
     
+    var multiSelectLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Multi Select"
+        label.font = K.Fonts.menuSelection
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.alpha = 0
+        return label
+    }()
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -64,7 +73,9 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                      view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
                                      view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
         
-        
+        navigationController!.navigationBar.addSubview(multiSelectLabel)
+        NSLayoutConstraint.activate([multiSelectLabel.centerYAnchor.constraint(equalTo: navigationController!.navigationBar.centerYAnchor),
+                                     navigationController!.navigationBar.trailingAnchor.constraint(equalTo: multiSelectLabel.trailingAnchor, constant: 50)])
         
         //Firebase DB
         ref = Database.database().reference()
@@ -120,11 +131,18 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             }),
             
             // FIXME: - Multi Select Needs Love
-            UIAction(title: "Multi/Single Select", image: nil, handler: { action in
+            UIAction(title: "Single/Multi Select", image: nil, handler: { action in
                 self.multiSelect = !self.multiSelect
                 self.collectionView.allowsMultipleSelection = self.multiSelect
                 
                 if !self.multiSelect {
+                    self.multiSelectLabel.alpha = 1.0
+                    self.multiSelectLabel.text = "Single Select"
+                    
+                    UIView.animate(withDuration: 0.5, delay: 2.0, options: .curveEaseInOut, animations: {
+                        self.multiSelectLabel.alpha = 0.0
+                    }, completion: nil)
+                    
                     //If toggling back to single selection, remove all selections. Need to make it loop through ALL cells - visible and not visible
                     for i in self.collectionView.indexPathsForVisibleItems {
 //                        let cell = self.collectionView.cellForItem(at: i)!
@@ -137,6 +155,14 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                     }
                 }
                 else {
+                    self.multiSelectLabel.alpha = 1.0
+                    self.multiSelectLabel.text = "Multi Select"
+                    
+                    UIView.animate(withDuration: 0.5, delay: 2.0, options: .curveEaseInOut, animations: {
+                        self.multiSelectLabel.alpha = 0.0
+                    }, completion: nil)
+
+                    
 //                    for i in self.collectionView.indexPathsForVisibleItems {
 //                        let cell = self.collectionView.cellForItem(at: IndexPath(row: i, section: 0))
 //                        let checkmarkView = UIImageView()
