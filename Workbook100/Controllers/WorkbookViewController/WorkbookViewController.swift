@@ -22,19 +22,25 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     // MARK: - Properties
     
     @IBOutlet weak var rightMenu: UIBarButtonItem!
+    @IBOutlet weak var cancelMultiButton: UIBarButtonItem!
     
     var ref: DatabaseReference!
     var delegate: WorkbookViewControllerDelegate?
-    var multiSelect = false
     
-    var multiSelectLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Multi Select"
-        label.font = K.Fonts.menuSelection
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.alpha = 0
-        return label
-    }()
+    var multiSelect = false {
+        didSet {
+            if multiSelect {
+                collectionView.allowsMultipleSelection = true
+                cancelMultiButton.isEnabled = true
+                cancelMultiButton.tintColor = nil
+            }
+            else {
+                collectionView.allowsMultipleSelection = false
+                cancelMultiButton.isEnabled = false
+                cancelMultiButton.tintColor = .clear
+            }
+        }
+    }
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,6 +57,21 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     @IBAction func productFilterTapped(_ sender: Any) {
         delegate?.expandPanel()
+    }
+    
+    @IBAction func cancelMultiTapped(_ sender: Any) {
+        multiSelect = false
+        
+        //If toggling back to single selection, remove all selections. Need to make it loop through ALL cells - visible and not visible
+        for i in self.collectionView.indexPathsForVisibleItems {
+//            let cell = self.collectionView.cellForItem(at: i)!
+//            self.collectionView.deselectItem(at: i, animated: true)
+//            if let viewWTag = cell.viewWithTag(200) {
+//                viewWTag.removeFromSuperview()
+//            }
+            
+            self.collectionView.deselectItem(at: i, animated: false)
+        }
     }
     
     
@@ -72,10 +93,6 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                      view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
                                      view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
-        
-        navigationController!.navigationBar.addSubview(multiSelectLabel)
-        NSLayoutConstraint.activate([multiSelectLabel.centerYAnchor.constraint(equalTo: navigationController!.navigationBar.centerYAnchor),
-                                     navigationController!.navigationBar.trailingAnchor.constraint(equalTo: multiSelectLabel.trailingAnchor, constant: 50)])
         
         //Firebase DB
         ref = Database.database().reference()
@@ -130,56 +147,8 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 }, completion: nil)
             }),
             
-            // FIXME: - Multi Select Needs Love
-            UIAction(title: "Single/Multi Select", image: nil, handler: { action in
-                self.multiSelect = !self.multiSelect
-                self.collectionView.allowsMultipleSelection = self.multiSelect
-                
-                if !self.multiSelect {
-                    self.multiSelectLabel.alpha = 1.0
-                    self.multiSelectLabel.text = "Single Select"
-                    
-                    UIView.animate(withDuration: 0.5, delay: 2.0, options: .curveEaseInOut, animations: {
-                        self.multiSelectLabel.alpha = 0.0
-                    }, completion: nil)
-                    
-                    //If toggling back to single selection, remove all selections. Need to make it loop through ALL cells - visible and not visible
-                    for i in self.collectionView.indexPathsForVisibleItems {
-//                        let cell = self.collectionView.cellForItem(at: i)!
-//                        self.collectionView.deselectItem(at: i, animated: true)
-//                        if let viewWTag = cell.viewWithTag(200) {
-//                            viewWTag.removeFromSuperview()
-//                        }
-                        
-                        self.collectionView.deselectItem(at: i, animated: false)
-                    }
-                }
-                else {
-                    self.multiSelectLabel.alpha = 1.0
-                    self.multiSelectLabel.text = "Multi Select"
-                    
-                    UIView.animate(withDuration: 0.5, delay: 2.0, options: .curveEaseInOut, animations: {
-                        self.multiSelectLabel.alpha = 0.0
-                    }, completion: nil)
-
-                    
-//                    for i in self.collectionView.indexPathsForVisibleItems {
-//                        let cell = self.collectionView.cellForItem(at: IndexPath(row: i, section: 0))
-//                        let checkmarkView = UIImageView()
-//                        checkmarkView.viewWithTag(200)
-//                        checkmarkView.image = UIImage(systemName: "circle")
-//                        checkmarkView.translatesAutoresizingMaskIntoConstraints = false
-//
-//                        if let cell = cell {
-//                        cell.addSubview(checkmarkView)
-//                        NSLayoutConstraint.activate([checkmarkView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 20),
-//                                                     cell.trailingAnchor.constraint(equalTo: checkmarkView.trailingAnchor, constant: 0),
-//                                                     checkmarkView.widthAnchor.constraint(equalToConstant: 30),
-//                                                     checkmarkView.heightAnchor.constraint(equalToConstant: 30)])
-//                        }
-//                }
-                    
-                }
+            UIAction(title: "Multi Select", image: nil, handler: { action in
+                self.multiSelect = true
             }),
             
             UIAction(title: "Export", image: nil, handler: { action in
@@ -237,30 +206,6 @@ extension WorkbookViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier1, for: indexPath) as! CollectionCell
             cell.model = K.items[indexPath.row]
             cell.setViews()
-
-//            if multiSelect {
-//                let checkmarkView = UIImageView()
-//                checkmarkView.viewWithTag(200)
-//                checkmarkView.image = UIImage(systemName: "circle")
-//                checkmarkView.translatesAutoresizingMaskIntoConstraints = false
-//
-//                cell.addSubview(checkmarkView)
-//                NSLayoutConstraint.activate([checkmarkView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 20),
-//                                             cell.trailingAnchor.constraint(equalTo: checkmarkView.trailingAnchor, constant: 0),
-//                                             checkmarkView.widthAnchor.constraint(equalToConstant: 30),
-//                                             checkmarkView.heightAnchor.constraint(equalToConstant: 30)])
-//            }
-//            else {
-//                if let viewWithTag = cell.viewWithTag(200) {
-//                    print("Removing...")
-//                    viewWithTag.removeFromSuperview()
-//                }
-//                else {
-//                    print("not Removing...")
-//                }
-//            }
-
-
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier0, for: indexPath) as! CollectionCellBlank

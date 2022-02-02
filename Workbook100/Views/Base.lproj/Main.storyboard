@@ -27,12 +27,21 @@
                                 <action selector="productFilterTapped:" destination="BYZ-38-t0r" id="cfL-7z-8xb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="gearshape" catalog="system" id="P9D-VW-Dvi">
-                            <color key="tintColor" systemColor="labelColor"/>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="gearshape" catalog="system" id="P9D-VW-Dvi">
+                                <color key="tintColor" systemColor="labelColor"/>
+                            </barButtonItem>
+                            <barButtonItem enabled="NO" systemItem="cancel" id="vc7-6a-blf">
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="cancelMultiTapped:" destination="BYZ-38-t0r" id="vUM-eZ-dAS"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cancelMultiButton" destination="vc7-6a-blf" id="PfP-9X-RfE"/>
                         <outlet property="rightMenu" destination="P9D-VW-Dvi" id="3ty-Iz-RGQ"/>
                         <segue destination="iFX-ne-hgK" kind="presentation" identifier="showDetails" id="GM9-wz-OKi"/>
                         <segue destination="LVv-C1-W7p" kind="presentation" identifier="showDetailsNEW" id="dGL-6y-kuy"/>
@@ -77,7 +86,7 @@
             <objects>
                 <tableViewController id="A10-Pv-fzG" customClass="WorkbookDetailControllerNEW" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="8ip-nL-Kwt">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
                             <tableViewSection headerTitle="Status" id="ZZn-sz-Qp1">
