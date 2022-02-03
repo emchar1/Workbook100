@@ -58,8 +58,13 @@ class WorkbookDetailControllerNEW: UITableViewController {
         tfSKU5.text = model.sizes[5].colorwaySKU
         tfSKU6.text = model.sizes[6].colorwaySKU
 
-        if let image = model.image {
-            imageView.sd_setImage(with: image)
+//        if let image = model.image {
+//            imageView.sd_setImage(with: image)
+//        }
+        
+        if let url = URL(string: model.imageURL) {
+            print("Success loading image: \(url)")
+            imageView.loadImage(at: url)
         }
     }
     
@@ -113,6 +118,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                            composition: K.items[row].composition,
                                            productDescription: K.items[row].productNameDescription,
                                            productFeatures: K.items[row].productFeatures,
+                                           imageURL: K.items[row].imageURL,
                                            //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
                                            image: nil)
             K.items[row] = newModel
@@ -146,7 +152,8 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                           K.FIR.countryCode: model.countryCode,
                                           K.FIR.composition: model.composition,
                                           K.FIR.productDescription: model.productDescription,
-                                          K.FIR.productFeatures: model.productFeatures]
+                                          K.FIR.productFeatures: model.productFeatures,
+                                          K.FIR.imageURL: model.imageURL]
             let ref = Database.database().reference().child(K.items[row].skuCode)
             ref.setValue(itemRef)
         }

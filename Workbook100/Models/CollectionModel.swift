@@ -35,6 +35,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     let composition: String
     let productDescription: String
     let productFeatures: String
+    let imageURL: String
     let image: StorageReference?
     var id = UUID()
     
@@ -58,7 +59,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     
     // MARK: - Initialization
     
-    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, image: StorageReference?) {
+    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, imageURL: String, image: StorageReference?) {
 
         self.division = division
         self.collection = collection
@@ -76,6 +77,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
         self.composition = composition
         self.productDescription = productDescription
         self.productFeatures = productFeatures
+        self.imageURL = imageURL
         self.image = image
         
         super.init()
@@ -106,6 +108,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                     composition: "Composition",
                                     productDescription: "Product Description",
                                     productFeatures: "Product Features",
+                                    imageURL: "https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364", //100% Logo
                                     image: nil)//Storage.storage().reference().child("10000-00000.jpg"))
         return model
     }

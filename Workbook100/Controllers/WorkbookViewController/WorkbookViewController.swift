@@ -127,6 +127,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                composition: obj[K.FIR.composition] as! String,
                                                productDescription: obj[K.FIR.productDescription] as! String,
                                                productFeatures: obj[K.FIR.productFeatures] as! String,
+                                               imageURL: obj[K.FIR.imageURL] as! String,
                                                image: imageRef)
 
                     K.items.append(item)
@@ -286,6 +287,7 @@ extension WorkbookViewController: ProductFilterControllerDelegate {
                                      composition: mohdel.composition,
                                      productDescription: mohdel.productDescription,
                                      productFeatures: mohdel.productFeatures,
+                                     imageURL: mohdel.imageURL,
                                      image: mohdel.image)
         
         delegate?.collapsePanel()

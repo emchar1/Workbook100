@@ -79,12 +79,21 @@ class CollectionCell: UICollectionViewCell {
 //        labelSizesLeft.text = layoutSizes().left
 //        labelSizesRight.text = layoutSizes().right
 //
-        if let image = model.image {
-            image.downloadURL { (url, error) in
-                self.productImageNoImg.isHidden = (url != nil ? true : false)
-            }
-            
-            productImage.sd_setImage(with: image)
+        //OLD WAY Uses images saved in Firebase Storage
+//        if let image = model.image {
+//            image.downloadURL { (url, error) in
+//                self.productImageNoImg.isHidden = (url != nil ? true : false)
+//            }
+//
+//            productImage.sd_setImage(with: image)
+//        }
+        //NEW WAY
+        if let url = URL(string: model.imageURL) {
+            productImage.loadImage(at: url)
+            productImageNoImg.isHidden = true
+        }
+        else {
+            productImageNoImg.isHidden = false
         }
 
         // FIXME: - This is sooo clunky - hStackTop
