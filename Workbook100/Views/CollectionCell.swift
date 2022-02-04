@@ -88,7 +88,7 @@ class CollectionCell: UICollectionViewCell {
 //            productImage.sd_setImage(with: image)
 //        }
         //NEW WAY
-        if let url = URL(string: model.imageURL) {
+        if let url = URL(string: model.thumbURL) {
             productImage.loadImage(at: url)
             productImageNoImg.isHidden = true
         }

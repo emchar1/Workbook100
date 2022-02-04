@@ -79,6 +79,7 @@ struct K {
         static let productDescription = "ProductDescription"
         static let productFeatures = "ProductFeatures"
         static let imageURL = "imageURL"
+        static let thumbURL = "thumbURL"
     }
 }
 

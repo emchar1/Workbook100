@@ -119,6 +119,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                            productDescription: K.items[row].productNameDescription,
                                            productFeatures: K.items[row].productFeatures,
                                            imageURL: K.items[row].imageURL,
+                                           thumbURL: K.items[row].thumbURL,
                                            //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
                                            image: nil)
             K.items[row] = newModel
@@ -153,7 +154,8 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                           K.FIR.composition: model.composition,
                                           K.FIR.productDescription: model.productDescription,
                                           K.FIR.productFeatures: model.productFeatures,
-                                          K.FIR.imageURL: model.imageURL]
+                                          K.FIR.imageURL: model.imageURL,
+                                          K.FIR.thumbURL: model.thumbURL]
             let ref = Database.database().reference().child(K.items[row].skuCode)
             ref.setValue(itemRef)
         }
