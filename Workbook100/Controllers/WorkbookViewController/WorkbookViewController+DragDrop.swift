@@ -29,7 +29,7 @@ extension WorkbookViewController {
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         if collectionView.hasActiveDrag {
             //If dropping multiple items, need to change from .insertAtDestinationIndexPath to .unspecified, though it looks ugly because the cells don't visually shift over to make room
-            return UICollectionViewDropProposal(operation: .move, intent: .unspecified)
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
         
         return UICollectionViewDropProposal(operation: .forbidden)
@@ -52,42 +52,43 @@ extension WorkbookViewController {
     }
     
     private func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
-//        if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
-//            collectionView.performBatchUpdates({
-//                K.items.remove(at: sourceIndexPath.item)
-//                K.items.insert(item.dragItem.localObject as! CollectionModel, at: destinationIndexPath.item)
+        //Reordering of single cell
+        if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
+            collectionView.performBatchUpdates({
+                K.items.remove(at: sourceIndexPath.item)
+                K.items.insert(item.dragItem.localObject as! CollectionModel, at: destinationIndexPath.item)
+
+                collectionView.deleteItems(at: [sourceIndexPath])
+                collectionView.insertItems(at: [destinationIndexPath])
+            }, completion: nil)
+
+            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+        }
+        
+//        //Reordering of multiple selected cells
+//        let items = coordinator.items
+//        var dIndexPath = destinationIndexPath
 //
-//                collectionView.deleteItems(at: [sourceIndexPath])
-//                collectionView.insertItems(at: [destinationIndexPath])
-//            }, completion: nil)
-//
-//            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+//        if dIndexPath.row >= collectionView.numberOfItems(inSection: 0) {
+//            dIndexPath.row = collectionView.numberOfItems(inSection: 0) - 1
 //        }
-        
-        //Reordering of multiple selected cells
-        let items = coordinator.items
-        var dIndexPath = destinationIndexPath
-        
-        if dIndexPath.row >= collectionView.numberOfItems(inSection: 0) {
-            dIndexPath.row = collectionView.numberOfItems(inSection: 0) - 1
-        }
-        
-        var sourceIndexPaths = [IndexPath]()
-        var destinationIndexPaths = [IndexPath]()
-        
-        for item in items {
-            if let sourceIndexPath = item.sourceIndexPath {
-                sourceIndexPaths.append(sourceIndexPath)
-                destinationIndexPaths.append(dIndexPath)
-                K.items.remove(at: sourceIndexPath.row)
-                K.items.insert(item.dragItem.localObject as! CollectionModel, at: dIndexPath.row)
-                dIndexPath = IndexPath(row: dIndexPath.row + 1, section: 0)
-            }
-        }
-                
-        collectionView.performBatchUpdates({
-            collectionView.deleteItems(at: sourceIndexPaths)
-            collectionView.insertItems(at: destinationIndexPaths)
-        })
+//
+//        var sourceIndexPaths = [IndexPath]()
+//        var destinationIndexPaths = [IndexPath]()
+//
+//        for item in items {
+//            if let sourceIndexPath = item.sourceIndexPath {
+//                sourceIndexPaths.append(sourceIndexPath)
+//                destinationIndexPaths.append(dIndexPath)
+//                K.items.remove(at: sourceIndexPath.row)
+//                K.items.insert(item.dragItem.localObject as! CollectionModel, at: dIndexPath.row)
+//                dIndexPath = IndexPath(row: dIndexPath.row + 1, section: 0)
+//            }
+//        }
+//
+//        collectionView.performBatchUpdates({
+//            collectionView.deleteItems(at: sourceIndexPaths)
+//            collectionView.insertItems(at: destinationIndexPaths)
+//        })
     }
 }

@@ -6,13 +6,12 @@
 //
 
 import UIKit
-import FirebaseStorageUI
-
 
 class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
     var model: CollectionModel!
+    
     var vStack: CollectionCellStack!
     
     var hStackTop: CollectionCellStack!
@@ -22,6 +21,7 @@ class CollectionCell: UICollectionViewCell {
     
     var labelTitle: CollectionCellLabel!
     var labelSubtitle: CollectionCellLabel!
+    
     var productImage: UIImageView!
     var productImageNoImg: UILabel = {
         let noimg = UILabel()
@@ -63,6 +63,12 @@ class CollectionCell: UICollectionViewCell {
 //    }
     
     func setViews() {
+        //New & Essential Stack
+        hStackTop.subviews[0].isHidden = model.carryOver
+        hStackTop.subviews[1].isHidden = !model.essential
+        hStackTop.subviews[2].isHidden = !(model.carryOver && !model.essential)
+
+        //Product Title
         labelTitle.text = model.productNameDescription
         labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
         
@@ -87,7 +93,8 @@ class CollectionCell: UICollectionViewCell {
 //
 //            productImage.sd_setImage(with: image)
 //        }
-        //NEW WAY
+        
+        //NEW WAY Product Image - Load images from Amplifi using ImageLoader Utility
         if let url = URL(string: model.thumbURL) {
             productImage.loadImage(at: url)
             productImageNoImg.isHidden = true
@@ -95,11 +102,6 @@ class CollectionCell: UICollectionViewCell {
         else {
             productImageNoImg.isHidden = false
         }
-
-        // FIXME: - This is sooo clunky - hStackTop
-        hStackTop.subviews[0].isHidden = model.carryOver
-        hStackTop.subviews[1].isHidden = !model.essential
-        hStackTop.subviews[2].isHidden = !(model.carryOver && !model.essential)
     }
     
     
@@ -108,17 +110,26 @@ class CollectionCell: UICollectionViewCell {
     private func setupViews() {
         self.model = CollectionModel.getBlankModel()
         
-        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
+        //==SETUP==//
+        //Content View
 //        contentView.backgroundColor = .white
-        contentView.clipsToBounds = true
-        
+//        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
+//        contentView.clipsToBounds = true
+
+        //VStack
         vStack = CollectionCellStack(distribution: .fill, alignment: .fill, axis: .vertical)
+        
+        //New & Essential Stack
         hStackTop = CollectionCellStack(spacing: 2, distribution: .fillEqually, alignment: .fill, axis: .horizontal)
         labelNew = CollectionCellLabelBubble(type: .new)
         labelEssential = CollectionCellLabelBubble(type: .essential)
         labelNothing = CollectionCellLabelBubble(type: .nothing)
+        
+        //Product Title
         labelTitle = CollectionCellLabel(type: .title, text: model.productNameDescription)
         labelSubtitle = CollectionCellLabel(type: .subtitle, text: model.colorway)
+        
+        //Product Image
         productImage = UIImageView()
 //        ruleLine = RuleLine(frame: CGRect(x: 0, y: 0, width: K.CollectionCell.width, height: 20))
 //        hStackBottom = CollectionCellStack(distribution: .fillEqually, alignment: .fill, axis: .horizontal)
@@ -127,13 +138,17 @@ class CollectionCell: UICollectionViewCell {
         
 //        let padding: CGFloat = K.CollectionCell.padding
 
+        
+
+        //==SUBVIEWS==//
+        //VStack
         contentView.addSubview(vStack)
         NSLayoutConstraint.activate([vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
                                      vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                                      contentView.trailingAnchor.constraint(equalTo: vStack.trailingAnchor),
                                      contentView.bottomAnchor.constraint(equalTo: vStack.bottomAnchor)])
         
-        //New and Essential
+        //New & Essential Stack
         vStack.addArrangedSubview(hStackTop)
         hStackTop.addArrangedSubview(labelNew)
         hStackTop.addArrangedSubview(labelEssential)
@@ -143,13 +158,13 @@ class CollectionCell: UICollectionViewCell {
         vStack.addArrangedSubview(labelTitle)
         vStack.addArrangedSubview(labelSubtitle)
 
-        // FIXME: - Product Image
+        //Product Image
         productImage.contentMode = .scaleAspectFill
         productImage.clipsToBounds = true
         productImage.backgroundColor = K.Colors.superLightGray
         productImage.translatesAutoresizingMaskIntoConstraints = false
         vStack.addArrangedSubview(productImage)
-        NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)]) //K.CollectionCell.width)])//K.CollectionCell.adjustedHeight(in: contentView))])
+        NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)])
         productImage.addSubview(productImageNoImg)
         NSLayoutConstraint.activate([productImageNoImg.centerXAnchor.constraint(equalTo: productImage.centerXAnchor),
                                      productImageNoImg.centerYAnchor.constraint(equalTo: productImage.centerYAnchor)])

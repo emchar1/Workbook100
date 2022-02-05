@@ -149,9 +149,9 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 }, completion: nil)
             }),
             
-            UIAction(title: "Multi Select", image: nil, handler: { action in
-                self.multiSelect = true
-            }),
+//            UIAction(title: "Multi Select", image: nil, handler: { action in
+//                self.multiSelect = true
+//            }),
             
             UIAction(title: "Export", image: nil, handler: { action in
                 var csv: [[String]] = [["SKUCode", "productNameDescription", "productCategory", "Colorway", "CarryOver", "Essential", "USRetailMSRP", "EURetailMSRP", "CountryCode"]]

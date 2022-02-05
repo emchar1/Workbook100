@@ -28,6 +28,7 @@
 		EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */; };
 		EAB133E527A494A0007F6553 /* CollectionCell+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */; };
 		EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */; };
+		EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133EC27AE5F3A007F6553 /* GloveCell.swift */; };
 		EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2BA0727A2306500CD4856 /* CSVMake.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookViewController+MailCompose.swift"; sourceTree = "<group>"; };
 		EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+Views.swift"; sourceTree = "<group>"; };
 		EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellBlank.swift; sourceTree = "<group>"; };
+		EAB133EC27AE5F3A007F6553 /* GloveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloveCell.swift; sourceTree = "<group>"; };
 		EAF2BA0727A2306500CD4856 /* CSVMake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMake.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 		EA53FF99276D138D00D22042 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EAB133EB27AE5EF9007F6553 /* ProductCategories */,
 				EAA0CF7A2769573F00943912 /* Main.storyboard */,
 				EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */,
 				EA53FF9A276D200F00D22042 /* CollectionCell.swift */,
@@ -166,6 +169,14 @@
 				EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */,
 			);
 			path = WorkbookViewController;
+			sourceTree = "<group>";
+		};
+		EAB133EB27AE5EF9007F6553 /* ProductCategories */ = {
+			isa = PBXGroup;
+			children = (
+				EAB133EC27AE5F3A007F6553 /* GloveCell.swift */,
+			);
+			path = ProductCategories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */,
 				EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */,
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
 				EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */,
