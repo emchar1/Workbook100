@@ -11,8 +11,8 @@ import UIKit
 // MARK: - UIImageView extension
 
 extension UIImageView {    
-    func loadImage(at url: URL) {
-        UIImageLoader.loader.load(url, for: self)
+    func loadImage(at url: URL, completion: (() -> Void)?) {
+        UIImageLoader.loader.load(url, for: self, completion: completion)
     }
     
     func cancelImageLoad() {
@@ -33,12 +33,14 @@ class UIImageLoader {
         
     }
     
-    func load(_ url: URL, for imageView: UIImageView) {
+    func load(_ url: URL, for imageView: UIImageView, completion: (() -> Void)?) {
         //1 We initiate the image load using the URL that was passed to load(_:for:).
         let token = imageLoader.loadImage(url) { (result) in
             //2 When the load is completed, we need to clean up the uuidMap by removing the UIImageView for which we’re loading the image from the dictionary.
             defer {
                 self.uuidMap.removeValue(forKey: imageView)
+
+                completion?() //<-- Does this cause the completion handler to run AFTER the image is loaded???
             }
             
             do {

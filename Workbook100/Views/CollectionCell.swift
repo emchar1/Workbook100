@@ -12,6 +12,7 @@ class CollectionCell: UICollectionViewCell {
     // MARK: - Properties
     var model: CollectionModel!
     
+    lazy var spinner = UIActivityIndicatorView()
     var vStack: CollectionCellStack!
     
     var hStackTop: CollectionCellStack!
@@ -96,7 +97,8 @@ class CollectionCell: UICollectionViewCell {
         
         //NEW WAY Product Image - Load images from Amplifi using ImageLoader Utility
         if let url = URL(string: model.thumbURL) {
-            productImage.loadImage(at: url)
+            startSpinner(in: contentView)
+            productImage.loadImage(at: url, completion: { self.stopSpinner() })
             productImageNoImg.isHidden = true
         }
         else {
@@ -179,6 +181,20 @@ class CollectionCell: UICollectionViewCell {
 //        labelSizesRight.textAlignment = .right
 //        hStackBottom.addArrangedSubview(labelSizesRight)
     }
+        
+    private func startSpinner(in view: UIView) {
+        spinner.hidesWhenStopped = true
+        spinner.color = .white
+        spinner.center = view.center
+        view.addSubview(spinner)
+        spinner.startAnimating()
+    }
+    
+    private func stopSpinner() {
+        OperationQueue.main.addOperation {
+            self.spinner.stopAnimating()
+        }
+    }
     
     
 //    private func layoutSizes() -> (left: String, right: String) {
@@ -219,5 +235,4 @@ class CollectionCell: UICollectionViewCell {
 //
 //        return (leftReturn, rightReturn)
 //    }
-    
 }

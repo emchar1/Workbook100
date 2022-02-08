@@ -64,7 +64,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
         
         if let url = URL(string: model.imageURL) {
             print("Success loading image: \(url)")
-            imageView.loadImage(at: url)
+            imageView.loadImage(at: url, completion: { print("Image loaded on thread: \(Thread.current)")})
         }
     }
     
