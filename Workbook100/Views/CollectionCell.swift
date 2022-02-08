@@ -10,9 +10,10 @@ import UIKit
 class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
-    var model: CollectionModel!
-    
+    class var reuseId: String { "CollectionCell" }
     lazy var spinner = UIActivityIndicatorView()
+    var model: CollectionModel!
+
     var vStack: CollectionCellStack!
     
     var hStackTop: CollectionCellStack!

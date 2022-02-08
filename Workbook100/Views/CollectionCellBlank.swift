@@ -8,6 +8,8 @@
 import UIKit
 
 class CollectionCellBlank: UICollectionViewCell {
+    class var reuseId: String { "CollectionCellBlank" }
+    
     override var isSelected: Bool {
         didSet {
             setSelected(isSelected, in: contentView)
@@ -18,8 +20,8 @@ class CollectionCellBlank: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        contentView.backgroundColor = .white
-        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
+//        contentView.backgroundColor = .magenta
+//        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
     }
     
     required init?(coder: NSCoder) {

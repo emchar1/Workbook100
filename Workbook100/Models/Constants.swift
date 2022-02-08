@@ -30,8 +30,6 @@ struct K {
     }
     
     struct CollectionCell {
-        static let identifier0 = "CVCell0"
-        static let identifier1 = "CVCell1"
         static var cellMultiplier: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
         static let padding: CGFloat = 8
         static let cornerRadius: CGFloat = 8

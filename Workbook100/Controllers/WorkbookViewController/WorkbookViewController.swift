@@ -50,8 +50,9 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: K.CollectionCell.identifier0)
-        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: K.CollectionCell.identifier1)
+        collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseId)
+        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseId)
+        collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseId)
         return collectionView
     }()
 
@@ -202,15 +203,19 @@ extension WorkbookViewController {
     // MARK: - Data Source
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // FIXME: - How Do I Get the Circle To Toggle On Multi/Single Select?
         switch K.items[indexPath.row].productCategory {
-        case "Apparel", "Gloves", "Accessories", "Gear":
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier1, for: indexPath) as! CollectionCell
+        case "Gloves":
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GloveCell.reuseId, for: indexPath) as! GloveCell
+            cell.model = K.items[indexPath.row]
+            cell.setViews()
+            return cell
+        case "Apparel", "Accessories", "Gear":
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
             cell.model = K.items[indexPath.row]
             cell.setViews()
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CollectionCell.identifier0, for: indexPath) as! CollectionCellBlank
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
             return cell
         }
     }
@@ -238,9 +243,14 @@ extension WorkbookViewController {
         // FIXME: - adaptable cell size doesn't work!!
 //        print(K.CollectionCell.adjustedWidth(in: collectionView))
         let productCategory = K.items[indexPath.row].productCategory
-        let multiplix: CGFloat = (productCategory == "Apparel" || productCategory == "Gloves" || productCategory == "Accessories") ? 1 : 1
-        return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView) * multiplix,
-                      height: K.CollectionCell.adjustedHeight(in: collectionView) * multiplix)
+        var multiplier: CGFloat = 1
+        
+        if productCategory == "Gloves" {
+            multiplier = 1.5
+        }
+        
+        return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView) * multiplier,
+                      height: K.CollectionCell.adjustedHeight(in: collectionView))
         //but this one does...
 //        return CGSize(width: K.CollectionCell.width * multiplier, height: K.CollectionCell.height * multiplier)
     }

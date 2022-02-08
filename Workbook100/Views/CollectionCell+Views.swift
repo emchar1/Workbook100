@@ -125,13 +125,13 @@ class CollectionCellLabel: UILabel {
 // MARK: - Rule Line
 
 class RuleLine: UIView {
-    override init(frame: CGRect) {
+    init(frame: CGRect, from: CGPoint, to: CGPoint) {
         super.init(frame: frame)
         
         let ruleLine = CAShapeLayer()
         let linePath = UIBezierPath()
-        linePath.move(to: CGPoint(x: 0, y: frame.height / 2))
-        linePath.addLine(to: CGPoint(x: frame.width, y: frame.height / 2))
+        linePath.move(to: from)//CGPoint(x: 0, y: frame.height / 2))
+        linePath.addLine(to: to)//CGPoint(x: frame.width, y: frame.height / 2))
         ruleLine.path = linePath.cgPath
         ruleLine.strokeColor = UIColor.black.cgColor
         ruleLine.lineWidth = 0.5

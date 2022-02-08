@@ -8,10 +8,9 @@
 import UIKit
 
 class GloveCell: CollectionCell {
-    var ruleLine: RuleLine!
-    var hStackBottom: CollectionCellStack!
-    var labelSizesLeft: CollectionCellLabel!
-    var labelSizesRight: CollectionCellLabel!
+    override class var reuseId: String { "GloveCell" }
+    var hStack: CollectionCellStack!
+    var labelSizes: CollectionCellLabel!
     
     override func setViews() {
         super.setViews()
@@ -25,29 +24,36 @@ class GloveCell: CollectionCell {
 //            ruleLine.isHidden = true
 //        }
         
-        labelSizesLeft.text = layoutSizes().left
-        labelSizesRight.text = layoutSizes().right
+        labelSizes.text = layoutSizes()
+//        labelSizesRight.text = layoutSizes().right
     }
     
     override func setupViews() {
         super.setupViews()
         
-        ruleLine = RuleLine(frame: CGRect(x: 0, y: 0, width: K.CollectionCell.width, height: 20))
-        hStackBottom = CollectionCellStack(distribution: .fillEqually, alignment: .fill, axis: .horizontal)
-        labelSizesLeft =  CollectionCellLabel(type: .productSize, text: layoutSizes().left)
-        labelSizesRight =  CollectionCellLabel(type: .productSize, text: layoutSizes().right)
+        //HStack
+        hStack = CollectionCellStack(spacing: 0, distribution: .fillEqually, alignment: .fill, axis: .horizontal)
+        labelSizes = CollectionCellLabel(type: .productSize, text: layoutSizes())
+        productImage.removeFromSuperview()
+        labelSubtitle.removeFromSuperview()
 
-        //Rule Line
-        vStack.addArrangedSubview(ruleLine)
-
-        // FIXME: - Sizes
-        vStack.addArrangedSubview(hStackBottom)
-        hStackBottom.addArrangedSubview(labelSizesLeft)
-        hStackBottom.alignment = .top
-        labelSizesRight.textAlignment = .right
-        hStackBottom.addArrangedSubview(labelSizesRight)
+        //Subviews
+        hStack.addArrangedSubview(productImage)
+        hStack.addArrangedSubview(labelSizes)
+        vStack.addArrangedSubview(hStack)
     }
     
+    private func layoutSizes() -> String {
+        var stringToReturn = ""
+        
+        for i in 0..<model.sizes.count {
+            stringToReturn += "\(model.sizes[i])\n"
+        }
+        
+        return stringToReturn
+    }
+    
+    /*
     private func layoutSizes() -> (left: String, right: String) {
         var leftReturn = ""
         var rightReturn = ""
@@ -86,6 +92,7 @@ class GloveCell: CollectionCell {
         
         return (leftReturn, rightReturn)
     }
+     */
 }
 
 
