@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B68824064CFEABB55FF5ADBB /* Pods_Workbook100.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4B096055F44837610B92BA3 /* Pods_Workbook100.framework */; };
+		8D0E4BED5DF7BA88A082979D /* Pods_Workbook100.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED0637F73B2DB24933760E3 /* Pods_Workbook100.framework */; };
 		EA22D4E027754129006C12CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4DF27754129006C12CF /* Constants.swift */; };
 		EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E127759DA4006C12CF /* CollectionModel.swift */; };
 		EA22D4E42776DFCE006C12CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */; };
@@ -34,9 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A1E5D880239732FE48C42CA1 /* Pods-Workbook100.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.debug.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.debug.xcconfig"; sourceTree = "<group>"; };
-		A451B958CBD6E94879050B91 /* Pods-Workbook100.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.release.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.release.xcconfig"; sourceTree = "<group>"; };
-		E4B096055F44837610B92BA3 /* Pods_Workbook100.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workbook100.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ED0637F73B2DB24933760E3 /* Pods_Workbook100.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workbook100.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70E4B2B00B3C8E30E41BA149 /* Pods-Workbook100.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.debug.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.debug.xcconfig"; sourceTree = "<group>"; };
+		C46D4E45F91E13A1CD215AB2 /* Pods-Workbook100.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.release.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.release.xcconfig"; sourceTree = "<group>"; };
 		EA22D4DF27754129006C12CF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA22D4E127759DA4006C12CF /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B68824064CFEABB55FF5ADBB /* Pods_Workbook100.framework in Frameworks */,
+				8D0E4BED5DF7BA88A082979D /* Pods_Workbook100.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,16 +80,16 @@
 		12ECE0B3AF1D1E97E916B4F8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A1E5D880239732FE48C42CA1 /* Pods-Workbook100.debug.xcconfig */,
-				A451B958CBD6E94879050B91 /* Pods-Workbook100.release.xcconfig */,
+				70E4B2B00B3C8E30E41BA149 /* Pods-Workbook100.debug.xcconfig */,
+				C46D4E45F91E13A1CD215AB2 /* Pods-Workbook100.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		BD43A44CD9ADAF6C76971031 /* Frameworks */ = {
+		C45901C3EA976BA3CCF32FC2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E4B096055F44837610B92BA3 /* Pods_Workbook100.framework */,
+				4ED0637F73B2DB24933760E3 /* Pods_Workbook100.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,7 +125,7 @@
 				EAA0CF732769573F00943912 /* Workbook100 */,
 				EAA0CF722769573F00943912 /* Products */,
 				12ECE0B3AF1D1E97E916B4F8 /* Pods */,
-				BD43A44CD9ADAF6C76971031 /* Frameworks */,
+				C45901C3EA976BA3CCF32FC2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,11 +191,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAA0CF852769574100943912 /* Build configuration list for PBXNativeTarget "Workbook100" */;
 			buildPhases = (
-				D09DBECC21B31298C279BE55 /* [CP] Check Pods Manifest.lock */,
+				11759D43DAEDD1D2AAA968AA /* [CP] Check Pods Manifest.lock */,
 				EAA0CF6D2769573F00943912 /* Sources */,
 				EAA0CF6E2769573F00943912 /* Frameworks */,
 				EAA0CF6F2769573F00943912 /* Resources */,
-				03824BDB0BE110490FE322DE /* [CP] Embed Pods Frameworks */,
+				1B4ECE3DD5AA9F6211E9BB0A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -254,24 +254,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		03824BDB0BE110490FE322DE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Workbook100/Pods-Workbook100-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Workbook100/Pods-Workbook100-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Workbook100/Pods-Workbook100-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D09DBECC21B31298C279BE55 /* [CP] Check Pods Manifest.lock */ = {
+		11759D43DAEDD1D2AAA968AA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -291,6 +274,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B4ECE3DD5AA9F6211E9BB0A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Workbook100/Pods-Workbook100-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Workbook100/Pods-Workbook100-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Workbook100/Pods-Workbook100-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -396,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -452,7 +452,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -464,7 +464,7 @@
 		};
 		EAA0CF862769574100943912 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1E5D880239732FE48C42CA1 /* Pods-Workbook100.debug.xcconfig */;
+			baseConfigurationReference = 70E4B2B00B3C8E30E41BA149 /* Pods-Workbook100.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -498,7 +498,7 @@
 		};
 		EAA0CF872769574100943912 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A451B958CBD6E94879050B91 /* Pods-Workbook100.release.xcconfig */;
+			baseConfigurationReference = C46D4E45F91E13A1CD215AB2 /* Pods-Workbook100.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
