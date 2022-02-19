@@ -90,6 +90,16 @@ class WorkbookDetailControllerNEW: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func pdfPressed(_ sender: UIBarButtonItem) {
+        let pdfFilePath = self.view.exportAsPDFFromView()
+        print("PDF saved to: \(pdfFilePath)")
+        
+        if let pdfData = pdfFilePath.pdfData {
+            self.present(UIActivityViewController(activityItems: [pdfData], applicationActivities: []), animated: true, completion: nil)
+        }
+
+    }
+    
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
         if let row = K.items.firstIndex(where: { $0.id == model.id }) {
 

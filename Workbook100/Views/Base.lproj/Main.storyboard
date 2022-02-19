@@ -86,7 +86,7 @@
             <objects>
                 <tableViewController id="A10-Pv-fzG" customClass="WorkbookDetailControllerNEW" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="8ip-nL-Kwt">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
                             <tableViewSection headerTitle="Status" id="ZZn-sz-Qp1">
@@ -614,11 +614,18 @@
                                 <action selector="cancelPressed:" destination="A10-Pv-fzG" id="jiB-tr-y9D"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="M3W-v1-xkt">
-                            <connections>
-                                <action selector="donePressed:" destination="A10-Pv-fzG" id="hhs-9X-P8E"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="done" id="M3W-v1-xkt">
+                                <connections>
+                                    <action selector="donePressed:" destination="A10-Pv-fzG" id="hhs-9X-P8E"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="PDF" id="dFi-BG-Qjq">
+                                <connections>
+                                    <action selector="pdfPressed:" destination="A10-Pv-fzG" id="dvg-2u-Orz"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="Fwk-Fj-QwR" id="Itg-uY-5ng"/>

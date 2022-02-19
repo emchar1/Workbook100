@@ -8,6 +8,7 @@
 import UIKit
 import MessageUI
 import Firebase
+//import PDFKit
 
 protocol WorkbookViewControllerDelegate {
     func expandPanel()
@@ -162,6 +163,29 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 }
                 
                 self.mailOrder(for: CSVMake.commaSeparatedValueDataForLines(csv))
+            }),
+            
+            UIAction(title: "PDF", image: UIImage(named: "printer"), handler: { action in
+//                var window: UIWindow? = UIApplication.shared.keyWindow
+//                window = UIApplication.shared.windows[0] as? UIWindow
+//                UIGraphicsBeginImageContextWithOptions(window!.frame.size, window!.isOpaque, 0.0)
+//                window!.layer.render(in: UIGraphicsGetCurrentContext()!)
+//                let image = UIGraphicsGetImageFromCurrentImageContext()
+//                UIGraphicsEndImageContext()
+//
+//
+//                let pdfPage = PDFPage(image: image!)
+//                let fm = FileManager.default
+//                let urls = fm.urls(for: .documentDirectory, in: .userDomainMask).first!
+//                _ = urls.appendingPathComponent("pdfPage.pdf")
+//                pdfPage?.document?.write(toFile: "pdfPage")
+                
+                let pdfFilePath = self.collectionView.exportAsPDFFromCollectionView()
+                print("PDF saved to: \(pdfFilePath)")
+                
+                if let pdfData = pdfFilePath.pdfData {
+                    self.present(UIActivityViewController(activityItems: [pdfData], applicationActivities: []), animated: true, completion: nil)
+                }
             })
             
         ]
@@ -209,12 +233,14 @@ extension WorkbookViewController {
             cell.model = K.items[indexPath.row]
             cell.setViews()
             return cell
-        case "Apparel", "Accessories", "Gear":
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
-            cell.model = K.items[indexPath.row]
-            cell.setViews()
-            return cell
         default:
+            if K.items[indexPath.row].productCategory.count > 0 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
+                cell.model = K.items[indexPath.row]
+                cell.setViews()
+                return cell
+            }
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
             return cell
         }

@@ -30,6 +30,7 @@
 		EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */; };
 		EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133EC27AE5F3A007F6553 /* GloveCell.swift */; };
 		EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2BA0727A2306500CD4856 /* CSVMake.swift */; };
+		EAF68F2327C0CE4800F2EDE6 /* PDFExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +60,9 @@
 		EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+Views.swift"; sourceTree = "<group>"; };
 		EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellBlank.swift; sourceTree = "<group>"; };
 		EAB133EC27AE5F3A007F6553 /* GloveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloveCell.swift; sourceTree = "<group>"; };
+		EAEC851E27B35FE900684ECF /* Workbook100.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Workbook100.entitlements; sourceTree = "<group>"; };
 		EAF2BA0727A2306500CD4856 /* CSVMake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMake.swift; sourceTree = "<group>"; };
+		EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,7 @@
 		EAA0CF732769573F00943912 /* Workbook100 */ = {
 			isa = PBXGroup;
 			children = (
+				EAEC851E27B35FE900684ECF /* Workbook100.entitlements */,
 				EAA0CF742769573F00943912 /* AppDelegate.swift */,
 				EAA0CF762769573F00943912 /* SceneDelegate.swift */,
 				EAA0CF882769576900943912 /* Models */,
@@ -157,6 +161,7 @@
 				EAF2BA0727A2306500CD4856 /* CSVMake.swift */,
 				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
 				EA22D4E127759DA4006C12CF /* CollectionModel.swift */,
+				EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 			files = (
 				EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */,
 				EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */,
+				EAF68F2327C0CE4800F2EDE6 /* PDFExport.swift in Sources */,
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
 				EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
@@ -463,6 +469,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
@@ -496,6 +503,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;

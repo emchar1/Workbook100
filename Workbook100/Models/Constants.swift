@@ -148,3 +148,16 @@ extension UICollectionViewCell {
         }
     }
 }
+
+
+
+
+
+
+/*
+- 2/18 RayWenderlich Dismiss Keyboard
+ // Add responder for keyboards to dismiss when tap or drag outside of text fields
+ scrollView.addGestureRecognizer(UITapGestureRecognizer(target: scrollView, action: #selector(UIView.endEditing(_:))))
+ scrollView.keyboardDismissMode = .onDrag
+
+ */
