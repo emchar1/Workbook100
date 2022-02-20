@@ -11,7 +11,7 @@ class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
     class var reuseId: String { "CollectionCell" }
-    lazy var spinner = UIActivityIndicatorView()
+    var spinner = ActivitySpinner()
     var model: CollectionModel!
 
     var vStack: CollectionCellStack!
@@ -80,8 +80,8 @@ class CollectionCell: UICollectionViewCell {
         
         //NEW WAY Product Image - Load images from Amplifi using ImageLoader Utility
         if let url = URL(string: model.thumbURL) {
-            startSpinner(in: contentView)
-            productImage.loadImage(at: url, completion: { self.stopSpinner() })
+            spinner.startSpinner(in: contentView)
+            productImage.loadImage(at: url, completion: { self.spinner.stopSpinner() })
             productImageNoImg.isHidden = true
         }
         else {
@@ -147,19 +147,5 @@ class CollectionCell: UICollectionViewCell {
         productImage.addSubview(productImageNoImg)
         NSLayoutConstraint.activate([productImageNoImg.centerXAnchor.constraint(equalTo: productImage.centerXAnchor),
                                      productImageNoImg.centerYAnchor.constraint(equalTo: productImage.centerYAnchor)])
-    }
-        
-    private func startSpinner(in view: UIView) {
-        spinner.hidesWhenStopped = true
-        spinner.color = .white
-        spinner.center = view.center
-        view.addSubview(spinner)
-        spinner.startAnimating()
-    }
-    
-    private func stopSpinner() {
-        OperationQueue.main.addOperation {
-            self.spinner.stopAnimating()
-        }
     }
 }

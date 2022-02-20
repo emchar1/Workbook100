@@ -26,6 +26,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var ref: DatabaseReference!
     var delegate: WorkbookViewControllerDelegate?
+    var spinner = ActivitySpinner(style: .large)
     
     var multiSelect = false {
         didSet {
@@ -95,6 +96,8 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                      view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
                                      view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
         
+        spinner.startSpinner(in: view)
+
         //Firebase DB
         ref = Database.database().reference()
         ref.observe(DataEventType.value) { [self] (snapshot) in
@@ -136,6 +139,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 }
             }
             self.collectionView.reloadData()
+            spinner.stopSpinner()
         }
     }
     

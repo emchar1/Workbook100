@@ -56,7 +56,7 @@ extension UICollectionView {
 
     /**
      Exports the PDF from save PDF in directory and returns PDF file path.
-     - returns: PDF file path
+     - returns: A tuple containing a PDF file path and the PDF data
      */
     func exportAsPDFFromCollectionView() -> PDFOutput {
         let originalBounds = self.bounds
@@ -69,7 +69,6 @@ extension UICollectionView {
         UIGraphicsBeginPDFPageWithInfo(pdfPageFrame, nil)
         
         guard let pdfContext = UIGraphicsGetCurrentContext() else { return ("", nil) }
-        
         self.layer.render(in: pdfContext)
 
         UIGraphicsEndPDFContext()
@@ -80,6 +79,7 @@ extension UICollectionView {
     
     /**
      Saves the PDF file in document directory.
+     - returns: A tuple containing a PDF file path and the PDF data
      */
     func saveCollectionViewPDF(data: NSMutableData) -> PDFOutput {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
