@@ -211,6 +211,9 @@ extension ContainerViewController {
             
             expandDistance = centerNavigationController.view.frame.width - centerPanelExpandedOffset
             animateCenterPanelXPosition(targetPosition: expandDistance)
+            
+            // 2/21/22 Added this to set the trailing constraint on the hStack in the ProductFilterController object.
+            leftViewController?.expandDistance = centerNavigationController.view.frame.width - expandDistance
         }
         else {
             animateCenterPanelXPosition(targetPosition: 0) { _ in

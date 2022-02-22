@@ -7,13 +7,32 @@
 
 import UIKit
 
+
 // MARK: - HStackSelection
 
 class HStackSelection: UIStackView {
     static let cellPadding: CGFloat = 8.0
     
-    var selectedItemView: UIView!
-    var dropdownView: UIView!
+    var selectedItemView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 0.5
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var dropdownButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .normal)
+        button.backgroundColor = .black
+        button.layer.borderColor = UIColor.black.cgColor
+        button.tintColor = .white
+        button.layer.borderWidth = 0.5
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     var selectedItemLabel: UILabel = {
         let label = UILabel()
         label.font = K.Fonts.menuSelection
@@ -21,13 +40,12 @@ class HStackSelection: UIStackView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     var selectedItem: String
 
     
     init(frame: CGRect, selectedItem: String) {
         self.selectedItem = selectedItem
-
         super.init(frame: frame)
         
         setupViews()
@@ -42,55 +60,19 @@ class HStackSelection: UIStackView {
         distribution = .fillProportionally
         translatesAutoresizingMaskIntoConstraints = false
         
-        selectedItemView = UIView()
-        selectedItemView.backgroundColor = .white
-        selectedItemView.layer.borderColor = UIColor.black.cgColor
-        selectedItemView.layer.borderWidth = 1.0
-        selectedItemView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-
-        dropdownView = UIView()
-        dropdownView.layer.borderColor = UIColor.black.cgColor
-        dropdownView.layer.borderWidth = 1.0
-        dropdownView.backgroundColor = .black
-        dropdownView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        let v = UIView()
-        v.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        v.translatesAutoresizingMaskIntoConstraints = false
-        addArrangedSubview(selectedItemView)
-        addArrangedSubview(dropdownView)
-        addArrangedSubview(v)
-        
         selectedItemLabel.text = selectedItem
+        
+        addArrangedSubview(selectedItemView)
+        addArrangedSubview(dropdownButton)
         selectedItemView.addSubview(selectedItemLabel)
-        NSLayoutConstraint.activate([selectedItemView.widthAnchor.constraint(equalToConstant: 100),
-                                     //selectedItemLabel.heightAnchor.constraint(equalToConstant: 24),
-                                     selectedItemLabel.centerYAnchor.constraint(equalTo: selectedItemView.centerYAnchor),
+
+        NSLayoutConstraint.activate([selectedItemLabel.centerYAnchor.constraint(equalTo: selectedItemView.centerYAnchor),
                                      selectedItemLabel.leadingAnchor.constraint(equalTo: selectedItemView.leadingAnchor,
+                                                                                constant: HStackSelection.cellPadding),
+                                     selectedItemView.trailingAnchor.constraint(equalTo: selectedItemLabel.trailingAnchor,
                                                                                 constant: HStackSelection.cellPadding)])
-
-        let triangle = UIImageView()
-        triangle.image = UIImage(systemName: "arrowtriangle.down.fill")
-        triangle.backgroundColor = .black
-        triangle.tintColor = .white
-        triangle.translatesAutoresizingMaskIntoConstraints = false
-        dropdownView.addSubview(triangle)
-//        let v = UILabel()
-//        v.font = K.Fonts.menuSelection
-//        v.text = "V"
-//        v.backgroundColor = .purple
-//        v.textColor = .white
-//        v.textAlignment = .center
-//        v.layer.borderWidth = 1.0
-//        v.layer.borderColor = UIColor.blue.cgColor
-//        v.translatesAutoresizingMaskIntoConstraints = false
-//        dropdownView.addSubview(v)
-        NSLayoutConstraint.activate([dropdownView.widthAnchor.constraint(equalToConstant: 30),
-                                     triangle.widthAnchor.constraint(equalToConstant: 12),
-                                     triangle.heightAnchor.constraint(equalToConstant: 14),
-                                     triangle.centerYAnchor.constraint(equalTo: dropdownView.centerYAnchor),
-                                     triangle.centerXAnchor.constraint(equalTo: dropdownView.centerXAnchor),
-                                     v.widthAnchor.constraint(equalToConstant: 99)])
-
+        
+        NSLayoutConstraint.activate([dropdownButton.widthAnchor.constraint(equalToConstant: 30)])
     }
 }
 
@@ -112,6 +94,7 @@ class VStackContent: UIStackView {
     var titleText: String
     var selectionItems: [String]
     var selectedItem: String
+    var hStack: HStackSelection!
     
     init(frame: CGRect, titleText: String, selectionItems: [String]) {
         self.titleText = titleText
@@ -136,37 +119,77 @@ class VStackContent: UIStackView {
         addArrangedSubview(titleView)
         addArrangedSubview(selectionView)
         
-//        NSLayoutConstraint.activate([selectionView.topAnchor.constraint(equalTo: arrangedSubviews[1].topAnchor, constant: VStackContent.cellPadding),
-//                                     selectionView.leadingAnchor.constraint(equalTo: arrangedSubviews[1].leadingAnchor, constant: VStackContent.cellPadding),
-//                                     arrangedSubviews[1].trailingAnchor.constraint(equalTo: selectionView.trailingAnchor, constant: VStackContent.cellPadding),
-//                                     arrangedSubviews[1].bottomAnchor.constraint(equalTo: selectionView.bottomAnchor, constant: VStackContent.cellPadding)])
-
         titleLabel.text = titleText + ":"
         titleView.addSubview(titleLabel)
-        NSLayoutConstraint.activate([titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
-                                     titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: VStackContent.cellPadding),
+        NSLayoutConstraint.activate([titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: VStackContent.cellPadding),
                                      titleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor)])
-
-        let hv = HStackSelection(frame: .zero, selectedItem: selectedItem)
-        selectionView.addSubview(hv)
-        NSLayoutConstraint.activate([hv.topAnchor.constraint(equalTo: selectionView.topAnchor, constant: VStackContent.cellPadding),
-                                     hv.leadingAnchor.constraint(equalTo: selectionView.leadingAnchor, constant: VStackContent.cellPadding),
-                                     selectionView.trailingAnchor.constraint(equalTo: hv.trailingAnchor, constant: VStackContent.cellPadding),
-                                     selectionView.bottomAnchor.constraint(equalTo: hv.bottomAnchor, constant: VStackContent.cellPadding)])
         
+        hStack = HStackSelection(frame: .zero, selectedItem: selectedItem)
+        selectionView.addSubview(hStack)
+        NSLayoutConstraint.activate([hStack.topAnchor.constraint(equalTo: selectionView.topAnchor, constant: VStackContent.cellPadding),
+                                     hStack.leadingAnchor.constraint(equalTo: selectionView.leadingAnchor, constant: VStackContent.cellPadding),
+                                     selectionView.trailingAnchor.constraint(equalTo: hStack.trailingAnchor, constant: VStackContent.cellPadding),
+                                     selectionView.bottomAnchor.constraint(equalTo: hStack.bottomAnchor, constant: VStackContent.cellPadding)])
+    }
+    
+    
+    func addTrailingPadding(in superView: UIView, padding: CGFloat) {
+        NSLayoutConstraint.activate([superView.trailingAnchor.constraint(equalTo: selectionView.trailingAnchor,
+                                                                         constant: padding + VStackContent.cellPadding)])
     }
 }
+
 
 
 // MARK: - ProductFilterController
 
 protocol ProductFilterControllerDelegate {
-    func youDonePressedDone()
+    func donePressed(selectedCollection: String, selectedProductCategory: String, selectedDivision: String)
 }
 
-class ProductFilterController: UIViewController {
+class ProductFilterController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Properties
+    
+    let padding: CGFloat = 8.0
+    let tableViewCellHeight: CGFloat = 34
+    let transparentView = UIView()
+    let tableView = UITableView()
+    var dataSource = [String]()
+    var selectedItemLabel = UILabel()
+    var expandDistance: CGFloat = 0
+    
+    var vStack1: VStackContent = {
+        let vStack = VStackContent(frame: .zero, titleText: "Collection", selectionItems: ["SP23", "SP22", "FA22"])
+        vStack.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectCollection(_:)), for: .touchUpInside)
+        vStack.translatesAutoresizingMaskIntoConstraints = false
+        return vStack
+    }()
+    var vStack2: VStackContent = {
+        let vStack = VStackContent(frame: .zero, titleText: "Product Category", selectionItems: ["Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Sunglass Parts and Lenses", "Sunglasses"])
+        vStack.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductCategory(_:)), for: .touchUpInside)
+        vStack.translatesAutoresizingMaskIntoConstraints = false
+        return vStack
+    }()
+    var vStack3: VStackContent = {
+        let vStack = VStackContent(frame: .zero, titleText: "Division", selectionItems: ["Bike", "Moto", "Bike, Moto"])
+        vStack.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectDivision(_:)), for: .touchUpInside)
+        vStack.translatesAutoresizingMaskIntoConstraints = false
+        return vStack
+    }()
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
     
     var delegate: ProductFilterControllerDelegate?
     
@@ -176,12 +199,14 @@ class ProductFilterController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(donePressed(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapDone(_:)), for: .touchUpInside)
         return button
     }()
     
-    @objc func donePressed(_ sender: UIButton) {
-        delegate?.youDonePressedDone()
+    @objc func didTapDone(_ sender: UIButton) {
+        delegate?.donePressed(selectedCollection: vStack1.hStack.selectedItemLabel.text!,
+                              selectedProductCategory: vStack2.hStack.selectedItemLabel.text!,
+                              selectedDivision: vStack3.hStack.selectedItemLabel.text!)
     }
     
     
@@ -190,43 +215,146 @@ class ProductFilterController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = K.Colors.superLightGray
         
+        
+        
+        
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        
+        
+        
         let titleLabel = UILabel()
-        titleLabel.text = "Filters (WIP)"
+        titleLabel.text = "Filters"
         titleLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 16)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
-                                     titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                     titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
                                      titleLabel.widthAnchor.constraint(equalToConstant: 100)])
         
-        let vstack = VStackContent(frame: .zero, titleText: "Collection", selectionItems: ["SP23", "FA22", "SP22"])
-        vstack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(vstack)
-        NSLayoutConstraint.activate([vstack.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-                                     vstack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                     vstack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                     vstack.heightAnchor.constraint(equalToConstant: 100)])
+        view.addSubview(vStack1)
+        NSLayoutConstraint.activate([vStack1.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+                                     vStack1.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                     vStack1.heightAnchor.constraint(equalToConstant: 100)])
         
-        let vstack2 = VStackContent(frame: .zero, titleText: "Product Category", selectionItems: ["Gear", "Apparel", "Accessories"])
-        vstack2.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(vstack2)
-        NSLayoutConstraint.activate([vstack2.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
-                                     vstack2.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                     vstack2.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                     vstack2.heightAnchor.constraint(equalToConstant: 100)])
+        view.addSubview(vStack2)
+        NSLayoutConstraint.activate([vStack2.topAnchor.constraint(equalTo: vStack1.bottomAnchor, constant: 0),
+                                     vStack2.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                     vStack2.heightAnchor.constraint(equalToConstant: 100)])
 
-        let vstack3 = VStackContent(frame: .zero, titleText: "Class", selectionItems: ["Gloves", "Helmets", "Bibs"])
-        vstack3.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(vstack3)
-        NSLayoutConstraint.activate([vstack3.topAnchor.constraint(equalTo: view.topAnchor, constant: 260),
-                                     vstack3.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                     vstack3.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                     vstack3.heightAnchor.constraint(equalToConstant: 100)])
+        view.addSubview(vStack3)
+        NSLayoutConstraint.activate([vStack3.topAnchor.constraint(equalTo: vStack2.bottomAnchor, constant: 0),
+                                     vStack3.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                     vStack3.heightAnchor.constraint(equalToConstant: 100)])
         
         view.addSubview(doneButton)
-        NSLayoutConstraint.activate([doneButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 440),
+        NSLayoutConstraint.activate([doneButton.topAnchor.constraint(equalTo: vStack3.bottomAnchor, constant: 100),
                                      doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
                                      doneButton.widthAnchor.constraint(equalToConstant: 80),
                                      doneButton.heightAnchor.constraint(equalToConstant: 50)])
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //These add a trailing padding x2 just before the center navigation left edge.
+        vStack1.addTrailingPadding(in: view, padding: expandDistance)
+        vStack2.addTrailingPadding(in: view, padding: expandDistance)
+        vStack3.addTrailingPadding(in: view, padding: expandDistance)
     }
 }
+
+
+// MARK: - Menu Selection
+
+extension ProductFilterController {
+    func addTransparentView(frame: CGRect, yOffset: CGFloat) {
+        let window = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
+                
+        transparentView.frame = window?.frame ?? self.view.frame
+        self.view.addSubview(transparentView)
+        
+        tableView.frame = CGRect(x: frame.origin.x + padding, y: frame.origin.y - padding + yOffset, width: frame.width, height: 0)
+        self.view.addSubview(tableView)
+        tableView.layer.cornerRadius = 0
+        
+        transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        tableView.reloadData()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
+        transparentView.addGestureRecognizer(tapGesture)
+        transparentView.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.transparentView.alpha = 0.5
+            self.tableView.frame = CGRect(x: frame.origin.x + self.padding, y: frame.origin.y - self.padding + yOffset,
+                                          width: frame.width, height: CGFloat(self.dataSource.count) * self.tableViewCellHeight)
+        }, completion: nil)
+    }
+    
+    @objc func removeTransparentView() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.transparentView.alpha = 0
+            self.tableView.alpha = 0
+        }, completion: { _ in
+            self.transparentView.removeFromSuperview()
+            self.tableView.removeFromSuperview()
+            self.tableView.alpha = 1
+        })
+    }
+    
+    @objc func onClickSelectCollection(_ sender: Any) {
+        dataSource = vStack1.selectionItems
+        selectedItemLabel = vStack1.hStack.selectedItemLabel
+        addTransparentView(frame: vStack1.hStack.selectedItemView.frame, yOffset: 160)
+    }
+
+    @objc func onClickSelectProductCategory(_ sender: Any) {
+        dataSource = vStack2.selectionItems
+        selectedItemLabel = vStack2.hStack.selectedItemLabel
+        addTransparentView(frame: vStack2.hStack.selectedItemView.frame, yOffset: 260)
+    }
+
+    @objc func onClickSelectDivision(_ sender: Any) {
+        dataSource = vStack3.selectionItems
+        selectedItemLabel = vStack3.hStack.selectedItemLabel
+        addTransparentView(frame: vStack3.hStack.selectedItemView.frame, yOffset: 360)
+    }
+}
+
+
+// MARK: - Table View Delegate and DataSource for Menu Selection
+
+extension ProductFilterController {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = dataSource[indexPath.row]
+        cell.textLabel?.font = K.Fonts.menuSelection
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableViewCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Sets the label on the last selectedItem because of pass by reference (UILabel)
+        selectedItemLabel.text = dataSource[indexPath.row]
+        removeTransparentView()
+    }
+}
+
+
+// MARK: - TableViewCell
+
+class TableViewCell: UITableViewCell { }
