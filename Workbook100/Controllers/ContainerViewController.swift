@@ -50,8 +50,8 @@ class ContainerViewController: UIViewController, WorkbookViewControllerDelegate 
         view.addSubview(centerNavigationController.view)
         
         //add pan gesture to slide out Product Filter Controller
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
+//        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+//        centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
     }
     
     @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {

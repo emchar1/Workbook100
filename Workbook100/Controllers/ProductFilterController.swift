@@ -72,7 +72,7 @@ class HStackSelection: UIStackView {
                                      selectedItemView.trailingAnchor.constraint(equalTo: selectedItemLabel.trailingAnchor,
                                                                                 constant: HStackSelection.cellPadding)])
         
-        NSLayoutConstraint.activate([dropdownButton.widthAnchor.constraint(equalToConstant: 30)])
+        NSLayoutConstraint.activate([dropdownButton.widthAnchor.constraint(equalToConstant: 34)])
     }
 }
 
@@ -96,10 +96,10 @@ class VStackContent: UIStackView {
     var selectedItem: String
     var hStack: HStackSelection!
     
-    init(frame: CGRect, titleText: String, selectionItems: [String]) {
+    init(frame: CGRect, titleText: String, selectionItems: [String], selectedItem: String) {
         self.titleText = titleText
         self.selectionItems = selectionItems
-        selectedItem = selectionItems.count > 0 ? selectionItems[0] : "Error"
+        self.selectedItem = selectedItem
 
         super.init(frame: frame)
         
@@ -140,12 +140,17 @@ class VStackContent: UIStackView {
 }
 
 
+// MARK: - TableViewCell
+
+class TableViewCell: UITableViewCell { }
+
 
 // MARK: - ProductFilterController
 
 protocol ProductFilterControllerDelegate {
     func donePressed(selectedCollection: String, selectedProductCategory: String, selectedDivision: String)
 }
+
 
 class ProductFilterController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -158,40 +163,45 @@ class ProductFilterController: UIViewController, UITableViewDelegate, UITableVie
     var dataSource = [String]()
     var selectedItemLabel = UILabel()
     var expandDistance: CGFloat = 0
+    var delegate: ProductFilterControllerDelegate?
     
     var vStack1: VStackContent = {
-        let vStack = VStackContent(frame: .zero, titleText: "Collection", selectionItems: ["SP23", "SP22", "FA22"])
+        let vStack = VStackContent(frame: .zero,
+                                   titleText: "Collection",
+                                   selectionItems: K.ProductFilterSelection.selectionCollections,
+                                   selectedItem: K.ProductFilterSelection.selectedCollection)
         vStack.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectCollection(_:)), for: .touchUpInside)
         vStack.translatesAutoresizingMaskIntoConstraints = false
         return vStack
     }()
     var vStack2: VStackContent = {
-        let vStack = VStackContent(frame: .zero, titleText: "Product Category", selectionItems: ["Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Sunglass Parts and Lenses", "Sunglasses"])
+        let vStack = VStackContent(frame: .zero,
+                                   titleText: "Product Category",
+                                   selectionItems: K.ProductFilterSelection.selectionProductCategories,
+                                   selectedItem: K.ProductFilterSelection.selectedProductCategory)
         vStack.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductCategory(_:)), for: .touchUpInside)
         vStack.translatesAutoresizingMaskIntoConstraints = false
         return vStack
     }()
     var vStack3: VStackContent = {
-        let vStack = VStackContent(frame: .zero, titleText: "Division", selectionItems: ["Bike", "Moto", "Bike, Moto"])
+        let vStack = VStackContent(frame: .zero,
+                                   titleText: "Division",
+                                   selectionItems: K.ProductFilterSelection.selectionDivisions,
+                                   selectedItem: K.ProductFilterSelection.selectedDivision)
         vStack.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectDivision(_:)), for: .touchUpInside)
         vStack.translatesAutoresizingMaskIntoConstraints = false
         return vStack
     }()
     
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-
-    
-    var delegate: ProductFilterControllerDelegate?
+    var clearButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Clear Filters", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(didTapClear(_:)), for: .touchUpInside)
+        return button
+    }()
     
     var doneButton: UIButton = {
         let button = UIButton(type: .system)
@@ -209,22 +219,21 @@ class ProductFilterController: UIViewController, UITableViewDelegate, UITableVie
                               selectedDivision: vStack3.hStack.selectedItemLabel.text!)
     }
     
+    @objc func didTapClear(_ sender: UIButton) {
+        vStack1.hStack.selectedItemLabel.text = K.ProductFilterSelection.wildcard
+        vStack2.hStack.selectedItemLabel.text = K.ProductFilterSelection.wildcard
+        vStack3.hStack.selectedItemLabel.text = K.ProductFilterSelection.wildcard
+    }
+
     
     // MARK: - Initialization
     
     override func viewDidLoad() {
         view.backgroundColor = K.Colors.superLightGray
         
-        
-        
-        
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
-        
-        
-        
         
         let titleLabel = UILabel()
         titleLabel.text = "Filters"
@@ -255,7 +264,13 @@ class ProductFilterController: UIViewController, UITableViewDelegate, UITableVie
                                      doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
                                      doneButton.widthAnchor.constraint(equalToConstant: 80),
                                      doneButton.heightAnchor.constraint(equalToConstant: 50)])
-        
+
+        view.addSubview(clearButton)
+        NSLayoutConstraint.activate([clearButton.topAnchor.constraint(equalTo: vStack3.bottomAnchor, constant: 100),
+                                     clearButton.leadingAnchor.constraint(equalTo: doneButton.trailingAnchor, constant: 8),
+                                     clearButton.widthAnchor.constraint(equalToConstant: 100),
+                                     clearButton.heightAnchor.constraint(equalToConstant: 50)])
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -353,8 +368,3 @@ extension ProductFilterController {
         removeTransparentView()
     }
 }
-
-
-// MARK: - TableViewCell
-
-class TableViewCell: UITableViewCell { }

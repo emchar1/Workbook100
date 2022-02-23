@@ -11,7 +11,7 @@ struct CSVMake {
     static func commaSeparatedValueDataForLines(_ lines: [[String]]) -> Data {
         return lines.map { column in
             commaSeparatedValueStringForColumns(column)
-        }.joined(separator: "\r\n").data(using: String.Encoding.utf8)!
+        }.joined(separator: "\n").data(using: String.Encoding.utf8)!
     }
 
     private static func quoteColumn(_ column: String) -> String {

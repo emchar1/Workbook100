@@ -86,23 +86,23 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     }
     
     static func getBlankModel() -> CollectionModel {
-        let model = CollectionModel(division: "Division",
-                                    collection: "SP23",
+        let model = CollectionModel(division: K.ProductFilterSelection.wildcard,
+                                    collection: K.ProductFilterSelection.wildcard,
                                     productNameDescription: "Product Name Description",
                                     productNameDescriptionSecondary: "Product Name Description Secondary",
-                                    productCategory: "Product Category",
+                                    productCategory: K.ProductFilterSelection.wildcard,
                                     colorway: "Color",
                                     carryOver: false,
                                     essential: true,
                                     skuCode: "00000-00000",
                                     sizes: [
-                                       CollectionModel.Size(size: "Size 0", colorwaySKU: "00000-00000"),
-                                       CollectionModel.Size(size: "Size 1", colorwaySKU: "00000-00001"),
-                                       CollectionModel.Size(size: "Size 2", colorwaySKU: "00000-00002"),
-                                       CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003"),
-                                       CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004"),
-                                       CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005"),
-                                       CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006")
+                                        CollectionModel.Size(size: "Size 0", colorwaySKU: "00000-00000"),
+                                        CollectionModel.Size(size: "Size 1", colorwaySKU: "00000-00001"),
+                                        CollectionModel.Size(size: "Size 2", colorwaySKU: "00000-00002"),
+                                        CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003"),
+                                        CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004"),
+                                        CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005"),
+                                        CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006")
                                     ],
                                     usMSRP: 9.99,
                                     euMSRP: 10.01,

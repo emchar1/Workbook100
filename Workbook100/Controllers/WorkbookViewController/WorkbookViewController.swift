@@ -28,6 +28,16 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     var delegate: WorkbookViewControllerDelegate?
     var spinner = ActivitySpinner(style: .large)
     
+    var noResultsLabel: UILabel = {
+        let label = UILabel()
+        label.font = K.Fonts.title
+        label.text = "No Results to Display"
+        label.isUserInteractionEnabled = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
+    
     var multiSelect = false {
         didSet {
             if multiSelect {
@@ -90,12 +100,17 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([collectionView.topAnchor.constraint(equalTo: view.topAnchor),
                                      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                      view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
                                      view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
         
+        view.addSubview(noResultsLabel)
+        NSLayoutConstraint.activate([noResultsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                     noResultsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+
         spinner.startSpinner(in: view)
 
         //Firebase DB
@@ -149,7 +164,8 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
 
                 self.collectionView.performBatchUpdates({
-                    K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+                    K.ProductFilterSelection.isFiltered ? K.filteredItems.insert(CollectionModel.getBlankModel(), at: indexPath.row) : K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+                    
                     self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
                 }, completion: nil)
             }),
@@ -161,7 +177,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             UIAction(title: "Export", image: nil, handler: { action in
                 var csv: [[String]] = [["SKUCode", "productNameDescription", "productCategory", "Colorway", "CarryOver", "Essential", "USRetailMSRP", "EURetailMSRP", "CountryCode"]]
                 
-                for item in K.items {
+                for item in (K.ProductFilterSelection.isFiltered ? K.filteredItems : K.items) {
                     csv.append([item.skuCode, item.productNameDescription, item.productCategory, item.colorway, item.carryOver ? "TRUE" : "FALSE", item.essential ? "TRUE" : "FALSE", "\(item.usMSRP)", "\(item.euMSRP)", item.countryCode])
                 }
                 
@@ -202,7 +218,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             let controller = nc.topViewController as! WorkbookDetailControllerNEW
 
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                controller.model = K.items[indexPath.row]
+                controller.model = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
             }
         }
     }
@@ -213,19 +229,18 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
 
 extension WorkbookViewController {
     
-    // MARK: - Data Source
-    
+    //Data Source
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch K.items[indexPath.row].productCategory {
+        switch (K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory) {
         case "Gloves":
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GloveCell.reuseId, for: indexPath) as! GloveCell
-            cell.model = K.items[indexPath.row]
+            cell.model = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
             cell.setViews()
             return cell
         default:
-            if K.items[indexPath.row].productCategory.count > 0 {
+            if (K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row].productCategory.count : K.items[indexPath.row].productCategory.count) > 0 {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
-                cell.model = K.items[indexPath.row]
+                cell.model = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
                 cell.setViews()
                 return cell
             }
@@ -236,12 +251,11 @@ extension WorkbookViewController {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return K.items.count
+        return K.ProductFilterSelection.isFiltered ? K.filteredItems.count : K.items.count
     }
     
     
-    // MARK: - Collection View Delegate
-    
+    //Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !multiSelect {
             performSegue(withIdentifier: "showDetailsNEW", sender: nil)
@@ -250,14 +264,13 @@ extension WorkbookViewController {
     }
     
 
-    // MARK: - Delegate Flow Layout
-
+    //Delegate Flow Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let multiplier: CGFloat = 1
         
         // FIXME: - adaptable cell size doesn't work!!
 //        print(K.CollectionCell.adjustedWidth(in: collectionView))
-        let productCategory = K.items[indexPath.row].productCategory
+        let productCategory = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory
         var multiplier: CGFloat = 1
         
         if productCategory == "Gloves" {
@@ -272,11 +285,8 @@ extension WorkbookViewController {
 }
 
 
+// MARK: - Product Filter Controller Delegate
 
-
-
-
-// FIXME: - Test for delegation from side panel
 extension WorkbookViewController: ProductFilterControllerDelegate {
     func donePressed(selectedCollection: String, selectedProductCategory: String, selectedDivision: String) {
         guard K.items.count > 0 else {
@@ -285,40 +295,24 @@ extension WorkbookViewController: ProductFilterControllerDelegate {
             return
         }
         
-        print(selectedCollection)
-        print(selectedProductCategory)
-        print(selectedDivision)
-//        let mohdel = K.items[0]
-//
-//        //SO HOKEY
-//        K.items[0] = CollectionModel(division: mohdel.division,
-//                                     collection: mohdel.collection,
-//                                     productNameDescription: mohdel.productNameDescription,
-//                                     productNameDescriptionSecondary: mohdel.productNameDescriptionSecondary,
-//                                     productCategory: mohdel.productCategory,
-//                                     colorway: mohdel.colorway,
-//                                     carryOver: mohdel.carryOver,
-//                                     essential: mohdel.essential,
-//                                     skuCode: mohdel.skuCode,
-//                                     sizes: [
-//                                        CollectionModel.Size(size: mohdel.sizes[0].size, colorwaySKU: "9999"),
-//                                        CollectionModel.Size(size: mohdel.sizes[1].size, colorwaySKU: mohdel.sizes[1].colorwaySKU),
-//                                        CollectionModel.Size(size: mohdel.sizes[2].size, colorwaySKU: mohdel.sizes[2].colorwaySKU),
-//                                        CollectionModel.Size(size: mohdel.sizes[3].size, colorwaySKU: mohdel.sizes[3].colorwaySKU),
-//                                        CollectionModel.Size(size: mohdel.sizes[4].size, colorwaySKU: mohdel.sizes[4].colorwaySKU),
-//                                        CollectionModel.Size(size: mohdel.sizes[5].size, colorwaySKU: mohdel.sizes[5].colorwaySKU),
-//                                        CollectionModel.Size(size: mohdel.sizes[6].size, colorwaySKU: mohdel.sizes[6].colorwaySKU)
-//                                     ],
-//                                     usMSRP: mohdel.usMSRP,
-//                                     euMSRP: mohdel.euMSRP,
-//                                     countryCode: mohdel.countryCode,
-//                                     composition: mohdel.composition,
-//                                     productDescription: mohdel.productDescription,
-//                                     productFeatures: mohdel.productFeatures,
-//                                     imageURL: mohdel.imageURL,
-//                                     thumbURL: mohdel.thumbURL,
-//                                     image: mohdel.image)
+        K.ProductFilterSelection.selectedCollection = selectedCollection
+        K.ProductFilterSelection.selectedProductCategory = selectedProductCategory
+        K.ProductFilterSelection.selectedDivision = selectedDivision
         
+        K.filteredItems = K.items.filter {
+            (selectedCollection == K.ProductFilterSelection.wildcard ? true : $0.collection == selectedCollection) &&
+            (selectedProductCategory == K.ProductFilterSelection.wildcard ? true : $0.productCategory == selectedProductCategory) &&
+            (selectedDivision == K.ProductFilterSelection.wildcard ? true : $0.division == selectedDivision)
+        }
+        
+        if K.ProductFilterSelection.isFiltered {
+            noResultsLabel.isHidden = !K.filteredItems.isEmpty
+        }
+        else {
+            noResultsLabel.isHidden = true
+        }
+
+        collectionView.reloadData()
         delegate?.collapsePanel()
     }
 }

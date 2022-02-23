@@ -13,6 +13,7 @@ import UIKit
 
 struct K {
     static var items: [CollectionModel] = []
+    static var filteredItems: [CollectionModel] = []
     
     struct Fonts {
         static let bubbleTitle = UIFont(name: "AvenirNext-Bold", size: 12)
@@ -43,6 +44,20 @@ struct K {
 
         static func adjustedHeight(in view: UIView) -> CGFloat {
             return adjustedWidth(in: view) * 3 / 2
+        }
+    }
+    
+    struct ProductFilterSelection {
+        static let wildcard = "[All]"
+        static let selectionCollections: [String] = [wildcard, "SP23", "SP22", "FA22"]
+        static let selectionProductCategories: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Sunglass Parts and Lenses", "Sunglasses"]
+        static let selectionDivisions: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
+
+        static var selectedCollection: String = wildcard
+        static var selectedProductCategory: String = wildcard
+        static var selectedDivision: String = wildcard
+        static var isFiltered: Bool {
+            return !(selectedCollection == wildcard && selectedProductCategory == wildcard && selectedDivision == wildcard)
         }
     }
     

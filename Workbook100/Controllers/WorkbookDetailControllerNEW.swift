@@ -101,18 +101,20 @@ class WorkbookDetailControllerNEW: UITableViewController {
     }
     
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
-        if let row = K.items.firstIndex(where: { $0.id == model.id }) {
+        let items = K.ProductFilterSelection.isFiltered ? K.filteredItems : K.items
+        
+        if let row = items.firstIndex(where: { $0.id == model.id }) {
 
             //Update Model
-            let newModel = CollectionModel(division: K.items[row].division,
-                                           collection: K.items[row].collection,
+            let newModel = CollectionModel(division: items[row].division,
+                                           collection: items[row].collection,
                                            productNameDescription: tfTitle.text!,
-                                           productNameDescriptionSecondary: K.items[row].productNameDescriptionSecondary,
-                                           productCategory: K.items[row].productCategory,
+                                           productNameDescriptionSecondary: items[row].productNameDescriptionSecondary,
+                                           productCategory: items[row].productCategory,
                                            colorway: tfSubtitle.text!,
                                            carryOver: !switchNew.isOn,
                                            essential: switchEssential.isOn,
-                                           skuCode: K.items[row].skuCode,
+                                           skuCode: items[row].skuCode,
                                            sizes: [
                                             CollectionModel.Size(size: tfSize0.text!, colorwaySKU: tfSKU0.text!),
                                             CollectionModel.Size(size: tfSize1.text!, colorwaySKU: tfSKU1.text!),
@@ -122,17 +124,23 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                             CollectionModel.Size(size: tfSize5.text!, colorwaySKU: tfSKU5.text!),
                                             CollectionModel.Size(size: tfSize6.text!, colorwaySKU: tfSKU6.text!)
                                            ],
-                                           usMSRP: K.items[row].usMSRP,
-                                           euMSRP: K.items[row].euMSRP,
-                                           countryCode: K.items[row].countryCode,
-                                           composition: K.items[row].composition,
-                                           productDescription: K.items[row].productNameDescription,
-                                           productFeatures: K.items[row].productFeatures,
-                                           imageURL: K.items[row].imageURL,
-                                           thumbURL: K.items[row].thumbURL,
+                                           usMSRP: items[row].usMSRP,
+                                           euMSRP: items[row].euMSRP,
+                                           countryCode: items[row].countryCode,
+                                           composition: items[row].composition,
+                                           productDescription: items[row].productNameDescription,
+                                           productFeatures: items[row].productFeatures,
+                                           imageURL: items[row].imageURL,
+                                           thumbURL: items[row].thumbURL,
                                            //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
                                            image: nil)
-            K.items[row] = newModel
+            
+            if K.ProductFilterSelection.isFiltered {
+                K.filteredItems[row] = newModel
+            }
+            else {
+                K.items[row] = newModel
+            }
             
             //Update Firebase
             let itemRef: [String: Any] = [K.FIR.division: newModel.division,
@@ -166,7 +174,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                           K.FIR.productFeatures: model.productFeatures,
                                           K.FIR.imageURL: model.imageURL,
                                           K.FIR.thumbURL: model.thumbURL]
-            let ref = Database.database().reference().child(K.items[row].skuCode)
+            let ref = Database.database().reference().child(K.ProductFilterSelection.isFiltered ? K.filteredItems[row].skuCode : K.items[row].skuCode)
             ref.setValue(itemRef)
         }
         
