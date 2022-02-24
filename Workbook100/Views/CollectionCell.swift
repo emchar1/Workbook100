@@ -140,7 +140,7 @@ class CollectionCell: UICollectionViewCell {
         //Product Image
         productImage.contentMode = .scaleAspectFill
         productImage.clipsToBounds = true
-        productImage.backgroundColor = K.Colors.superLightGray
+        productImage.backgroundColor = .workbookSuperLightGray
         productImage.translatesAutoresizingMaskIntoConstraints = false
         vStack.addArrangedSubview(productImage)
         NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)])

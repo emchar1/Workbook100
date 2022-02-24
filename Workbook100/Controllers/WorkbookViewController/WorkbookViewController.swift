@@ -30,7 +30,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var noResultsLabel: UILabel = {
         let label = UILabel()
-        label.font = K.Fonts.title
+        label.font = .workbookTitle
         label.text = "No Results to Display"
         label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -236,6 +236,9 @@ extension WorkbookViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GloveCell.reuseId, for: indexPath) as! GloveCell
             cell.model = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
             cell.setViews()
+            return cell
+        case K.ProductFilterSelection.wildcard:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
             return cell
         default:
             if (K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row].productCategory.count : K.items[indexPath.row].productCategory.count) > 0 {

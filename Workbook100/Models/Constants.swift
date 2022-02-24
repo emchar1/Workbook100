@@ -15,20 +15,20 @@ struct K {
     static var items: [CollectionModel] = []
     static var filteredItems: [CollectionModel] = []
     
-    struct Fonts {
-        static let bubbleTitle = UIFont(name: "AvenirNext-Bold", size: 12)
-        static let title = UIFont(name: "AvenirNext-Bold", size: 14)
-        static let subtitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 9)
-        static let footerTitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 10)
-        static let menuTitle = UIFont(name: "AvenirNext-DemiBold", size: 12)
-        static let menuSelection = UIFont(name: "AvenirNext-Regular", size: 12)
-        static let noimg = UIFont(name: "AvenirNext-Regular", size: 16)
-    }
+//    struct Fonts {
+//        static let bubbleTitle = UIFont(name: "AvenirNext-Bold", size: 12)
+//        static let title = UIFont(name: "AvenirNext-Bold", size: 14)
+//        static let subtitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 9)
+//        static let footerTitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 10)
+//        static let menuTitle = UIFont(name: "AvenirNext-DemiBold", size: 12)
+//        static let menuSelection = UIFont(name: "AvenirNext-Regular", size: 12)
+//        static let noimg = UIFont(name: "AvenirNext-Regular", size: 16)
+//    }
     
-    struct Colors {
-        static let superLightGray = UIColor(named: "superLightGray")
-        static let isSelected = UIColor(named: "isSelected")
-    }
+//    struct Colors {
+//        static let superLightGray = UIColor(named: "superLightGray")
+//        static let isSelected = UIColor(named: "isSelected")
+//    }
     
     struct CollectionCell {
         static var cellMultiplier: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
@@ -165,6 +165,8 @@ extension UICollectionViewCell {
 }
 
 
+// MARK: - ActivitySpinner
+
 class ActivitySpinner {
     private var spinner = UIActivityIndicatorView()
     
@@ -185,6 +187,27 @@ class ActivitySpinner {
             self.spinner.stopAnimating()
         }
     }
+}
+
+
+// MARK: - UIFont Extension
+
+extension UIFont {
+    static let workbookTitle = UIFont(name: "AvenirNext-Bold", size: 14)!
+    static let workbookBubbleTitle = UIFont(name: "AvenirNext-Bold", size: 12)!
+    static let workbookSubtitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 9)!
+    static let workbookFooterTitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 10)!
+    static let workbookMenuTitle = UIFont(name: "AvenirNext-DemiBold", size: 12)!
+    static let workbookMenuSelection = UIFont(name: "AvenirNext-Regular", size: 12)!
+    static let workbookNoimg = UIFont(name: "AvenirNext-Regular", size: 16)!
+}
+
+
+// MARK: - UIColor Extension
+
+extension UIColor {
+    static let workbookSuperLightGray = UIColor(named: "superLightGray")
+    static let workbookIsSelected = UIColor(named: "isSelected")
 }
 
 

@@ -35,7 +35,7 @@ class HStackSelection: UIStackView {
     
     var selectedItemLabel: UILabel = {
         let label = UILabel()
-        label.font = K.Fonts.menuSelection
+        label.font = .workbookMenuSelection
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -86,7 +86,7 @@ class VStackContent: UIStackView {
     var selectionView: UIView!
     var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = K.Fonts.menuTitle
+        label.font = .workbookMenuTitle
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -229,7 +229,7 @@ class ProductFilterController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Initialization
     
     override func viewDidLoad() {
-        view.backgroundColor = K.Colors.superLightGray
+        view.backgroundColor = .workbookSuperLightGray
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -354,7 +354,7 @@ extension ProductFilterController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = dataSource[indexPath.row]
-        cell.textLabel?.font = K.Fonts.menuSelection
+        cell.textLabel?.font = .workbookMenuSelection
         return cell
     }
     

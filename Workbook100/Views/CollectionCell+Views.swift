@@ -46,7 +46,7 @@ class CollectionCellLabelBubble: UILabel {
         self.text = text
         self.textColor = .white
         self.textAlignment = .center
-        self.font = K.Fonts.bubbleTitle
+        self.font = .workbookBubbleTitle
         self.layer.cornerRadius = 8
         self.clipsToBounds = true
         
@@ -112,11 +112,11 @@ class CollectionCellLabel: UILabel {
     private func customizeType(_ type: LabelType) {
         switch type {
         case .title:
-            self.font = K.Fonts.title
+            self.font = .workbookTitle
         case .subtitle:
-            self.font = K.Fonts.subtitle
+            self.font = .workbookSubtitle
         case .productSize:
-            self.font = K.Fonts.footerTitle
+            self.font = .workbookFooterTitle
         }
     }
 }
