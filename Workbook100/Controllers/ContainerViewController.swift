@@ -21,7 +21,7 @@ class ContainerViewController: UIViewController, WorkbookViewControllerDelegate 
 
     var centerNavigationController: UINavigationController!
     var centerViewController: WorkbookViewController!
-    var leftViewController: ProductFilterController?
+    var leftViewController: ProductFilterControllerNEW?
     
     enum SlideOutState {
         case productFilterCollapsed, productFilterExpanded
@@ -149,8 +149,8 @@ extension ContainerViewController {
             addChild(vc)
             vc.didMove(toParent: self)
             view.insertSubview(vc.view, at: 0)
-            
-            vc.delegate = centerViewController
+
+//            vc.delegate = centerViewController
             leftViewController = vc
         }
 
@@ -213,7 +213,7 @@ extension ContainerViewController {
             animateCenterPanelXPosition(targetPosition: expandDistance)
             
             // 2/21/22 Added this to set the trailing constraint on the hStack in the ProductFilterController object.
-            leftViewController?.expandDistance = centerNavigationController.view.frame.width - expandDistance
+//            leftViewController?.expandDistance = centerNavigationController.view.frame.width - expandDistance
         }
         else {
             animateCenterPanelXPosition(targetPosition: 0) { _ in

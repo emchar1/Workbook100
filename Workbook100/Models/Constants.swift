@@ -15,21 +15,6 @@ struct K {
     static var items: [CollectionModel] = []
     static var filteredItems: [CollectionModel] = []
     
-//    struct Fonts {
-//        static let bubbleTitle = UIFont(name: "AvenirNext-Bold", size: 12)
-//        static let title = UIFont(name: "AvenirNext-Bold", size: 14)
-//        static let subtitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 9)
-//        static let footerTitle = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 10)
-//        static let menuTitle = UIFont(name: "AvenirNext-DemiBold", size: 12)
-//        static let menuSelection = UIFont(name: "AvenirNext-Regular", size: 12)
-//        static let noimg = UIFont(name: "AvenirNext-Regular", size: 16)
-//    }
-    
-//    struct Colors {
-//        static let superLightGray = UIColor(named: "superLightGray")
-//        static let isSelected = UIColor(named: "isSelected")
-//    }
-    
     struct CollectionCell {
         static var cellMultiplier: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
         static let padding: CGFloat = 8
@@ -49,15 +34,25 @@ struct K {
     
     struct ProductFilterSelection {
         static let wildcard = "[All]"
-        static let selectionCollections: [String] = [wildcard, "SP23", "SP22", "FA22"]
-        static let selectionProductCategories: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Sunglass Parts and Lenses", "Sunglasses"]
-        static let selectionDivisions: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
+        
+        static let selectionCollection: [String] = [wildcard, "SP23", "SP22", "FA22"]
+        static let selectionProductCategory: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Sunglass Parts and Lenses", "Sunglasses"]
+        static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
+        static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
+        static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
+        static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
+        static let selectionProductSubtype: [String] = [wildcard, "Active Performance", "Athletic", "Base Layers", "Camper", "Casual", "Clear", "Dual", "Dual Pane", "Dual Pane Sonic Bumps", "Dual Pane Vented", "Elbow", "Flexfit", "Full Face", "HiPER", "Injected", "Jersey", "Knee", "Laminated", "Liners", "Mirror", "Misc.", "Mud", "Nose Bridges", "Nose Pads", "Open Face", "Pants", "Performance", "Perimeter Seal", "Photochromic", "Premium", "Regular", "Replacement Lenses", "Screws", "Shield", "Short Fingers", "Shorts", "Sleeves", "Snapback", "Sonic Bumps", "Spare Parts", "Sport Performance", "Standard", "Tech", "Trucker", "Unstructured", "Upper", "Varied", "Visors", "Water Resistant", "Waterproof", "Windproof", "Wool"]
 
         static var selectedCollection: String = wildcard
         static var selectedProductCategory: String = wildcard
         static var selectedDivision: String = wildcard
+        static var selectedProductDepartment: String = wildcard
+        static var selectedLaunchSeason: String = wildcard
+        static var selectedProductType: String = wildcard
+        static var selectedProductSubtype: String = wildcard
+        
         static var isFiltered: Bool {
-            return !(selectedCollection == wildcard && selectedProductCategory == wildcard && selectedDivision == wildcard)
+            return !(selectedCollection == wildcard && selectedProductCategory == wildcard && selectedDivision == wildcard && selectedProductDepartment == wildcard && selectedLaunchSeason == wildcard && selectedProductType == wildcard && selectedProductSubtype == wildcard)
         }
     }
     
@@ -67,6 +62,11 @@ struct K {
         static let productNameDescription = "ProductNameDescription"
         static let productNameDescriptionSecondary = "ProductNameDescriptionSecondary"
         static let productCategory = "ProductCategory"
+        static let productDepartment = "ProductDepartment"
+        static let launchSeason = "LaunchSeason"
+        static let productType = "ProductType"
+        static let productSubtype = "ProductSubtype"
+        static let youthWomen = "YouthWomen"
         static let colorway = "Colorway"
         static let carryOver = "CarryOver"
         static let essential = "Essential"
@@ -104,8 +104,9 @@ extension UIStoryboard {
         UIStoryboard(name: "Main", bundle: Bundle.main)
     }
     
-    static var leftViewController: ProductFilterController? {
-        mainStoryboard.instantiateViewController(withIdentifier: "ProductFilterController") as? ProductFilterController
+    // 2/26/22 Changed these from ProductFilterController to ProductFilterControllerNEW
+    static var leftViewController: ProductFilterControllerNEW? {
+        mainStoryboard.instantiateViewController(withIdentifier: "ProductFilterControllerNEW") as? ProductFilterControllerNEW
     }
     
     static var centerViewController: WorkbookViewController? {

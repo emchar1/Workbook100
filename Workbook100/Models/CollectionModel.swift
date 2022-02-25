@@ -24,6 +24,11 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     let productNameDescription: String
     let productNameDescriptionSecondary: String
     let productCategory: String
+    let productDepartment: String
+    let launchSeason: String
+    let productType: String
+    let productSubtype: String
+    let youthWomen: String
     let colorway: String
     let carryOver: Bool
     let essential: Bool
@@ -60,13 +65,18 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     
     // MARK: - Initialization
     
-    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, imageURL: String, thumbURL: String, image: StorageReference?) {
+    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, productDepartment: String, launchSeason: String, productType: String, productSubtype: String, youthWomen: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, imageURL: String, thumbURL: String, image: StorageReference?) {
 
         self.division = division
         self.collection = collection
         self.productNameDescription = productNameDescription
         self.productNameDescriptionSecondary = productNameDescriptionSecondary
         self.productCategory = productCategory
+        self.productDepartment = productDepartment
+        self.launchSeason = launchSeason
+        self.productType = productType
+        self.productSubtype = productSubtype
+        self.youthWomen = youthWomen
         self.colorway = colorway
         self.carryOver = carryOver
         self.essential = essential
@@ -91,6 +101,11 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                     productNameDescription: "Product Name Description",
                                     productNameDescriptionSecondary: "Product Name Description Secondary",
                                     productCategory: K.ProductFilterSelection.wildcard,
+                                    productDepartment: "Product Department",
+                                    launchSeason: "Launch Season",
+                                    productType: "Product Type",
+                                    productSubtype: "Product Subtype",
+                                    youthWomen: "Youth/Women",
                                     colorway: "Color",
                                     carryOver: false,
                                     essential: true,

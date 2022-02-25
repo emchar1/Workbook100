@@ -127,6 +127,11 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                productNameDescription: obj[K.FIR.productNameDescription] as! String,
                                                productNameDescriptionSecondary: obj[K.FIR.productNameDescriptionSecondary] as! String,
                                                productCategory: obj[K.FIR.productCategory] as! String,
+                                               productDepartment: obj[K.FIR.productDepartment] as! String,
+                                               launchSeason: obj[K.FIR.launchSeason] as! String,
+                                               productType: obj[K.FIR.productType] as! String,
+                                               productSubtype: obj[K.FIR.productSubtype] as! String,
+                                               youthWomen: obj[K.FIR.youthWomen] as! String,
                                                colorway: obj[K.FIR.colorway] as! String,
                                                carryOver: (obj[K.FIR.carryOver] as! String) == "TRUE",
                                                essential: (obj[K.FIR.essential] as! String) == "TRUE",
@@ -149,7 +154,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                imageURL: obj[K.FIR.imageURL] as! String,
                                                thumbURL: obj[K.FIR.thumbURL] as! String,
                                                image: imageRef)
-
+                    
                     K.items.append(item)
                 }
             }
@@ -175,10 +180,34 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
 //            }),
             
             UIAction(title: "Export", image: nil, handler: { action in
-                var csv: [[String]] = [["SKUCode", "productNameDescription", "productCategory", "Colorway", "CarryOver", "Essential", "USRetailMSRP", "EURetailMSRP", "CountryCode"]]
+                var csv: [[String]] = [["SKUCode",
+                                        "productNameDescription",
+                                        "productCategory",
+                                        "productDepartment",
+                                        "launchSeason",
+                                        "productType",
+                                        "productSubtype",
+                                        "Colorway",
+                                        "CarryOver",
+                                        "Essential",
+                                        "USRetailMSRP",
+                                        "EURetailMSRP",
+                                        "CountryCode"]]
                 
                 for item in (K.ProductFilterSelection.isFiltered ? K.filteredItems : K.items) {
-                    csv.append([item.skuCode, item.productNameDescription, item.productCategory, item.colorway, item.carryOver ? "TRUE" : "FALSE", item.essential ? "TRUE" : "FALSE", "\(item.usMSRP)", "\(item.euMSRP)", item.countryCode])
+                    csv.append([item.skuCode,
+                                item.productNameDescription,
+                                item.productCategory,
+                                item.productDepartment,
+                                item.launchSeason,
+                                item.productType,
+                                item.productSubtype,
+                                item.colorway,
+                                item.carryOver ? "TRUE" : "FALSE",
+                                item.essential ? "TRUE" : "FALSE",
+                                "\(item.usMSRP)",
+                                "\(item.euMSRP)",
+                                item.countryCode])
                 }
                 
                 self.mailOrder(for: CSVMake.commaSeparatedValueDataForLines(csv))
@@ -291,7 +320,7 @@ extension WorkbookViewController {
 // MARK: - Product Filter Controller Delegate
 
 extension WorkbookViewController: ProductFilterControllerDelegate {
-    func donePressed(selectedCollection: String, selectedProductCategory: String, selectedDivision: String) {
+    func donePressed(selectedCollection: String, selectedProductCategory: String, selectedDivision: String, selectedProductDepartment: String, selectedLaunchSeason: String, selectedProductType: String, selectedProductSubtype: String) {
         guard K.items.count > 0 else {
             print("Items still loading. Exiting early")
             delegate?.collapsePanel()
@@ -301,11 +330,19 @@ extension WorkbookViewController: ProductFilterControllerDelegate {
         K.ProductFilterSelection.selectedCollection = selectedCollection
         K.ProductFilterSelection.selectedProductCategory = selectedProductCategory
         K.ProductFilterSelection.selectedDivision = selectedDivision
+        K.ProductFilterSelection.selectedProductDepartment = selectedProductDepartment
+        K.ProductFilterSelection.selectedLaunchSeason = selectedLaunchSeason
+        K.ProductFilterSelection.selectedProductType = selectedProductType
+        K.ProductFilterSelection.selectedProductSubtype = selectedProductSubtype
         
         K.filteredItems = K.items.filter {
             (selectedCollection == K.ProductFilterSelection.wildcard ? true : $0.collection == selectedCollection) &&
             (selectedProductCategory == K.ProductFilterSelection.wildcard ? true : $0.productCategory == selectedProductCategory) &&
-            (selectedDivision == K.ProductFilterSelection.wildcard ? true : $0.division == selectedDivision)
+            (selectedDivision == K.ProductFilterSelection.wildcard ? true : $0.division == selectedDivision) &&
+            (selectedProductDepartment == K.ProductFilterSelection.wildcard ? true : $0.productDepartment == selectedProductDepartment) &&
+            (selectedLaunchSeason == K.ProductFilterSelection.wildcard ? true : $0.launchSeason == selectedLaunchSeason) &&
+            (selectedProductType == K.ProductFilterSelection.wildcard ? true : $0.productType == selectedProductType) &&
+            (selectedProductSubtype == K.ProductFilterSelection.wildcard ? true : $0.productSubtype == selectedProductSubtype)
         }
         
         if K.ProductFilterSelection.isFiltered {
