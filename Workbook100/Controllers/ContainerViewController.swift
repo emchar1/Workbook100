@@ -11,8 +11,8 @@ class ContainerViewController: UIViewController, WorkbookViewControllerDelegate 
     
     // MARK: - Properties
     
-    let centerPanelExpandedOffset: CGFloat = 60
-    let maxPanelSize: CGFloat = 300
+    let centerPanelExpandedOffset: CGFloat = 50
+    let maxPanelSize: CGFloat = 360
     var expandDistance: CGFloat = 0 {
         didSet {
             expandDistance = min(expandDistance, maxPanelSize)
@@ -150,7 +150,7 @@ extension ContainerViewController {
             vc.didMove(toParent: self)
             view.insertSubview(vc.view, at: 0)
 
-//            vc.delegate = centerViewController
+            vc.delegate = centerViewController
             leftViewController = vc
         }
 
@@ -208,9 +208,9 @@ extension ContainerViewController {
         if shouldExpand {
             currentState = .productFilterExpanded
             
-            
             expandDistance = centerNavigationController.view.frame.width - centerPanelExpandedOffset
             animateCenterPanelXPosition(targetPosition: expandDistance)
+            centerViewController.view.isUserInteractionEnabled = false
             
             // 2/21/22 Added this to set the trailing constraint on the hStack in the ProductFilterController object.
 //            leftViewController?.expandDistance = centerNavigationController.view.frame.width - expandDistance
@@ -218,6 +218,7 @@ extension ContainerViewController {
         else {
             animateCenterPanelXPosition(targetPosition: 0) { _ in
                 self.currentState = .productFilterCollapsed
+                self.centerViewController.view.isUserInteractionEnabled = true
                 self.leftViewController?.view.removeFromSuperview()
                 self.leftViewController = nil
             }

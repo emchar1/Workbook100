@@ -17,7 +17,7 @@ protocol WorkbookViewControllerDelegate {
 
 // MARK: - Workbook View Controller MAIN CLASS
 
-class WorkbookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIPopoverPresentationControllerDelegate, MFMailComposeViewControllerDelegate {
+class WorkbookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIPopoverPresentationControllerDelegate, MFMailComposeViewControllerDelegate, ProductFilterControllerNEWDelegate {
     
     // MARK: - Properties
     
@@ -317,41 +317,73 @@ extension WorkbookViewController {
 }
 
 
-// MARK: - Product Filter Controller Delegate
+// MARK: - Product Filter Controller NEW Delegate
 
-extension WorkbookViewController: ProductFilterControllerDelegate {
-    func donePressed(selectedCollection: String, selectedProductCategory: String, selectedDivision: String, selectedProductDepartment: String, selectedLaunchSeason: String, selectedProductType: String, selectedProductSubtype: String) {
+extension WorkbookViewController {
+//    func donePressed(selectedCollection: String, selectedProductCategory: String, selectedDivision: String, selectedProductDepartment: String, selectedLaunchSeason: String, selectedProductType: String, selectedProductSubtype: String) {
+//        guard K.items.count > 0 else {
+//            print("Items still loading. Exiting early")
+//            delegate?.collapsePanel()
+//            return
+//        }
+//
+//        K.ProductFilterSelection.selectedCollection = selectedCollection
+//        K.ProductFilterSelection.selectedProductCategory = selectedProductCategory
+//        K.ProductFilterSelection.selectedDivision = selectedDivision
+//        K.ProductFilterSelection.selectedProductDepartment = selectedProductDepartment
+//        K.ProductFilterSelection.selectedLaunchSeason = selectedLaunchSeason
+//        K.ProductFilterSelection.selectedProductType = selectedProductType
+//        K.ProductFilterSelection.selectedProductSubtype = selectedProductSubtype
+//
+//        K.filteredItems = K.items.filter {
+//            (selectedCollection == K.ProductFilterSelection.wildcard ? true : $0.collection == selectedCollection) &&
+//            (selectedProductCategory == K.ProductFilterSelection.wildcard ? true : $0.productCategory == selectedProductCategory) &&
+//            (selectedDivision == K.ProductFilterSelection.wildcard ? true : $0.division == selectedDivision) &&
+//            (selectedProductDepartment == K.ProductFilterSelection.wildcard ? true : $0.productDepartment == selectedProductDepartment) &&
+//            (selectedLaunchSeason == K.ProductFilterSelection.wildcard ? true : $0.launchSeason == selectedLaunchSeason) &&
+//            (selectedProductType == K.ProductFilterSelection.wildcard ? true : $0.productType == selectedProductType) &&
+//            (selectedProductSubtype == K.ProductFilterSelection.wildcard ? true : $0.productSubtype == selectedProductSubtype)
+//        }
+//
+//        if K.ProductFilterSelection.isFiltered {
+//            noResultsLabel.isHidden = !K.filteredItems.isEmpty
+//        }
+//        else {
+//            noResultsLabel.isHidden = true
+//        }
+//
+//        collectionView.reloadData()
+//        delegate?.collapsePanel()
+//    }
+    
+    func applyTapped(selectedDivision: String,
+                     selectedLaunchSeason: String,
+                     selectedProductCategory: String,
+                     selectedProductType: String,
+                     selectedProductSubtype: String) {
+        
         guard K.items.count > 0 else {
             print("Items still loading. Exiting early")
             delegate?.collapsePanel()
             return
         }
         
-        K.ProductFilterSelection.selectedCollection = selectedCollection
-        K.ProductFilterSelection.selectedProductCategory = selectedProductCategory
         K.ProductFilterSelection.selectedDivision = selectedDivision
-        K.ProductFilterSelection.selectedProductDepartment = selectedProductDepartment
         K.ProductFilterSelection.selectedLaunchSeason = selectedLaunchSeason
+        K.ProductFilterSelection.selectedProductCategory = selectedProductCategory
         K.ProductFilterSelection.selectedProductType = selectedProductType
         K.ProductFilterSelection.selectedProductSubtype = selectedProductSubtype
         
         K.filteredItems = K.items.filter {
-            (selectedCollection == K.ProductFilterSelection.wildcard ? true : $0.collection == selectedCollection) &&
-            (selectedProductCategory == K.ProductFilterSelection.wildcard ? true : $0.productCategory == selectedProductCategory) &&
             (selectedDivision == K.ProductFilterSelection.wildcard ? true : $0.division == selectedDivision) &&
-            (selectedProductDepartment == K.ProductFilterSelection.wildcard ? true : $0.productDepartment == selectedProductDepartment) &&
             (selectedLaunchSeason == K.ProductFilterSelection.wildcard ? true : $0.launchSeason == selectedLaunchSeason) &&
+            (selectedProductCategory == K.ProductFilterSelection.wildcard ? true : $0.productCategory == selectedProductCategory) &&
             (selectedProductType == K.ProductFilterSelection.wildcard ? true : $0.productType == selectedProductType) &&
             (selectedProductSubtype == K.ProductFilterSelection.wildcard ? true : $0.productSubtype == selectedProductSubtype)
         }
+                
+        noResultsLabel.isHidden = K.ProductFilterSelection.isFiltered ? !K.filteredItems.isEmpty : true
         
-        if K.ProductFilterSelection.isFiltered {
-            noResultsLabel.isHidden = !K.filteredItems.isEmpty
-        }
-        else {
-            noResultsLabel.isHidden = true
-        }
-
         collectionView.reloadData()
         delegate?.collapsePanel()
     }

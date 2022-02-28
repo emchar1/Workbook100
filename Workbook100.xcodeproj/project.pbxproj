@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D0E4BED5DF7BA88A082979D /* Pods_Workbook100.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED0637F73B2DB24933760E3 /* Pods_Workbook100.framework */; };
+		EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */; };
 		EA22D4E027754129006C12CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4DF27754129006C12CF /* Constants.swift */; };
 		EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E127759DA4006C12CF /* CollectionModel.swift */; };
 		EA22D4E42776DFCE006C12CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */; };
@@ -40,6 +41,7 @@
 		4ED0637F73B2DB24933760E3 /* Pods_Workbook100.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workbook100.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E4B2B00B3C8E30E41BA149 /* Pods-Workbook100.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.debug.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.debug.xcconfig"; sourceTree = "<group>"; };
 		C46D4E45F91E13A1CD215AB2 /* Pods-Workbook100.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.release.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.release.xcconfig"; sourceTree = "<group>"; };
+		EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSubFilterController.swift; sourceTree = "<group>"; };
 		EA22D4DF27754129006C12CF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA22D4E127759DA4006C12CF /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -106,10 +108,11 @@
 				EAB133E127A47C93007F6553 /* WorkbookViewController */,
 				EA22D4E527770BE3006C12CF /* LoginController.swift */,
 				EA91E071279366DC00DE630E /* ContainerViewController.swift */,
-				EA91E07327936A6200DE630E /* ProductFilterController.swift */,
-				EA5CE2DE27C8E1420071F015 /* ProductFilterControllerNEW.swift */,
 				EA22D4E7277A5FD6006C12CF /* WorkbookDetailController.swift */,
 				EA22D53127859964006C12CF /* WorkbookDetailControllerNEW.swift */,
+				EA91E07327936A6200DE630E /* ProductFilterController.swift */,
+				EA5CE2DE27C8E1420071F015 /* ProductFilterControllerNEW.swift */,
+				EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -128,8 +131,8 @@
 		EA5CE2D827C743790071F015 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				EA5CE2D927C743880071F015 /* HStackSelection.swift */,
 				EA5CE2DB27C743C40071F015 /* VStackContent.swift */,
+				EA5CE2D927C743880071F015 /* HStackSelection.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */,
 				EAF68F2327C0CE4800F2EDE6 /* PDFExport.swift in Sources */,
 				EA5CE2DF27C8E1420071F015 /* ProductFilterControllerNEW.swift in Sources */,
+				EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */,
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
 				EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
