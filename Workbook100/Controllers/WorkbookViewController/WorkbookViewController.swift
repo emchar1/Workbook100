@@ -169,7 +169,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
 
                 self.collectionView.performBatchUpdates({
-                    K.ProductFilterSelection.isFiltered ? K.filteredItems.insert(CollectionModel.getBlankModel(), at: indexPath.row) : K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+                    K.ProductFilter.isFiltered ? K.filteredItems.insert(CollectionModel.getBlankModel(), at: indexPath.row) : K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
                     
                     self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
                 }, completion: nil)
@@ -194,7 +194,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                         "EURetailMSRP",
                                         "CountryCode"]]
                 
-                for item in (K.ProductFilterSelection.isFiltered ? K.filteredItems : K.items) {
+                for item in (K.ProductFilter.isFiltered ? K.filteredItems : K.items) {
                     csv.append([item.skuCode,
                                 item.productNameDescription,
                                 item.productCategory,
@@ -247,7 +247,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             let controller = nc.topViewController as! WorkbookDetailControllerNEW
 
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                controller.model = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+                controller.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
             }
         }
     }
@@ -260,19 +260,19 @@ extension WorkbookViewController {
     
     //Data Source
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch (K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory) {
+        switch (K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory) {
         case "Gloves":
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GloveCell.reuseId, for: indexPath) as! GloveCell
-            cell.model = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+            cell.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
             cell.setViews()
             return cell
-        case K.ProductFilterSelection.wildcard:
+        case K.ProductFilter.wildcard:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
             return cell
         default:
-            if (K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row].productCategory.count : K.items[indexPath.row].productCategory.count) > 0 {
+            if (K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory.count : K.items[indexPath.row].productCategory.count) > 0 {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
-                cell.model = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+                cell.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
                 cell.setViews()
                 return cell
             }
@@ -283,7 +283,7 @@ extension WorkbookViewController {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return K.ProductFilterSelection.isFiltered ? K.filteredItems.count : K.items.count
+        return K.ProductFilter.isFiltered ? K.filteredItems.count : K.items.count
     }
     
     
@@ -302,7 +302,7 @@ extension WorkbookViewController {
         
         // FIXME: - adaptable cell size doesn't work!!
 //        print(K.CollectionCell.adjustedWidth(in: collectionView))
-        let productCategory = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory
+        let productCategory = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory
         var multiplier: CGFloat = 1
         
         if productCategory == "Gloves" {
@@ -363,26 +363,33 @@ extension WorkbookViewController {
                      selectedProductSubtype: String) {
         
         guard K.items.count > 0 else {
-            print("Items still loading. Exiting early")
+            print("Items still loading. Exiting early.")
             delegate?.collapsePanel()
             return
         }
         
-        K.ProductFilterSelection.selectedDivision = selectedDivision
-        K.ProductFilterSelection.selectedLaunchSeason = selectedLaunchSeason
-        K.ProductFilterSelection.selectedProductCategory = selectedProductCategory
-        K.ProductFilterSelection.selectedProductType = selectedProductType
-        K.ProductFilterSelection.selectedProductSubtype = selectedProductSubtype
+        //Set the global constant variables, i.e. make the changes "permanent."
+        K.ProductFilter.selectedDivision = selectedDivision
+        K.ProductFilter.selectedLaunchSeason = selectedLaunchSeason
+        K.ProductFilter.selectedProductCategory = selectedProductCategory
+        K.ProductFilter.selectedProductType = selectedProductType
+        K.ProductFilter.selectedProductSubtype = selectedProductSubtype
         
         K.filteredItems = K.items.filter {
-            (selectedDivision == K.ProductFilterSelection.wildcard ? true : $0.division == selectedDivision) &&
-            (selectedLaunchSeason == K.ProductFilterSelection.wildcard ? true : $0.launchSeason == selectedLaunchSeason) &&
-            (selectedProductCategory == K.ProductFilterSelection.wildcard ? true : $0.productCategory == selectedProductCategory) &&
-            (selectedProductType == K.ProductFilterSelection.wildcard ? true : $0.productType == selectedProductType) &&
-            (selectedProductSubtype == K.ProductFilterSelection.wildcard ? true : $0.productSubtype == selectedProductSubtype)
+            (selectedDivision == K.ProductFilter.wildcard ? true : $0.division == selectedDivision) &&
+            (selectedLaunchSeason == K.ProductFilter.wildcard ? true : $0.launchSeason == selectedLaunchSeason) &&
+            (selectedProductCategory == K.ProductFilter.wildcard ? true : $0.productCategory == selectedProductCategory) &&
+            (selectedProductType == K.ProductFilter.wildcard ? true : $0.productType == selectedProductType) &&
+            (selectedProductSubtype == K.ProductFilter.wildcard ? true : $0.productSubtype == selectedProductSubtype)
         }
                 
-        noResultsLabel.isHidden = K.ProductFilterSelection.isFiltered ? !K.filteredItems.isEmpty : true
+        //Show a "No results found" label if the filtered list is empty
+        if K.ProductFilter.isFiltered {
+            noResultsLabel.isHidden = !K.filteredItems.isEmpty
+        }
+        else {
+            noResultsLabel.isHidden = true
+        }
         
         collectionView.reloadData()
         delegate?.collapsePanel()

@@ -16,7 +16,6 @@ import UniformTypeIdentifiers
 final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderWriting {
     //removed CustomStringConvertible, Equatable, when I converted it from a struct to a class
 
-    
     // MARK: - Properties
 
     let division: String
@@ -96,11 +95,11 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     }
     
     static func getBlankModel() -> CollectionModel {
-        let model = CollectionModel(division: K.ProductFilterSelection.wildcard,
-                                    collection: K.ProductFilterSelection.wildcard,
+        let model = CollectionModel(division: K.ProductFilter.wildcard,
+                                    collection: K.ProductFilter.wildcard,
                                     productNameDescription: "Product Name Description",
                                     productNameDescriptionSecondary: "Product Name Description Secondary",
-                                    productCategory: K.ProductFilterSelection.wildcard,
+                                    productCategory: K.ProductFilter.wildcard,
                                     productDepartment: "Product Department",
                                     launchSeason: "Launch Season",
                                     productType: "Product Type",

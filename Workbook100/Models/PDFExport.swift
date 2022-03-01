@@ -30,7 +30,6 @@ extension UIView {
         return self.saveViewPDF(data: pdfData)
     }
     
-    
     /**
      Saves the PDF file in document directory.
      */
@@ -48,7 +47,6 @@ extension UIView {
     }
     
 }
-
 
 
 extension UICollectionView {
@@ -75,7 +73,6 @@ extension UICollectionView {
         
         return self.saveCollectionViewPDF(data: pdfData)
     }
-    
     
     /**
      Saves the PDF file in document directory.

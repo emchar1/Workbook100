@@ -101,7 +101,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
     }
     
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
-        let items = K.ProductFilterSelection.isFiltered ? K.filteredItems : K.items
+        let items = K.ProductFilter.isFiltered ? K.filteredItems : K.items
         
         if let row = items.firstIndex(where: { $0.id == model.id }) {
 
@@ -140,7 +140,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                            //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
                                            image: nil)
             
-            if K.ProductFilterSelection.isFiltered {
+            if K.ProductFilter.isFiltered {
                 K.filteredItems[row] = newModel
             }
             else {
@@ -184,7 +184,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                           K.FIR.productFeatures: model.productFeatures,
                                           K.FIR.imageURL: model.imageURL,
                                           K.FIR.thumbURL: model.thumbURL]
-            let ref = Database.database().reference().child(K.ProductFilterSelection.isFiltered ? K.filteredItems[row].skuCode : K.items[row].skuCode)
+            let ref = Database.database().reference().child(K.ProductFilter.isFiltered ? K.filteredItems[row].skuCode : K.items[row].skuCode)
             ref.setValue(itemRef)
         }
         

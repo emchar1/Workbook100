@@ -36,7 +36,12 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     var delegate: ProductFilterControllerNEWDelegate?
     
     enum FilterItem: Int {
-        case division = 0, launchSeason, productCategory, productType, productSubtype, applyClearButtons
+        case division = 0,
+             launchSeason,
+             productCategory,
+             productType,
+             productSubtype,
+             applyClearButtons
     }
     
     
@@ -49,17 +54,11 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     }
     
     private func resetFilters(clear: Bool = false) {
-        selectedDivision = clear ? K.ProductFilterSelection.wildcard : K.ProductFilterSelection.selectedDivision
-        selectedLaunchSeason = clear ? K.ProductFilterSelection.wildcard : K.ProductFilterSelection.selectedLaunchSeason
-        selectedProductCategory = clear ? K.ProductFilterSelection.wildcard : K.ProductFilterSelection.selectedProductCategory
-        selectedProductType = clear ? K.ProductFilterSelection.wildcard : K.ProductFilterSelection.selectedProductType
-        selectedProductSubtype = clear ? K.ProductFilterSelection.wildcard : K.ProductFilterSelection.selectedProductSubtype
-        
-//        labelDivision.text = selectedDivision
-//        labelLaunchSeason.text = selectedLaunchSeason
-//        labelProductCategory.text = selectedProductCategory
-//        labelProductType.text = selectedProductType
-//        labelProductSubtype.text = selectedProductSubtype
+        selectedDivision = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedDivision
+        selectedLaunchSeason = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedLaunchSeason
+        selectedProductCategory = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductCategory
+        selectedProductType = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductType
+        selectedProductSubtype = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductSubtype
     }
     
     
@@ -83,37 +82,42 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelectFilter" {
-            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow else {
+                print("No indexPath found in prepare(for: sender:) in ProductFilterControllerNEW.")
+                return
+            }
             
             let nc = segue.destination as! UINavigationController
-            let vc = nc.topViewController as! ProductSubFilterController
+            let controller = nc.topViewController as! ProductSubFilterController
             
-            vc.navigationItem.title = "Select "
-            vc.delegate = self
+            controller.navigationItem.title = "Select "
+            controller.delegate = self
             selectedSection = indexPath.section
             
             switch selectedSection {
             case FilterItem.division.rawValue:
-                vc.selections = K.ProductFilterSelection.selectionDivision
-                vc.selectedItem = selectedDivision
-                vc.navigationItem.title! += "Division"
+                controller.selections = K.ProductFilter.selectionDivision
+                controller.selectedItem = selectedDivision
+                controller.navigationItem.title! += "Division"
             case FilterItem.launchSeason.rawValue:
-                vc.selections = K.ProductFilterSelection.selectionLaunchSeason
-                vc.selectedItem = selectedLaunchSeason
-                vc.navigationItem.title! += "Launch Season"
+                controller.selections = K.ProductFilter.selectionLaunchSeason
+                controller.selectedItem = selectedLaunchSeason
+                controller.navigationItem.title! += "Launch Season"
             case FilterItem.productCategory.rawValue:
-                vc.selections = K.ProductFilterSelection.selectionProductCategory
-                vc.selectedItem = selectedProductCategory
-                vc.navigationItem.title! += "Product Category"
+                controller.selections = K.ProductFilter.selectionProductCategory
+                controller.selectedItem = selectedProductCategory
+                controller.navigationItem.title! += "Product Category"
             case FilterItem.productType.rawValue:
-                vc.selections = K.ProductFilterSelection.selectionProductType
-                vc.selectedItem = selectedProductType
-                vc.navigationItem.title! += "Product Type"
+                controller.selections = K.ProductFilter.selectionProductType
+                controller.selectedItem = selectedProductType
+                controller.navigationItem.title! += "Product Type"
             case FilterItem.productSubtype.rawValue:
-                vc.selections = K.ProductFilterSelection.selectionProductSubtype
-                vc.selectedItem = selectedProductSubtype
-                vc.navigationItem.title! += "Product Subtype"
-            default: print("Wrong selection")
+                controller.selections = K.ProductFilter.selectionProductSubtype
+                controller.selectedItem = selectedProductSubtype
+                controller.navigationItem.title! += "Product Subtype"
+            default:
+                controller.selectedItem = "Wrong selection!"
+                print("Wrong selection!")
             }
         }
     }
@@ -146,22 +150,12 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
 extension ProductFilterControllerNEW {
     func didSelectItem(selectedItem: String) {
         switch selectedSection {
-        case FilterItem.division.rawValue:
-            selectedDivision = selectedItem
-//            labelDivision.text = selectedItem
-        case FilterItem.launchSeason.rawValue:
-            selectedLaunchSeason = selectedItem
-//            labelLaunchSeason.text = selectedItem
-        case FilterItem.productCategory.rawValue:
-            selectedProductCategory = selectedItem
-//            labelProductCategory.text = selectedItem
-        case FilterItem.productType.rawValue:
-            selectedProductType = selectedItem
-//            labelProductType.text = selectedItem
-        case FilterItem.productSubtype.rawValue:
-            selectedProductSubtype = selectedItem
-//            labelProductSubtype.text = selectedItem
-        default: print("Wrong selection")
+        case FilterItem.division.rawValue: selectedDivision = selectedItem
+        case FilterItem.launchSeason.rawValue: selectedLaunchSeason = selectedItem
+        case FilterItem.productCategory.rawValue: selectedProductCategory = selectedItem
+        case FilterItem.productType.rawValue: selectedProductType = selectedItem
+        case FilterItem.productSubtype.rawValue: selectedProductSubtype = selectedItem
+        default: print("Wrong selection!")
         }
     }
 }

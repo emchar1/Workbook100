@@ -8,7 +8,7 @@
 import UIKit
 
 
-// MARK: - UIImageView extension
+// MARK: - UIImageView Extension
 
 extension UIImageView {    
     func loadImage(at url: URL, completion: (() -> Void)?) {

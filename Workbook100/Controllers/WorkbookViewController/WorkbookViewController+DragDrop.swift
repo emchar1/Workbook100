@@ -14,7 +14,7 @@ extension WorkbookViewController {
     // MARK: - Drag Delegate
     
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let item = K.ProductFilterSelection.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+        let item = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
         let itemProvider = NSItemProvider(object: item)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         
@@ -55,7 +55,7 @@ extension WorkbookViewController {
         //Reordering of single cell
         if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
             collectionView.performBatchUpdates({
-                if K.ProductFilterSelection.isFiltered {
+                if K.ProductFilter.isFiltered {
                     K.filteredItems.remove(at: sourceIndexPath.item)
                     K.filteredItems.insert(item.dragItem.localObject as! CollectionModel, at: destinationIndexPath.item)
                 }

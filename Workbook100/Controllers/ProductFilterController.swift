@@ -66,7 +66,7 @@ class ProductFilterController: UIViewController, UITableViewDelegate, UITableVie
         for stacks in vStackMain.arrangedSubviews {
             let stack = stacks as! VStackContent
             
-            stack.hStack.selectedItemLabel.text = K.ProductFilterSelection.wildcard
+            stack.hStack.selectedItemLabel.text = K.ProductFilter.wildcard
         }
         
 //        vStackCollection.hStack.selectedItemLabel.text = K.ProductFilterSelection.wildcard
@@ -112,50 +112,50 @@ class ProductFilterController: UIViewController, UITableViewDelegate, UITableVie
                 
         vStackCollection = VStackContent(frame: .zero,
                                          titleText: "Collection",
-                                         selectionItems: K.ProductFilterSelection.selectionCollection,
-                                         selectedItem: K.ProductFilterSelection.selectedCollection)
+                                         selectionItems: K.ProductFilter.selectionCollection,
+                                         selectedItem: K.ProductFilter.selectedCollection)
         vStackCollection.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectCollection(_:)), for: .touchUpInside)
         vStackCollection.translatesAutoresizingMaskIntoConstraints = false
         
         vStackProductCategory = VStackContent(frame: .zero,
                                               titleText: "Product Category",
-                                              selectionItems: K.ProductFilterSelection.selectionProductCategory,
-                                              selectedItem: K.ProductFilterSelection.selectedProductCategory)
+                                              selectionItems: K.ProductFilter.selectionProductCategory,
+                                              selectedItem: K.ProductFilter.selectedProductCategory)
         vStackProductCategory.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductCategory(_:)), for: .touchUpInside)
         vStackProductCategory.translatesAutoresizingMaskIntoConstraints = false
         
         vStackDivision = VStackContent(frame: .zero,
                                        titleText: "Division",
-                                       selectionItems: K.ProductFilterSelection.selectionDivision,
-                                       selectedItem: K.ProductFilterSelection.selectedDivision)
+                                       selectionItems: K.ProductFilter.selectionDivision,
+                                       selectedItem: K.ProductFilter.selectedDivision)
         vStackDivision.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectDivision(_:)), for: .touchUpInside)
         vStackDivision.translatesAutoresizingMaskIntoConstraints = false
         
         vStackProductDepartment = VStackContent(frame: .zero,
                                                 titleText: "Product Department",
-                                                selectionItems: K.ProductFilterSelection.selectionProductDepartment,
-                                                selectedItem: K.ProductFilterSelection.selectedProductDepartment)
+                                                selectionItems: K.ProductFilter.selectionProductDepartment,
+                                                selectedItem: K.ProductFilter.selectedProductDepartment)
         vStackProductDepartment.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductDepartment(_:)), for: .touchUpInside)
         vStackProductDepartment.translatesAutoresizingMaskIntoConstraints = false
         
         vStackLaunchSeason = VStackContent(frame: .zero,
                                            titleText: "Launch Season",
-                                           selectionItems: K.ProductFilterSelection.selectionLaunchSeason,
-                                           selectedItem: K.ProductFilterSelection.selectedLaunchSeason)
+                                           selectionItems: K.ProductFilter.selectionLaunchSeason,
+                                           selectedItem: K.ProductFilter.selectedLaunchSeason)
         vStackLaunchSeason.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectLaunchSeason(_:)), for: .touchUpInside)
         vStackLaunchSeason.translatesAutoresizingMaskIntoConstraints = false
         
         vStackProductType = VStackContent(frame: .zero,
                                           titleText: "Product Type",
-                                          selectionItems: K.ProductFilterSelection.selectionProductType,
-                                          selectedItem: K.ProductFilterSelection.selectedProductType)
+                                          selectionItems: K.ProductFilter.selectionProductType,
+                                          selectedItem: K.ProductFilter.selectedProductType)
         vStackProductType.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductType(_:)), for: .touchUpInside)
         vStackProductType.translatesAutoresizingMaskIntoConstraints = false
         
         vStackProductSubtype = VStackContent(frame: .zero,
                                              titleText: "Product Subtype",
-                                             selectionItems: K.ProductFilterSelection.selectionProductSubtype,
-                                             selectedItem: K.ProductFilterSelection.selectedProductSubtype)
+                                             selectionItems: K.ProductFilter.selectionProductSubtype,
+                                             selectedItem: K.ProductFilter.selectedProductSubtype)
         vStackProductSubtype.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductSubtype(_:)), for: .touchUpInside)
         vStackProductSubtype.translatesAutoresizingMaskIntoConstraints = false
         
