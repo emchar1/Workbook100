@@ -360,7 +360,9 @@ extension WorkbookViewController {
                      selectedLaunchSeason: String,
                      selectedProductCategory: String,
                      selectedProductType: String,
-                     selectedProductSubtype: String) {
+                     selectedProductSubtype: String,
+                     selectedNew: Int,
+                     selectedEssential: Int) {
         
         guard K.items.count > 0 else {
             print("Items still loading. Exiting early.")
@@ -374,13 +376,17 @@ extension WorkbookViewController {
         K.ProductFilter.selectedProductCategory = selectedProductCategory
         K.ProductFilter.selectedProductType = selectedProductType
         K.ProductFilter.selectedProductSubtype = selectedProductSubtype
+        K.ProductFilter.selectedNew = selectedNew
+        K.ProductFilter.selectedEssential = selectedEssential
         
         K.filteredItems = K.items.filter {
             (selectedDivision == K.ProductFilter.wildcard ? true : $0.division == selectedDivision) &&
             (selectedLaunchSeason == K.ProductFilter.wildcard ? true : $0.launchSeason == selectedLaunchSeason) &&
             (selectedProductCategory == K.ProductFilter.wildcard ? true : $0.productCategory == selectedProductCategory) &&
             (selectedProductType == K.ProductFilter.wildcard ? true : $0.productType == selectedProductType) &&
-            (selectedProductSubtype == K.ProductFilter.wildcard ? true : $0.productSubtype == selectedProductSubtype)
+            (selectedProductSubtype == K.ProductFilter.wildcard ? true : $0.productSubtype == selectedProductSubtype) &&
+            (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
+            (selectedEssential == K.ProductFilter.segementedBoth ? true : $0.essential == (selectedEssential == K.ProductFilter.segementedOn))
         }
                 
         //Show a "No results found" label if the filtered list is empty

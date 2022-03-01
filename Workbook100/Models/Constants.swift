@@ -30,6 +30,9 @@ struct K {
     
     struct ProductFilter {
         static let wildcard = "[All]"
+        static let segementedBoth = 0
+        static let segementedOn = 1
+        static let segementedOff = 2
         
         static let selectionCollection: [String] = [wildcard, "SP23", "SP22", "FA22"]
         static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
@@ -46,6 +49,8 @@ struct K {
         static var selectedProductDepartment: String = wildcard
         static var selectedProductType: String = wildcard
         static var selectedProductSubtype: String = wildcard
+        static var selectedNew: Int = segementedBoth
+        static var selectedEssential: Int = segementedBoth
         
         static var isFiltered: Bool {
             return !(selectedCollection == wildcard &&
@@ -54,7 +59,9 @@ struct K {
                      selectedProductCategory == wildcard &&
                      selectedProductDepartment == wildcard &&
                      selectedProductType == wildcard &&
-                     selectedProductSubtype == wildcard)
+                     selectedProductSubtype == wildcard &&
+                     selectedNew == segementedBoth &&
+                     selectedEssential == segementedBoth)
         }
     }
     

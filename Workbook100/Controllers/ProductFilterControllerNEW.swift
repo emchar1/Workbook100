@@ -12,7 +12,9 @@ protocol ProductFilterControllerNEWDelegate {
                      selectedLaunchSeason: String,
                      selectedProductCategory: String,
                      selectedProductType: String,
-                     selectedProductSubtype: String)
+                     selectedProductSubtype: String,
+                     selectedNew: Int,
+                     selectedEssential: Int)
 }
 
 
@@ -25,6 +27,8 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var labelProductCategory: UILabel!
     @IBOutlet weak var labelProductType: UILabel!
     @IBOutlet weak var labelProductSubtype: UILabel!
+    @IBOutlet weak var segmentedNew: UISegmentedControl!
+    @IBOutlet weak var segmentedEssential: UISegmentedControl!
     
     var selectedDivision: String! { didSet {labelDivision.text = selectedDivision}}
     var selectedLaunchSeason: String! { didSet { labelLaunchSeason.text = selectedLaunchSeason}}
@@ -41,6 +45,8 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
              productCategory,
              productType,
              productSubtype,
+             new,
+             essential,
              applyClearButtons
     }
     
@@ -59,6 +65,8 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
         selectedProductCategory = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductCategory
         selectedProductType = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductType
         selectedProductSubtype = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductSubtype
+        segmentedNew.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedNew
+        segmentedEssential.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedEssential
     }
     
     
@@ -69,7 +77,9 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                               selectedLaunchSeason: selectedLaunchSeason,
                               selectedProductCategory: selectedProductCategory,
                               selectedProductType: selectedProductType,
-                              selectedProductSubtype: selectedProductSubtype)
+                              selectedProductSubtype: selectedProductSubtype,
+                              selectedNew: segmentedNew.selectedSegmentIndex,
+                              selectedEssential: segmentedEssential.selectedSegmentIndex)
     }
     
     @IBAction func clearButtonTapped(_ sender: UIButton) {
@@ -134,7 +144,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section < FilterItem.applyClearButtons.rawValue {
+        if indexPath.section < FilterItem.new.rawValue {
             performSegue(withIdentifier: "didSelectFilter", sender: nil)
         }
         

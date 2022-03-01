@@ -200,54 +200,108 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="SdW-v9-D9x">
+                            <tableViewSection headerTitle="New" id="SdW-v9-D9x">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="XIC-Pb-AxB">
-                                        <rect key="frame" x="20" y="502.00000381469727" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="515.66666984558105" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XIC-Pb-AxB" id="ev9-a8-usi">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lWr-fT-32v">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jOD-aJ-LYL">
+                                                    <rect key="frame" x="20" y="6.3333333333333321" width="270" height="31.999999999999996"/>
+                                                    <segments>
+                                                        <segment title="Any"/>
+                                                        <segment title="New"/>
+                                                        <segment title="Not New"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jOD-aJ-LYL" firstAttribute="leading" secondItem="ev9-a8-usi" secondAttribute="leadingMargin" id="04B-gH-sgx"/>
+                                                <constraint firstItem="jOD-aJ-LYL" firstAttribute="centerY" secondItem="ev9-a8-usi" secondAttribute="centerY" id="6Ul-ph-ZXa"/>
+                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="jOD-aJ-LYL" secondAttribute="trailing" constant="40" id="PNJ-sZ-3OB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Essential" id="kc3-Vq-YOi">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="nIz-Ot-lk2">
+                                        <rect key="frame" x="20" y="609.00000381469727" width="350" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nIz-Ot-lk2" id="X8h-b4-HX5">
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PkO-yG-Nkj">
+                                                    <rect key="frame" x="20" y="6.3333333333333321" width="270" height="31.999999999999996"/>
+                                                    <segments>
+                                                        <segment title="Any"/>
+                                                        <segment title="Essential"/>
+                                                        <segment title="Not Essential"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="PkO-yG-Nkj" firstAttribute="centerY" secondItem="X8h-b4-HX5" secondAttribute="centerY" id="97o-yh-Ff0"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="PkO-yG-Nkj" secondAttribute="trailing" constant="40" id="BtV-uh-Pgb"/>
+                                                <constraint firstItem="PkO-yG-Nkj" firstAttribute="leading" secondItem="X8h-b4-HX5" secondAttribute="leadingMargin" id="g4s-Av-buf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="grA-CN-MUE">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="x2d-jJ-Jfe">
+                                        <rect key="frame" x="20" y="688.66667175292969" width="350" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x2d-jJ-Jfe" id="R0N-aT-K43">
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-qI-Y9u">
                                                     <rect key="frame" x="20" y="-8.3333333333333321" width="230" height="60.333333333333329"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNU-7B-L5e">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gtt-tH-A7V">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="60.333333333333336"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ctv-tk-9Ks"/>
-                                                                <constraint firstAttribute="height" constant="60" id="pPn-GY-5pt"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Cgp-mO-mym"/>
+                                                                <constraint firstAttribute="height" constant="60" id="Lty-xw-xJ5"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" title="Apply"/>
                                                             <connections>
-                                                                <action selector="applyButtonTapped:" destination="lrO-AL-zg7" eventType="touchUpInside" id="lOl-x4-zr0"/>
+                                                                <action selector="applyButtonTapped:" destination="lrO-AL-zg7" eventType="touchUpInside" id="Cfv-C0-wQ4"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9F-Iy-a5C" userLabel="Clear Filters">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQV-bO-eva" userLabel="Clear Filters">
                                                             <rect key="frame" x="110" y="0.0" width="120" height="60.333333333333336"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="60" id="7XC-yx-X4V"/>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="D8A-nS-ldg"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="YBU-lO-8wk"/>
+                                                                <constraint firstAttribute="height" constant="60" id="s3v-Dg-RHY"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" title="Clear Filters"/>
                                                             <connections>
-                                                                <action selector="clearButtonTapped:" destination="lrO-AL-zg7" eventType="touchUpInside" id="IHI-B0-vod"/>
+                                                                <action selector="clearButtonTapped:" destination="lrO-AL-zg7" eventType="touchUpInside" id="rVX-bK-eXV"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="lWr-fT-32v" firstAttribute="centerY" secondItem="ev9-a8-usi" secondAttribute="centerY" id="VZg-cq-fdr"/>
-                                                <constraint firstItem="lWr-fT-32v" firstAttribute="leading" secondItem="ev9-a8-usi" secondAttribute="leadingMargin" id="pf0-K4-2RN"/>
+                                                <constraint firstItem="gJd-qI-Y9u" firstAttribute="leading" secondItem="R0N-aT-K43" secondAttribute="leadingMargin" id="2Lv-T5-p4T"/>
+                                                <constraint firstItem="gJd-qI-Y9u" firstAttribute="centerY" secondItem="R0N-aT-K43" secondAttribute="centerY" id="aLR-tc-1EI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -267,6 +321,8 @@
                         <outlet property="labelProductCategory" destination="sex-a1-HPY" id="ztO-4Z-It4"/>
                         <outlet property="labelProductSubtype" destination="i27-ia-PH5" id="yYp-e9-KXN"/>
                         <outlet property="labelProductType" destination="Uki-AH-Q5n" id="0if-eB-ecS"/>
+                        <outlet property="segmentedEssential" destination="PkO-yG-Nkj" id="Op6-xk-yZ5"/>
+                        <outlet property="segmentedNew" destination="jOD-aJ-LYL" id="QYQ-8x-s8q"/>
                         <segue destination="PI5-Hy-7ng" kind="presentation" identifier="didSelectFilter" id="6XB-bB-61l"/>
                     </connections>
                 </tableViewController>
