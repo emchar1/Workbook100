@@ -251,6 +251,15 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 controller.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
             }
         }
+        else if segue.identifier == "showDetails" {
+            let nc = segue.destination as! UINavigationController
+            let controller = nc.topViewController as! WorkbookDetailController
+
+            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+                controller.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+            }
+        }
+
     }
 }
 
@@ -291,7 +300,7 @@ extension WorkbookViewController {
     //Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !multiSelect {
-            performSegue(withIdentifier: "showDetailsNEW", sender: nil)
+            performSegue(withIdentifier: "showDetails", sender: nil)
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }

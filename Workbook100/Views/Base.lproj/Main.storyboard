@@ -1016,8 +1016,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="QZg-rK-3gl">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cB5-05-SA2"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mya-ai-Afc"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mya-ai-Afc">
+                            <connections>
+                                <action selector="donePressed:" destination="2Cb-Xa-ql8" id="IH5-W5-ltP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
