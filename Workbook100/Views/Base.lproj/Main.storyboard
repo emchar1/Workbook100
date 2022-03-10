@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="J0a-zK-Af6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bZc-S1-Ykv">
     <device id="retina6_0" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -31,6 +31,11 @@
                         <rightBarButtonItems>
                             <barButtonItem image="gearshape" catalog="system" id="P9D-VW-Dvi">
                                 <color key="tintColor" systemColor="labelColor"/>
+                            </barButtonItem>
+                            <barButtonItem title="TVC" id="W5W-Ed-ziU">
+                                <connections>
+                                    <segue destination="iHg-K3-sTT" kind="presentation" id="qax-c8-4bt"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem enabled="NO" systemItem="cancel" id="vc7-6a-blf">
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,7 +105,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Launch Season" id="bVC-cf-TGF">
+                            <tableViewSection headerTitle="Seasons Carried" id="bVC-cf-TGF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qmc-fX-dve">
                                         <rect key="frame" x="20" y="142.33333396911621" width="350" height="43.666667938232422"/>
@@ -210,7 +215,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jOD-aJ-LYL">
-                                                    <rect key="frame" x="20" y="6.3333333333333321" width="270" height="31.999999999999996"/>
+                                                    <rect key="frame" x="20" y="6.3333333333333321" width="218" height="31.999999999999996"/>
                                                     <segments>
                                                         <segment title="Any"/>
                                                         <segment title="New"/>
@@ -221,7 +226,7 @@
                                             <constraints>
                                                 <constraint firstItem="jOD-aJ-LYL" firstAttribute="leading" secondItem="ev9-a8-usi" secondAttribute="leadingMargin" id="04B-gH-sgx"/>
                                                 <constraint firstItem="jOD-aJ-LYL" firstAttribute="centerY" secondItem="ev9-a8-usi" secondAttribute="centerY" id="6Ul-ph-ZXa"/>
-                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="jOD-aJ-LYL" secondAttribute="trailing" constant="40" id="PNJ-sZ-3OB"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="jOD-aJ-LYL" secondAttribute="trailing" constant="40" id="PNJ-sZ-3OB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -317,10 +322,10 @@
                     <navigationItem key="navigationItem" id="B6Q-xA-FYe"/>
                     <connections>
                         <outlet property="labelDivision" destination="XGc-nV-8va" id="Jb7-cW-FSv"/>
-                        <outlet property="labelLaunchSeason" destination="PTH-Fk-S6S" id="v4p-wE-k2r"/>
                         <outlet property="labelProductCategory" destination="sex-a1-HPY" id="ztO-4Z-It4"/>
                         <outlet property="labelProductSubtype" destination="i27-ia-PH5" id="yYp-e9-KXN"/>
                         <outlet property="labelProductType" destination="Uki-AH-Q5n" id="0if-eB-ecS"/>
+                        <outlet property="labelSeasonsCarried" destination="PTH-Fk-S6S" id="v4p-wE-k2r"/>
                         <outlet property="segmentedEssential" destination="PkO-yG-Nkj" id="Op6-xk-yZ5"/>
                         <outlet property="segmentedNew" destination="jOD-aJ-LYL" id="QYQ-8x-s8q"/>
                         <segue destination="PI5-Hy-7ng" kind="presentation" identifier="didSelectFilter" id="6XB-bB-61l"/>
@@ -378,7 +383,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YZG-I0-D8d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="ji7-cW-6c5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4271" y="1819"/>
+            <point key="canvasLocation" x="4449" y="1818"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="DRM-TN-gnC">
@@ -394,6 +399,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aga-ht-Elx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1058" y="1043"/>
+        </scene>
+        <!--Workbook TableVC-->
+        <scene sceneID="8Ba-UT-g6P">
+            <objects>
+                <tableViewController id="CXc-Hc-IS8" customClass="WorkbookTableVC" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="0qd-gk-mGz">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="jno-hL-MEu">
+                                <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jno-hL-MEu" id="FVa-AC-ihc">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="LVv-C1-W7p" kind="presentation" identifier="showMe" id="NoB-Ur-E4s"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CXc-Hc-IS8" id="J0m-QN-Ygi"/>
+                            <outlet property="delegate" destination="CXc-Hc-IS8" id="dJL-pA-zRz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="WbE-HE-h8n"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yR9-ar-cbO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="642" y="2014"/>
         </scene>
         <!--Workbook Detail ControllerNEW-->
         <scene sceneID="gnK-Cl-aci">
@@ -1188,7 +1225,28 @@
             </objects>
             <point key="canvasLocation" x="3480" y="1819"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EkZ-ir-64w">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iHg-K3-sTT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1bJ-EU-R3u">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CXc-Hc-IS8" kind="relationship" relationship="rootViewController" id="2eK-Og-XXe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z5N-nu-UBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-229" y="2014"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="NoB-Ur-E4s"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="eye" catalog="system" width="128" height="81"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>

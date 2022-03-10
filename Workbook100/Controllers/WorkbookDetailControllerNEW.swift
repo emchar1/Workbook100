@@ -113,6 +113,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                            productCategory: items[row].productCategory,
                                            productDepartment: items[row].productDepartment,
                                            launchSeason: items[row].launchSeason,
+                                           seasonsCarried: items[row].seasonsCarried,
                                            productType: items[row].productType,
                                            productSubtype: items[row].productSubtype,
                                            youthWomen: items[row].youthWomen,

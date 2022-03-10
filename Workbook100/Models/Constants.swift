@@ -37,6 +37,7 @@ struct K {
         static let selectionCollection: [String] = [wildcard, "SP23", "SP22", "FA22"]
         static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
         static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
+        static let selectionSeasonsCarried: [String] = [wildcard, "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22", "SP23"]
         static let selectionProductCategory: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Sunglass Parts and Lenses", "Sunglasses"]
         static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
         static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
@@ -45,6 +46,7 @@ struct K {
         static var selectedCollection: String = wildcard
         static var selectedDivision: String = wildcard
         static var selectedLaunchSeason: String = wildcard
+        static var selectedSeasonsCarried: String = wildcard
         static var selectedProductCategory: String = wildcard
         static var selectedProductDepartment: String = wildcard
         static var selectedProductType: String = wildcard
@@ -56,6 +58,7 @@ struct K {
             return !(selectedCollection == wildcard &&
                      selectedDivision == wildcard &&
                      selectedLaunchSeason == wildcard &&
+                     selectedSeasonsCarried == wildcard &&
                      selectedProductCategory == wildcard &&
                      selectedProductDepartment == wildcard &&
                      selectedProductType == wildcard &&
@@ -73,6 +76,7 @@ struct K {
         static let productCategory = "ProductCategory"
         static let productDepartment = "ProductDepartment"
         static let launchSeason = "LaunchSeason"
+        static let seasonsCarried = "SeasonsCarried"
         static let productType = "ProductType"
         static let productSubtype = "ProductSubtype"
         static let youthWomen = "YouthWomen"

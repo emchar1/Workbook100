@@ -67,7 +67,7 @@ class CollectionCell: UICollectionViewCell {
 
         //Product Title
         labelTitle.text = model.productNameDescription
-        labelSubtitle.text = model.productNameDescriptionSecondary
+        labelSubtitle.text = model.productNameDescriptionSecondary + " - " + model.colorway
         
         //OLD WAY Uses images saved in Firebase Storage
 //        if let image = model.image {

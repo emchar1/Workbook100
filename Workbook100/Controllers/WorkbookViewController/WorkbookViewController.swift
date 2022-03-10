@@ -129,6 +129,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                productCategory: obj[K.FIR.productCategory] as! String,
                                                productDepartment: obj[K.FIR.productDepartment] as! String,
                                                launchSeason: obj[K.FIR.launchSeason] as! String,
+                                               seasonsCarried: obj[K.FIR.seasonsCarried] as! String,
                                                productType: obj[K.FIR.productType] as! String,
                                                productSubtype: obj[K.FIR.productSubtype] as! String,
                                                youthWomen: obj[K.FIR.youthWomen] as! String,
@@ -261,11 +262,11 @@ extension WorkbookViewController {
     //Data Source
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch (K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory) {
-        case "Gloves":
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GloveCell.reuseId, for: indexPath) as! GloveCell
-            cell.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
-            cell.setViews()
-            return cell
+//        case "Gloves":
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GloveCell.reuseId, for: indexPath) as! GloveCell
+//            cell.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+//            cell.setViews()
+//            return cell
         case K.ProductFilter.wildcard:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
             return cell
@@ -298,21 +299,16 @@ extension WorkbookViewController {
 
     //Delegate Flow Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let multiplier: CGFloat = 1
         
-        // FIXME: - adaptable cell size doesn't work!!
-//        print(K.CollectionCell.adjustedWidth(in: collectionView))
         let productCategory = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory
         var multiplier: CGFloat = 1
         
-        if productCategory == "Gloves" {
-            multiplier = 1.5
-        }
+//        if productCategory == "Gloves" {
+//            multiplier = 1.5
+//        }
         
         return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView) * multiplier,
                       height: K.CollectionCell.adjustedHeight(in: collectionView))
-        //but this one does...
-//        return CGSize(width: K.CollectionCell.width * multiplier, height: K.CollectionCell.height * multiplier)
     }
 }
 
@@ -320,44 +316,8 @@ extension WorkbookViewController {
 // MARK: - Product Filter Controller NEW Delegate
 
 extension WorkbookViewController {
-//    func donePressed(selectedCollection: String, selectedProductCategory: String, selectedDivision: String, selectedProductDepartment: String, selectedLaunchSeason: String, selectedProductType: String, selectedProductSubtype: String) {
-//        guard K.items.count > 0 else {
-//            print("Items still loading. Exiting early")
-//            delegate?.collapsePanel()
-//            return
-//        }
-//
-//        K.ProductFilterSelection.selectedCollection = selectedCollection
-//        K.ProductFilterSelection.selectedProductCategory = selectedProductCategory
-//        K.ProductFilterSelection.selectedDivision = selectedDivision
-//        K.ProductFilterSelection.selectedProductDepartment = selectedProductDepartment
-//        K.ProductFilterSelection.selectedLaunchSeason = selectedLaunchSeason
-//        K.ProductFilterSelection.selectedProductType = selectedProductType
-//        K.ProductFilterSelection.selectedProductSubtype = selectedProductSubtype
-//
-//        K.filteredItems = K.items.filter {
-//            (selectedCollection == K.ProductFilterSelection.wildcard ? true : $0.collection == selectedCollection) &&
-//            (selectedProductCategory == K.ProductFilterSelection.wildcard ? true : $0.productCategory == selectedProductCategory) &&
-//            (selectedDivision == K.ProductFilterSelection.wildcard ? true : $0.division == selectedDivision) &&
-//            (selectedProductDepartment == K.ProductFilterSelection.wildcard ? true : $0.productDepartment == selectedProductDepartment) &&
-//            (selectedLaunchSeason == K.ProductFilterSelection.wildcard ? true : $0.launchSeason == selectedLaunchSeason) &&
-//            (selectedProductType == K.ProductFilterSelection.wildcard ? true : $0.productType == selectedProductType) &&
-//            (selectedProductSubtype == K.ProductFilterSelection.wildcard ? true : $0.productSubtype == selectedProductSubtype)
-//        }
-//
-//        if K.ProductFilterSelection.isFiltered {
-//            noResultsLabel.isHidden = !K.filteredItems.isEmpty
-//        }
-//        else {
-//            noResultsLabel.isHidden = true
-//        }
-//
-//        collectionView.reloadData()
-//        delegate?.collapsePanel()
-//    }
-    
     func applyTapped(selectedDivision: String,
-                     selectedLaunchSeason: String,
+                     selectedSeasonsCarried: String,
                      selectedProductCategory: String,
                      selectedProductType: String,
                      selectedProductSubtype: String,
@@ -372,7 +332,7 @@ extension WorkbookViewController {
         
         //Set the global constant variables, i.e. make the changes "permanent."
         K.ProductFilter.selectedDivision = selectedDivision
-        K.ProductFilter.selectedLaunchSeason = selectedLaunchSeason
+        K.ProductFilter.selectedSeasonsCarried = selectedSeasonsCarried
         K.ProductFilter.selectedProductCategory = selectedProductCategory
         K.ProductFilter.selectedProductType = selectedProductType
         K.ProductFilter.selectedProductSubtype = selectedProductSubtype
@@ -381,7 +341,7 @@ extension WorkbookViewController {
         
         K.filteredItems = K.items.filter {
             (selectedDivision == K.ProductFilter.wildcard ? true : $0.division == selectedDivision) &&
-            (selectedLaunchSeason == K.ProductFilter.wildcard ? true : $0.launchSeason == selectedLaunchSeason) &&
+            (selectedSeasonsCarried == K.ProductFilter.wildcard ? true : $0.seasonsCarried.contains(selectedSeasonsCarried)) &&
             (selectedProductCategory == K.ProductFilter.wildcard ? true : $0.productCategory == selectedProductCategory) &&
             (selectedProductType == K.ProductFilter.wildcard ? true : $0.productType == selectedProductType) &&
             (selectedProductSubtype == K.ProductFilter.wildcard ? true : $0.productSubtype == selectedProductSubtype) &&

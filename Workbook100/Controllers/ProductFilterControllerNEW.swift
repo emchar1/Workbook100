@@ -9,7 +9,7 @@ import UIKit
 
 protocol ProductFilterControllerNEWDelegate {
     func applyTapped(selectedDivision: String,
-                     selectedLaunchSeason: String,
+                     selectedSeasonsCarried: String,
                      selectedProductCategory: String,
                      selectedProductType: String,
                      selectedProductSubtype: String,
@@ -23,7 +23,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     // MARK: - Properties
     
     @IBOutlet weak var labelDivision: UILabel!
-    @IBOutlet weak var labelLaunchSeason: UILabel!
+    @IBOutlet weak var labelSeasonsCarried: UILabel!
     @IBOutlet weak var labelProductCategory: UILabel!
     @IBOutlet weak var labelProductType: UILabel!
     @IBOutlet weak var labelProductSubtype: UILabel!
@@ -31,7 +31,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var segmentedEssential: UISegmentedControl!
     
     var selectedDivision: String! { didSet {labelDivision.text = selectedDivision}}
-    var selectedLaunchSeason: String! { didSet { labelLaunchSeason.text = selectedLaunchSeason}}
+    var selectedSeasonsCarried: String! { didSet { labelSeasonsCarried.text = selectedSeasonsCarried}}
     var selectedProductCategory: String! { didSet { labelProductCategory.text = selectedProductCategory}}
     var selectedProductType: String! { didSet { labelProductType.text = selectedProductType}}
     var selectedProductSubtype: String! { didSet { labelProductSubtype.text = selectedProductSubtype}}
@@ -41,7 +41,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     
     enum FilterItem: Int {
         case division = 0,
-             launchSeason,
+             seasonsCarried,
              productCategory,
              productType,
              productSubtype,
@@ -61,7 +61,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     
     private func resetFilters(clear: Bool = false) {
         selectedDivision = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedDivision
-        selectedLaunchSeason = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedLaunchSeason
+        selectedSeasonsCarried = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedSeasonsCarried
         selectedProductCategory = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductCategory
         selectedProductType = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductType
         selectedProductSubtype = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductSubtype
@@ -74,7 +74,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
         delegate?.applyTapped(selectedDivision: selectedDivision,
-                              selectedLaunchSeason: selectedLaunchSeason,
+                              selectedSeasonsCarried: selectedSeasonsCarried,
                               selectedProductCategory: selectedProductCategory,
                               selectedProductType: selectedProductType,
                               selectedProductSubtype: selectedProductSubtype,
@@ -109,10 +109,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                 controller.selections = K.ProductFilter.selectionDivision
                 controller.selectedItem = selectedDivision
                 controller.navigationItem.title! += "Division"
-            case FilterItem.launchSeason.rawValue:
-                controller.selections = K.ProductFilter.selectionLaunchSeason
-                controller.selectedItem = selectedLaunchSeason
-                controller.navigationItem.title! += "Launch Season"
+            case FilterItem.seasonsCarried.rawValue:
+                controller.selections = K.ProductFilter.selectionSeasonsCarried
+                controller.selectedItem = selectedSeasonsCarried
+                controller.navigationItem.title! += "Seasons Carried"
             case FilterItem.productCategory.rawValue:
                 controller.selections = K.ProductFilter.selectionProductCategory
                 controller.selectedItem = selectedProductCategory
@@ -161,7 +161,7 @@ extension ProductFilterControllerNEW {
     func didSelectItem(selectedItem: String) {
         switch selectedSection {
         case FilterItem.division.rawValue: selectedDivision = selectedItem
-        case FilterItem.launchSeason.rawValue: selectedLaunchSeason = selectedItem
+        case FilterItem.seasonsCarried.rawValue: selectedSeasonsCarried = selectedItem
         case FilterItem.productCategory.rawValue: selectedProductCategory = selectedItem
         case FilterItem.productType.rawValue: selectedProductType = selectedItem
         case FilterItem.productSubtype.rawValue: selectedProductSubtype = selectedItem
