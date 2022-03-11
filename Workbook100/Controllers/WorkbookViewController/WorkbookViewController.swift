@@ -325,13 +325,16 @@ extension WorkbookViewController {
 // MARK: - Product Filter Controller NEW Delegate
 
 extension WorkbookViewController {
-    func applyTapped(selectedDivision: String,
+    func applyTapped(selectedNew: Int,
+                     selectedEssential: Int,
                      selectedSeasonsCarried: String,
                      selectedProductCategory: String,
                      selectedProductType: String,
                      selectedProductSubtype: String,
-                     selectedNew: Int,
-                     selectedEssential: Int) {
+                     selectedDivision: String,
+                     selectedProductClass: String,
+                     selectedDescription: String,
+                     selectedProductDetails: String) {
         
         guard K.items.count > 0 else {
             print("Items still loading. Exiting early.")
@@ -340,22 +343,28 @@ extension WorkbookViewController {
         }
         
         //Set the global constant variables, i.e. make the changes "permanent."
-        K.ProductFilter.selectedDivision = selectedDivision
+        K.ProductFilter.selectedNew = selectedNew
+        K.ProductFilter.selectedEssential = selectedEssential
         K.ProductFilter.selectedSeasonsCarried = selectedSeasonsCarried
         K.ProductFilter.selectedProductCategory = selectedProductCategory
         K.ProductFilter.selectedProductType = selectedProductType
         K.ProductFilter.selectedProductSubtype = selectedProductSubtype
-        K.ProductFilter.selectedNew = selectedNew
-        K.ProductFilter.selectedEssential = selectedEssential
+        K.ProductFilter.selectedDivision = selectedDivision
+        K.ProductFilter.selectedProductClass = selectedProductClass
+        K.ProductFilter.selectedDescription = selectedDescription
+        K.ProductFilter.selectedProductDetails = selectedProductDetails
         
         K.filteredItems = K.items.filter {
-            (selectedDivision == K.ProductFilter.wildcard ? true : $0.division == selectedDivision) &&
+            (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
+            (selectedEssential == K.ProductFilter.segementedBoth ? true : $0.essential == (selectedEssential == K.ProductFilter.segementedOn)) &&
             (selectedSeasonsCarried == K.ProductFilter.wildcard ? true : $0.seasonsCarried.contains(selectedSeasonsCarried)) &&
             (selectedProductCategory == K.ProductFilter.wildcard ? true : $0.productCategory == selectedProductCategory) &&
             (selectedProductType == K.ProductFilter.wildcard ? true : $0.productType == selectedProductType) &&
             (selectedProductSubtype == K.ProductFilter.wildcard ? true : $0.productSubtype == selectedProductSubtype) &&
-            (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
-            (selectedEssential == K.ProductFilter.segementedBoth ? true : $0.essential == (selectedEssential == K.ProductFilter.segementedOn))
+            (selectedDivision == K.ProductFilter.wildcard ? true : $0.division == selectedDivision) &&
+            (selectedProductClass == K.ProductFilter.wildcard ? true : $0.youthWomen == selectedProductClass) &&
+            (selectedDescription == K.ProductFilter.wildcard ? true : $0.description == selectedDescription) /* doesn't exist yet!! &&
+            (selectedProductDetails == K.ProductFilter.wildcard ? true : $0.productDetails == selectedProductDetails)*/
         }
                 
         //Show a "No results found" label if the filtered list is empty

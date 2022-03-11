@@ -42,6 +42,10 @@ struct K {
         static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
         static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
         static let selectionProductSubtype: [String] = [wildcard, "Active Performance", "Athletic", "Base Layers", "Camper", "Casual", "Clear", "Dual", "Dual Pane", "Dual Pane Sonic Bumps", "Dual Pane Vented", "Elbow", "Flexfit", "Full Face", "HiPER", "Injected", "Jersey", "Knee", "Laminated", "Liners", "Mirror", "Misc.", "Mud", "Nose Bridges", "Nose Pads", "Open Face", "Pants", "Performance", "Perimeter Seal", "Photochromic", "Premium", "Regular", "Replacement Lenses", "Screws", "Shield", "Short Fingers", "Shorts", "Sleeves", "Snapback", "Sonic Bumps", "Spare Parts", "Sport Performance", "Standard", "Tech", "Trucker", "Unstructured", "Upper", "Varied", "Visors", "Water Resistant", "Waterproof", "Windproof", "Wool"]
+        static let selectionProductClass: [String] = [wildcard, "Mens", "Womens", "Youth", "Miscellaneous", "Unisex", ""]
+        static let selectionDescription: [String] = [wildcard, "Uno", "Dos", "Tres"]
+        static let selectionProductDetails: [String] = [wildcard, "Un", "Deux", "Trois"]
+
 
         static var selectedCollection: String = wildcard
         static var selectedDivision: String = wildcard
@@ -53,6 +57,9 @@ struct K {
         static var selectedProductSubtype: String = wildcard
         static var selectedNew: Int = segementedBoth
         static var selectedEssential: Int = segementedBoth
+        static var selectedProductClass: String = wildcard
+        static var selectedDescription: String = wildcard
+        static var selectedProductDetails: String = wildcard
         
         static var isFiltered: Bool {
             return !(selectedCollection == wildcard &&
@@ -64,7 +71,10 @@ struct K {
                      selectedProductType == wildcard &&
                      selectedProductSubtype == wildcard &&
                      selectedNew == segementedBoth &&
-                     selectedEssential == segementedBoth)
+                     selectedEssential == segementedBoth &&
+                     selectedProductClass == wildcard &&
+                     selectedDescription == wildcard &&
+                     selectedProductDetails == wildcard)
         }
     }
     
