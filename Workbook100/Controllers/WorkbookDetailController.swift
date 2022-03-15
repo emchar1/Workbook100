@@ -36,7 +36,7 @@ class WorkbookDetailController: UIViewController, UITableViewDelegate, UITableVi
         modelArray.append("Collection: \(model.collection)")
         modelArray.append("Product Name Description: \(model.productNameDescription)")
         modelArray.append("Product Name Description Secondary: \(model.productNameDescriptionSecondary)")
-        modelArray.append("Product Cateogory: \(model.productCategory)")
+        modelArray.append("Product Category: \(model.productCategory)")
         modelArray.append("Product Department: \(model.productDepartment)")
         modelArray.append("Launch Season: \(model.launchSeason)")
         modelArray.append("Seasons Carried: \(model.seasonsCarried)")

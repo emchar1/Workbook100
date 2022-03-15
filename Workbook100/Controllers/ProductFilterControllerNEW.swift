@@ -8,9 +8,10 @@
 import UIKit
 
 protocol ProductFilterControllerNEWDelegate {
-    func applyTapped(selectedNew: Int,
+    func applyTapped(selectedCollection: String,
+                     selectedNew: Int,
                      selectedEssential: Int,
-                     selectedSeasonsCarried: String,
+                     selectedLaunchSeason: String,
                      selectedProductCategory: String,
                      selectedProductType: String,
                      selectedProductSubtype: String,
@@ -25,9 +26,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     
     // MARK: - Properties
     
+    @IBOutlet weak var labelCollection: UILabel!
     @IBOutlet weak var segmentedNew: UISegmentedControl!
     @IBOutlet weak var segmentedEssential: UISegmentedControl!
-    @IBOutlet weak var labelSeasonsCarried: UILabel!
+    @IBOutlet weak var labelLaunchSeason: UILabel!
     @IBOutlet weak var labelProductCategory: UILabel!
     @IBOutlet weak var labelProductType: UILabel!
     @IBOutlet weak var labelProductSubtype: UILabel!
@@ -36,7 +38,8 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var labelProductDetails: UILabel!
     
-    var selectedSeasonsCarried: String! { didSet { labelSeasonsCarried.text = selectedSeasonsCarried}}
+    var selectedCollection: String! { didSet { labelCollection.text = selectedCollection}}
+    var selectedLaunchSeason: String! { didSet { labelLaunchSeason.text = selectedLaunchSeason}}
     var selectedProductCategory: String! { didSet { labelProductCategory.text = selectedProductCategory}}
     var selectedProductType: String! { didSet { labelProductType.text = selectedProductType}}
     var selectedProductSubtype: String! { didSet { labelProductSubtype.text = selectedProductSubtype}}
@@ -49,9 +52,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     var delegate: ProductFilterControllerNEWDelegate?
     
     enum FilterItem: Int {
-        case new = 0,
+        case collection = 0,
+             new,
              essential,
-             seasonsCarried,
+             launchSeason,
              productCategory,
              productType,
              productSubtype,
@@ -72,9 +76,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     }
     
     private func resetFilters(clear: Bool = false) {
+        selectedCollection = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedCollection
         segmentedNew.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedNew
         segmentedEssential.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedEssential
-        selectedSeasonsCarried = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedSeasonsCarried
+        selectedLaunchSeason = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedLaunchSeason
         selectedProductCategory = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductCategory
         selectedProductType = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductType
         selectedProductSubtype = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductSubtype
@@ -88,9 +93,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     // MARK: - Navigation
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
-        delegate?.applyTapped(selectedNew: segmentedNew.selectedSegmentIndex,
+        delegate?.applyTapped(selectedCollection: selectedCollection,
+                              selectedNew: segmentedNew.selectedSegmentIndex,
                               selectedEssential: segmentedEssential.selectedSegmentIndex,
-                              selectedSeasonsCarried: selectedSeasonsCarried,
+                              selectedLaunchSeason: selectedLaunchSeason,
                               selectedProductCategory: selectedProductCategory,
                               selectedProductType: selectedProductType,
                               selectedProductSubtype: selectedProductSubtype,
@@ -119,43 +125,68 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
             let nc = segue.destination as! UINavigationController
             let controller = nc.topViewController as! ProductSubFilterController
             
-            controller.navigationItem.title = "Select "
+            controller.navigationItem.title = "Select"
             controller.delegate = self
             selectedSection = indexPath.section
             
             switch selectedSection {
-            case FilterItem.seasonsCarried.rawValue:
-                controller.selections = K.ProductFilter.selectionSeasonsCarried
-                controller.selectedItem = selectedSeasonsCarried
-                controller.navigationItem.title! += "Seasons Carried"
+            case FilterItem.collection.rawValue:
+                controller.selections = K.ProductFilter.selectionCollection
+                controller.selectedItem = selectedCollection
+                controller.navigationItem.title! += " Collection"
+            case FilterItem.launchSeason.rawValue:
+                controller.selections = K.ProductFilter.selectionLaunchSeason
+                controller.selectedItem = selectedLaunchSeason
+                controller.navigationItem.title! += " Launch Season"
             case FilterItem.productCategory.rawValue:
                 controller.selections = K.ProductFilter.selectionProductCategory
                 controller.selectedItem = selectedProductCategory
-                controller.navigationItem.title! += "Product Category"
+                controller.navigationItem.title! += " Product Category"
             case FilterItem.productType.rawValue:
-                controller.selections = K.ProductFilter.selectionProductType
+                if let selectedProductCategory = K.ProductFilter.categories.search(selectedProductCategory) {
+                    controller.selections = [K.ProductFilter.wildcard] + selectedProductCategory.getChildren()
+                }
+                else {
+                    controller.selections = K.ProductFilter.selectionProductType
+                }
+                
                 controller.selectedItem = selectedProductType
-                controller.navigationItem.title! += "Product Type"
+                controller.navigationItem.title! += " Product Type"
             case FilterItem.productSubtype.rawValue:
-                controller.selections = K.ProductFilter.selectionProductSubtype
+                if let selectedProductCategory = K.ProductFilter.categories.search(selectedProductCategory),
+                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == selectedProductType }) {
+                    controller.selections = [K.ProductFilter.wildcard] + selectedProductType.getChildren()
+                }
+                else {
+                    controller.selections = K.ProductFilter.selectionProductSubtype
+                }
+                
                 controller.selectedItem = selectedProductSubtype
-                controller.navigationItem.title! += "Product Subtype"
+                controller.navigationItem.title! += " Product Subtype"
             case FilterItem.division.rawValue:
                 controller.selections = K.ProductFilter.selectionDivision
                 controller.selectedItem = selectedDivision
-                controller.navigationItem.title! += "Division"
+                controller.navigationItem.title! += " Division"
             case FilterItem.productClass.rawValue:
-                controller.selections = K.ProductFilter.selectionProductClass
+                if let selectedProductCategory = K.ProductFilter.categories.search(selectedProductCategory),
+                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == selectedProductType }),
+                   let selectedProductSubtype = selectedProductType.children.first(where: { $0.value == selectedProductSubtype }) {
+                    controller.selections = [K.ProductFilter.wildcard] + selectedProductSubtype.getChildren()
+                }
+                else {
+                    controller.selections = K.ProductFilter.selectionProductClass
+                }
+                
                 controller.selectedItem = selectedProductClass
-                controller.navigationItem.title! += "Product Class"
+                controller.navigationItem.title! += " Product Class"
             case FilterItem.description.rawValue:
                 controller.selections = K.ProductFilter.selectionDescription
                 controller.selectedItem = selectedDescription
-                controller.navigationItem.title! += "Description"
+                controller.navigationItem.title! += " Description"
             case FilterItem.productDetails.rawValue:
                 controller.selections = K.ProductFilter.selectionProductDetails
                 controller.selectedItem = selectedProductDetails
-                controller.navigationItem.title! += "Product Details"
+                controller.navigationItem.title! += " Product Details"
             default:
                 controller.selectedItem = "Wrong selection!"
                 print("Wrong selection!")
@@ -193,7 +224,8 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
 extension ProductFilterControllerNEW {
     func didSelectItem(selectedItem: String) {
         switch selectedSection {
-        case FilterItem.seasonsCarried.rawValue: selectedSeasonsCarried = selectedItem
+        case FilterItem.collection.rawValue: selectedCollection = selectedItem
+        case FilterItem.launchSeason.rawValue: selectedLaunchSeason = selectedItem
         case FilterItem.productCategory.rawValue: selectedProductCategory = selectedItem
         case FilterItem.productType.rawValue: selectedProductType = selectedItem
         case FilterItem.productSubtype.rawValue: selectedProductSubtype = selectedItem

@@ -23,6 +23,7 @@
 		EA5CE2DA27C743880071F015 /* HStackSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5CE2D927C743880071F015 /* HStackSelection.swift */; };
 		EA5CE2DC27C743C40071F015 /* VStackContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5CE2DB27C743C40071F015 /* VStackContent.swift */; };
 		EA5CE2DF27C8E1420071F015 /* ProductFilterControllerNEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5CE2DE27C8E1420071F015 /* ProductFilterControllerNEW.swift */; };
+		EA8914E027DC038300C8D8D3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8914DF27DC038300C8D8D3 /* Category.swift */; };
 		EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91E071279366DC00DE630E /* ContainerViewController.swift */; };
 		EA91E07427936A6200DE630E /* ProductFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91E07327936A6200DE630E /* ProductFilterController.swift */; };
 		EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF742769573F00943912 /* AppDelegate.swift */; };
@@ -59,6 +60,7 @@
 		EA5CE2D927C743880071F015 /* HStackSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HStackSelection.swift; sourceTree = "<group>"; };
 		EA5CE2DB27C743C40071F015 /* VStackContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStackContent.swift; sourceTree = "<group>"; };
 		EA5CE2DE27C8E1420071F015 /* ProductFilterControllerNEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFilterControllerNEW.swift; sourceTree = "<group>"; };
+		EA8914DF27DC038300C8D8D3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EA91E071279366DC00DE630E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		EA91E07327936A6200DE630E /* ProductFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFilterController.swift; sourceTree = "<group>"; };
 		EAA0CF712769573F00943912 /* Workbook100.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workbook100.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +200,7 @@
 				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
 				EA22D4E127759DA4006C12CF /* CollectionModel.swift */,
 				EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */,
+				EA8914DF27DC038300C8D8D3 /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				EA0AB09027CDB621000D7D37 /* Extensions.swift in Sources */,
 				EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */,
 				EA22D4E8277A5FD7006C12CF /* WorkbookDetailController.swift in Sources */,
+				EA8914E027DC038300C8D8D3 /* Category.swift in Sources */,
 				EA0AB09427CE9D3F000D7D37 /* WorkbookTableVC.swift in Sources */,
 				EA22D4E027754129006C12CF /* Constants.swift in Sources */,
 				EA91E07427936A6200DE630E /* ProductFilterController.swift in Sources */,
@@ -515,7 +519,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -530,7 +534,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -549,7 +553,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -564,7 +568,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";

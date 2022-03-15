@@ -325,9 +325,10 @@ extension WorkbookViewController {
 // MARK: - Product Filter Controller NEW Delegate
 
 extension WorkbookViewController {
-    func applyTapped(selectedNew: Int,
+    func applyTapped(selectedCollection: String,
+                     selectedNew: Int,
                      selectedEssential: Int,
-                     selectedSeasonsCarried: String,
+                     selectedLaunchSeason: String,
                      selectedProductCategory: String,
                      selectedProductType: String,
                      selectedProductSubtype: String,
@@ -343,9 +344,10 @@ extension WorkbookViewController {
         }
         
         //Set the global constant variables, i.e. make the changes "permanent."
+        K.ProductFilter.selectedCollection = selectedCollection
         K.ProductFilter.selectedNew = selectedNew
         K.ProductFilter.selectedEssential = selectedEssential
-        K.ProductFilter.selectedSeasonsCarried = selectedSeasonsCarried
+        K.ProductFilter.selectedLaunchSeason = selectedLaunchSeason
         K.ProductFilter.selectedProductCategory = selectedProductCategory
         K.ProductFilter.selectedProductType = selectedProductType
         K.ProductFilter.selectedProductSubtype = selectedProductSubtype
@@ -353,11 +355,12 @@ extension WorkbookViewController {
         K.ProductFilter.selectedProductClass = selectedProductClass
         K.ProductFilter.selectedDescription = selectedDescription
         K.ProductFilter.selectedProductDetails = selectedProductDetails
-        
+
         K.filteredItems = K.items.filter {
+            (selectedCollection == K.ProductFilter.wildcard ? true : $0.collection == selectedCollection) &&
             (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
             (selectedEssential == K.ProductFilter.segementedBoth ? true : $0.essential == (selectedEssential == K.ProductFilter.segementedOn)) &&
-            (selectedSeasonsCarried == K.ProductFilter.wildcard ? true : $0.seasonsCarried.contains(selectedSeasonsCarried)) &&
+            (selectedLaunchSeason == K.ProductFilter.wildcard ? true : $0.launchSeason.contains(selectedLaunchSeason)) &&
             (selectedProductCategory == K.ProductFilter.wildcard ? true : $0.productCategory == selectedProductCategory) &&
             (selectedProductType == K.ProductFilter.wildcard ? true : $0.productType == selectedProductType) &&
             (selectedProductSubtype == K.ProductFilter.wildcard ? true : $0.productSubtype == selectedProductSubtype) &&
