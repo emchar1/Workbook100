@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D0E4BED5DF7BA88A082979D /* Pods_Workbook100.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED0637F73B2DB24933760E3 /* Pods_Workbook100.framework */; };
+		9DCE8D59CCCD8932A2F34098 /* Pods_Workbook100.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 033156AFB36211A1A41C5673 /* Pods_Workbook100.framework */; };
 		EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */; };
 		EA0AB09027CDB621000D7D37 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB08F27CDB620000D7D37 /* Extensions.swift */; };
 		EA0AB09227CDB64A000D7D37 /* ActivitySpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */; };
@@ -42,9 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4ED0637F73B2DB24933760E3 /* Pods_Workbook100.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workbook100.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		70E4B2B00B3C8E30E41BA149 /* Pods-Workbook100.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.debug.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.debug.xcconfig"; sourceTree = "<group>"; };
-		C46D4E45F91E13A1CD215AB2 /* Pods-Workbook100.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.release.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.release.xcconfig"; sourceTree = "<group>"; };
+		033156AFB36211A1A41C5673 /* Pods_Workbook100.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workbook100.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C975EEDB9AEB83F8D8FCCF4 /* Pods-Workbook100.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.debug.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.debug.xcconfig"; sourceTree = "<group>"; };
 		EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSubFilterController.swift; sourceTree = "<group>"; };
 		EA0AB08F27CDB620000D7D37 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySpinner.swift; sourceTree = "<group>"; };
@@ -79,6 +78,7 @@
 		EAEC851E27B35FE900684ECF /* Workbook100.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Workbook100.entitlements; sourceTree = "<group>"; };
 		EAF2BA0727A2306500CD4856 /* CSVMake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMake.swift; sourceTree = "<group>"; };
 		EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExport.swift; sourceTree = "<group>"; };
+		FCE1DC817DBC8C4D9B273770 /* Pods-Workbook100.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.release.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D0E4BED5DF7BA88A082979D /* Pods_Workbook100.framework in Frameworks */,
+				9DCE8D59CCCD8932A2F34098 /* Pods_Workbook100.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,16 +96,16 @@
 		12ECE0B3AF1D1E97E916B4F8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				70E4B2B00B3C8E30E41BA149 /* Pods-Workbook100.debug.xcconfig */,
-				C46D4E45F91E13A1CD215AB2 /* Pods-Workbook100.release.xcconfig */,
+				4C975EEDB9AEB83F8D8FCCF4 /* Pods-Workbook100.debug.xcconfig */,
+				FCE1DC817DBC8C4D9B273770 /* Pods-Workbook100.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		C45901C3EA976BA3CCF32FC2 /* Frameworks */ = {
+		896D76856156F9AFAE02B988 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4ED0637F73B2DB24933760E3 /* Pods_Workbook100.framework */,
+				033156AFB36211A1A41C5673 /* Pods_Workbook100.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -161,7 +161,7 @@
 				EAA0CF732769573F00943912 /* Workbook100 */,
 				EAA0CF722769573F00943912 /* Products */,
 				12ECE0B3AF1D1E97E916B4F8 /* Pods */,
-				C45901C3EA976BA3CCF32FC2 /* Frameworks */,
+				896D76856156F9AFAE02B988 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -231,11 +231,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAA0CF852769574100943912 /* Build configuration list for PBXNativeTarget "Workbook100" */;
 			buildPhases = (
-				11759D43DAEDD1D2AAA968AA /* [CP] Check Pods Manifest.lock */,
+				863586E022CF2F7FE5EA68FE /* [CP] Check Pods Manifest.lock */,
 				EAA0CF6D2769573F00943912 /* Sources */,
 				EAA0CF6E2769573F00943912 /* Frameworks */,
 				EAA0CF6F2769573F00943912 /* Resources */,
-				1B4ECE3DD5AA9F6211E9BB0A /* [CP] Embed Pods Frameworks */,
+				FF7856BE9CA7C4E5A5D76BF3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -294,7 +294,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11759D43DAEDD1D2AAA968AA /* [CP] Check Pods Manifest.lock */ = {
+		863586E022CF2F7FE5EA68FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -316,7 +316,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1B4ECE3DD5AA9F6211E9BB0A /* [CP] Embed Pods Frameworks */ = {
+		FF7856BE9CA7C4E5A5D76BF3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -512,14 +512,14 @@
 		};
 		EAA0CF862769574100943912 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70E4B2B00B3C8E30E41BA149 /* Pods-Workbook100.debug.xcconfig */;
+			baseConfigurationReference = 4C975EEDB9AEB83F8D8FCCF4 /* Pods-Workbook100.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -534,10 +534,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -546,14 +547,14 @@
 		};
 		EAA0CF872769574100943912 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C46D4E45F91E13A1CD215AB2 /* Pods-Workbook100.release.xcconfig */;
+			baseConfigurationReference = FCE1DC817DBC8C4D9B273770 /* Pods-Workbook100.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -568,10 +569,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

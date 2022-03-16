@@ -11,6 +11,6 @@ target 'Workbook100' do
   pod 'Firebase/Firestore'  #Firestore
   pod 'Firebase/Database'   #Realtime Database
   pod 'FirebaseUI/Storage'  #Cloud Storage
-  pod 'Firebase/Analytics'  #Analytics
+#  pod 'Firebase/Analytics'  #Analytics
 
 end
