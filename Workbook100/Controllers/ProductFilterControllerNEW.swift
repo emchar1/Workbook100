@@ -55,15 +55,15 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var labelProductDetails: UILabel!
     
-    var selectedCollection: String! { didSet { labelCollection.text = selectedCollection}}
-    var selectedLaunchSeason: String! { didSet { labelLaunchSeason.text = selectedLaunchSeason}}
-    var selectedProductCategory: String! { didSet { labelProductCategory.text = selectedProductCategory}}
-    var selectedProductType: String! { didSet { labelProductType.text = selectedProductType}}
-    var selectedProductSubtype: String! { didSet { labelProductSubtype.text = selectedProductSubtype}}
-    var selectedDivision: String! { didSet {labelDivision.text = selectedDivision}}
-    var selectedProductClass: String! { didSet { labelProductClass.text = selectedProductClass}}
-    var selectedDescription: String! { didSet { labelDescription.text = selectedDescription}}
-    var selectedProductDetails: String! { didSet { labelProductDetails.text = selectedProductDetails}}
+    var selectedCollection: String! { didSet { labelCollection.text = selectedCollection }}
+    var selectedLaunchSeason: String! { didSet { labelLaunchSeason.text = selectedLaunchSeason }}
+    var selectedProductCategory: String! { didSet { labelProductCategory.text = selectedProductCategory }}
+    var selectedProductType: String! { didSet { labelProductType.text = selectedProductType }}
+    var selectedProductSubtype: String! { didSet { labelProductSubtype.text = selectedProductSubtype }}
+    var selectedDivision: String! { didSet {labelDivision.text = selectedDivision }}
+    var selectedProductClass: String! { didSet { labelProductClass.text = selectedProductClass }}
+    var selectedDescription: String! { didSet { labelDescription.text = selectedDescription }}
+    var selectedProductDetails: String! { didSet { labelProductDetails.text = selectedProductDetails }}
     
     var selectedSection: Int?
     var delegate: ProductFilterControllerNEWDelegate?

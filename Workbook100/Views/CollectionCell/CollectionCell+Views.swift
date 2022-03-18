@@ -44,7 +44,7 @@ class CollectionCellLabelBubble: UILabel {
         super.init(frame: frame)
 
         self.text = text
-        self.textColor = .white
+        self.textColor = type == .essential ? .systemBackground : .white
         self.textAlignment = .center
         self.font = .workbookBubbleTitle
         self.layer.cornerRadius = 8
@@ -67,7 +67,7 @@ class CollectionCellLabelBubble: UILabel {
             self.backgroundColor = .red
             self.text = "New"
         case .essential:
-            self.backgroundColor = .black
+            self.backgroundColor = .label
             self.text = "Essential"
         case .nothing:
             self.backgroundColor = .clear

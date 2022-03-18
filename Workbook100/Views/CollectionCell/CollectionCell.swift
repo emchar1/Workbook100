@@ -83,7 +83,7 @@ class CollectionCell: UICollectionViewCell {
         case "Goggles":
             labelSubtitle.text = model.colorway + "\n" + model.productNameDescriptionSecondary
         default:
-            labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway + "|"
+            labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
         }
         
         //OLD WAY Uses images saved in Firebase Storage
@@ -115,8 +115,8 @@ class CollectionCell: UICollectionViewCell {
         //==SETUP==//
         //Content View
 //        contentView.backgroundColor = .magenta
-//        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
-//        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
+        contentView.clipsToBounds = true
 
         //VStack
         vStack = CollectionCellStack(distribution: .fill, alignment: .fill, axis: .vertical)
