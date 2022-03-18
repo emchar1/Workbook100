@@ -59,7 +59,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
         layout.sectionInset = UIEdgeInsets(top: K.CollectionCell.padding, left: K.CollectionCell.padding, bottom: K.CollectionCell.padding, right: K.CollectionCell.padding)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+//        collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseId)
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseId)
@@ -132,6 +132,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                seasonsCarried: obj[K.FIR.seasonsCarried] as! String,
                                                productType: obj[K.FIR.productType] as! String,
                                                productSubtype: obj[K.FIR.productSubtype] as! String,
+                                               productDetails: obj[K.FIR.productDetails] as! String,
                                                youthWomen: obj[K.FIR.youthWomen] as! String,
                                                colorway: obj[K.FIR.colorway] as! String,
                                                carryOver: (obj[K.FIR.carryOver] as! String) == "TRUE",

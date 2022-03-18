@@ -67,7 +67,24 @@ class CollectionCell: UICollectionViewCell {
 
         //Product Title
         labelTitle.text = model.productNameDescription
-        labelSubtitle.text = model.productNameDescriptionSecondary + " - " + model.colorway
+        
+        switch model.productCategory {
+        case "Accessories":
+            labelSubtitle.text = model.colorway + "\n"
+        case "Apparel":
+            if model.productType == "Cap" {
+                labelSubtitle.text = model.colorway + "/" + model.productSubtype + "\n" + model.productDetails
+            }
+            else {
+                labelSubtitle.text = model.colorway + "\n" + model.productNameDescriptionSecondary
+            }
+        case "Gear", "Gloves", "Helmets", "Protection":
+            labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
+        case "Goggles":
+            labelSubtitle.text = model.colorway + "\n" + model.productNameDescriptionSecondary
+        default:
+            labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway + "|"
+        }
         
         //OLD WAY Uses images saved in Firebase Storage
 //        if let image = model.image {

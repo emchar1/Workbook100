@@ -12,8 +12,8 @@ class ContainerViewController: UIViewController, WorkbookViewControllerDelegate 
     // MARK: - Properties
     
     let centerPanelExpandedOffset: CGFloat = 50
-    let maxPanelSize: CGFloat = 360
-    var expandDistance: CGFloat = 0 {
+    static let maxPanelSize: CGFloat = 360
+    static var expandDistance: CGFloat = 0 {
         didSet {
             expandDistance = min(expandDistance, maxPanelSize)
         }
@@ -85,7 +85,7 @@ class ContainerViewController: UIViewController, WorkbookViewControllerDelegate 
                 animatePanel(shouldExpand: hasMovedGreaterThanHalfway)
             }
             else {
-                let hasMovedGreaterThanHalfway = rView.frame.origin.x > maxPanelSize - peekOffset
+                let hasMovedGreaterThanHalfway = rView.frame.origin.x > ContainerViewController.maxPanelSize - peekOffset
                 animatePanel(shouldExpand: hasMovedGreaterThanHalfway)
             }
         default:
@@ -208,8 +208,8 @@ extension ContainerViewController {
         if shouldExpand {
             currentState = .productFilterExpanded
             
-            expandDistance = centerNavigationController.view.frame.width - centerPanelExpandedOffset
-            animateCenterPanelXPosition(targetPosition: expandDistance)
+            ContainerViewController.expandDistance = centerNavigationController.view.frame.width - centerPanelExpandedOffset
+            animateCenterPanelXPosition(targetPosition: ContainerViewController.expandDistance)
             centerViewController.view.isUserInteractionEnabled = false
             
             // 2/21/22 Added this to set the trailing constraint on the hStack in the ProductFilterController object.

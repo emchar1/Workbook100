@@ -21,15 +21,25 @@ protocol ProductSubFilterControllerDelegate {
 }
 
 class ProductSubFilterController: UITableViewController {
+    @IBOutlet weak var singleMultiButton: UIBarButtonItem!
+
     var selections: [String] = []
     var selectedItem: String!
     var delegate: ProductSubFilterControllerDelegate?
+    var isSingle = true
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        navigationItem.title = "Product Filters"
+    }
+    
+    
+    @IBAction func singleMultiPressed(_ sender: UIBarButtonItem) {
+        isSingle = !isSingle
+        
+        singleMultiButton.title = isSingle ? "Multi" : "Done"
     }
     
     
@@ -53,6 +63,9 @@ class ProductSubFilterController: UITableViewController {
         
         delegate?.didSelectItem(selectedItem: selectedItem)
         
-        dismiss(animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
+//        dismiss(animated: true, completion: nil)
     }
+    
+    
 }

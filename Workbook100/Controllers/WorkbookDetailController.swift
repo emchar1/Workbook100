@@ -42,6 +42,7 @@ class WorkbookDetailController: UIViewController, UITableViewDelegate, UITableVi
         modelArray.append("Seasons Carried: \(model.seasonsCarried)")
         modelArray.append("Product Type: \(model.productType)")
         modelArray.append("Product Subtype: \(model.productSubtype)")
+        modelArray.append("Product Details: \(model.productDetails)")
         modelArray.append("Youth/Women: \(model.youthWomen)")
         modelArray.append("Colorway: \(model.colorway)")
         modelArray.append("New: \(!model.carryOver)")

@@ -95,7 +95,7 @@ class CollectionCellLabel: UILabel {
         super.init(frame: frame)
 
         self.text = text
-        self.textColor = .black
+//        self.textColor = .black
         self.numberOfLines = (type != .title) ? 0 : 1
         
         if frame == .zero {

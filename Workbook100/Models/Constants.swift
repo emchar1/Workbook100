@@ -398,6 +398,7 @@ struct K {
         static let seasonsCarried = "SeasonsCarried"
         static let productType = "ProductType"
         static let productSubtype = "ProductSubtype"
+        static let productDetails = "ProductDetails"
         static let youthWomen = "YouthWomen"
         static let colorway = "Colorway"
         static let carryOver = "CarryOver"

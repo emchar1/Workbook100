@@ -28,6 +28,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     let seasonsCarried: String
     let productType: String
     let productSubtype: String
+    let productDetails: String
     let youthWomen: String
     let colorway: String
     let carryOver: Bool
@@ -65,7 +66,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     
     // MARK: - Initialization
     
-    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, productDepartment: String, launchSeason: String, seasonsCarried: String, productType: String, productSubtype: String, youthWomen: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, imageURL: String, thumbURL: String, image: StorageReference?) {
+    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, productDepartment: String, launchSeason: String, seasonsCarried: String, productType: String, productSubtype: String, productDetails: String, youthWomen: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, imageURL: String, thumbURL: String, image: StorageReference?) {
 
         self.division = division
         self.collection = collection
@@ -77,6 +78,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
         self.seasonsCarried = seasonsCarried
         self.productType = productType
         self.productSubtype = productSubtype
+        self.productDetails = productDetails
         self.youthWomen = youthWomen
         self.colorway = colorway
         self.carryOver = carryOver
@@ -107,6 +109,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                     seasonsCarried: "Seasons Carried",
                                     productType: "Product Type",
                                     productSubtype: "Product Subtype",
+                                    productDetails: "Product Details",
                                     youthWomen: "Youth/Women",
                                     colorway: "Color",
                                     carryOver: false,

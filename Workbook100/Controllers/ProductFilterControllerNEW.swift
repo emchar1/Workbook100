@@ -21,6 +21,23 @@ protocol ProductFilterControllerNEWDelegate {
                      selectedProductDetails: String)
 }
 
+class ProductFilterCell: UITableViewCell {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override var frame: CGRect {
+        get {
+            return super.frame
+        }
+        set(newFrame) {
+            var frame = newFrame
+            frame.size.width = ContainerViewController.expandDistance - 40
+            super.frame = frame
+        }
+    }
+}
+
 
 class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControllerDelegate {
     
