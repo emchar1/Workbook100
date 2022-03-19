@@ -329,12 +329,12 @@ extension WorkbookViewController {
     func applyTapped(selectedCollection: String,
                      selectedNew: Int,
                      selectedEssential: Int,
-                     selectedLaunchSeason: String,
-                     selectedProductCategory: String,
-                     selectedProductType: String,
-                     selectedProductSubtype: String,
-                     selectedDivision: String,
-                     selectedProductClass: String,
+                     selectedLaunchSeason: [String],
+                     selectedProductCategory: [String],
+                     selectedProductType: [String],
+                     selectedProductSubtype: [String],
+                     selectedDivision: [String],
+                     selectedProductClass: [String],
                      selectedDescription: String,
                      selectedProductDetails: String) {
         
@@ -361,12 +361,12 @@ extension WorkbookViewController {
             (selectedCollection == K.ProductFilter.wildcard ? true : $0.collection == selectedCollection) &&
             (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
             (selectedEssential == K.ProductFilter.segementedBoth ? true : $0.essential == (selectedEssential == K.ProductFilter.segementedOn)) &&
-            (selectedLaunchSeason == K.ProductFilter.wildcard ? true : $0.launchSeason.contains(selectedLaunchSeason)) &&
-            (selectedProductCategory == K.ProductFilter.wildcard ? true : $0.productCategory == selectedProductCategory) &&
-            (selectedProductType == K.ProductFilter.wildcard ? true : $0.productType == selectedProductType) &&
-            (selectedProductSubtype == K.ProductFilter.wildcard ? true : $0.productSubtype == selectedProductSubtype) &&
-            (selectedDivision == K.ProductFilter.wildcard ? true : $0.division == selectedDivision) &&
-            (selectedProductClass == K.ProductFilter.wildcard ? true : $0.youthWomen == selectedProductClass) &&
+            (selectedLaunchSeason.joined().contains(K.ProductFilter.wildcard) ? true : selectedLaunchSeason.joined().contains($0.launchSeason)) &&
+            (selectedProductCategory.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductCategory.joined().contains($0.productCategory)) &&
+            (selectedProductType.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductType.joined().contains($0.productType)) &&
+            (selectedProductSubtype.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductSubtype.joined().contains($0.productSubtype)) &&
+            (selectedDivision.joined().contains(K.ProductFilter.wildcard) ? true : selectedDivision.joined().contains($0.division)) &&
+            (selectedProductClass.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductClass.joined().contains($0.youthWomen)) &&
             (selectedDescription == K.ProductFilter.wildcard ? true : $0.description == selectedDescription) /* doesn't exist yet!! &&
             (selectedProductDetails == K.ProductFilter.wildcard ? true : $0.productDetails == selectedProductDetails)*/
         }

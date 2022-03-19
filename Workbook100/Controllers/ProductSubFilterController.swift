@@ -17,29 +17,40 @@ class ProductSubFilterCell: UITableViewCell {
 
 
 protocol ProductSubFilterControllerDelegate {
-    func didSelectItem(selectedItem: String)
+    func didSelectItems(selectedItems: [String])
 }
 
 class ProductSubFilterController: UITableViewController {
     @IBOutlet weak var singleMultiButton: UIBarButtonItem!
 
     var selections: [String] = []
-    var selectedItem: String!
+    var selectedItems: [String]!
     var delegate: ProductSubFilterControllerDelegate?
-    var isSingle = true
-    
+    private var isSingle = true
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        navigationItem.title = "Product Filters"
     }
     
-    
     @IBAction func singleMultiPressed(_ sender: UIBarButtonItem) {
-        isSingle = !isSingle
+        guard isSingle else {
+            delegate?.didSelectItems(selectedItems: selectedItems)
+            dismiss(animated: true, completion: nil)
+            return
+        }
+
         
-        singleMultiButton.title = isSingle ? "Multi" : "Done"
+        isSingle = false
+        singleMultiButton.title = "Done"
+
+        selectedItems = selectedItems.filter { $0 != K.ProductFilter.wildcard }
+        
+        if selectedItems.count <= 0 {
+            singleMultiButton.isEnabled = false
+        }
+
+        tableView.reloadData()
     }
     
     
@@ -51,20 +62,50 @@ class ProductSubFilterController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubFilterCell", for: indexPath) as! ProductSubFilterCell
+        let selectedItemsFlat = K.ProductFilter.multiSeparator + selectedItems.joined(separator: K.ProductFilter.multiSeparator) + K.ProductFilter.multiSeparator
 
         cell.label.text = selections[indexPath.row]
-        cell.accessoryType = selectedItem == selections[indexPath.row] ? .checkmark : .none
+        cell.accessoryType = selectedItemsFlat.contains(K.ProductFilter.multiSeparator + selections[indexPath.row] + K.ProductFilter.multiSeparator) ? .checkmark : .none
+        cell.selectionStyle = isSingle ? .default : .none
 
+        if !isSingle && indexPath.row == 0 {
+            cell.label.text = "Multi-Select Mode"
+            cell.label.textColor = .secondaryLabel
+            cell.label.textAlignment = .center
+        }
+        else {
+            cell.label.textColor = .label
+            cell.label.textAlignment = .natural
+        }
+            
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedItem = selections[indexPath.row]
-        
-        delegate?.didSelectItem(selectedItem: selectedItem)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-//        dismiss(animated: true, completion: nil)
+        if isSingle {
+            selectedItems = [selections[indexPath.row]]
+            
+            delegate?.didSelectItems(selectedItems: selectedItems)
+            dismiss(animated: true, completion: nil)
+        }
+        else {
+            //Wildcard not selectable in Multi-mode
+            guard indexPath.row > 0 else { return }
+            
+            
+            //Toggle adding/removing a selectedItem
+            if selectedItems.contains(selections[indexPath.row]) {
+                //i.e. remove the selected item
+                selectedItems = selectedItems.filter { $0 != selections[indexPath.row] }
+            }
+            else {
+                selectedItems.append(selections[indexPath.row])
+            }
+
+            singleMultiButton.isEnabled = selectedItems.count <= 0 ? false : true
+            selectedItems.sort()
+            tableView.reloadData()
+        }
     }
     
     

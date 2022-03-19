@@ -78,10 +78,10 @@ class CollectionCell: UICollectionViewCell {
             else {
                 labelSubtitle.text = model.colorway + "\n" + model.productNameDescriptionSecondary
             }
-        case "Gear", "Gloves", "Helmets", "Protection":
-            labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
         case "Goggles":
             labelSubtitle.text = model.colorway + "\n" + model.productNameDescriptionSecondary
+        case "Gear", "Gloves", "Helmets", "Protection":
+            labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
         default:
             labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
         }

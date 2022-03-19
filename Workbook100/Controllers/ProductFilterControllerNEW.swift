@@ -11,12 +11,12 @@ protocol ProductFilterControllerNEWDelegate {
     func applyTapped(selectedCollection: String,
                      selectedNew: Int,
                      selectedEssential: Int,
-                     selectedLaunchSeason: String,
-                     selectedProductCategory: String,
-                     selectedProductType: String,
-                     selectedProductSubtype: String,
-                     selectedDivision: String,
-                     selectedProductClass: String,
+                     selectedLaunchSeason: [String],
+                     selectedProductCategory: [String],
+                     selectedProductType: [String],
+                     selectedProductSubtype: [String],
+                     selectedDivision: [String],
+                     selectedProductClass: [String],
                      selectedDescription: String,
                      selectedProductDetails: String)
 }
@@ -56,12 +56,12 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var labelProductDetails: UILabel!
     
     var selectedCollection: String! { didSet { labelCollection.text = selectedCollection }}
-    var selectedLaunchSeason: String! { didSet { labelLaunchSeason.text = selectedLaunchSeason }}
-    var selectedProductCategory: String! { didSet { labelProductCategory.text = selectedProductCategory }}
-    var selectedProductType: String! { didSet { labelProductType.text = selectedProductType }}
-    var selectedProductSubtype: String! { didSet { labelProductSubtype.text = selectedProductSubtype }}
-    var selectedDivision: String! { didSet {labelDivision.text = selectedDivision }}
-    var selectedProductClass: String! { didSet { labelProductClass.text = selectedProductClass }}
+    var selectedLaunchSeason: [String]! { didSet { labelLaunchSeason.text = selectedLaunchSeason.joined(separator: K.ProductFilter.multiSeparator + " ") }}
+    var selectedProductCategory: [String]! { didSet { labelProductCategory.text = selectedProductCategory.joined(separator: K.ProductFilter.multiSeparator + " ") }}
+    var selectedProductType: [String]! { didSet { labelProductType.text = selectedProductType.joined(separator: K.ProductFilter.multiSeparator + " ") }}
+    var selectedProductSubtype: [String]! { didSet { labelProductSubtype.text = selectedProductSubtype.joined(separator: K.ProductFilter.multiSeparator + " ") }}
+    var selectedDivision: [String]! { didSet { labelDivision.text = selectedDivision.joined(separator: K.ProductFilter.multiSeparator + " ") }}
+    var selectedProductClass: [String]! { didSet { labelProductClass.text = selectedProductClass.joined(separator: K.ProductFilter.multiSeparator + " ") }}
     var selectedDescription: String! { didSet { labelDescription.text = selectedDescription }}
     var selectedProductDetails: String! { didSet { labelProductDetails.text = selectedProductDetails }}
     
@@ -93,34 +93,34 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     }
     
     private func resetFilters(clear: Bool = false) {
-        selectedCollection = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedCollection
-        segmentedNew.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedNew
-        segmentedEssential.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedEssential
-        selectedLaunchSeason = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedLaunchSeason
-        selectedProductCategory = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductCategory
-        selectedProductType = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductType
-        selectedProductSubtype = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductSubtype
-        selectedDivision = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedDivision
-        selectedProductClass = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductClass
-        selectedDescription = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedDescription
-        selectedProductDetails = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductDetails
+        self.selectedCollection = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedCollection
+        self.segmentedNew.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedNew
+        self.segmentedEssential.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedEssential
+        self.selectedLaunchSeason = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedLaunchSeason
+        self.selectedProductCategory = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductCategory
+        self.selectedProductType = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductType
+        self.selectedProductSubtype = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductSubtype
+        self.selectedDivision = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedDivision
+        self.selectedProductClass = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductClass
+        self.selectedDescription = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedDescription
+        self.selectedProductDetails = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductDetails
     }
     
     
     // MARK: - Navigation
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
-        delegate?.applyTapped(selectedCollection: selectedCollection,
-                              selectedNew: segmentedNew.selectedSegmentIndex,
-                              selectedEssential: segmentedEssential.selectedSegmentIndex,
-                              selectedLaunchSeason: selectedLaunchSeason,
-                              selectedProductCategory: selectedProductCategory,
-                              selectedProductType: selectedProductType,
-                              selectedProductSubtype: selectedProductSubtype,
-                              selectedDivision: selectedDivision,
-                              selectedProductClass: selectedProductClass,
-                              selectedDescription: selectedDescription,
-                              selectedProductDetails: selectedProductDetails
+        self.delegate?.applyTapped(selectedCollection: self.selectedCollection,
+                                   selectedNew: self.segmentedNew.selectedSegmentIndex,
+                                   selectedEssential: self.segmentedEssential.selectedSegmentIndex,
+                                   selectedLaunchSeason: self.selectedLaunchSeason,
+                                   selectedProductCategory: self.selectedProductCategory,
+                                   selectedProductType: self.selectedProductType,
+                                   selectedProductSubtype: self.selectedProductSubtype,
+                                   selectedDivision: self.selectedDivision,
+                                   selectedProductClass: self.selectedProductClass,
+                                   selectedDescription: self.selectedDescription,
+                                   selectedProductDetails: self.selectedProductDetails
         )
     }
     
@@ -144,68 +144,68 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
             
             controller.navigationItem.title = "Select"
             controller.delegate = self
-            selectedSection = indexPath.section
+            self.selectedSection = indexPath.section
             
-            switch selectedSection {
+            switch self.selectedSection {
             case FilterItem.collection.rawValue:
                 controller.selections = K.ProductFilter.selectionCollection
-                controller.selectedItem = selectedCollection
+                controller.selectedItems = [self.selectedCollection]
                 controller.navigationItem.title! += " Collection"
             case FilterItem.launchSeason.rawValue:
                 controller.selections = K.ProductFilter.selectionLaunchSeason
-                controller.selectedItem = selectedLaunchSeason
+                controller.selectedItems = self.selectedLaunchSeason
                 controller.navigationItem.title! += " Launch Season"
             case FilterItem.productCategory.rawValue:
                 controller.selections = K.ProductFilter.selectionProductCategory
-                controller.selectedItem = selectedProductCategory
+                controller.selectedItems = self.selectedProductCategory
                 controller.navigationItem.title! += " Product Category"
             case FilterItem.productType.rawValue:
-                if let selectedProductCategory = K.ProductFilter.categories.search(selectedProductCategory) {
+                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()) {
                     controller.selections = [K.ProductFilter.wildcard] + selectedProductCategory.getChildren()
                 }
                 else {
                     controller.selections = K.ProductFilter.selectionProductType
                 }
                 
-                controller.selectedItem = selectedProductType
+                controller.selectedItems = self.selectedProductType
                 controller.navigationItem.title! += " Product Type"
             case FilterItem.productSubtype.rawValue:
-                if let selectedProductCategory = K.ProductFilter.categories.search(selectedProductCategory),
-                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == selectedProductType }) {
+                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()),
+                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == self.selectedProductType.joined() }) {
                     controller.selections = [K.ProductFilter.wildcard] + selectedProductType.getChildren()
                 }
                 else {
                     controller.selections = K.ProductFilter.selectionProductSubtype
                 }
                 
-                controller.selectedItem = selectedProductSubtype
+                controller.selectedItems = self.selectedProductSubtype
                 controller.navigationItem.title! += " Product Subtype"
             case FilterItem.division.rawValue:
                 controller.selections = K.ProductFilter.selectionDivision
-                controller.selectedItem = selectedDivision
+                controller.selectedItems = self.selectedDivision
                 controller.navigationItem.title! += " Division"
             case FilterItem.productClass.rawValue:
-                if let selectedProductCategory = K.ProductFilter.categories.search(selectedProductCategory),
-                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == selectedProductType }),
-                   let selectedProductSubtype = selectedProductType.children.first(where: { $0.value == selectedProductSubtype }) {
+                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()),
+                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == self.selectedProductType.joined() }),
+                   let selectedProductSubtype = selectedProductType.children.first(where: { $0.value == self.selectedProductSubtype.joined() }) {
                     controller.selections = [K.ProductFilter.wildcard] + selectedProductSubtype.getChildren()
                 }
                 else {
                     controller.selections = K.ProductFilter.selectionProductClass
                 }
                 
-                controller.selectedItem = selectedProductClass
+                controller.selectedItems = self.selectedProductClass
                 controller.navigationItem.title! += " Product Class"
             case FilterItem.description.rawValue:
                 controller.selections = K.ProductFilter.selectionDescription
-                controller.selectedItem = selectedDescription
+                controller.selectedItems = [self.selectedDescription]
                 controller.navigationItem.title! += " Description"
             case FilterItem.productDetails.rawValue:
                 controller.selections = K.ProductFilter.selectionProductDetails
-                controller.selectedItem = selectedProductDetails
+                controller.selectedItems = [self.selectedProductDetails]
                 controller.navigationItem.title! += " Product Details"
             default:
-                controller.selectedItem = "Wrong selection!"
+                controller.selectedItems = ["Wrong selection!"]
                 print("Wrong selection!")
             }
         }
@@ -239,17 +239,17 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
 // MARK: - Product Sub Filter Controller Delegate
 
 extension ProductFilterControllerNEW {
-    func didSelectItem(selectedItem: String) {
-        switch selectedSection {
-        case FilterItem.collection.rawValue: selectedCollection = selectedItem
-        case FilterItem.launchSeason.rawValue: selectedLaunchSeason = selectedItem
-        case FilterItem.productCategory.rawValue: selectedProductCategory = selectedItem
-        case FilterItem.productType.rawValue: selectedProductType = selectedItem
-        case FilterItem.productSubtype.rawValue: selectedProductSubtype = selectedItem
-        case FilterItem.division.rawValue: selectedDivision = selectedItem
-        case FilterItem.productClass.rawValue: selectedProductClass = selectedItem
-        case FilterItem.description.rawValue: selectedDescription = selectedItem
-        case FilterItem.productDetails.rawValue: selectedProductDetails = selectedItem
+    func didSelectItems(selectedItems: [String]) {
+        switch self.selectedSection {
+        case FilterItem.collection.rawValue: self.selectedCollection = selectedItems[0]
+        case FilterItem.launchSeason.rawValue: self.selectedLaunchSeason = selectedItems
+        case FilterItem.productCategory.rawValue: self.selectedProductCategory = selectedItems
+        case FilterItem.productType.rawValue: self.selectedProductType = selectedItems
+        case FilterItem.productSubtype.rawValue: self.selectedProductSubtype = selectedItems
+        case FilterItem.division.rawValue: self.selectedDivision = selectedItems
+        case FilterItem.productClass.rawValue: self.selectedProductClass = selectedItems
+        case FilterItem.description.rawValue: self.selectedDescription = selectedItems[0]
+        case FilterItem.productDetails.rawValue: self.selectedProductDetails = selectedItems[0]
         default: print("Wrong selection!")
         }
     }

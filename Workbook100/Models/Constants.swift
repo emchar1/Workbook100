@@ -33,6 +33,7 @@ struct K {
         static let segementedBoth = 0
         static let segementedOn = 1
         static let segementedOff = 2
+        static let multiSeparator = ";"
         
         static var categories: Category<String> {
             let collection = Category("2023 - Spring")
@@ -351,37 +352,37 @@ struct K {
         static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
         static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
         static let selectionProductSubtype: [String] = [wildcard, "Active Performance", "Athletic", "Base Layers", "Camper", "Casual", "Clear", "Dual", "Dual Pane", "Dual Pane Sonic Bumps", "Dual Pane Vented", "Elbow", "Flexfit", "Full Face", "HiPER", "Injected", "Jersey", "Knee", "Laminated", "Liners", "Mirror", "Misc.", "Mud", "Nose Bridges", "Nose Pads", "Open Face", "Pants", "Performance", "Perimeter Seal", "Photochromic", "Premium", "Regular", "Replacement Lenses", "Screws", "Shield", "Short Fingers", "Shorts", "Sleeves", "Snapback", "Sonic Bumps", "Spare Parts", "Sport Performance", "Standard", "Tech", "Trucker", "Unstructured", "Upper", "Varied", "Visors", "Water Resistant", "Waterproof", "Windproof", "Wool"]
-        static let selectionProductClass: [String] = [wildcard, "Mens", "Miscellaneous", "Unisex", "Womens", "Youth", ""]
+        static let selectionProductClass: [String] = [wildcard, "Mens", "Miscellaneous", "Unisex", "Womens", "Youth"]
         static let selectionDescription: [String] = [wildcard, "1", "2", "3"]
         static let selectionProductDetails: [String] = [wildcard, "1", "2", "3", "4"]
 
 
         static var selectedCollection: String = wildcard
-        static var selectedDivision: String = wildcard
-        static var selectedLaunchSeason: String = wildcard
-        static var selectedSeasonsCarried: String = wildcard
-        static var selectedProductCategory: String = wildcard
-        static var selectedProductDepartment: String = wildcard
-        static var selectedProductType: String = wildcard
-        static var selectedProductSubtype: String = wildcard
         static var selectedNew: Int = segementedBoth
         static var selectedEssential: Int = segementedBoth
-        static var selectedProductClass: String = wildcard
+        static var selectedLaunchSeason: [String] = [wildcard]
+        static var selectedSeasonsCarried: [String] = [wildcard]
+        static var selectedProductDepartment: [String] = [wildcard]
+        static var selectedProductCategory: [String] = [wildcard]
+        static var selectedProductType: [String] = [wildcard]
+        static var selectedProductSubtype: [String] = [wildcard]
+        static var selectedDivision: [String] = [wildcard]
+        static var selectedProductClass: [String] = [wildcard]
         static var selectedDescription: String = wildcard
         static var selectedProductDetails: String = wildcard
         
         static var isFiltered: Bool {
             return !(selectedCollection == wildcard &&
-                     selectedDivision == wildcard &&
-                     selectedLaunchSeason == wildcard &&
-                     selectedSeasonsCarried == wildcard &&
-                     selectedProductCategory == wildcard &&
-                     selectedProductDepartment == wildcard &&
-                     selectedProductType == wildcard &&
-                     selectedProductSubtype == wildcard &&
                      selectedNew == segementedBoth &&
                      selectedEssential == segementedBoth &&
-                     selectedProductClass == wildcard &&
+                     selectedLaunchSeason == [wildcard] &&
+                     selectedSeasonsCarried == [wildcard] &&
+                     selectedProductDepartment == [wildcard] &&
+                     selectedProductCategory == [wildcard] &&
+                     selectedProductType == [wildcard] &&
+                     selectedProductSubtype == [wildcard] &&
+                     selectedDivision == [wildcard] &&
+                     selectedProductClass == [wildcard] &&
                      selectedDescription == wildcard &&
                      selectedProductDetails == wildcard)
         }

@@ -120,42 +120,42 @@ class ProductFilterController: UIViewController, UITableViewDelegate, UITableVie
         vStackProductCategory = VStackContent(frame: .zero,
                                               titleText: "Product Category",
                                               selectionItems: K.ProductFilter.selectionProductCategory,
-                                              selectedItem: K.ProductFilter.selectedProductCategory)
+                                              selectedItem: K.ProductFilter.selectedProductCategory[0])
         vStackProductCategory.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductCategory(_:)), for: .touchUpInside)
         vStackProductCategory.translatesAutoresizingMaskIntoConstraints = false
         
         vStackDivision = VStackContent(frame: .zero,
                                        titleText: "Division",
                                        selectionItems: K.ProductFilter.selectionDivision,
-                                       selectedItem: K.ProductFilter.selectedDivision)
+                                       selectedItem: K.ProductFilter.selectedDivision[0])
         vStackDivision.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectDivision(_:)), for: .touchUpInside)
         vStackDivision.translatesAutoresizingMaskIntoConstraints = false
         
         vStackProductDepartment = VStackContent(frame: .zero,
                                                 titleText: "Product Department",
                                                 selectionItems: K.ProductFilter.selectionProductDepartment,
-                                                selectedItem: K.ProductFilter.selectedProductDepartment)
+                                                selectedItem: K.ProductFilter.selectedProductDepartment[0])
         vStackProductDepartment.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductDepartment(_:)), for: .touchUpInside)
         vStackProductDepartment.translatesAutoresizingMaskIntoConstraints = false
         
         vStackLaunchSeason = VStackContent(frame: .zero,
                                            titleText: "Launch Season",
                                            selectionItems: K.ProductFilter.selectionLaunchSeason,
-                                           selectedItem: K.ProductFilter.selectedLaunchSeason)
+                                           selectedItem: K.ProductFilter.selectedLaunchSeason[0])
         vStackLaunchSeason.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectLaunchSeason(_:)), for: .touchUpInside)
         vStackLaunchSeason.translatesAutoresizingMaskIntoConstraints = false
         
         vStackProductType = VStackContent(frame: .zero,
                                           titleText: "Product Type",
                                           selectionItems: K.ProductFilter.selectionProductType,
-                                          selectedItem: K.ProductFilter.selectedProductType)
+                                          selectedItem: K.ProductFilter.selectedProductType[0])
         vStackProductType.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductType(_:)), for: .touchUpInside)
         vStackProductType.translatesAutoresizingMaskIntoConstraints = false
         
         vStackProductSubtype = VStackContent(frame: .zero,
                                              titleText: "Product Subtype",
                                              selectionItems: K.ProductFilter.selectionProductSubtype,
-                                             selectedItem: K.ProductFilter.selectedProductSubtype)
+                                             selectedItem: K.ProductFilter.selectedProductSubtype[0])
         vStackProductSubtype.hStack.dropdownButton.addTarget(self, action: #selector(onClickSelectProductSubtype(_:)), for: .touchUpInside)
         vStackProductSubtype.translatesAutoresizingMaskIntoConstraints = false
         
