@@ -11,7 +11,6 @@
 		EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */; };
 		EA0AB09027CDB621000D7D37 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB08F27CDB620000D7D37 /* Extensions.swift */; };
 		EA0AB09227CDB64A000D7D37 /* ActivitySpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */; };
-		EA0AB09427CE9D3F000D7D37 /* WorkbookTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB09327CE9D3F000D7D37 /* WorkbookTableVC.swift */; };
 		EA22D4E027754129006C12CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4DF27754129006C12CF /* Constants.swift */; };
 		EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E127759DA4006C12CF /* CollectionModel.swift */; };
 		EA22D4E42776DFCE006C12CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */; };
@@ -47,7 +46,6 @@
 		EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSubFilterController.swift; sourceTree = "<group>"; };
 		EA0AB08F27CDB620000D7D37 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySpinner.swift; sourceTree = "<group>"; };
-		EA0AB09327CE9D3F000D7D37 /* WorkbookTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookTableVC.swift; sourceTree = "<group>"; };
 		EA22D4DF27754129006C12CF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA22D4E127759DA4006C12CF /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				EAA0CF782769573F00943912 /* WorkbookViewController.swift */,
 				EAB133DF27A47BFD007F6553 /* WorkbookViewController+DragDrop.swift */,
 				EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */,
-				EA0AB09327CE9D3F000D7D37 /* WorkbookTableVC.swift */,
 			);
 			path = WorkbookViewController;
 			sourceTree = "<group>";
@@ -364,7 +361,6 @@
 				EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */,
 				EA22D4E8277A5FD7006C12CF /* WorkbookDetailController.swift in Sources */,
 				EA8914E027DC038300C8D8D3 /* Category.swift in Sources */,
-				EA0AB09427CE9D3F000D7D37 /* WorkbookTableVC.swift in Sources */,
 				EA22D4E027754129006C12CF /* Constants.swift in Sources */,
 				EA91E07427936A6200DE630E /* ProductFilterController.swift in Sources */,
 			);

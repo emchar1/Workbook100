@@ -17,8 +17,7 @@ protocol ProductFilterControllerNEWDelegate {
                      selectedProductSubtype: [String],
                      selectedDivision: [String],
                      selectedProductClass: [String],
-                     selectedDescription: String,
-                     selectedProductDetails: String)
+                     selectedProductDetails: [String])
 }
 
 class ProductFilterCell: UITableViewCell {
@@ -52,7 +51,6 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var labelProductSubtype: UILabel!
     @IBOutlet weak var labelDivision: UILabel!
     @IBOutlet weak var labelProductClass: UILabel!
-    @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var labelProductDetails: UILabel!
     
     var selectedCollection: String! { didSet { labelCollection.text = selectedCollection }}
@@ -62,8 +60,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     var selectedProductSubtype: [String]! { didSet { labelProductSubtype.text = selectedProductSubtype.joined(separator: K.ProductFilter.multiSeparator + " ") }}
     var selectedDivision: [String]! { didSet { labelDivision.text = selectedDivision.joined(separator: K.ProductFilter.multiSeparator + " ") }}
     var selectedProductClass: [String]! { didSet { labelProductClass.text = selectedProductClass.joined(separator: K.ProductFilter.multiSeparator + " ") }}
-    var selectedDescription: String! { didSet { labelDescription.text = selectedDescription }}
-    var selectedProductDetails: String! { didSet { labelProductDetails.text = selectedProductDetails }}
+    var selectedProductDetails: [String]! { didSet { labelProductDetails.text = selectedProductDetails.joined(separator: K.ProductFilter.multiSeparator + " ") }}
     
     var selectedSection: Int?
     var delegate: ProductFilterControllerNEWDelegate?
@@ -78,7 +75,6 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
              productSubtype,
              division,
              productClass,
-             description,
              productDetails,
              applyClearButtons
     }
@@ -102,8 +98,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
         self.selectedProductSubtype = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductSubtype
         self.selectedDivision = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedDivision
         self.selectedProductClass = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductClass
-        self.selectedDescription = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedDescription
-        self.selectedProductDetails = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedProductDetails
+        self.selectedProductDetails = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductDetails
     }
     
     
@@ -119,7 +114,6 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                                    selectedProductSubtype: self.selectedProductSubtype,
                                    selectedDivision: self.selectedDivision,
                                    selectedProductClass: self.selectedProductClass,
-                                   selectedDescription: self.selectedDescription,
                                    selectedProductDetails: self.selectedProductDetails
         )
     }
@@ -196,13 +190,9 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                 
                 controller.selectedItems = self.selectedProductClass
                 controller.navigationItem.title! += " Product Class"
-            case FilterItem.description.rawValue:
-                controller.selections = K.ProductFilter.selectionDescription
-                controller.selectedItems = [self.selectedDescription]
-                controller.navigationItem.title! += " Description"
             case FilterItem.productDetails.rawValue:
                 controller.selections = K.ProductFilter.selectionProductDetails
-                controller.selectedItems = [self.selectedProductDetails]
+                controller.selectedItems = self.selectedProductDetails
                 controller.navigationItem.title! += " Product Details"
             default:
                 controller.selectedItems = ["Wrong selection!"]
@@ -243,14 +233,27 @@ extension ProductFilterControllerNEW {
         switch self.selectedSection {
         case FilterItem.collection.rawValue: self.selectedCollection = selectedItems[0]
         case FilterItem.launchSeason.rawValue: self.selectedLaunchSeason = selectedItems
-        case FilterItem.productCategory.rawValue: self.selectedProductCategory = selectedItems
-        case FilterItem.productType.rawValue: self.selectedProductType = selectedItems
-        case FilterItem.productSubtype.rawValue: self.selectedProductSubtype = selectedItems
+        case FilterItem.productCategory.rawValue:
+            self.selectedProductCategory = selectedItems
+            resetFilterSpecific(productType: true, productSubtype: true, productClass: true)
+        case FilterItem.productType.rawValue:
+            self.selectedProductType = selectedItems
+            resetFilterSpecific(productType: false, productSubtype: true, productClass: true)
+        case FilterItem.productSubtype.rawValue:
+            self.selectedProductSubtype = selectedItems
+            resetFilterSpecific(productType: false, productSubtype: false, productClass: true)
         case FilterItem.division.rawValue: self.selectedDivision = selectedItems
         case FilterItem.productClass.rawValue: self.selectedProductClass = selectedItems
-        case FilterItem.description.rawValue: self.selectedDescription = selectedItems[0]
-        case FilterItem.productDetails.rawValue: self.selectedProductDetails = selectedItems[0]
+        case FilterItem.productDetails.rawValue: self.selectedProductDetails = selectedItems
         default: print("Wrong selection!")
         }
+    }
+    
+    private func resetFilterSpecific(productType: Bool, productSubtype: Bool, productClass: Bool) {
+        let resetMe = [K.ProductFilter.wildcard]
+
+        if productType { self.selectedProductType = resetMe }
+        if productSubtype { self.selectedProductSubtype = resetMe }
+        if productClass { self.selectedProductClass = resetMe }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bZc-S1-Ykv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bZc-S1-Ykv">
     <device id="retina6_0" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -31,11 +31,6 @@
                         <rightBarButtonItems>
                             <barButtonItem image="gearshape" catalog="system" id="P9D-VW-Dvi">
                                 <color key="tintColor" systemColor="labelColor"/>
-                            </barButtonItem>
-                            <barButtonItem title="TVC" id="W5W-Ed-ziU">
-                                <connections>
-                                    <segue destination="iHg-K3-sTT" kind="presentation" id="qax-c8-4bt"/>
-                                </connections>
                             </barButtonItem>
                             <barButtonItem enabled="NO" systemItem="cancel" id="vc7-6a-blf">
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -70,7 +65,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xyg-6K-qR9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1086" y="2691"/>
+            <point key="canvasLocation" x="-269" y="1757"/>
         </scene>
         <!--Product Filter ControllerNEW-->
         <scene sceneID="ZmM-mZ-fvC">
@@ -309,35 +304,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Description" id="WvR-c4-Nzp">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ocI-w8-apT" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="889.66666984558105" width="350" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ocI-w8-apT" id="mCq-kX-O15">
-                                            <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qY3-mm-fQB">
-                                                    <rect key="frame" x="20" y="12.333333333333334" width="293.33333333333331" height="19.333333333333329"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="qY3-mm-fQB" firstAttribute="centerY" secondItem="mCq-kX-O15" secondAttribute="centerY" id="9WI-Al-bst"/>
-                                                <constraint firstItem="qY3-mm-fQB" firstAttribute="leading" secondItem="mCq-kX-O15" secondAttribute="leadingMargin" id="Dmy-fI-X4Z"/>
-                                                <constraint firstItem="qY3-mm-fQB" firstAttribute="trailing" secondItem="mCq-kX-O15" secondAttribute="trailingMargin" id="uLo-Qc-ksy"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="Product Details" id="Vbr-RD-0m2">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="r0A-Ea-Icy" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="983.00000381469727" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="889.66666984558105" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r0A-Ea-Icy" id="W9A-Uu-nhb">
                                             <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
@@ -362,7 +332,7 @@
                             <tableViewSection id="grA-CN-MUE">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="x2d-jJ-Jfe" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="1062.6666717529297" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="969.33333778381348" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x2d-jJ-Jfe" id="R0N-aT-K43">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="43.666667938232422"/>
@@ -422,7 +392,6 @@
                     <navigationItem key="navigationItem" id="B6Q-xA-FYe"/>
                     <connections>
                         <outlet property="labelCollection" destination="oZf-e7-7q9" id="KBp-Vh-8Y6"/>
-                        <outlet property="labelDescription" destination="qY3-mm-fQB" id="1Gn-mQ-k1K"/>
                         <outlet property="labelDivision" destination="XGc-nV-8va" id="Jb7-cW-FSv"/>
                         <outlet property="labelLaunchSeason" destination="PTH-Fk-S6S" id="v4p-wE-k2r"/>
                         <outlet property="labelProductCategory" destination="sex-a1-HPY" id="ztO-4Z-It4"/>
@@ -437,7 +406,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2S-cM-xn2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2490.7692307692305" y="1818.4834123222747"/>
+            <point key="canvasLocation" x="771" y="1832"/>
         </scene>
         <!--Table-->
         <scene sceneID="k29-QZ-q5b">
@@ -495,7 +464,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YZG-I0-D8d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="ji7-cW-6c5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4449" y="1818"/>
+            <point key="canvasLocation" x="2491" y="1832"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="DRM-TN-gnC">
@@ -511,38 +480,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aga-ht-Elx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1058" y="1043"/>
-        </scene>
-        <!--Workbook TableVC-->
-        <scene sceneID="8Ba-UT-g6P">
-            <objects>
-                <tableViewController id="CXc-Hc-IS8" customClass="WorkbookTableVC" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="0qd-gk-mGz">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="jno-hL-MEu">
-                                <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jno-hL-MEu" id="FVa-AC-ihc">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="LVv-C1-W7p" kind="presentation" identifier="showMe" id="NoB-Ur-E4s"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="CXc-Hc-IS8" id="J0m-QN-Ygi"/>
-                            <outlet property="delegate" destination="CXc-Hc-IS8" id="dJL-pA-zRz"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="WbE-HE-h8n"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yR9-ar-cbO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="642" y="2014"/>
         </scene>
         <!--Workbook Detail ControllerNEW-->
         <scene sceneID="gnK-Cl-aci">
@@ -1149,7 +1086,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5zj-t6-tei">
-                                <rect key="frame" x="75" y="223" width="240" height="398"/>
+                                <rect key="frame" x="75" y="173" width="240" height="398"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100icon" translatesAutoresizingMaskIntoConstraints="NO" id="xZS-Eg-wXL">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="140"/>
@@ -1244,7 +1181,7 @@
                         <viewLayoutGuide key="safeArea" id="zo4-Ub-Z4k"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5zj-t6-tei" firstAttribute="centerY" secondItem="fj1-eF-D3S" secondAttribute="centerY" id="h1i-qX-B64"/>
+                            <constraint firstItem="5zj-t6-tei" firstAttribute="centerY" secondItem="fj1-eF-D3S" secondAttribute="centerY" constant="-50" id="h1i-qX-B64"/>
                             <constraint firstItem="5zj-t6-tei" firstAttribute="centerX" secondItem="fj1-eF-D3S" secondAttribute="centerX" id="kBf-ww-MRe"/>
                         </constraints>
                     </view>
@@ -1335,30 +1272,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jeo-YW-1jv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3480" y="1819"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="EkZ-ir-64w">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iHg-K3-sTT" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1bJ-EU-R3u">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="CXc-Hc-IS8" kind="relationship" relationship="rootViewController" id="2eK-Og-XXe"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z5N-nu-UBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-229" y="2014"/>
+            <point key="canvasLocation" x="1691" y="1832"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="dGL-6y-kuy"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="100icon" width="910" height="911"/>
         <image name="eye" catalog="system" width="128" height="81"/>

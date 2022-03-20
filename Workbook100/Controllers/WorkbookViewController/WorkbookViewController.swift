@@ -160,6 +160,13 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                     K.items.append(item)
                 }
             }
+
+            //Re-order everything according to Ludo 3/16/22
+            K.items = K.items
+                .sorted(by: { $0.productNameDescription < $1.productNameDescription })
+                .sorted(by: { $0.productType < $1.productType })
+            //add more sorted(by:) the last sorted(by:) has the highest sort priority
+            
             self.collectionView.reloadData()
             spinner.stopSpinner()
         }
@@ -335,8 +342,7 @@ extension WorkbookViewController {
                      selectedProductSubtype: [String],
                      selectedDivision: [String],
                      selectedProductClass: [String],
-                     selectedDescription: String,
-                     selectedProductDetails: String) {
+                     selectedProductDetails: [String]) {
         
         guard K.items.count > 0 else {
             print("Items still loading. Exiting early.")
@@ -354,7 +360,6 @@ extension WorkbookViewController {
         K.ProductFilter.selectedProductSubtype = selectedProductSubtype
         K.ProductFilter.selectedDivision = selectedDivision
         K.ProductFilter.selectedProductClass = selectedProductClass
-        K.ProductFilter.selectedDescription = selectedDescription
         K.ProductFilter.selectedProductDetails = selectedProductDetails
 
         K.filteredItems = K.items.filter {
@@ -367,8 +372,7 @@ extension WorkbookViewController {
             (selectedProductSubtype.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductSubtype.joined().contains($0.productSubtype)) &&
             (selectedDivision.joined().contains(K.ProductFilter.wildcard) ? true : selectedDivision.joined().contains($0.division)) &&
             (selectedProductClass.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductClass.joined().contains($0.youthWomen)) &&
-            (selectedDescription == K.ProductFilter.wildcard ? true : $0.description == selectedDescription) /* doesn't exist yet!! &&
-            (selectedProductDetails == K.ProductFilter.wildcard ? true : $0.productDetails == selectedProductDetails)*/
+            (selectedProductDetails.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductDetails.joined().contains($0.productDetails))
         }
                 
         //Show a "No results found" label if the filtered list is empty

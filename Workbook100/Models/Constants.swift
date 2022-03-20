@@ -353,8 +353,7 @@ struct K {
         static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
         static let selectionProductSubtype: [String] = [wildcard, "Active Performance", "Athletic", "Base Layers", "Camper", "Casual", "Clear", "Dual", "Dual Pane", "Dual Pane Sonic Bumps", "Dual Pane Vented", "Elbow", "Flexfit", "Full Face", "HiPER", "Injected", "Jersey", "Knee", "Laminated", "Liners", "Mirror", "Misc.", "Mud", "Nose Bridges", "Nose Pads", "Open Face", "Pants", "Performance", "Perimeter Seal", "Photochromic", "Premium", "Regular", "Replacement Lenses", "Screws", "Shield", "Short Fingers", "Shorts", "Sleeves", "Snapback", "Sonic Bumps", "Spare Parts", "Sport Performance", "Standard", "Tech", "Trucker", "Unstructured", "Upper", "Varied", "Visors", "Water Resistant", "Waterproof", "Windproof", "Wool"]
         static let selectionProductClass: [String] = [wildcard, "Mens", "Miscellaneous", "Unisex", "Womens", "Youth"]
-        static let selectionDescription: [String] = [wildcard, "1", "2", "3"]
-        static let selectionProductDetails: [String] = [wildcard, "1", "2", "3", "4"]
+        static let selectionProductDetails: [String] = [wildcard, "210g/m2", "250g/m2 mini loop French Terry", "280g/2", "280g/m2", "280g/m2 (330g/m2 after wash)", "290g/m2 Interlock", "330g/m2", "Fit ( AJ) Trucker, Flat Visor (230 squared), 5 Panel", "Fit ( J ), Visor 909 Flat (rounded), 6 Panel", "Fit ( LYP), Curved Visor (230 CV-3), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 6 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 5 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 6 Panel", "Fit (AJ) Trucker, Visor (Flat 230 squared), 5 Panel", "Fit (AJ), Flat Visor (230 squared), 6 Panel", "Fit (AJ), Flat Visor 230 (squared), 6 Panel", "Fit (AJ), Visor (Flat), 6 Panel", "Fit (LYP), Flat Visor 230 (squared), 5 Panel", "Fit (LYP), Visor Flat 230 (squared), 5 Panel", "Fit (X) Trucker, Visor (Curve 230 CV-3), 5 Panel", "Fit (X), Visor (Curve 230 CV-3), 5 Panel"]
 
 
         static var selectedCollection: String = wildcard
@@ -368,8 +367,7 @@ struct K {
         static var selectedProductSubtype: [String] = [wildcard]
         static var selectedDivision: [String] = [wildcard]
         static var selectedProductClass: [String] = [wildcard]
-        static var selectedDescription: String = wildcard
-        static var selectedProductDetails: String = wildcard
+        static var selectedProductDetails: [String] = [wildcard]
         
         static var isFiltered: Bool {
             return !(selectedCollection == wildcard &&
@@ -383,8 +381,7 @@ struct K {
                      selectedProductSubtype == [wildcard] &&
                      selectedDivision == [wildcard] &&
                      selectedProductClass == [wildcard] &&
-                     selectedDescription == wildcard &&
-                     selectedProductDetails == wildcard)
+                     selectedProductDetails == [wildcard])
         }
     }
     
