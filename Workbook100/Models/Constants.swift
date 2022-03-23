@@ -344,7 +344,7 @@ struct K {
             return collection
         }
         
-        static let selectionCollection: [String] = [wildcard, "SP23"]
+        static let selectionCollection: [String] = [wildcard, "2023 - Spring"]
         static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
         static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
         static let selectionSeasonsCarried: [String] = [wildcard, "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22", "SP23"]
@@ -422,7 +422,18 @@ struct K {
         static let composition = "Composition"
         static let productDescription = "ProductDescription"
         static let productFeatures = "ProductFeatures"
-        static let imageURL = "imageURL"
+        static let primaryImageURL = "primaryImageURL"
         static let thumbURL = "thumbURL"
+        static let imageURL0 = "imageURL0"
+        static let imageURL1 = "imageURL1"
+        static let imageURL2 = "imageURL2"
+        static let imageURL3 = "imageURL3"
+        static let imageURL4 = "imageURL4"
+        static let imageURL5 = "imageURL5"
+        static let imageURL6 = "imageURL6"
+        static let imageURL7 = "imageURL7"
+        static let imageURL8 = "imageURL8"
+        static let imageURL9 = "imageURL9"
+        static let imageURL10 = "imageURL10"
     }
 }

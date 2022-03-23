@@ -41,8 +41,9 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     let composition: String
     let productDescription: String
     let productFeatures: String
-    let imageURL: String
+    let primaryImageURL: String
     let thumbURL: String
+    let imageURLs: [String]
     let image: StorageReference?
     var id = UUID()
     
@@ -66,7 +67,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     
     // MARK: - Initialization
     
-    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, productDepartment: String, launchSeason: String, seasonsCarried: String, productType: String, productSubtype: String, productDetails: String, youthWomen: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, imageURL: String, thumbURL: String, image: StorageReference?) {
+    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, productDepartment: String, launchSeason: String, seasonsCarried: String, productType: String, productSubtype: String, productDetails: String, youthWomen: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, primaryImageURL: String, thumbURL: String, imageURLs: [String], image: StorageReference?) {
 
         self.division = division
         self.collection = collection
@@ -91,8 +92,9 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
         self.composition = composition
         self.productDescription = productDescription
         self.productFeatures = productFeatures
-        self.imageURL = imageURL
+        self.primaryImageURL = primaryImageURL
         self.thumbURL = thumbURL
+        self.imageURLs = imageURLs
         self.image = image
         
         super.init()
@@ -130,8 +132,9 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                     composition: "Composition",
                                     productDescription: "Product Description",
                                     productFeatures: "Product Features",
-                                    imageURL: "https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364", //100% Logo
+                                    primaryImageURL: "https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364", //100% Logo
                                     thumbURL: "https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364", //100% Logo
+                                    imageURLs: ["https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364"],
                                     image: nil)//Storage.storage().reference().child("10000-00000.jpg"))
         return model
     }

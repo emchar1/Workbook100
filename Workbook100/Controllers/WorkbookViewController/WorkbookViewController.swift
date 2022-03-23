@@ -153,8 +153,19 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                composition: obj[K.FIR.composition] as! String,
                                                productDescription: obj[K.FIR.productDescription] as! String,
                                                productFeatures: obj[K.FIR.productFeatures] as! String,
-                                               imageURL: obj[K.FIR.imageURL] as! String,
+                                               primaryImageURL: obj[K.FIR.primaryImageURL] as! String,
                                                thumbURL: obj[K.FIR.thumbURL] as! String,
+                                               imageURLs: [obj[K.FIR.imageURL0] as! String,
+                                                           obj[K.FIR.imageURL1] as! String,
+                                                           obj[K.FIR.imageURL2] as! String,
+                                                           obj[K.FIR.imageURL3] as! String,
+                                                           obj[K.FIR.imageURL4] as! String,
+                                                           obj[K.FIR.imageURL5] as! String,
+                                                           obj[K.FIR.imageURL6] as! String,
+                                                           obj[K.FIR.imageURL7] as! String,
+                                                           obj[K.FIR.imageURL8] as! String,
+                                                           obj[K.FIR.imageURL9] as! String,
+                                                           obj[K.FIR.imageURL10] as! String],
                                                image: imageRef)
                     
                     K.items.append(item)
@@ -267,7 +278,14 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 controller.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
             }
         }
+        else if segue.identifier == "showDetailsTVC2" {
+            let nc = segue.destination as! UINavigationController
+            let controller = nc.topViewController as! WorkbookDetailTVC2
 
+            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+                controller.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+            }
+        }
     }
 }
 
@@ -308,7 +326,7 @@ extension WorkbookViewController {
     //Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !multiSelect {
-            performSegue(withIdentifier: "showDetails", sender: nil)
+            performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }

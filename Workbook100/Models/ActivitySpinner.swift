@@ -10,7 +10,7 @@ import UIKit
 class ActivitySpinner {
     private var spinner = UIActivityIndicatorView()
     
-    init(style: UIActivityIndicatorView.Style = .medium, color: UIColor = .darkGray) {
+    init(style: UIActivityIndicatorView.Style = .medium, color: UIColor = .systemGray) {
         spinner.style = style
         spinner.color = color
     }

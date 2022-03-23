@@ -62,7 +62,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
 //            imageView.sd_setImage(with: image)
 //        }
         
-        if let url = URL(string: model.imageURL) {
+        if let url = URL(string: model.imageURLs[0]) {
             print("Success loading image: \(url)")
             imageView.loadImage(at: url, completion: { print("Image loaded on thread: \(Thread.current)")})
         }
@@ -137,8 +137,9 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                            composition: items[row].composition,
                                            productDescription: items[row].productNameDescription,
                                            productFeatures: items[row].productFeatures,
-                                           imageURL: items[row].imageURL,
+                                           primaryImageURL: items[row].primaryImageURL,
                                            thumbURL: items[row].thumbURL,
+                                           imageURLs: items[row].imageURLs,
                                            //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
                                            image: nil)
             
@@ -185,8 +186,20 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                           K.FIR.composition: model.composition,
                                           K.FIR.productDescription: model.productDescription,
                                           K.FIR.productFeatures: model.productFeatures,
-                                          K.FIR.imageURL: model.imageURL,
-                                          K.FIR.thumbURL: model.thumbURL]
+                                          K.FIR.primaryImageURL: model.primaryImageURL,
+                                          K.FIR.thumbURL: model.thumbURL,
+                                          K.FIR.imageURL0: model.imageURLs[0],
+                                          K.FIR.imageURL1: model.imageURLs[1],
+                                          K.FIR.imageURL2: model.imageURLs[2],
+                                          K.FIR.imageURL3: model.imageURLs[3],
+                                          K.FIR.imageURL4: model.imageURLs[4],
+                                          K.FIR.imageURL5: model.imageURLs[5],
+                                          K.FIR.imageURL6: model.imageURLs[6],
+                                          K.FIR.imageURL7: model.imageURLs[7],
+                                          K.FIR.imageURL8: model.imageURLs[8],
+                                          K.FIR.imageURL9: model.imageURLs[9],
+                                          K.FIR.imageURL10: model.imageURLs[10],
+            ]
             let ref = Database.database().reference().child(K.ProductFilter.isFiltered ? K.filteredItems[row].skuCode : K.items[row].skuCode)
             ref.setValue(itemRef)
         }

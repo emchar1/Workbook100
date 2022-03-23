@@ -52,6 +52,7 @@ class CollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented.")
     }
     
+    //THIS PREVENTS IMAGES FROM RECYCLE LOADING, WHICH LOOKS WEIRD!!
     override func prepareForReuse() {
         super.prepareForReuse()
 
