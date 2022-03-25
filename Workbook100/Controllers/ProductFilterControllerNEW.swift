@@ -53,14 +53,15 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var labelProductClass: UILabel!
     @IBOutlet weak var labelProductDetails: UILabel!
     
+    let s = "; "
     var selectedCollection: String! { didSet { labelCollection.text = selectedCollection }}
-    var selectedLaunchSeason: [String]! { didSet { labelLaunchSeason.text = selectedLaunchSeason.joined(separator: K.ProductFilter.multiSeparator + " ") }}
-    var selectedProductCategory: [String]! { didSet { labelProductCategory.text = selectedProductCategory.joined(separator: K.ProductFilter.multiSeparator + " ") }}
-    var selectedProductType: [String]! { didSet { labelProductType.text = selectedProductType.joined(separator: K.ProductFilter.multiSeparator + " ") }}
-    var selectedProductSubtype: [String]! { didSet { labelProductSubtype.text = selectedProductSubtype.joined(separator: K.ProductFilter.multiSeparator + " ") }}
-    var selectedDivision: [String]! { didSet { labelDivision.text = selectedDivision.joined(separator: K.ProductFilter.multiSeparator + " ") }}
-    var selectedProductClass: [String]! { didSet { labelProductClass.text = selectedProductClass.joined(separator: K.ProductFilter.multiSeparator + " ") }}
-    var selectedProductDetails: [String]! { didSet { labelProductDetails.text = selectedProductDetails.joined(separator: K.ProductFilter.multiSeparator + " ") }}
+    var selectedLaunchSeason: [String]! { didSet { labelLaunchSeason.text = selectedLaunchSeason.joined(separator: s) }}
+    var selectedProductCategory: [String]! { didSet { labelProductCategory.text = selectedProductCategory.joined(separator: s) }}
+    var selectedProductType: [String]! { didSet { labelProductType.text = selectedProductType.joined(separator: s) }}
+    var selectedProductSubtype: [String]! { didSet { labelProductSubtype.text = selectedProductSubtype.joined(separator: s) }}
+    var selectedDivision: [String]! { didSet { labelDivision.text = selectedDivision.joined(separator: s) }}
+    var selectedProductClass: [String]! { didSet { labelProductClass.text = selectedProductClass.joined(separator: s) }}
+    var selectedProductDetails: [String]! { didSet { labelProductDetails.text = selectedProductDetails.joined(separator: s) }}
     
     var selectedSection: Int?
     var delegate: ProductFilterControllerNEWDelegate?

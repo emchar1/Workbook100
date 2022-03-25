@@ -93,7 +93,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         sku4Label.text = model.sizes[4].colorwaySKU
         sku5Label.text = model.sizes[5].colorwaySKU
         sku6Label.text = model.sizes[6].colorwaySKU
-        savedListsLabel.text = model.savedLists?.joined(separator: "|")
+        savedListsLabel.text = model.savedLists?.joined(separator: K.ProductFilter.multiSeparator)
     }
     
     

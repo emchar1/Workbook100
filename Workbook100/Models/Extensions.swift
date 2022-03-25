@@ -98,6 +98,14 @@ extension UIColor {
 }
 
 
+// MARK: - String
+
+extension String {
+    func wrap(in separator: String) -> String {
+        return separator + self + separator
+    }
+}
+
 
 /*
 - 2/18 RayWenderlich Dismiss Keyboard

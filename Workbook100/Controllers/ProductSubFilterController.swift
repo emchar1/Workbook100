@@ -62,10 +62,11 @@ class ProductSubFilterController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubFilterCell", for: indexPath) as! ProductSubFilterCell
-        let selectedItemsFlat = K.ProductFilter.multiSeparator + selectedItems.joined(separator: K.ProductFilter.multiSeparator) + K.ProductFilter.multiSeparator
+        let s = K.ProductFilter.multiSeparator
+        let selectedItemsFlat = selectedItems.joined(separator: s).wrap(in: s)
 
         cell.label.text = selections[indexPath.row]
-        cell.accessoryType = selectedItemsFlat.contains(K.ProductFilter.multiSeparator + selections[indexPath.row] + K.ProductFilter.multiSeparator) ? .checkmark : .none
+        cell.accessoryType = selectedItemsFlat.contains(selections[indexPath.row].wrap(in: s)) ? .checkmark : .none
         cell.selectionStyle = isSingle ? .default : .none
 
         if !isSingle && indexPath.row == 0 {

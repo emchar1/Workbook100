@@ -398,12 +398,15 @@ extension WorkbookViewController {
                      selectedDivision: [String],
                      selectedProductClass: [String],
                      selectedProductDetails: [String]) {
-        
+                
         guard K.items.count > 0 else {
             print("Items still loading. Exiting early.")
             delegate?.collapsePanel()
             return
         }
+        
+
+        let s = K.ProductFilter.multiSeparator
         
         //Set the global constant variables, i.e. make the changes "permanent."
         K.ProductFilter.selectedCollection = selectedCollection
@@ -419,15 +422,24 @@ extension WorkbookViewController {
 
         K.filteredItems = K.items.filter {
             (selectedCollection == K.ProductFilter.wildcard ? true : $0.collection == selectedCollection) &&
+            
             (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
+            
             (selectedEssential == K.ProductFilter.segementedBoth ? true : $0.essential == (selectedEssential == K.ProductFilter.segementedOn)) &&
-            (selectedLaunchSeason.joined().contains(K.ProductFilter.wildcard) ? true : selectedLaunchSeason.joined().contains($0.launchSeason)) &&
-            (selectedProductCategory.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductCategory.joined().contains($0.productCategory)) &&
-            (selectedProductType.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductType.joined().contains($0.productType)) &&
-            (selectedProductSubtype.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductSubtype.joined().contains($0.productSubtype)) &&
-            (selectedDivision.joined().contains(K.ProductFilter.wildcard) ? true : selectedDivision.joined().contains($0.division)) &&
-            (selectedProductClass.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductClass.joined().contains($0.youthWomen)) &&
-            (selectedProductDetails.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductDetails.joined().contains($0.productDetails))
+            
+            (selectedLaunchSeason.joined().contains(K.ProductFilter.wildcard) ? true : selectedLaunchSeason.joined(separator: s).wrap(in: s).contains($0.launchSeason.wrap(in: s))) &&
+            
+            (selectedProductCategory.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductCategory.joined(separator: s).wrap(in: s).contains($0.productCategory.wrap(in: s))) &&
+            
+            (selectedProductType.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductType.joined(separator: s).wrap(in: s).contains($0.productType.wrap(in: s))) &&
+            
+            (selectedProductSubtype.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductSubtype.joined(separator: s).wrap(in: s).contains($0.productSubtype.wrap(in: s))) &&
+            
+            (selectedDivision.joined().contains(K.ProductFilter.wildcard) ? true : selectedDivision.joined(separator: s).wrap(in: s).contains($0.division.wrap(in: s))) &&
+            
+            (selectedProductClass.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductClass.joined(separator: s).wrap(in: s).contains($0.youthWomen.wrap(in: s))) &&
+            
+            (selectedProductDetails.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductDetails.joined(separator: s).wrap(in: s).contains($0.productDetails.wrap(in: s)))
         }
                 
         //Show a "No results found" label if the filtered list is empty

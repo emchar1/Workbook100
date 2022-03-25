@@ -34,7 +34,7 @@ struct K {
         static let segementedBoth = 0
         static let segementedOn = 1
         static let segementedOff = 2
-        static let multiSeparator = ";"
+        static let multiSeparator = "|"
         
         static let selectionCollection: [String] = [wildcard, "2023 - Spring"]
         static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
