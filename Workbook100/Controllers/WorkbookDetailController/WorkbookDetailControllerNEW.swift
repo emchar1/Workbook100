@@ -141,7 +141,8 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                            thumbURL: items[row].thumbURL,
                                            imageURLs: items[row].imageURLs,
                                            //This needs to be Storage.storage().reference.child(K.items[row].productCategory + ".png"))
-                                           image: nil)
+                                           image: nil,
+                                           savedLists: nil)
             
             if K.ProductFilter.isFiltered {
                 K.filteredItems[row] = newModel

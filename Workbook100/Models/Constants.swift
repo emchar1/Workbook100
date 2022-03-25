@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 struct K {
     static var items: [CollectionModel] = []
@@ -34,6 +35,48 @@ struct K {
         static let segementedOn = 1
         static let segementedOff = 2
         static let multiSeparator = ";"
+        
+        static let selectionCollection: [String] = [wildcard, "2023 - Spring"]
+        static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
+        static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
+        static let selectionSeasonsCarried: [String] = [wildcard, "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22", "SP23"]
+        static let selectionProductCategory: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Snow Goggle Accessories", "Snow Goggles", "Sunglass Parts and Lenses", "Sunglasses"]
+        static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
+        static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
+        static let selectionProductSubtype: [String] = [wildcard, "Active Performance", "Athletic", "Base Layers", "Camper", "Casual", "Clear", "Dual", "Dual Pane", "Dual Pane Sonic Bumps", "Dual Pane Vented", "Elbow", "Flexfit", "Full Face", "HiPER", "Injected", "Jersey", "Knee", "Laminated", "Liners", "Mirror", "Misc.", "Mud", "Nose Bridges", "Nose Pads", "Open Face", "Pants", "Performance", "Perimeter Seal", "Photochromic", "Premium", "Regular", "Replacement Lenses", "Screws", "Shield", "Short Fingers", "Shorts", "Sleeves", "Snapback", "Sonic Bumps", "Spare Parts", "Sport Performance", "Standard", "Tech", "Trucker", "Unstructured", "Upper", "Varied", "Visors", "Water Resistant", "Waterproof", "Windproof", "Wool"]
+        static let selectionProductClass: [String] = [wildcard, "Mens", "Miscellaneous", "Unisex", "Womens", "Youth"]
+        static let selectionProductDetails: [String] = [wildcard, "210g/m2", "250g/m2 mini loop French Terry", "280g/2", "280g/m2", "280g/m2 (330g/m2 after wash)", "290g/m2 Interlock", "330g/m2", "Fit ( AJ) Trucker, Flat Visor (230 squared), 5 Panel", "Fit ( J ), Visor 909 Flat (rounded), 6 Panel", "Fit ( LYP), Curved Visor (230 CV-3), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 6 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 5 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 6 Panel", "Fit (AJ) Trucker, Visor (Flat 230 squared), 5 Panel", "Fit (AJ), Flat Visor (230 squared), 6 Panel", "Fit (AJ), Flat Visor 230 (squared), 6 Panel", "Fit (AJ), Visor (Flat), 6 Panel", "Fit (LYP), Flat Visor 230 (squared), 5 Panel", "Fit (LYP), Visor Flat 230 (squared), 5 Panel", "Fit (X) Trucker, Visor (Curve 230 CV-3), 5 Panel", "Fit (X), Visor (Curve 230 CV-3), 5 Panel"]
+
+        static var selectedCollection: String = wildcard
+        static var selectedNew: Int = segementedBoth
+        static var selectedEssential: Int = segementedBoth
+        static var selectedLaunchSeason: [String] = [wildcard]
+        static var selectedSeasonsCarried: [String] = [wildcard]
+        static var selectedProductDepartment: [String] = [wildcard]
+        static var selectedProductCategory: [String] = [wildcard]
+        static var selectedProductType: [String] = [wildcard]
+        static var selectedProductSubtype: [String] = [wildcard]
+        static var selectedDivision: [String] = [wildcard]
+        static var selectedProductClass: [String] = [wildcard]
+        static var selectedProductDetails: [String] = [wildcard]
+        
+        static var isFiltered: Bool {
+            return !(selectedCollection == wildcard &&
+                     selectedNew == segementedBoth &&
+                     selectedEssential == segementedBoth &&
+                     selectedLaunchSeason == [wildcard] &&
+                     selectedSeasonsCarried == [wildcard] &&
+                     selectedProductDepartment == [wildcard] &&
+                     selectedProductCategory == [wildcard] &&
+                     selectedProductType == [wildcard] &&
+                     selectedProductSubtype == [wildcard] &&
+                     selectedDivision == [wildcard] &&
+                     selectedProductClass == [wildcard] &&
+                     selectedProductDetails == [wildcard])
+        }
+        
+        
+        // MARK: - Binary Tree Filter List
         
         static var categories: Category<String> {
             let collection = Category("2023 - Spring")
@@ -295,97 +338,66 @@ struct K {
             
             //Sunglass Parts and Lenses
             let sunglassPartsAndLenses = Category("Sunglass Parts and Lenses")
-            let sunglassPartsAndLenses_ = Category("")
+//            let sunglassPartsAndLenses_ = Category("")
             let sunglassPartsAndLenses_noseParts = Category("Nose Parts")
             let sunglassPartsAndLenses_replacementLenses = Category("Replacement Lenses")
             collection.add(sunglassPartsAndLenses)
-            sunglassPartsAndLenses.add(sunglassPartsAndLenses_)
-            sunglassPartsAndLenses_.add(Category(""))
+//            sunglassPartsAndLenses.add(sunglassPartsAndLenses_)
+//            sunglassPartsAndLenses_.add(Category(""))
 //            sunglassPartsAndLenses_.search("")!.add(Category(""))
-            sunglassPartsAndLenses_.add(Category("Replacement Lenses"))
-            sunglassPartsAndLenses_.search("Replacement Lenses")!.add(Category(""))
+//            sunglassPartsAndLenses_.add(Category("Replacement Lenses"))
+//            sunglassPartsAndLenses_.search("Replacement Lenses")!.add(Category(""))
             sunglassPartsAndLenses.add(sunglassPartsAndLenses_noseParts)
             sunglassPartsAndLenses_noseParts.add(Category("Nose Bridges"))
-            sunglassPartsAndLenses_noseParts.search("Nose Bridges")!.add(Category(""))
+//            sunglassPartsAndLenses_noseParts.search("Nose Bridges")!.add(Category(""))
             sunglassPartsAndLenses_noseParts.add(Category("Nose Pads"))
-            sunglassPartsAndLenses_noseParts.search("Nose Pads")!.add(Category(""))
+//            sunglassPartsAndLenses_noseParts.search("Nose Pads")!.add(Category(""))
             sunglassPartsAndLenses.add(snowGoggleAccessories_replacementLenses)
             sunglassPartsAndLenses_replacementLenses.add(Category("Dual"))
-            sunglassPartsAndLenses_replacementLenses.search("Dual")!.add(Category(""))
+//            sunglassPartsAndLenses_replacementLenses.search("Dual")!.add(Category(""))
             sunglassPartsAndLenses_replacementLenses.add(Category("Shield"))
-            sunglassPartsAndLenses_replacementLenses.search("Shield")!.add(Category(""))
+//            sunglassPartsAndLenses_replacementLenses.search("Shield")!.add(Category(""))
             
             //Sunglasses
             let sunglasses = Category("Sunglasses")
-            let sunglasses_ = Category("")
+//            let sunglasses_ = Category("")
             let sunglasses_accessories = Category("Accessories")
             let sunglasses_noseParts = Category("Nose Parts")
             let sunglasses_sunglassSystem = Category("Sunglass System")
             collection.add(sunglasses)
-            sunglasses.add(sunglasses_)
-            sunglasses_.add(Category(""))
+//            sunglasses.add(sunglasses_)
+//            sunglasses_.add(Category(""))
 //            sunglasses_.search("")!.add(Category(""))
-            sunglasses_.add(Category("Active Performance"))
-            sunglasses_.search("Active Performance")!.add(Category(""))
-            sunglasses_.add(Category("Sport Performance"))
-            sunglasses_.search("Sport Performance")!.add(Category(""))
+//            sunglasses_.add(Category("Active Performance"))
+//            sunglasses_.search("Active Performance")!.add(Category(""))
+//            sunglasses_.add(Category("Sport Performance"))
+//            sunglasses_.search("Sport Performance")!.add(Category(""))
             sunglasses.add(sunglasses_accessories)
-            sunglasses_accessories.add(Category(""))
+//            sunglasses_accessories.add(Category(""))
 //            sunglasses_accessories.search("")!.add(Category(""))
             sunglasses.add(sunglasses_noseParts)
             sunglasses_noseParts.add(Category("Nose Bridges"))
-            sunglasses_noseParts.search("Nose Bridges")!.add(Category(""))
+//            sunglasses_noseParts.search("Nose Bridges")!.add(Category(""))
             sunglasses.add(sunglasses_sunglassSystem)
             sunglasses_sunglassSystem.add(Category("Active Performance"))
-            sunglasses_sunglassSystem.search("Active Performance")!.add(Category(""))
+//            sunglasses_sunglassSystem.search("Active Performance")!.add(Category(""))
             sunglasses_sunglassSystem.add(Category("Sport Performance"))
-            sunglasses_sunglassSystem.search("Sport Performance")!.add(Category(""))
+//            sunglasses_sunglassSystem.search("Sport Performance")!.add(Category(""))
 
             return collection
         }
         
-        static let selectionCollection: [String] = [wildcard, "2023 - Spring"]
-        static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
-        static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
-        static let selectionSeasonsCarried: [String] = [wildcard, "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22", "SP23"]
-        static let selectionProductCategory: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Snow Goggle Accessories", "Snow Goggles", "Sunglass Parts and Lenses", "Sunglasses"]
-        static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
-        static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
-        static let selectionProductSubtype: [String] = [wildcard, "Active Performance", "Athletic", "Base Layers", "Camper", "Casual", "Clear", "Dual", "Dual Pane", "Dual Pane Sonic Bumps", "Dual Pane Vented", "Elbow", "Flexfit", "Full Face", "HiPER", "Injected", "Jersey", "Knee", "Laminated", "Liners", "Mirror", "Misc.", "Mud", "Nose Bridges", "Nose Pads", "Open Face", "Pants", "Performance", "Perimeter Seal", "Photochromic", "Premium", "Regular", "Replacement Lenses", "Screws", "Shield", "Short Fingers", "Shorts", "Sleeves", "Snapback", "Sonic Bumps", "Spare Parts", "Sport Performance", "Standard", "Tech", "Trucker", "Unstructured", "Upper", "Varied", "Visors", "Water Resistant", "Waterproof", "Windproof", "Wool"]
-        static let selectionProductClass: [String] = [wildcard, "Mens", "Miscellaneous", "Unisex", "Womens", "Youth"]
-        static let selectionProductDetails: [String] = [wildcard, "210g/m2", "250g/m2 mini loop French Terry", "280g/2", "280g/m2", "280g/m2 (330g/m2 after wash)", "290g/m2 Interlock", "330g/m2", "Fit ( AJ) Trucker, Flat Visor (230 squared), 5 Panel", "Fit ( J ), Visor 909 Flat (rounded), 6 Panel", "Fit ( LYP), Curved Visor (230 CV-3), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 6 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 5 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 6 Panel", "Fit (AJ) Trucker, Visor (Flat 230 squared), 5 Panel", "Fit (AJ), Flat Visor (230 squared), 6 Panel", "Fit (AJ), Flat Visor 230 (squared), 6 Panel", "Fit (AJ), Visor (Flat), 6 Panel", "Fit (LYP), Flat Visor 230 (squared), 5 Panel", "Fit (LYP), Visor Flat 230 (squared), 5 Panel", "Fit (X) Trucker, Visor (Curve 230 CV-3), 5 Panel", "Fit (X), Visor (Curve 230 CV-3), 5 Panel"]
-
-
-        static var selectedCollection: String = wildcard
-        static var selectedNew: Int = segementedBoth
-        static var selectedEssential: Int = segementedBoth
-        static var selectedLaunchSeason: [String] = [wildcard]
-        static var selectedSeasonsCarried: [String] = [wildcard]
-        static var selectedProductDepartment: [String] = [wildcard]
-        static var selectedProductCategory: [String] = [wildcard]
-        static var selectedProductType: [String] = [wildcard]
-        static var selectedProductSubtype: [String] = [wildcard]
-        static var selectedDivision: [String] = [wildcard]
-        static var selectedProductClass: [String] = [wildcard]
-        static var selectedProductDetails: [String] = [wildcard]
-        
-        static var isFiltered: Bool {
-            return !(selectedCollection == wildcard &&
-                     selectedNew == segementedBoth &&
-                     selectedEssential == segementedBoth &&
-                     selectedLaunchSeason == [wildcard] &&
-                     selectedSeasonsCarried == [wildcard] &&
-                     selectedProductDepartment == [wildcard] &&
-                     selectedProductCategory == [wildcard] &&
-                     selectedProductType == [wildcard] &&
-                     selectedProductSubtype == [wildcard] &&
-                     selectedDivision == [wildcard] &&
-                     selectedProductClass == [wildcard] &&
-                     selectedProductDetails == [wildcard])
-        }
     }
+}
     
+
+
+// MARK: - Firebase stuff
+
+extension K {
     struct FIR {
+        
+        // IMPORTANT: - When adding to this list, MUST add to the updateFirebaseRecord() function down below!!!
         static let division = "Division"
         static let collection = "Collection"
         static let productNameDescription = "ProductNameDescription"
@@ -435,5 +447,64 @@ struct K {
         static let imageURL8 = "imageURL8"
         static let imageURL9 = "imageURL9"
         static let imageURL10 = "imageURL10"
+        static let savedLists = "savedLists"
+    }
+    
+    //Update lists in tandem!!!
+    static func updateFirebaseRecord(model: CollectionModel, databaseReference: DatabaseReference!) {
+        let itemRef: [String: Any?] = [K.FIR.division: model.division,
+                                      K.FIR.collection: model.collection,
+                                      K.FIR.productNameDescription: model.productNameDescription,
+                                      K.FIR.productNameDescriptionSecondary: model.productNameDescriptionSecondary,
+                                      K.FIR.productCategory: model.productCategory,
+                                      K.FIR.productDepartment: model.productDepartment,
+                                      K.FIR.launchSeason: model.launchSeason,
+                                      K.FIR.seasonsCarried: model.seasonsCarried,
+                                      K.FIR.productType: model.productType,
+                                      K.FIR.productSubtype: model.productSubtype,
+                                      K.FIR.productDetails: model.productDetails,
+                                      K.FIR.youthWomen: model.youthWomen,
+                                      K.FIR.colorway: model.colorway,
+                                      K.FIR.carryOver: model.carryOver ? "TRUE" : "FALSE",
+                                      K.FIR.essential: model.essential ? "TRUE" : "FALSE",
+                                      K.FIR.skuCode: model.skuCode,
+                                      K.FIR.colorwaySKU0: model.sizes[0].colorwaySKU ?? "",
+                                      K.FIR.colorwaySKU1: model.sizes[1].colorwaySKU ?? "",
+                                      K.FIR.colorwaySKU2: model.sizes[2].colorwaySKU ?? "",
+                                      K.FIR.colorwaySKU3: model.sizes[3].colorwaySKU ?? "",
+                                      K.FIR.colorwaySKU4: model.sizes[4].colorwaySKU ?? "",
+                                      K.FIR.colorwaySKU5: model.sizes[5].colorwaySKU ?? "",
+                                      K.FIR.colorwaySKU6: model.sizes[6].colorwaySKU ?? "",
+                                      K.FIR.size0: model.sizes[0].size ?? "",
+                                      K.FIR.size1: model.sizes[1].size ?? "",
+                                      K.FIR.size2: model.sizes[2].size ?? "",
+                                      K.FIR.size3: model.sizes[3].size ?? "",
+                                      K.FIR.size4: model.sizes[4].size ?? "",
+                                      K.FIR.size5: model.sizes[5].size ?? "",
+                                      K.FIR.size6: model.sizes[6].size ?? "",
+                                      K.FIR.usRetailMSRP: model.usMSRP,
+                                      K.FIR.euRetailMSRP: model.euMSRP,
+                                      K.FIR.countryCode: model.countryCode,
+                                      K.FIR.composition: model.composition,
+                                      K.FIR.productDescription: model.productDescription,
+                                      K.FIR.productFeatures: model.productFeatures,
+                                      K.FIR.primaryImageURL: model.primaryImageURL,
+                                      K.FIR.thumbURL: model.thumbURL,
+                                      K.FIR.imageURL0: model.imageURLs[0],
+                                      K.FIR.imageURL1: model.imageURLs[1],
+                                      K.FIR.imageURL2: model.imageURLs[2],
+                                      K.FIR.imageURL3: model.imageURLs[3],
+                                      K.FIR.imageURL4: model.imageURLs[4],
+                                      K.FIR.imageURL5: model.imageURLs[5],
+                                      K.FIR.imageURL6: model.imageURLs[6],
+                                      K.FIR.imageURL7: model.imageURLs[7],
+                                      K.FIR.imageURL8: model.imageURLs[8],
+                                      K.FIR.imageURL9: model.imageURLs[9],
+                                      K.FIR.imageURL10: model.imageURLs[10],
+                                      K.FIR.savedLists: model.savedLists
+        ]
+        
+        //Now, SAVE!!!
+        databaseReference.setValue(itemRef)
     }
 }

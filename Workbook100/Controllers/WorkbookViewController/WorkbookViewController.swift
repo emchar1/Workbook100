@@ -166,7 +166,8 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                            obj[K.FIR.imageURL8] as! String,
                                                            obj[K.FIR.imageURL9] as! String,
                                                            obj[K.FIR.imageURL10] as! String],
-                                               image: imageRef)
+                                               image: imageRef,
+                                               savedLists: obj[K.FIR.savedLists] as? [String])
                     
                     K.items.append(item)
                 }
@@ -240,6 +241,42 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                 if let pdfData = pdfFilePath.pdfData {
                     self.present(UIActivityViewController(activityItems: [pdfData], applicationActivities: []), animated: true, completion: nil)
                 }
+            }),
+            
+            UIAction(title: "Save List", image: nil, handler: { action in
+                guard K.ProductFilter.selectedProductCategory != [K.ProductFilter.wildcard] else {
+                    let alert = UIAlertController(title: "Error", message: "Please select a Product Category in the filters before proceeding", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+                    
+                    return
+                }
+                
+                
+                let alert = UIAlertController(title: "Save", message: "Enter a name for your list", preferredStyle: .alert)
+                alert.addTextField()
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
+                    let textString = alert!.textFields![0].text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+                    guard textString.count > 0 else { return }
+                    
+                    for item in (K.ProductFilter.isFiltered ? K.filteredItems : K.items) {
+                        if item.savedLists != nil {
+                            item.savedLists!.append(textString)
+                        }
+                        else {
+                            item.savedLists = [textString]
+                        }
+                                                
+                        //Save to Firebase
+                        K.updateFirebaseRecord(model: item,
+                                               databaseReference: Database.database().reference().child(item.skuCode))
+                    }
+                }))
+
+                self.present(alert, animated: true)
+                
+                print("Saving list...")
             })
             
         ]
@@ -335,8 +372,8 @@ extension WorkbookViewController {
     //Delegate Flow Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let productCategory = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory
-        var multiplier: CGFloat = 1
+//        let productCategory = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory
+        let multiplier: CGFloat = 1
         
 //        if productCategory == "Gloves" {
 //            multiplier = 1.5
