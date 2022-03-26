@@ -80,10 +80,10 @@
                             <tableViewSection headerTitle="Collection" id="KD2-h8-uES" userLabel="Collection">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UWe-UC-c4l" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="49" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="49" width="350" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UWe-UC-c4l" id="f2i-1z-Ghg">
-                                            <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZf-e7-7q9">
@@ -105,14 +105,14 @@
                             <tableViewSection headerTitle="New" id="SdW-v9-D9x">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="XIC-Pb-AxB" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="142.33333396911621" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="142.66666603088379" width="350" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XIC-Pb-AxB" id="ev9-a8-usi">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jOD-aJ-LYL">
-                                                    <rect key="frame" x="20" y="6.3333333333333321" width="310" height="31.999999999999996"/>
+                                                    <rect key="frame" x="20" y="6.6666666666666679" width="310" height="32"/>
                                                     <segments>
                                                         <segment title="Any"/>
                                                         <segment title="New"/>
@@ -132,7 +132,7 @@
                             <tableViewSection headerTitle="Essential" id="kc3-Vq-YOi">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="nIz-Ot-lk2" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="235.66666793823242" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="236.33333206176758" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nIz-Ot-lk2" id="X8h-b4-HX5">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="43.666667938232422"/>
@@ -159,7 +159,7 @@
                             <tableViewSection headerTitle="Launch Season" id="bVC-cf-TGF" userLabel="Launch Season">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qmc-fX-dve" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="329.00000190734863" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="329.66666603088379" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qmc-fX-dve" id="Wi0-4X-9fg">
                                             <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
@@ -184,7 +184,7 @@
                             <tableViewSection headerTitle="Product Category" id="PkX-XM-dzI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9mH-he-kUf" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="422.33333587646484" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="423" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9mH-he-kUf" id="TcS-nb-hRe">
                                             <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
@@ -209,7 +209,7 @@
                             <tableViewSection headerTitle="Style Type" id="EY1-WY-k7X">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="WxG-Ao-nr6" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="515.66666984558105" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="516.33333396911621" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WxG-Ao-nr6" id="1aY-mg-1Do">
                                             <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
@@ -234,7 +234,7 @@
                             <tableViewSection headerTitle="Sub Type" id="tUc-i9-kN4">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eac-LT-iG2" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="609.00000381469727" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="609.66666793823242" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eac-LT-iG2" id="brL-Os-jIA">
                                             <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
@@ -259,7 +259,7 @@
                             <tableViewSection headerTitle="Division" id="uJv-7I-DUH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3UA-pB-tkY" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="702.33333778381348" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="703.00000190734863" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3UA-pB-tkY" id="bPR-hT-6l0">
                                             <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
@@ -284,7 +284,7 @@
                             <tableViewSection headerTitle="Product Class" id="811-Ah-lzg">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="8SW-eV-BtV" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="795.66667175292969" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="796.33333587646484" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8SW-eV-BtV" id="JrJ-LZ-hWH">
                                             <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
@@ -309,7 +309,7 @@
                             <tableViewSection headerTitle="Product Details" id="Vbr-RD-0m2">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="r0A-Ea-Icy" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="889.0000057220459" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="889.66666984558105" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r0A-Ea-Icy" id="W9A-Uu-nhb">
                                             <rect key="frame" x="0.0" y="0.0" width="321.33333333333331" height="43.666667938232422"/>
@@ -334,16 +334,16 @@
                             <tableViewSection id="grA-CN-MUE" userLabel="Apply/Clear Filters">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="x2d-jJ-Jfe" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="968.66667366027832" width="350" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="969.33333778381348" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x2d-jJ-Jfe" id="R0N-aT-K43">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-qI-Y9u">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-qI-Y9u">
                                                     <rect key="frame" x="20" y="-8.3333333333333321" width="240" height="60.333333333333329"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gtt-tH-A7V">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gtt-tH-A7V">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="60.333333333333336"/>
                                                             <color key="backgroundColor" systemColor="labelColor"/>
                                                             <constraints>
@@ -363,7 +363,7 @@
                                                                 <action selector="applyButtonTapped:" destination="lrO-AL-zg7" eventType="touchUpInside" id="Cfv-C0-wQ4"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQV-bO-eva" userLabel="Clear Filters">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQV-bO-eva" userLabel="Clear Filters">
                                                             <rect key="frame" x="120" y="0.0" width="120" height="60.333333333333336"/>
                                                             <color key="backgroundColor" systemColor="labelColor"/>
                                                             <constraints>
@@ -1580,10 +1580,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Bw-Sd-tRW">
-                                                    <rect key="frame" x="20" y="12.333333333333336" width="350" height="19.333333333333329"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Bw-Sd-tRW">
+                                                    <rect key="frame" x="20" y="12.333333333333334" width="350" height="19.333333333333329"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" ambiguous="YES" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kz0-j5-l3H">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kz0-j5-l3H">
                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="19.333333333333332"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="ZAh-EL-tQo"/>
@@ -1592,7 +1592,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtb-qN-2Kb">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtb-qN-2Kb">
                                                             <rect key="frame" x="125" y="0.0" width="225" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
@@ -1615,10 +1615,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uLH-EY-9G4">
-                                                    <rect key="frame" x="20" y="12.333333333333336" width="350" height="19.333333333333329"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLH-EY-9G4">
+                                                    <rect key="frame" x="20" y="12.333333333333334" width="350" height="19.333333333333329"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" ambiguous="YES" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLg-X2-TMe">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLg-X2-TMe">
                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="19.333333333333332"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="M7Y-NM-Hpt"/>
@@ -1627,7 +1627,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6k-Xo-3kJ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6k-Xo-3kJ">
                                                             <rect key="frame" x="125" y="0.0" width="225" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
@@ -1650,10 +1650,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rAl-8e-6Ip">
-                                                    <rect key="frame" x="20" y="12.333333333333336" width="350" height="19.333333333333329"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAl-8e-6Ip">
+                                                    <rect key="frame" x="20" y="12.333333333333334" width="350" height="19.333333333333329"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" ambiguous="YES" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWC-9u-6pp">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWC-9u-6pp">
                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="19.333333333333332"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="XYo-6p-EbQ"/>
@@ -1662,7 +1662,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBJ-SN-C7T">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBJ-SN-C7T">
                                                             <rect key="frame" x="125" y="0.0" width="225" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
@@ -1685,10 +1685,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6g-bD-xCG">
-                                                    <rect key="frame" x="20" y="12.333333333333336" width="350" height="19.333333333333329"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6g-bD-xCG">
+                                                    <rect key="frame" x="20" y="12.333333333333334" width="350" height="19.333333333333329"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" ambiguous="YES" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcz-0d-6Yz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcz-0d-6Yz">
                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="19.333333333333332"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="9tN-cA-De0"/>
@@ -1697,7 +1697,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teE-h6-hQN">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teE-h6-hQN">
                                                             <rect key="frame" x="125" y="0.0" width="225" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
@@ -1724,7 +1724,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NDs-Jm-eXM">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NDs-Jm-eXM">
                                                     <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ewP-Pf-XIr">
@@ -1737,11 +1737,11 @@
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="productImageCell" id="ZgZ-5r-tK9" customClass="ImageViewCollectionCell" customModule="Workbook100" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="36" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="BG6-GM-wHh">
+                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BG6-GM-wHh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R6e-Vr-iow">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R6e-Vr-iow">
                                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                     </imageView>
                                                                 </subviews>
@@ -1778,7 +1778,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJg-Ot-v2Y">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJg-Ot-v2Y">
                                                     <rect key="frame" x="20" y="12.333333333333334" width="350" height="19.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -1850,27 +1850,8 @@
                     <view key="view" contentMode="scaleToFill" id="Ng3-zv-wPR">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jf3-4F-Pyb">
-                                <rect key="frame" x="0.0" y="200" width="390" height="390"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fu-kb-9hu">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="734"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <viewLayoutGuide key="contentLayoutGuide" id="463-WP-gap"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="vMs-FA-M1U"/>
-                            </scrollView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="wtS-PQ-YXo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="jf3-4F-Pyb" firstAttribute="leading" secondItem="wtS-PQ-YXo" secondAttribute="leading" id="cQl-rI-h4L"/>
-                            <constraint firstItem="jf3-4F-Pyb" firstAttribute="trailing" secondItem="wtS-PQ-YXo" secondAttribute="trailing" id="f7X-uM-jJI"/>
-                            <constraint firstItem="jf3-4F-Pyb" firstAttribute="top" secondItem="wtS-PQ-YXo" secondAttribute="top" id="fxP-Q7-OjR"/>
-                            <constraint firstItem="wtS-PQ-YXo" firstAttribute="bottom" secondItem="jf3-4F-Pyb" secondAttribute="bottom" id="hw4-Rg-jJm"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PeD-e7-XPB">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="x1i-b0-S2P">
@@ -1879,14 +1860,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="imageView" destination="0Fu-kb-9hu" id="zw3-es-gZ9"/>
-                        <outlet property="scrollView" destination="jf3-4F-Pyb" id="CCA-T5-2VS"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYi-Ot-0DO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4261.538461538461" y="-518.24644549763036"/>
+            <point key="canvasLocation" x="4260" y="-518.24644549763036"/>
         </scene>
         <!--Workbook Detail Controller-->
         <scene sceneID="9o9-9K-gue">
