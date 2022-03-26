@@ -398,6 +398,7 @@ extension K {
     struct FIR {
         
         // IMPORTANT: - When adding to this list, MUST add to the updateFirebaseRecord() function down below!!!
+        static let hashNeedThis = "HashNeedThis"
         static let division = "Division"
         static let collection = "Collection"
         static let productNameDescription = "ProductNameDescription"
@@ -451,60 +452,66 @@ extension K {
     }
     
     //Update lists in tandem!!!
-    static func updateFirebaseRecord(model: CollectionModel, databaseReference: DatabaseReference!) {
-        let itemRef: [String: Any?] = [K.FIR.division: model.division,
-                                      K.FIR.collection: model.collection,
-                                      K.FIR.productNameDescription: model.productNameDescription,
-                                      K.FIR.productNameDescriptionSecondary: model.productNameDescriptionSecondary,
-                                      K.FIR.productCategory: model.productCategory,
-                                      K.FIR.productDepartment: model.productDepartment,
-                                      K.FIR.launchSeason: model.launchSeason,
-                                      K.FIR.seasonsCarried: model.seasonsCarried,
-                                      K.FIR.productType: model.productType,
-                                      K.FIR.productSubtype: model.productSubtype,
-                                      K.FIR.productDetails: model.productDetails,
-                                      K.FIR.youthWomen: model.youthWomen,
-                                      K.FIR.colorway: model.colorway,
-                                      K.FIR.carryOver: model.carryOver ? "TRUE" : "FALSE",
-                                      K.FIR.essential: model.essential ? "TRUE" : "FALSE",
-                                      K.FIR.skuCode: model.skuCode,
-                                      K.FIR.colorwaySKU0: model.sizes[0].colorwaySKU ?? "",
-                                      K.FIR.colorwaySKU1: model.sizes[1].colorwaySKU ?? "",
-                                      K.FIR.colorwaySKU2: model.sizes[2].colorwaySKU ?? "",
-                                      K.FIR.colorwaySKU3: model.sizes[3].colorwaySKU ?? "",
-                                      K.FIR.colorwaySKU4: model.sizes[4].colorwaySKU ?? "",
-                                      K.FIR.colorwaySKU5: model.sizes[5].colorwaySKU ?? "",
-                                      K.FIR.colorwaySKU6: model.sizes[6].colorwaySKU ?? "",
-                                      K.FIR.size0: model.sizes[0].size ?? "",
-                                      K.FIR.size1: model.sizes[1].size ?? "",
-                                      K.FIR.size2: model.sizes[2].size ?? "",
-                                      K.FIR.size3: model.sizes[3].size ?? "",
-                                      K.FIR.size4: model.sizes[4].size ?? "",
-                                      K.FIR.size5: model.sizes[5].size ?? "",
-                                      K.FIR.size6: model.sizes[6].size ?? "",
-                                      K.FIR.usRetailMSRP: model.usMSRP,
-                                      K.FIR.euRetailMSRP: model.euMSRP,
-                                      K.FIR.countryCode: model.countryCode,
-                                      K.FIR.composition: model.composition,
-                                      K.FIR.productDescription: model.productDescription,
-                                      K.FIR.productFeatures: model.productFeatures,
-                                      K.FIR.primaryImageURL: model.primaryImageURL,
-                                      K.FIR.thumbURL: model.thumbURL,
-                                      K.FIR.imageURL0: model.imageURLs[0],
-                                      K.FIR.imageURL1: model.imageURLs[1],
-                                      K.FIR.imageURL2: model.imageURLs[2],
-                                      K.FIR.imageURL3: model.imageURLs[3],
-                                      K.FIR.imageURL4: model.imageURLs[4],
-                                      K.FIR.imageURL5: model.imageURLs[5],
-                                      K.FIR.imageURL6: model.imageURLs[6],
-                                      K.FIR.imageURL7: model.imageURLs[7],
-                                      K.FIR.imageURL8: model.imageURLs[8],
-                                      K.FIR.imageURL9: model.imageURLs[9],
-                                      K.FIR.imageURL10: model.imageURLs[10],
-                                      K.FIR.savedLists: model.savedLists
-        ]
-        
-        //Now, SAVE!!!
-        databaseReference.setValue(itemRef)
+    static func updateFirebaseRecord(item: Any?, databaseReference: DatabaseReference!) {
+        if let model = item as? CollectionModel {
+            let itemRef: [String: Any?] = [K.FIR.hashNeedThis: model.hashNeedThis,
+                                           K.FIR.division: model.division,
+                                           K.FIR.collection: model.collection,
+                                           K.FIR.productNameDescription: model.productNameDescription,
+                                           K.FIR.productNameDescriptionSecondary: model.productNameDescriptionSecondary,
+                                           K.FIR.productCategory: model.productCategory,
+                                           K.FIR.productDepartment: model.productDepartment,
+                                           K.FIR.launchSeason: model.launchSeason,
+                                           K.FIR.seasonsCarried: model.seasonsCarried,
+                                           K.FIR.productType: model.productType,
+                                           K.FIR.productSubtype: model.productSubtype,
+                                           K.FIR.productDetails: model.productDetails,
+                                           K.FIR.youthWomen: model.youthWomen,
+                                           K.FIR.colorway: model.colorway,
+                                           K.FIR.carryOver: model.carryOver ? "TRUE" : "FALSE",
+                                           K.FIR.essential: model.essential ? "TRUE" : "FALSE",
+                                           K.FIR.skuCode: model.skuCode,
+                                           K.FIR.colorwaySKU0: model.sizes[0].colorwaySKU ?? "",
+                                           K.FIR.colorwaySKU1: model.sizes[1].colorwaySKU ?? "",
+                                           K.FIR.colorwaySKU2: model.sizes[2].colorwaySKU ?? "",
+                                           K.FIR.colorwaySKU3: model.sizes[3].colorwaySKU ?? "",
+                                           K.FIR.colorwaySKU4: model.sizes[4].colorwaySKU ?? "",
+                                           K.FIR.colorwaySKU5: model.sizes[5].colorwaySKU ?? "",
+                                           K.FIR.colorwaySKU6: model.sizes[6].colorwaySKU ?? "",
+                                           K.FIR.size0: model.sizes[0].size ?? "",
+                                           K.FIR.size1: model.sizes[1].size ?? "",
+                                           K.FIR.size2: model.sizes[2].size ?? "",
+                                           K.FIR.size3: model.sizes[3].size ?? "",
+                                           K.FIR.size4: model.sizes[4].size ?? "",
+                                           K.FIR.size5: model.sizes[5].size ?? "",
+                                           K.FIR.size6: model.sizes[6].size ?? "",
+                                           K.FIR.usRetailMSRP: model.usMSRP,
+                                           K.FIR.euRetailMSRP: model.euMSRP,
+                                           K.FIR.countryCode: model.countryCode,
+                                           K.FIR.composition: model.composition,
+                                           K.FIR.productDescription: model.productDescription,
+                                           K.FIR.productFeatures: model.productFeatures,
+                                           K.FIR.primaryImageURL: model.primaryImageURL,
+                                           K.FIR.thumbURL: model.thumbURL,
+                                           K.FIR.imageURL0: model.imageURLs[0],
+                                           K.FIR.imageURL1: model.imageURLs[1],
+                                           K.FIR.imageURL2: model.imageURLs[2],
+                                           K.FIR.imageURL3: model.imageURLs[3],
+                                           K.FIR.imageURL4: model.imageURLs[4],
+                                           K.FIR.imageURL5: model.imageURLs[5],
+                                           K.FIR.imageURL6: model.imageURLs[6],
+                                           K.FIR.imageURL7: model.imageURLs[7],
+                                           K.FIR.imageURL8: model.imageURLs[8],
+                                           K.FIR.imageURL9: model.imageURLs[9],
+                                           K.FIR.imageURL10: model.imageURLs[10],
+                                           K.FIR.savedLists: model.savedLists
+            ]
+
+            //Now, SAVE!!!
+            databaseReference.setValue(itemRef)
+        }
+        else {
+            databaseReference.updateChildValues(item as! [AnyHashable : Any])
+        }
     }
 }

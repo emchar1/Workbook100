@@ -20,6 +20,7 @@
 		EA2E387B27E97B3B00122877 /* WorkbookDetailTVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387A27E97B3B00122877 /* WorkbookDetailTVC2.swift */; };
 		EA2E387E27E9A74900122877 /* ImageViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */; };
 		EA2E388027EA939F00122877 /* WorkbookImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */; };
+		EA2E388427EE27D000122877 /* SavedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E388327EE27D000122877 /* SavedList.swift */; };
 		EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9A276D200F00D22042 /* CollectionCell.swift */; };
 		EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9C276D211000D22042 /* ImageLoader.swift */; };
 		EA5CE2DA27C743880071F015 /* HStackSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5CE2D927C743880071F015 /* HStackSelection.swift */; };
@@ -58,6 +59,7 @@
 		EA2E387A27E97B3B00122877 /* WorkbookDetailTVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookDetailTVC2.swift; sourceTree = "<group>"; };
 		EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCollectionCell.swift; sourceTree = "<group>"; };
 		EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookImageViewController.swift; sourceTree = "<group>"; };
+		EA2E388327EE27D000122877 /* SavedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedList.swift; sourceTree = "<group>"; };
 		EA53FF9A276D200F00D22042 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		EA53FF9C276D211000D22042 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		EA5CE2D927C743880071F015 /* HStackSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HStackSelection.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */,
 				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
 				EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */,
+				EA2E388327EE27D000122877 /* SavedList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */,
 				EAF68F2327C0CE4800F2EDE6 /* PDFExport.swift in Sources */,
 				EA5CE2DF27C8E1420071F015 /* ProductFilterControllerNEW.swift in Sources */,
+				EA2E388427EE27D000122877 /* SavedList.swift in Sources */,
 				EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */,
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
 				EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */,

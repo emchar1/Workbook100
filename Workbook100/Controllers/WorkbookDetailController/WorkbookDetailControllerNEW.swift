@@ -106,7 +106,8 @@ class WorkbookDetailControllerNEW: UITableViewController {
         if let row = items.firstIndex(where: { $0.id == model.id }) {
 
             //Update Model
-            let newModel = CollectionModel(division: items[row].division,
+            let newModel = CollectionModel(hashNeedThis: items[row].hashNeedThis,
+                                           division: items[row].division,
                                            collection: items[row].collection,
                                            productNameDescription: tfTitle.text!,
                                            productNameDescriptionSecondary: items[row].productNameDescriptionSecondary,
@@ -201,7 +202,7 @@ class WorkbookDetailControllerNEW: UITableViewController {
                                           K.FIR.imageURL9: model.imageURLs[9],
                                           K.FIR.imageURL10: model.imageURLs[10],
             ]
-            let ref = Database.database().reference().child(K.ProductFilter.isFiltered ? K.filteredItems[row].skuCode : K.items[row].skuCode)
+            let ref = Database.database().reference().child(K.ProductFilter.isFiltered ? K.filteredItems[row].hashNeedThis : K.items[row].hashNeedThis)
             ref.setValue(itemRef)
         }
         

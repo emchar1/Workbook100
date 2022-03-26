@@ -17,7 +17,15 @@ protocol WorkbookViewControllerDelegate {
 
 // MARK: - Workbook View Controller MAIN CLASS
 
-class WorkbookViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIPopoverPresentationControllerDelegate, MFMailComposeViewControllerDelegate, ProductFilterControllerNEWDelegate {
+class WorkbookViewController: UIViewController,
+                              UICollectionViewDelegate,
+                              UICollectionViewDataSource,
+                              UICollectionViewDelegateFlowLayout,
+                              UICollectionViewDragDelegate,
+                              UICollectionViewDropDelegate,
+                              UIPopoverPresentationControllerDelegate,
+                              MFMailComposeViewControllerDelegate,
+                              ProductFilterControllerNEWDelegate {
     
     // MARK: - Properties
     
@@ -120,9 +128,10 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
             
             for itemSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
                 if let obj = itemSnapshot.value as? [String: AnyObject] {
-                    let imageRef = Storage.storage().reference().child((obj[K.FIR.skuCode] as! String) + ".jpg")
+//                    let imageRef = Storage.storage().reference().child((obj[K.FIR.hashNeedThis] as! String) + ".jpg")
                     
-                    let item = CollectionModel(division: obj[K.FIR.division] as! String,
+                    let item = CollectionModel(hashNeedThis: obj[K.FIR.hashNeedThis] as! String,
+                                               division: obj[K.FIR.division] as! String,
                                                collection: obj[K.FIR.collection] as! String,
                                                productNameDescription: obj[K.FIR.productNameDescription] as! String,
                                                productNameDescriptionSecondary: obj[K.FIR.productNameDescriptionSecondary] as! String,
@@ -166,7 +175,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                            obj[K.FIR.imageURL8] as! String,
                                                            obj[K.FIR.imageURL9] as! String,
                                                            obj[K.FIR.imageURL10] as! String],
-                                               image: imageRef,
+                                               image: nil,//imageRef,
                                                savedLists: obj[K.FIR.savedLists] as? [String])
                     
                     K.items.append(item)
@@ -260,6 +269,7 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                     
                     guard textString.count > 0 else { return }
                     
+                    //The bulk of the code needs to happen here!
                     for item in (K.ProductFilter.isFiltered ? K.filteredItems : K.items) {
                         if item.savedLists != nil {
                             item.savedLists!.append(textString)
@@ -268,15 +278,14 @@ class WorkbookViewController: UIViewController, UICollectionViewDelegate, UIColl
                             item.savedLists = [textString]
                         }
                                                 
-                        //Save to Firebase
-                        K.updateFirebaseRecord(model: item,
-                                               databaseReference: Database.database().reference().child(item.skuCode))
+                        // FIXME:  - Would like to just update the savedLists and not the entire record, for speed.
+                        //Save to Firebase - this needs to happen on a background queue or use an activity spinner
+                        K.updateFirebaseRecord(item: [K.FIR.savedLists: item.savedLists],
+                                               databaseReference: Database.database().reference().child(item.hashNeedThis))
                     }
                 }))
-
-                self.present(alert, animated: true)
                 
-                print("Saving list...")
+                self.present(alert, animated: true)
             })
             
         ]

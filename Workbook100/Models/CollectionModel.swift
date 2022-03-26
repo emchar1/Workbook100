@@ -18,6 +18,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
 
     // MARK: - Properties
 
+    let hashNeedThis: String
     let division: String
     let collection: String
     let productNameDescription: String
@@ -69,8 +70,37 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     
     // MARK: - Initialization
     
-    init(division: String, collection: String, productNameDescription: String, productNameDescriptionSecondary: String, productCategory: String, productDepartment: String, launchSeason: String, seasonsCarried: String, productType: String, productSubtype: String, productDetails: String, youthWomen: String, colorway: String, carryOver: Bool, essential: Bool, skuCode: String, sizes: [Size], usMSRP: Double, euMSRP: Double, countryCode: String, composition: String, productDescription: String, productFeatures: String, primaryImageURL: String, thumbURL: String, imageURLs: [String], image: StorageReference?, savedLists: [String]?) {
+    init(hashNeedThis: String,
+         division: String,
+         collection: String,
+         productNameDescription: String,
+         productNameDescriptionSecondary: String,
+         productCategory: String,
+         productDepartment: String,
+         launchSeason: String,
+         seasonsCarried: String,
+         productType: String,
+         productSubtype: String,
+         productDetails: String,
+         youthWomen: String,
+         colorway: String,
+         carryOver: Bool,
+         essential: Bool,
+         skuCode: String,
+         sizes: [Size],
+         usMSRP: Double,
+         euMSRP: Double,
+         countryCode: String,
+         composition: String,
+         productDescription: String,
+         productFeatures: String,
+         primaryImageURL: String,
+         thumbURL: String,
+         imageURLs: [String],
+         image: StorageReference?,
+         savedLists: [String]?) {
 
+        self.hashNeedThis = hashNeedThis
         self.division = division
         self.collection = collection
         self.productNameDescription = productNameDescription
@@ -104,7 +134,8 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     }
     
     static func getBlankModel() -> CollectionModel {
-        let model = CollectionModel(division: K.ProductFilter.wildcard,
+        let model = CollectionModel(hashNeedThis: "00000-00000",
+                                    division: K.ProductFilter.wildcard,
                                     collection: K.ProductFilter.wildcard,
                                     productNameDescription: "Product Name Description",
                                     productNameDescriptionSecondary: "Product Name Description Secondary",
