@@ -11,6 +11,7 @@ import Firebase
 struct K {
     static var items: [CollectionModel] = []
     static var filteredItems: [CollectionModel] = []
+    static var savedLists: [String] = []
     
     struct CollectionCell {
         static var cellMultiplier: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
@@ -452,7 +453,9 @@ extension K {
     }
     
     //Update lists in tandem!!!
-    static func updateFirebaseRecord(item: Any?, databaseReference: DatabaseReference!) {
+    static func updateFirebaseRecord(item: Any?, databaseReference: DatabaseReference!, completion: (() -> ())?) {
+        
+        
         if let model = item as? CollectionModel {
             let itemRef: [String: Any?] = [K.FIR.hashNeedThis: model.hashNeedThis,
                                            K.FIR.division: model.division,
@@ -508,10 +511,15 @@ extension K {
             ]
 
             //Now, SAVE!!!
-            databaseReference.setValue(itemRef)
+            databaseReference.setValue(itemRef) { error, dbRef in
+                completion?()
+            }
         }
         else {
-            databaseReference.updateChildValues(item as! [AnyHashable : Any])
+//            databaseReference.updateChildValues(item as! [AnyHashable : Any])
+            databaseReference.updateChildValues(item as! [AnyHashable : Any]) { error, dbRef in
+                completion?()
+            }
         }
     }
 }

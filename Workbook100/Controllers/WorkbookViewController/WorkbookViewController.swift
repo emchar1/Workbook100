@@ -100,8 +100,6 @@ class WorkbookViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupRightMenu()
-
         collectionView.dragInteractionEnabled = true
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
@@ -178,9 +176,18 @@ class WorkbookViewController: UIViewController,
                                                image: nil,//imageRef,
                                                savedLists: obj[K.FIR.savedLists] as? [String])
                     
+                    if let savedLists = obj[K.FIR.savedLists] as? [String] {
+                        let _ = savedLists.map({
+                            if !K.savedLists.contains($0) {
+                                K.savedLists.append($0)
+                            }
+                        })
+                    }
+                    
+                    
                     K.items.append(item)
-                }
-            }
+                }//end if let obj = itemSnapshot.value
+            }//end for itemSnapshot in snapshot.children
 
             //Re-order everything according to Ludo 3/16/22
             K.items = K.items
@@ -190,107 +197,10 @@ class WorkbookViewController: UIViewController,
             
             self.collectionView.reloadData()
             spinner.stopSpinner()
-        }
-    }
-    
-    func setupRightMenu() {
-        let menuItems: [UIAction] = [
-            UIAction(title: "Insert Blank", image: nil, handler: { action in
-                guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
-
-                self.collectionView.performBatchUpdates({
-                    K.ProductFilter.isFiltered ? K.filteredItems.insert(CollectionModel.getBlankModel(), at: indexPath.row) : K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
-                    
-                    self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
-                }, completion: nil)
-            }),
             
-//            UIAction(title: "Multi Select", image: nil, handler: { action in
-//                self.multiSelect = true
-//            }),
-            
-            UIAction(title: "Export", image: nil, handler: { action in
-                var csv: [[String]] = [["SKUCode",
-                                        "productNameDescription",
-                                        "productCategory",
-                                        "productDepartment",
-                                        "launchSeason",
-                                        "productType",
-                                        "productSubtype",
-                                        "Colorway",
-                                        "CarryOver",
-                                        "Essential",
-                                        "USRetailMSRP",
-                                        "EURetailMSRP",
-                                        "CountryCode"]]
-                
-                for item in (K.ProductFilter.isFiltered ? K.filteredItems : K.items) {
-                    csv.append([item.skuCode,
-                                item.productNameDescription,
-                                item.productCategory,
-                                item.productDepartment,
-                                item.launchSeason,
-                                item.productType,
-                                item.productSubtype,
-                                item.colorway,
-                                item.carryOver ? "TRUE" : "FALSE",
-                                item.essential ? "TRUE" : "FALSE",
-                                "\(item.usMSRP)",
-                                "\(item.euMSRP)",
-                                item.countryCode])
-                }
-                
-                self.mailOrder(for: CSVMake.commaSeparatedValueDataForLines(csv))
-            }),
-            
-            UIAction(title: "PDF", image: UIImage(named: "printer"), handler: { action in
-                let pdfFilePath = self.collectionView.exportAsPDFFromCollectionView()
-                print("PDF saved to: \(pdfFilePath.pdfFilePath)")
-                
-                if let pdfData = pdfFilePath.pdfData {
-                    self.present(UIActivityViewController(activityItems: [pdfData], applicationActivities: []), animated: true, completion: nil)
-                }
-            }),
-            
-            UIAction(title: "Save List", image: nil, handler: { action in
-                guard K.ProductFilter.selectedProductCategory != [K.ProductFilter.wildcard] else {
-                    let alert = UIAlertController(title: "Error", message: "Please select a Product Category in the filters before proceeding", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true)
-                    
-                    return
-                }
-                
-                
-                let alert = UIAlertController(title: "Save", message: "Enter a name for your list", preferredStyle: .alert)
-                alert.addTextField()
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
-                    let textString = alert!.textFields![0].text!.trimmingCharacters(in: .whitespacesAndNewlines)
-                    
-                    guard textString.count > 0 else { return }
-                    
-                    //The bulk of the code needs to happen here!
-                    for item in (K.ProductFilter.isFiltered ? K.filteredItems : K.items) {
-                        if item.savedLists != nil {
-                            item.savedLists!.append(textString)
-                        }
-                        else {
-                            item.savedLists = [textString]
-                        }
-                                                
-                        // FIXME:  - Would like to just update the savedLists and not the entire record, for speed.
-                        //Save to Firebase - this needs to happen on a background queue or use an activity spinner
-                        K.updateFirebaseRecord(item: [K.FIR.savedLists: item.savedLists],
-                                               databaseReference: Database.database().reference().child(item.hashNeedThis))
-                    }
-                }))
-                
-                self.present(alert, animated: true)
-            })
-            
-        ]
-        
-        rightMenu.menu = UIMenu(title: "Settings", image: nil, options: .displayInline, children: menuItems)
+            // 3-26-22 Moved setupRightMenu() here, i.e. after loading the collection model to ensure K.FIR.savedLists is populated so the right menu can present it.
+            setupRightMenu()
+        }//end ref.observe
     }
     
     
