@@ -11,6 +11,9 @@ import Firebase
 struct K {
     static var items: [CollectionModel] = []
     static var filteredItems: [CollectionModel] = []
+    static var remainingItems: [CollectionModel] {
+        Array(Set(items).symmetricDifference(Set(filteredItems)))
+    }
     static var savedLists: [String] = []
     
     struct CollectionCell {

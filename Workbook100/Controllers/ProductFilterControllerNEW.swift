@@ -239,7 +239,9 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
 extension ProductFilterControllerNEW {
     func didSelectItems(selectedItems: [String]) {
         switch self.selectedSection {
-        case FilterItem.loadList.rawValue: self.selectedLoadList = selectedItems[0]
+        case FilterItem.loadList.rawValue:
+            self.resetFilters(clear: true)
+            self.selectedLoadList = selectedItems[0]
         case FilterItem.collection.rawValue: self.selectedCollection = selectedItems[0]
         case FilterItem.productCategory.rawValue:
             self.selectedProductCategory = selectedItems

@@ -324,7 +324,7 @@ extension WorkbookViewController {
         K.ProductFilter.selectedProductDetails = selectedProductDetails
 
         K.filteredItems = K.items.filter {
-            (selectedLoadList == K.ProductFilter.wildcard ? true : $0.savedLists!.joined(separator: s).wrap(in: s).contains(selectedLoadList.wrap(in: s))) &&
+            (selectedLoadList == K.ProductFilter.wildcard ? true : ($0.savedLists ?? []).joined(separator: s).wrap(in: s).contains(selectedLoadList.wrap(in: s))) &&
             
             (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
             

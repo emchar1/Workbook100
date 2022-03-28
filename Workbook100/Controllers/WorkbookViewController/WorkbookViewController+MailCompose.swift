@@ -25,9 +25,9 @@ extension WorkbookViewController {
         
         mail.mailComposeDelegate = self
         mail.setCcRecipients(["eddie@100percent.com"])
-        mail.setSubject("Gloves Export \(formatter.string(from: date))")
+        mail.setSubject("List Export \(formatter.string(from: date))")
         mail.setMessageBody("Here's your file", isHTML: true)
-        mail.addAttachmentData(data, mimeType: "text/csv", fileName: "GlovesLineSheet.csv")
+        mail.addAttachmentData(data, mimeType: "text/csv", fileName: "LineSheet.csv")
         
         present(mail, animated: true)
     }
