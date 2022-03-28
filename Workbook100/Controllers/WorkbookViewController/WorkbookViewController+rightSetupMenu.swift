@@ -74,8 +74,8 @@ extension  WorkbookViewController {
             
             // MARK: - Save List
             UIAction(title: "Save List", image: nil, handler: { action in
-                guard K.ProductFilter.selectedProductCategory != [K.ProductFilter.wildcard] else {
-                    let alert = UIAlertController(title: "Error", message: "Please select a Product Category in the filters before proceeding", preferredStyle: .alert)
+                guard K.ProductFilter.isFiltered else {
+                    let alert = UIAlertController(title: "Error", message: "Results too large. Please narrow your search in the filters before proceeding.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true)
                     
@@ -136,22 +136,7 @@ extension  WorkbookViewController {
                 }))//end alert.addAction...[OK]
                 
                 self.present(alert, animated: true)
-            }),
-            
-            
-            // MARK: - Load List
-            UIAction(title: "Load List", image: nil, handler: { action in
-                let alert = UIAlertController(title: "Load", message: nil, preferredStyle: .alert)
-                
-                for list in K.savedLists {
-                    alert.addAction(UIAlertAction(title: list, style: .default, handler: nil))
-                }
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                
-                self.present(alert, animated: true)
             })
-            
         ]
         
         rightMenu.menu = UIMenu(title: "Settings", image: nil, options: .displayInline, children: menuItems)

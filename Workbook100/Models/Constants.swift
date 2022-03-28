@@ -37,9 +37,12 @@ struct K {
         static let segementedOff = 2
         static let multiSeparator = "|"
         
+        static var selectionLoadList: [String] {
+            [wildcard] + K.savedLists
+        }
         static let selectionCollection: [String] = [wildcard, "2023 - Spring"]
         static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
-        static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
+//        static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
         static let selectionSeasonsCarried: [String] = [wildcard, "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22", "SP23"]
         static let selectionProductCategory: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Snow Goggle Accessories", "Snow Goggles", "Sunglass Parts and Lenses", "Sunglasses"]
         static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
@@ -48,10 +51,10 @@ struct K {
         static let selectionProductClass: [String] = [wildcard, "Mens", "Miscellaneous", "Unisex", "Womens", "Youth"]
         static let selectionProductDetails: [String] = [wildcard, "210g/m2", "250g/m2 mini loop French Terry", "280g/2", "280g/m2", "280g/m2 (330g/m2 after wash)", "290g/m2 Interlock", "330g/m2", "Fit ( AJ) Trucker, Flat Visor (230 squared), 5 Panel", "Fit ( J ), Visor 909 Flat (rounded), 6 Panel", "Fit ( LYP), Curved Visor (230 CV-3), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 6 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 5 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 6 Panel", "Fit (AJ) Trucker, Visor (Flat 230 squared), 5 Panel", "Fit (AJ), Flat Visor (230 squared), 6 Panel", "Fit (AJ), Flat Visor 230 (squared), 6 Panel", "Fit (AJ), Visor (Flat), 6 Panel", "Fit (LYP), Flat Visor 230 (squared), 5 Panel", "Fit (LYP), Visor Flat 230 (squared), 5 Panel", "Fit (X) Trucker, Visor (Curve 230 CV-3), 5 Panel", "Fit (X), Visor (Curve 230 CV-3), 5 Panel"]
 
-        static var selectedCollection: String = wildcard
+        static var selectedLoadList: String = wildcard
         static var selectedNew: Int = segementedBoth
         static var selectedEssential: Int = segementedBoth
-        static var selectedLaunchSeason: [String] = [wildcard]
+        static var selectedCollection: String = wildcard
         static var selectedSeasonsCarried: [String] = [wildcard]
         static var selectedProductDepartment: [String] = [wildcard]
         static var selectedProductCategory: [String] = [wildcard]
@@ -62,10 +65,10 @@ struct K {
         static var selectedProductDetails: [String] = [wildcard]
         
         static var isFiltered: Bool {
-            return !(selectedCollection == wildcard &&
+            return !(selectedLoadList == wildcard &&
                      selectedNew == segementedBoth &&
                      selectedEssential == segementedBoth &&
-                     selectedLaunchSeason == [wildcard] &&
+                     selectedCollection == wildcard &&
                      selectedSeasonsCarried == [wildcard] &&
                      selectedProductDepartment == [wildcard] &&
                      selectedProductCategory == [wildcard] &&

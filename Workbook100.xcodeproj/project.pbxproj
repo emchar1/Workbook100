@@ -15,8 +15,6 @@
 		EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E127759DA4006C12CF /* CollectionModel.swift */; };
 		EA22D4E42776DFCE006C12CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */; };
 		EA22D4E627770BE3006C12CF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E527770BE3006C12CF /* LoginController.swift */; };
-		EA22D4E8277A5FD7006C12CF /* WorkbookDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E7277A5FD6006C12CF /* WorkbookDetailController.swift */; };
-		EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D53127859964006C12CF /* WorkbookDetailControllerNEW.swift */; };
 		EA2E387B27E97B3B00122877 /* WorkbookDetailTVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387A27E97B3B00122877 /* WorkbookDetailTVC2.swift */; };
 		EA2E387E27E9A74900122877 /* ImageViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */; };
 		EA2E388027EA939F00122877 /* WorkbookImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */; };
@@ -29,7 +27,6 @@
 		EA5CE2DF27C8E1420071F015 /* ProductFilterControllerNEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5CE2DE27C8E1420071F015 /* ProductFilterControllerNEW.swift */; };
 		EA8914E027DC038300C8D8D3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8914DF27DC038300C8D8D3 /* Category.swift */; };
 		EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91E071279366DC00DE630E /* ContainerViewController.swift */; };
-		EA91E07427936A6200DE630E /* ProductFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91E07327936A6200DE630E /* ProductFilterController.swift */; };
 		EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF742769573F00943912 /* AppDelegate.swift */; };
 		EAA0CF772769573F00943912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF762769573F00943912 /* SceneDelegate.swift */; };
 		EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF782769573F00943912 /* WorkbookViewController.swift */; };
@@ -55,8 +52,6 @@
 		EA22D4E127759DA4006C12CF /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EA22D4E527770BE3006C12CF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		EA22D4E7277A5FD6006C12CF /* WorkbookDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookDetailController.swift; sourceTree = "<group>"; };
-		EA22D53127859964006C12CF /* WorkbookDetailControllerNEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookDetailControllerNEW.swift; sourceTree = "<group>"; };
 		EA2E387A27E97B3B00122877 /* WorkbookDetailTVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookDetailTVC2.swift; sourceTree = "<group>"; };
 		EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCollectionCell.swift; sourceTree = "<group>"; };
 		EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookImageViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +64,6 @@
 		EA5CE2DE27C8E1420071F015 /* ProductFilterControllerNEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFilterControllerNEW.swift; sourceTree = "<group>"; };
 		EA8914DF27DC038300C8D8D3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EA91E071279366DC00DE630E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
-		EA91E07327936A6200DE630E /* ProductFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFilterController.swift; sourceTree = "<group>"; };
 		EAA0CF712769573F00943912 /* Workbook100.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workbook100.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA0CF742769573F00943912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAA0CF762769573F00943912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,8 +115,6 @@
 		EA2E387C27E982E600122877 /* WorkbookDetailController */ = {
 			isa = PBXGroup;
 			children = (
-				EA22D4E7277A5FD6006C12CF /* WorkbookDetailController.swift */,
-				EA22D53127859964006C12CF /* WorkbookDetailControllerNEW.swift */,
 				EA2E387A27E97B3B00122877 /* WorkbookDetailTVC2.swift */,
 				EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */,
 			);
@@ -136,7 +128,6 @@
 				EA2E387C27E982E600122877 /* WorkbookDetailController */,
 				EA22D4E527770BE3006C12CF /* LoginController.swift */,
 				EA91E071279366DC00DE630E /* ContainerViewController.swift */,
-				EA91E07327936A6200DE630E /* ProductFilterController.swift */,
 				EA5CE2DE27C8E1420071F015 /* ProductFilterControllerNEW.swift */,
 				EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */,
 			);
@@ -368,7 +359,6 @@
 				EA2E388427EE27D000122877 /* SavedList.swift in Sources */,
 				EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */,
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
-				EA22D53227859964006C12CF /* WorkbookDetailControllerNEW.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
 				EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */,
 				EA2E387B27E97B3B00122877 /* WorkbookDetailTVC2.swift in Sources */,
@@ -387,10 +377,8 @@
 				EA0AB09027CDB621000D7D37 /* Extensions.swift in Sources */,
 				EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */,
 				EA2E388027EA939F00122877 /* WorkbookImageViewController.swift in Sources */,
-				EA22D4E8277A5FD7006C12CF /* WorkbookDetailController.swift in Sources */,
 				EA8914E027DC038300C8D8D3 /* Category.swift in Sources */,
 				EA22D4E027754129006C12CF /* Constants.swift in Sources */,
-				EA91E07427936A6200DE630E /* ProductFilterController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

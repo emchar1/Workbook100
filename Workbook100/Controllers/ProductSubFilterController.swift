@@ -21,16 +21,42 @@ protocol ProductSubFilterControllerDelegate {
 }
 
 class ProductSubFilterController: UITableViewController {
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var singleMultiButton: UIBarButtonItem!
 
     var selections: [String] = []
     var selectedItems: [String]!
+    var allowsMultiSelection = true {
+        didSet {
+            singleMultiButton.isEnabled = allowsMultiSelection
+        }
+    }
     var delegate: ProductSubFilterControllerDelegate?
+    
+    private let spinner = ActivitySpinner()
     private var isSingle = true
 
     
+    // MARK: - Initialization, Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if spinner.isAnimating {
+            stopSpinner()
+        }
+    }
+    
+    func startSpinner(in view: UIView, offset: CGPoint) {
+        spinner.startSpinner(in: view, offset: offset)
+    }
+    
+    func stopSpinner() {
+        spinner.stopSpinner()
     }
     
     @IBAction func singleMultiPressed(_ sender: UIBarButtonItem) {

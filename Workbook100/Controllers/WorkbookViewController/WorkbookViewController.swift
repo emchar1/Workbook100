@@ -218,23 +218,7 @@ class WorkbookViewController: UIViewController,
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetailsNEW" {
-            let nc = segue.destination as! UINavigationController
-            let controller = nc.topViewController as! WorkbookDetailControllerNEW
-
-            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                controller.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
-            }
-        }
-        else if segue.identifier == "showDetails" {
-            let nc = segue.destination as! UINavigationController
-            let controller = nc.topViewController as! WorkbookDetailController
-
-            if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                controller.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
-            }
-        }
-        else if segue.identifier == "showDetailsTVC2" {
+        if segue.identifier == "showDetailsTVC2" {
             let nc = segue.destination as! UINavigationController
             let controller = nc.topViewController as! WorkbookDetailTVC2
 
@@ -307,10 +291,10 @@ extension WorkbookViewController {
 // MARK: - Product Filter Controller NEW Delegate
 
 extension WorkbookViewController {
-    func applyTapped(selectedCollection: String,
+    func applyTapped(selectedLoadList: String,
                      selectedNew: Int,
                      selectedEssential: Int,
-                     selectedLaunchSeason: [String],
+                     selectedCollection: String,
                      selectedProductCategory: [String],
                      selectedProductType: [String],
                      selectedProductSubtype: [String],
@@ -328,10 +312,10 @@ extension WorkbookViewController {
         let s = K.ProductFilter.multiSeparator
         
         //Set the global constant variables, i.e. make the changes "permanent."
-        K.ProductFilter.selectedCollection = selectedCollection
+        K.ProductFilter.selectedLoadList = selectedLoadList
         K.ProductFilter.selectedNew = selectedNew
         K.ProductFilter.selectedEssential = selectedEssential
-        K.ProductFilter.selectedLaunchSeason = selectedLaunchSeason
+        K.ProductFilter.selectedCollection = selectedCollection
         K.ProductFilter.selectedProductCategory = selectedProductCategory
         K.ProductFilter.selectedProductType = selectedProductType
         K.ProductFilter.selectedProductSubtype = selectedProductSubtype
@@ -340,13 +324,13 @@ extension WorkbookViewController {
         K.ProductFilter.selectedProductDetails = selectedProductDetails
 
         K.filteredItems = K.items.filter {
-            (selectedCollection == K.ProductFilter.wildcard ? true : $0.collection == selectedCollection) &&
+            (selectedLoadList == K.ProductFilter.wildcard ? true : $0.savedLists!.joined(separator: s).wrap(in: s).contains(selectedLoadList.wrap(in: s))) &&
             
             (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
             
             (selectedEssential == K.ProductFilter.segementedBoth ? true : $0.essential == (selectedEssential == K.ProductFilter.segementedOn)) &&
             
-            (selectedLaunchSeason.joined().contains(K.ProductFilter.wildcard) ? true : selectedLaunchSeason.joined(separator: s).wrap(in: s).contains($0.launchSeason.wrap(in: s))) &&
+            (selectedCollection == K.ProductFilter.wildcard ? true : $0.collection == selectedCollection) &&
             
             (selectedProductCategory.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductCategory.joined(separator: s).wrap(in: s).contains($0.productCategory.wrap(in: s))) &&
             

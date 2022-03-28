@@ -8,10 +8,10 @@
 import UIKit
 
 protocol ProductFilterControllerNEWDelegate {
-    func applyTapped(selectedCollection: String,
+    func applyTapped(selectedLoadList: String,
                      selectedNew: Int,
                      selectedEssential: Int,
-                     selectedLaunchSeason: [String],
+                     selectedCollection: String,
                      selectedProductCategory: [String],
                      selectedProductType: [String],
                      selectedProductSubtype: [String],
@@ -42,10 +42,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     
     // MARK: - Properties
     
-    @IBOutlet weak var labelCollection: UILabel!
+    @IBOutlet weak var labelLoadList: UILabel!
     @IBOutlet weak var segmentedNew: UISegmentedControl!
     @IBOutlet weak var segmentedEssential: UISegmentedControl!
-    @IBOutlet weak var labelLaunchSeason: UILabel!
+    @IBOutlet weak var labelCollection: UILabel!
     @IBOutlet weak var labelProductCategory: UILabel!
     @IBOutlet weak var labelProductType: UILabel!
     @IBOutlet weak var labelProductSubtype: UILabel!
@@ -54,8 +54,8 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var labelProductDetails: UILabel!
     
     let s = "; "
+    var selectedLoadList: String! { didSet { labelLoadList.text = selectedLoadList }}
     var selectedCollection: String! { didSet { labelCollection.text = selectedCollection }}
-    var selectedLaunchSeason: [String]! { didSet { labelLaunchSeason.text = selectedLaunchSeason.joined(separator: s) }}
     var selectedProductCategory: [String]! { didSet { labelProductCategory.text = selectedProductCategory.joined(separator: s) }}
     var selectedProductType: [String]! { didSet { labelProductType.text = selectedProductType.joined(separator: s) }}
     var selectedProductSubtype: [String]! { didSet { labelProductSubtype.text = selectedProductSubtype.joined(separator: s) }}
@@ -67,10 +67,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     var delegate: ProductFilterControllerNEWDelegate?
     
     enum FilterItem: Int {
-        case collection = 0,
+        case loadList = 0,
              new,
              essential,
-             launchSeason,
+             collection,
              productCategory,
              productType,
              productSubtype,
@@ -90,10 +90,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     }
     
     private func resetFilters(clear: Bool = false) {
-        self.selectedCollection = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedCollection
+        self.selectedLoadList = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedLoadList
         self.segmentedNew.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedNew
         self.segmentedEssential.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedEssential
-        self.selectedLaunchSeason = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedLaunchSeason
+        self.selectedCollection = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedCollection
         self.selectedProductCategory = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductCategory
         self.selectedProductType = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductType
         self.selectedProductSubtype = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductSubtype
@@ -106,10 +106,10 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     // MARK: - Navigation
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
-        self.delegate?.applyTapped(selectedCollection: self.selectedCollection,
+        self.delegate?.applyTapped(selectedLoadList: self.selectedLoadList,
                                    selectedNew: self.segmentedNew.selectedSegmentIndex,
                                    selectedEssential: self.segmentedEssential.selectedSegmentIndex,
-                                   selectedLaunchSeason: self.selectedLaunchSeason,
+                                   selectedCollection: self.selectedCollection,
                                    selectedProductCategory: self.selectedProductCategory,
                                    selectedProductType: self.selectedProductType,
                                    selectedProductSubtype: self.selectedProductSubtype,
@@ -142,14 +142,21 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
             self.selectedSection = indexPath.section
             
             switch self.selectedSection {
+            case FilterItem.loadList.rawValue:
+                controller.selections = K.ProductFilter.selectionLoadList
+                controller.selectedItems = [self.selectedLoadList]
+                controller.allowsMultiSelection = false
+                controller.navigationItem.title! += " a Saved List"
+                
+                if K.savedLists.isEmpty {
+                    controller.startSpinner(in: controller.view,
+                                            offset: CGPoint(x: 0, y: -controller.view.frame.height / 3))
+                }
             case FilterItem.collection.rawValue:
                 controller.selections = K.ProductFilter.selectionCollection
                 controller.selectedItems = [self.selectedCollection]
+                controller.allowsMultiSelection = false
                 controller.navigationItem.title! += " Collection"
-            case FilterItem.launchSeason.rawValue:
-                controller.selections = K.ProductFilter.selectionLaunchSeason
-                controller.selectedItems = self.selectedLaunchSeason
-                controller.navigationItem.title! += " Launch Season"
             case FilterItem.productCategory.rawValue:
                 controller.selections = K.ProductFilter.selectionProductCategory
                 controller.selectedItems = self.selectedProductCategory
@@ -232,8 +239,8 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
 extension ProductFilterControllerNEW {
     func didSelectItems(selectedItems: [String]) {
         switch self.selectedSection {
+        case FilterItem.loadList.rawValue: self.selectedLoadList = selectedItems[0]
         case FilterItem.collection.rawValue: self.selectedCollection = selectedItems[0]
-        case FilterItem.launchSeason.rawValue: self.selectedLaunchSeason = selectedItems
         case FilterItem.productCategory.rawValue:
             self.selectedProductCategory = selectedItems
             resetFilterSpecific(productType: true, productSubtype: true, productClass: true)
