@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bZc-S1-Ykv">
-    <device id="retina6_0" orientation="portrait" appearance="dark"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -1836,7 +1836,7 @@
                         <outlet property="sku4Label" destination="v6k-Xo-3kJ" id="3xS-Kn-GLA"/>
                         <outlet property="sku5Label" destination="IBJ-SN-C7T" id="rVo-aC-Ubo"/>
                         <outlet property="sku6Label" destination="teE-h6-hQN" id="3dD-QY-ho1"/>
-                        <segue destination="Xjo-K6-qsU" kind="presentation" identifier="imageSegue" id="Gch-FV-R5y"/>
+                        <segue destination="pnD-lz-pb9" kind="presentation" identifier="imageSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="XFQ-te-Zw1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sd9-xe-pD2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1848,22 +1848,16 @@
             <objects>
                 <viewController id="pnD-lz-pb9" customClass="WorkbookImageViewController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ng3-zv-wPR">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="wtS-PQ-YXo"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" id="PeD-e7-XPB">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="x1i-b0-S2P">
-                            <connections>
-                                <action selector="doneTapped:" destination="pnD-lz-pb9" id="Zei-xU-JEy"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="PeD-e7-XPB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYi-Ot-0DO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4260" y="-518.24644549763036"/>
+            <point key="canvasLocation" x="3375" y="-518"/>
         </scene>
         <!--Workbook Detail Controller-->
         <scene sceneID="9o9-9K-gue">
@@ -2103,24 +2097,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zgd-NZ-K80" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1691" y="-511"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Pp0-rC-hrc">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xjo-K6-qsU" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zo0-qQ-2Hm">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="pnD-lz-pb9" kind="relationship" relationship="rootViewController" id="xzT-vV-zey"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g93-vc-ajy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3436.9230769230767" y="-518.24644549763036"/>
         </scene>
     </scenes>
     <resources>

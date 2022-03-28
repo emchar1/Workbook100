@@ -108,10 +108,10 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
                let indexPath = indexPaths.first,
                let url = URL(string: model.imageURLs[indexPath.row]) {
                 
-                let nc = segue.destination as! UINavigationController
-                let controller = nc.topViewController as! WorkbookImageViewController
+                let controller = segue.destination as! WorkbookImageViewController
                 
                 controller.title = model.productNameDescription
+//                controller.imageArray = model.imageURLs
                 controller.spinner.startSpinner(in: controller.view)
                 controller.imageView.loadImage(at: url, completion: { controller.spinner.stopSpinner() })
             }
