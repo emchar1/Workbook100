@@ -73,7 +73,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         productNameLabel.text = model.productNameDescription
         productNameSecondaryLabel.text = model.productNameDescriptionSecondary
         colorwayLabel.text = model.colorway
-        classLabel.text = model.youthWomen
+        classLabel.text = model.productClass
         productCategoryLabel.text = model.productCategory
         productDeptLabel.text = model.productDepartment
         productTypeLabel.text = model.productType

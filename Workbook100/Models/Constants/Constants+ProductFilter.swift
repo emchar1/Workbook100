@@ -15,27 +15,22 @@ extension K {
         static let segementedOff = 2
         static let multiSeparator = "|"
         
-        static var selectionLoadList: [String] {
+        static var selectionSavedLists: [String] {
             [wildcard] + K.savedLists
         }
-        static let selectionCollection: [String] = [wildcard, "2023 - Spring"]
-        static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
-//        static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
-        static let selectionSeasonsCarried: [String] = [wildcard, "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22", "SP23"]
+        
+        static var selectionCollection: [String] = []
+        static var selectionDivision: [String] = []
         static var selectionProductCategory: [String] = []
-//        static let selectionProductCategory: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Snow Goggle Accessories", "Snow Goggles", "Sunglass Parts and Lenses", "Sunglasses"]
-        static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
-        static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
-        static let selectionProductSubtype: [String] = [wildcard, "Active Performance", "Athletic", "Base Layers", "Camper", "Casual", "Clear", "Dual", "Dual Pane", "Dual Pane Sonic Bumps", "Dual Pane Vented", "Elbow", "Flexfit", "Full Face", "HiPER", "Injected", "Jersey", "Knee", "Laminated", "Liners", "Mirror", "Misc.", "Mud", "Nose Bridges", "Nose Pads", "Open Face", "Pants", "Performance", "Perimeter Seal", "Photochromic", "Premium", "Regular", "Replacement Lenses", "Screws", "Shield", "Short Fingers", "Shorts", "Sleeves", "Snapback", "Sonic Bumps", "Spare Parts", "Sport Performance", "Standard", "Tech", "Trucker", "Unstructured", "Upper", "Varied", "Visors", "Water Resistant", "Waterproof", "Windproof", "Wool"]
-        static let selectionProductClass: [String] = [wildcard, "Mens", "Miscellaneous", "Unisex", "Womens", "Youth"]
-        static let selectionProductDetails: [String] = [wildcard, "210g/m2", "250g/m2 mini loop French Terry", "280g/2", "280g/m2", "280g/m2 (330g/m2 after wash)", "290g/m2 Interlock", "330g/m2", "Fit ( AJ) Trucker, Flat Visor (230 squared), 5 Panel", "Fit ( J ), Visor 909 Flat (rounded), 6 Panel", "Fit ( LYP), Curved Visor (230 CV-3), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 5 Panel", "Fit ( LYP), Flat Visor (230 squared), 6 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 5 Panel", "Fit ( X ), Visor (Curve 230 CV-3), 6 Panel", "Fit (AJ) Trucker, Visor (Flat 230 squared), 5 Panel", "Fit (AJ), Flat Visor (230 squared), 6 Panel", "Fit (AJ), Flat Visor 230 (squared), 6 Panel", "Fit (AJ), Visor (Flat), 6 Panel", "Fit (LYP), Flat Visor 230 (squared), 5 Panel", "Fit (LYP), Visor Flat 230 (squared), 5 Panel", "Fit (X) Trucker, Visor (Curve 230 CV-3), 5 Panel", "Fit (X), Visor (Curve 230 CV-3), 5 Panel"]
+        static var selectionProductType: [String] = []
+        static var selectionProductSubtype: [String] = []
+        static var selectionProductClass: [String] = []
+        static var selectionProductDetails: [String] = []
 
-        static var selectedLoadList: String = wildcard
+        static var selectedSavedLists: String = wildcard
         static var selectedNew: Int = segementedBoth
         static var selectedEssential: Int = segementedBoth
         static var selectedCollection: String = wildcard
-        static var selectedSeasonsCarried: [String] = [wildcard]
-        static var selectedProductDepartment: [String] = [wildcard]
         static var selectedProductCategory: [String] = [wildcard]
         static var selectedProductType: [String] = [wildcard]
         static var selectedProductSubtype: [String] = [wildcard]
@@ -44,12 +39,10 @@ extension K {
         static var selectedProductDetails: [String] = [wildcard]
         
         static var isFiltered: Bool {
-            return !(selectedLoadList == wildcard &&
+            return !(selectedSavedLists == wildcard &&
                      selectedNew == segementedBoth &&
                      selectedEssential == segementedBoth &&
                      selectedCollection == wildcard &&
-                     selectedSeasonsCarried == [wildcard] &&
-                     selectedProductDepartment == [wildcard] &&
                      selectedProductCategory == [wildcard] &&
                      selectedProductType == [wildcard] &&
                      selectedProductSubtype == [wildcard] &&

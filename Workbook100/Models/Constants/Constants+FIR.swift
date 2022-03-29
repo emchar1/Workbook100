@@ -8,8 +8,6 @@
 import Firebase
 
 extension K {
-    static var ref: DatabaseReference!
-
     struct FIR {
         
         // IMPORTANT: - When adding to this list, MUST add to the updateFirebaseRecord() function down below!!!
@@ -25,7 +23,7 @@ extension K {
         static let productType = "ProductType"
         static let productSubtype = "ProductSubtype"
         static let productDetails = "ProductDetails"
-        static let youthWomen = "YouthWomen"
+        static let productClass = "ProductClass"
         static let colorway = "Colorway"
         static let carryOver = "CarryOver"
         static let essential = "Essential"
@@ -81,7 +79,7 @@ extension K {
                                            K.FIR.productType: model.productType,
                                            K.FIR.productSubtype: model.productSubtype,
                                            K.FIR.productDetails: model.productDetails,
-                                           K.FIR.youthWomen: model.youthWomen,
+                                           K.FIR.productClass: model.productClass,
                                            K.FIR.colorway: model.colorway,
                                            K.FIR.carryOver: model.carryOver ? "TRUE" : "FALSE",
                                            K.FIR.essential: model.essential ? "TRUE" : "FALSE",
@@ -140,7 +138,7 @@ extension K {
     
     static func initializeRecords(completion: (() -> ())?) {
         //Firebase DB
-        ref = Database.database().reference()
+        let ref = Database.database().reference()
         ref.observe(DataEventType.value) { [self] (snapshot) in
             K.items.removeAll()
             
@@ -158,7 +156,7 @@ extension K {
                                                productType: obj[K.FIR.productType] as! String,
                                                productSubtype: obj[K.FIR.productSubtype] as! String,
                                                productDetails: obj[K.FIR.productDetails] as! String,
-                                               youthWomen: obj[K.FIR.youthWomen] as! String,
+                                               productClass: obj[K.FIR.productClass] as! String,
                                                colorway: obj[K.FIR.colorway] as! String,
                                                carryOver: (obj[K.FIR.carryOver] as! String) == "TRUE",
                                                essential: (obj[K.FIR.essential] as! String) == "TRUE",
@@ -196,20 +194,6 @@ extension K {
                     
                     //Populate items
                     K.items.append(item)
-
-                    //Populate savedLists
-                    if let savedLists = obj[K.FIR.savedLists] as? [String] {
-                        let _ = savedLists.map({
-                            if !K.savedLists.contains($0) {
-                                K.savedLists.append($0)
-                            }
-                        })
-                    }
-                    
-                    //Populate selectionProductCategory
-                    if !K.ProductFilter.selectionProductCategory.contains(item.productCategory) {
-                        K.ProductFilter.selectionProductCategory.append(item.productCategory)
-                    }
                 }//end if let obj = itemSnapshot.value
             }//end for itemSnapshot in snapshot.children
             
@@ -219,15 +203,97 @@ extension K {
                 .sorted(by: { $0.productType < $1.productType })
                 //add more sorted(by:) the last sorted(by:) has the highest sort priority
 
-            //Reorder selectionProductCategory
-            K.ProductFilter.selectionProductCategory = K.ProductFilter.selectionProductCategory.sorted(by: { $0 < $1 })
-            K.ProductFilter.selectionProductCategory.insert(K.ProductFilter.wildcard, at: 0)
             
+            K.initializeProductFilterSelections()
             completion?()
 
             //Discardable result, otherwise get Warning that self is unused
             let _ = self
         }//end ref.observe
     }//end func initializeRecords()
+    
+    
+    /**
+     Initializes the selections options for each filter item.
+     */
+    private static func initializeProductFilterSelections() {
+        for item in K.items {
+            //Saved Lists
+            if let savedLists = item.savedLists {
+                let _ = savedLists.map {
+                    if !K.savedLists.contains($0) {
+                        K.savedLists.append($0)
+                    }
+                }
+            }
+            
+            //Collection
+            if !K.ProductFilter.selectionCollection.contains(item.collection) && item.collection != "" {
+                K.ProductFilter.selectionCollection.append(item.collection)
+            }
+            
+            //Division
+            if !K.ProductFilter.selectionDivision.contains(item.division) && item.division != "" {
+                K.ProductFilter.selectionDivision.append(item.division)
+            }
+
+            //Product Category
+            if !K.ProductFilter.selectionProductCategory.contains(item.productCategory) && item.productCategory != "" {
+                K.ProductFilter.selectionProductCategory.append(item.productCategory)
+            }
+            
+            //Product Type
+            if !K.ProductFilter.selectionProductType.contains(item.productType) && item.productType != "" {
+                K.ProductFilter.selectionProductType.append(item.productType)
+            }
+
+            //Product Subtype
+            if !K.ProductFilter.selectionProductSubtype.contains(item.productSubtype) && item.productSubtype != "" {
+                K.ProductFilter.selectionProductSubtype.append(item.productSubtype)
+            }
+
+            //Product Class
+            if !K.ProductFilter.selectionProductClass.contains(item.productClass) && item.productClass != "" {
+                K.ProductFilter.selectionProductClass.append(item.productClass)
+            }
+            
+            //Product Details
+            if !K.ProductFilter.selectionProductDetails.contains(item.productDetails) && item.productDetails != "" {
+                K.ProductFilter.selectionProductDetails.append(item.productDetails)
+            }
+
+        }
+        
+        //Saved Lists
+        K.savedLists = K.savedLists.sorted(by: { $0 < $1 })
+        
+        //Collection
+        K.ProductFilter.selectionCollection = K.ProductFilter.selectionCollection.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionCollection.insert(K.ProductFilter.wildcard, at: 0)
+        
+        //Division
+        K.ProductFilter.selectionDivision = K.ProductFilter.selectionDivision.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionDivision.insert(K.ProductFilter.wildcard, at: 0)
+
+        //Product Category
+        K.ProductFilter.selectionProductCategory = K.ProductFilter.selectionProductCategory.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductCategory.insert(K.ProductFilter.wildcard, at: 0)
+
+        //Product Type
+        K.ProductFilter.selectionProductType = K.ProductFilter.selectionProductType.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductType.insert(K.ProductFilter.wildcard, at: 0)
+        
+        //Product Subtype
+        K.ProductFilter.selectionProductSubtype = K.ProductFilter.selectionProductSubtype.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductSubtype.insert(K.ProductFilter.wildcard, at: 0)
+        
+        //Product Class
+        K.ProductFilter.selectionProductClass = K.ProductFilter.selectionProductClass.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductClass.insert(K.ProductFilter.wildcard, at: 0)
+        
+        //Product Details
+        K.ProductFilter.selectionProductDetails = K.ProductFilter.selectionProductDetails.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductDetails.insert(K.ProductFilter.wildcard, at: 0)
+    }
     
 }

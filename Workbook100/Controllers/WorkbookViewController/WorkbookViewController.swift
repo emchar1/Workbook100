@@ -243,13 +243,14 @@ extension WorkbookViewController {
 //            }
 //        }
 //    }
+//    
 }
 
 
 // MARK: - Product Filter Controller NEW Delegate
 
 extension WorkbookViewController {
-    func applyTapped(selectedLoadList: String,
+    func applyTapped(selectedSavedLists: String,
                      selectedNew: Int,
                      selectedEssential: Int,
                      selectedCollection: String,
@@ -270,7 +271,7 @@ extension WorkbookViewController {
         let s = K.ProductFilter.multiSeparator
         
         //Set the global constant variables, i.e. make the changes "permanent."
-        K.ProductFilter.selectedLoadList = selectedLoadList
+        K.ProductFilter.selectedSavedLists = selectedSavedLists
         K.ProductFilter.selectedNew = selectedNew
         K.ProductFilter.selectedEssential = selectedEssential
         K.ProductFilter.selectedCollection = selectedCollection
@@ -282,7 +283,7 @@ extension WorkbookViewController {
         K.ProductFilter.selectedProductDetails = selectedProductDetails
 
         K.filteredItems = K.items.filter {
-            (selectedLoadList == K.ProductFilter.wildcard ? true : ($0.savedLists ?? []).joined(separator: s).wrap(in: s).contains(selectedLoadList.wrap(in: s))) &&
+            (selectedSavedLists == K.ProductFilter.wildcard ? true : ($0.savedLists ?? []).joined(separator: s).wrap(in: s).contains(selectedSavedLists.wrap(in: s))) &&
             
             (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
             
@@ -298,7 +299,7 @@ extension WorkbookViewController {
             
             (selectedDivision.joined().contains(K.ProductFilter.wildcard) ? true : selectedDivision.joined(separator: s).wrap(in: s).contains($0.division.wrap(in: s))) &&
             
-            (selectedProductClass.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductClass.joined(separator: s).wrap(in: s).contains($0.youthWomen.wrap(in: s))) &&
+            (selectedProductClass.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductClass.joined(separator: s).wrap(in: s).contains($0.productClass.wrap(in: s))) &&
             
             (selectedProductDetails.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductDetails.joined(separator: s).wrap(in: s).contains($0.productDetails.wrap(in: s)))
         }

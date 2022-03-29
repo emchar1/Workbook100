@@ -30,7 +30,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     let productType: String
     let productSubtype: String
     let productDetails: String
-    let youthWomen: String
+    let productClass: String
     let colorway: String
     let carryOver: Bool
     let essential: Bool
@@ -82,7 +82,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
          productType: String,
          productSubtype: String,
          productDetails: String,
-         youthWomen: String,
+         productClass: String,
          colorway: String,
          carryOver: Bool,
          essential: Bool,
@@ -112,7 +112,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
         self.productType = productType
         self.productSubtype = productSubtype
         self.productDetails = productDetails
-        self.youthWomen = youthWomen
+        self.productClass = productClass
         self.colorway = colorway
         self.carryOver = carryOver
         self.essential = essential
@@ -146,7 +146,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                     productType: "Product Type",
                                     productSubtype: "Product Subtype",
                                     productDetails: "Product Details",
-                                    youthWomen: "Youth/Women",
+                                    productClass: "Product Class",
                                     colorway: "Color",
                                     carryOver: false,
                                     essential: true,
