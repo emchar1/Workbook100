@@ -194,6 +194,8 @@ extension K {
                     
                     //Populate items
                     K.items.append(item)
+
+                    K.populateProductFilterSelections(item: item)
                 }//end if let obj = itemSnapshot.value
             }//end for itemSnapshot in snapshot.children
             
@@ -203,8 +205,8 @@ extension K {
                 .sorted(by: { $0.productType < $1.productType })
                 //add more sorted(by:) the last sorted(by:) has the highest sort priority
 
-            
-            K.initializeProductFilterSelections()
+            K.sortProductFilterSelections()
+
             completion?()
 
             //Discardable result, otherwise get Warning that self is unused
@@ -216,84 +218,78 @@ extension K {
     /**
      Initializes the selections options for each filter item.
      */
-    private static func initializeProductFilterSelections() {
-        for item in K.items {
-            //Saved Lists
-            if let savedLists = item.savedLists {
-                let _ = savedLists.map {
-                    if !K.savedLists.contains($0) {
-                        K.savedLists.append($0)
-                    }
+    private static func populateProductFilterSelections(item: CollectionModel) {
+        //Saved Lists
+        if let savedLists = item.savedLists {
+            let _ = savedLists.map {
+                if !K.ProductFilter.selectionSavedLists.contains($0) {
+                    K.ProductFilter.selectionSavedLists.append($0)
                 }
             }
-            
-            //Collection
-            if !K.ProductFilter.selectionCollection.contains(item.collection) && item.collection != "" {
-                K.ProductFilter.selectionCollection.append(item.collection)
-            }
-            
-            //Division
-            if !K.ProductFilter.selectionDivision.contains(item.division) && item.division != "" {
-                K.ProductFilter.selectionDivision.append(item.division)
-            }
-
-            //Product Category
-            if !K.ProductFilter.selectionProductCategory.contains(item.productCategory) && item.productCategory != "" {
-                K.ProductFilter.selectionProductCategory.append(item.productCategory)
-            }
-            
-            //Product Type
-            if !K.ProductFilter.selectionProductType.contains(item.productType) && item.productType != "" {
-                K.ProductFilter.selectionProductType.append(item.productType)
-            }
-
-            //Product Subtype
-            if !K.ProductFilter.selectionProductSubtype.contains(item.productSubtype) && item.productSubtype != "" {
-                K.ProductFilter.selectionProductSubtype.append(item.productSubtype)
-            }
-
-            //Product Class
-            if !K.ProductFilter.selectionProductClass.contains(item.productClass) && item.productClass != "" {
-                K.ProductFilter.selectionProductClass.append(item.productClass)
-            }
-            
-            //Product Details
-            if !K.ProductFilter.selectionProductDetails.contains(item.productDetails) && item.productDetails != "" {
-                K.ProductFilter.selectionProductDetails.append(item.productDetails)
-            }
-
         }
         
-        //Saved Lists
-        K.savedLists = K.savedLists.sorted(by: { $0 < $1 })
+        //Collection
+        if !K.ProductFilter.selectionCollection.contains(item.collection) && item.collection != "" {
+            K.ProductFilter.selectionCollection.append(item.collection)
+        }
         
+        //Division
+        if !K.ProductFilter.selectionDivision.contains(item.division) && item.division != "" {
+            K.ProductFilter.selectionDivision.append(item.division)
+        }
+        
+        //Product Category
+        if !K.ProductFilter.selectionProductCategory.contains(item.productCategory) && item.productCategory != "" {
+            K.ProductFilter.selectionProductCategory.append(item.productCategory)
+        }
+        
+        //Product Type
+        if !K.ProductFilter.selectionProductType.contains(item.productType) && item.productType != "" {
+            K.ProductFilter.selectionProductType.append(item.productType)
+        }
+        
+        //Product Subtype
+        if !K.ProductFilter.selectionProductSubtype.contains(item.productSubtype) && item.productSubtype != "" {
+            K.ProductFilter.selectionProductSubtype.append(item.productSubtype)
+        }
+        
+        //Product Class
+        if !K.ProductFilter.selectionProductClass.contains(item.productClass) && item.productClass != "" {
+            K.ProductFilter.selectionProductClass.append(item.productClass)
+        }
+        
+        //Product Details
+        if !K.ProductFilter.selectionProductDetails.contains(item.productDetails) && item.productDetails != "" {
+            K.ProductFilter.selectionProductDetails.append(item.productDetails)
+        }
+        
+    }
+    
+    
+    private static func sortProductFilterSelections() {
+        //Saved Lists
+        K.ProductFilter.selectionSavedLists = K.ProductFilter.selectionSavedLists.sorted(by: { $0 < $1 })
+
         //Collection
         K.ProductFilter.selectionCollection = K.ProductFilter.selectionCollection.sorted(by: { $0 < $1 })
-        K.ProductFilter.selectionCollection.insert(K.ProductFilter.wildcard, at: 0)
         
         //Division
         K.ProductFilter.selectionDivision = K.ProductFilter.selectionDivision.sorted(by: { $0 < $1 })
-        K.ProductFilter.selectionDivision.insert(K.ProductFilter.wildcard, at: 0)
-
+        
         //Product Category
         K.ProductFilter.selectionProductCategory = K.ProductFilter.selectionProductCategory.sorted(by: { $0 < $1 })
-        K.ProductFilter.selectionProductCategory.insert(K.ProductFilter.wildcard, at: 0)
-
+        
         //Product Type
         K.ProductFilter.selectionProductType = K.ProductFilter.selectionProductType.sorted(by: { $0 < $1 })
-        K.ProductFilter.selectionProductType.insert(K.ProductFilter.wildcard, at: 0)
         
         //Product Subtype
         K.ProductFilter.selectionProductSubtype = K.ProductFilter.selectionProductSubtype.sorted(by: { $0 < $1 })
-        K.ProductFilter.selectionProductSubtype.insert(K.ProductFilter.wildcard, at: 0)
         
         //Product Class
         K.ProductFilter.selectionProductClass = K.ProductFilter.selectionProductClass.sorted(by: { $0 < $1 })
-        K.ProductFilter.selectionProductClass.insert(K.ProductFilter.wildcard, at: 0)
         
         //Product Details
         K.ProductFilter.selectionProductDetails = K.ProductFilter.selectionProductDetails.sorted(by: { $0 < $1 })
-        K.ProductFilter.selectionProductDetails.insert(K.ProductFilter.wildcard, at: 0)
     }
     
 }

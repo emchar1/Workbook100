@@ -144,17 +144,17 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
             
             switch self.selectedSection {
             case FilterItem.savedLists.rawValue:
-                controller.selections = K.ProductFilter.selectionSavedLists
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionSavedLists
                 controller.selectedItems = [self.selectedSavedLists]
                 controller.allowsMultiSelection = false
                 controller.navigationItem.title! += " a Saved List"
                 
-                if K.savedLists.isEmpty {
+                if K.ProductFilter.selectionSavedLists.isEmpty {
                     controller.startSpinner(in: controller.view,
                                             offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.collection.rawValue:
-                controller.selections = K.ProductFilter.selectionCollection
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionCollection
                 controller.selectedItems = [self.selectedCollection]
                 controller.allowsMultiSelection = false
                 controller.navigationItem.title! += " Collection"
@@ -164,7 +164,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                                             offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productCategory.rawValue:
-                controller.selections = K.ProductFilter.selectionProductCategory
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductCategory
                 controller.selectedItems = self.selectedProductCategory
                 controller.navigationItem.title! += " Product Category"
                 
@@ -177,7 +177,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                     controller.selections = [K.ProductFilter.wildcard] + selectedProductCategory.getChildren()
                 }
                 else {
-                    controller.selections = K.ProductFilter.selectionProductType
+                    controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductType
                 }
                 
                 controller.selectedItems = self.selectedProductType
@@ -193,7 +193,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                     controller.selections = [K.ProductFilter.wildcard] + selectedProductType.getChildren()
                 }
                 else {
-                    controller.selections = K.ProductFilter.selectionProductSubtype
+                    controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductSubtype
                 }
                 
                 controller.selectedItems = self.selectedProductSubtype
@@ -204,7 +204,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                                             offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.division.rawValue:
-                controller.selections = K.ProductFilter.selectionDivision
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionDivision
                 controller.selectedItems = self.selectedDivision
                 controller.navigationItem.title! += " Division"
                 
@@ -219,7 +219,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                     controller.selections = [K.ProductFilter.wildcard] + selectedProductSubtype.getChildren()
                 }
                 else {
-                    controller.selections = K.ProductFilter.selectionProductClass
+                    controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductClass
                 }
                 
                 controller.selectedItems = self.selectedProductClass
@@ -230,7 +230,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
                                             offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productDetails.rawValue:
-                controller.selections = K.ProductFilter.selectionProductDetails
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductDetails
                 controller.selectedItems = self.selectedProductDetails
                 controller.navigationItem.title! += " Product Details"
                 

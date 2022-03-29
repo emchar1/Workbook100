@@ -15,10 +15,7 @@ extension K {
         static let segementedOff = 2
         static let multiSeparator = "|"
         
-        static var selectionSavedLists: [String] {
-            [wildcard] + K.savedLists
-        }
-        
+        static var selectionSavedLists: [String] = []
         static var selectionCollection: [String] = []
         static var selectionDivision: [String] = []
         static var selectionProductCategory: [String] = []

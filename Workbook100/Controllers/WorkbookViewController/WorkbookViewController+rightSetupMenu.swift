@@ -137,7 +137,6 @@ extension  WorkbookViewController {
                                 })
                             }
                         }//end K.updateFirebaseRecord()
-                        
                     }//end for(index, item)
                 }))//end alert.addAction...[OK]
                 

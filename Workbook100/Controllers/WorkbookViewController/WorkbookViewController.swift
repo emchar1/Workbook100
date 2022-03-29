@@ -132,6 +132,11 @@ class WorkbookViewController: UIViewController,
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        print("Memory warning called!")
+    }
+    
     
     // MARK: - Orientation Transition
         
