@@ -106,8 +106,8 @@ class WorkbookViewController: UIViewController,
         super.viewDidLoad()
         
         collectionView.dragInteractionEnabled = true
-        collectionView.dragDelegate = self
-        collectionView.dropDelegate = self
+//        collectionView.dragDelegate = self
+//        collectionView.dropDelegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         

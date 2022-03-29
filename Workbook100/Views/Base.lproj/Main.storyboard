@@ -1179,31 +1179,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Saved Lists" id="47p-em-DJn" userLabel="Saved Lists">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="18P-py-9Zb">
-                                        <rect key="frame" x="0.0" y="1258.3333301544189" width="390" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="18P-py-9Zb" id="sVe-6a-Gsq">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJg-Ot-v2Y">
-                                                    <rect key="frame" x="20" y="12.333333333333334" width="350" height="19.333333333333329"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="zJg-Ot-v2Y" secondAttribute="trailing" id="R9F-6n-hoz"/>
-                                                <constraint firstItem="zJg-Ot-v2Y" firstAttribute="centerY" secondItem="sVe-6a-Gsq" secondAttribute="centerY" id="YeI-pE-cWN"/>
-                                                <constraint firstItem="zJg-Ot-v2Y" firstAttribute="leading" secondItem="sVe-6a-Gsq" secondAttribute="leadingMargin" id="ohN-rD-Pcy"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="Nks-Vp-edx" id="a0r-yb-TJn"/>
@@ -1231,7 +1206,6 @@
                         <outlet property="productNameSecondaryLabel" destination="NGM-WT-qTH" id="hiO-lJ-VhG"/>
                         <outlet property="productSubtypeLabel" destination="oLv-16-ZvV" id="C3J-Ei-2hF"/>
                         <outlet property="productTypeLabel" destination="zbZ-G0-cM2" id="nF3-Y8-HKC"/>
-                        <outlet property="savedListsLabel" destination="zJg-Ot-v2Y" id="1FP-qU-S3M"/>
                         <outlet property="size0Label" destination="90t-1m-5WF" id="yUq-t1-pXr"/>
                         <outlet property="size1Label" destination="DFG-0L-Ylu" id="bWQ-NT-xn7"/>
                         <outlet property="size2Label" destination="5Nn-TZ-0JB" id="Y5J-at-PMY"/>

@@ -38,7 +38,6 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var sku5Label: UILabel!
     @IBOutlet weak var sku6Label: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var savedListsLabel: UILabel!
 
     let imageSize: CGFloat = 200
     var model: CollectionModel!
@@ -93,7 +92,6 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         sku4Label.text = model.sizes[4].colorwaySKU
         sku5Label.text = model.sizes[5].colorwaySKU
         sku6Label.text = model.sizes[6].colorwaySKU
-        savedListsLabel.text = model.savedLists?.joined(separator: K.ProductFilter.multiSeparator)
     }
     
     

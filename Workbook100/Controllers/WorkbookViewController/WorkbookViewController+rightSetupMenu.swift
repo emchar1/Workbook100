@@ -14,20 +14,20 @@ extension  WorkbookViewController {
             
             
             // MARK: - Insert Blank
-            UIAction(title: "Insert Blank", image: nil, handler: { action in
-                guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
-
-                self.collectionView.performBatchUpdates({
-                    if K.ProductFilter.isFiltered {
-                        K.filteredItems.insert(CollectionModel.getBlankModel(), at: indexPath.row)
-                    }
-                    else {
-                        K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
-                    }
-                    
-                    self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
-                }, completion: nil)
-            }),
+//            UIAction(title: "Insert Blank", image: nil, handler: { action in
+//                guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
+//
+//                self.collectionView.performBatchUpdates({
+//                    if K.ProductFilter.isFiltered {
+//                        K.filteredItems.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+//                    }
+//                    else {
+//                        K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+//                    }
+//
+//                    self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
+//                }, completion: nil)
+//            }),
             
                     
             // MARK: - Export
@@ -67,14 +67,14 @@ extension  WorkbookViewController {
             
             
             // MARK: - PDF
-            UIAction(title: "PDF", image: UIImage(named: "printer"), handler: { action in
-                let pdfFilePath = self.collectionView.exportAsPDFFromCollectionView()
-                print("PDF saved to: \(pdfFilePath.pdfFilePath)")
-                
-                if let pdfData = pdfFilePath.pdfData {
-                    self.present(UIActivityViewController(activityItems: [pdfData], applicationActivities: []), animated: true, completion: nil)
-                }
-            }),
+//            UIAction(title: "PDF", image: UIImage(named: "printer"), handler: { action in
+//                let pdfFilePath = self.collectionView.exportAsPDFFromCollectionView()
+//                print("PDF saved to: \(pdfFilePath.pdfFilePath)")
+//                
+//                if let pdfData = pdfFilePath.pdfData {
+//                    self.present(UIActivityViewController(activityItems: [pdfData], applicationActivities: []), animated: true, completion: nil)
+//                }
+//            }),
             
             
             // MARK: - Save List
