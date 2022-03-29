@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		9DCE8D59CCCD8932A2F34098 /* Pods_Workbook100.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 033156AFB36211A1A41C5673 /* Pods_Workbook100.framework */; };
 		EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */; };
-		EA0AB09027CDB621000D7D37 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB08F27CDB620000D7D37 /* Extensions.swift */; };
+		EA0AB09027CDB621000D7D37 /* Extension+UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB08F27CDB620000D7D37 /* Extension+UIStoryboard.swift */; };
 		EA0AB09227CDB64A000D7D37 /* ActivitySpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */; };
 		EA22D4E027754129006C12CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4DF27754129006C12CF /* Constants.swift */; };
 		EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E127759DA4006C12CF /* CollectionModel.swift */; };
@@ -20,6 +20,13 @@
 		EA2E388027EA939F00122877 /* WorkbookImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */; };
 		EA2E388427EE27D000122877 /* SavedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E388327EE27D000122877 /* SavedList.swift */; };
 		EA2E388A27EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E388927EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift */; };
+		EA2E38AF27F2DD7100122877 /* Extension+UICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */; };
+		EA2E38B127F2DDAB00122877 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */; };
+		EA2E38B327F2DDDA00122877 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */; };
+		EA2E38B527F2DDF600122877 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B427F2DDF600122877 /* Extension+String.swift */; };
+		EA2E38B827F2E00200122877 /* Constants+FIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B727F2E00200122877 /* Constants+FIR.swift */; };
+		EA2E38BA27F2E34200122877 /* Constants+ProductFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */; };
+		EA2E38BC27F2E3C700122877 /* Constants+UICollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */; };
 		EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9A276D200F00D22042 /* CollectionCell.swift */; };
 		EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9C276D211000D22042 /* ImageLoader.swift */; };
 		EA5CE2DA27C743880071F015 /* HStackSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5CE2D927C743880071F015 /* HStackSelection.swift */; };
@@ -46,7 +53,7 @@
 		033156AFB36211A1A41C5673 /* Pods_Workbook100.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Workbook100.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C975EEDB9AEB83F8D8FCCF4 /* Pods-Workbook100.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workbook100.debug.xcconfig"; path = "Target Support Files/Pods-Workbook100/Pods-Workbook100.debug.xcconfig"; sourceTree = "<group>"; };
 		EA0AB06327C9CA55000D7D37 /* ProductSubFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSubFilterController.swift; sourceTree = "<group>"; };
-		EA0AB08F27CDB620000D7D37 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		EA0AB08F27CDB620000D7D37 /* Extension+UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIStoryboard.swift"; sourceTree = "<group>"; };
 		EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySpinner.swift; sourceTree = "<group>"; };
 		EA22D4DF27754129006C12CF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA22D4E127759DA4006C12CF /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
@@ -57,6 +64,13 @@
 		EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookImageViewController.swift; sourceTree = "<group>"; };
 		EA2E388327EE27D000122877 /* SavedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedList.swift; sourceTree = "<group>"; };
 		EA2E388927EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookViewController+rightSetupMenu.swift"; sourceTree = "<group>"; };
+		EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionViewCell.swift"; sourceTree = "<group>"; };
+		EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
+		EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
+		EA2E38B427F2DDF600122877 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		EA2E38B727F2E00200122877 /* Constants+FIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+FIR.swift"; sourceTree = "<group>"; };
+		EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+ProductFilter.swift"; sourceTree = "<group>"; };
+		EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+UICollectionCell.swift"; sourceTree = "<group>"; };
 		EA53FF9A276D200F00D22042 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		EA53FF9C276D211000D22042 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		EA5CE2D927C743880071F015 /* HStackSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HStackSelection.swift; sourceTree = "<group>"; };
@@ -119,6 +133,41 @@
 				EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */,
 			);
 			path = WorkbookDetailController;
+			sourceTree = "<group>";
+		};
+		EA2E38AD27F2DD1F00122877 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EA2E38B627F2DE8900122877 /* Extensions */,
+				EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */,
+				EAF2BA0727A2306500CD4856 /* CSVMake.swift */,
+				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
+				EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EA2E38B627F2DE8900122877 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EA0AB08F27CDB620000D7D37 /* Extension+UIStoryboard.swift */,
+				EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */,
+				EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */,
+				EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */,
+				EA2E38B427F2DDF600122877 /* Extension+String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EA2E38BD27F2E3F500122877 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				EA22D4DF27754129006C12CF /* Constants.swift */,
+				EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */,
+				EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */,
+				EA2E38B727F2E00200122877 /* Constants+FIR.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		EA53FF98276D137900D22042 /* Controllers */ = {
@@ -189,6 +238,7 @@
 				EAEC851E27B35FE900684ECF /* Workbook100.entitlements */,
 				EAA0CF742769573F00943912 /* AppDelegate.swift */,
 				EAA0CF762769573F00943912 /* SceneDelegate.swift */,
+				EA2E38AD27F2DD1F00122877 /* Utilities */,
 				EAA0CF882769576900943912 /* Models */,
 				EA53FF99276D138D00D22042 /* Views */,
 				EA53FF98276D137900D22042 /* Controllers */,
@@ -203,14 +253,9 @@
 		EAA0CF882769576900943912 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EA22D4DF27754129006C12CF /* Constants.swift */,
+				EA2E38BD27F2E3F500122877 /* Constants */,
 				EA22D4E127759DA4006C12CF /* CollectionModel.swift */,
 				EA8914DF27DC038300C8D8D3 /* Category.swift */,
-				EA0AB08F27CDB620000D7D37 /* Extensions.swift */,
-				EAF2BA0727A2306500CD4856 /* CSVMake.swift */,
-				EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */,
-				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
-				EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */,
 				EA2E388327EE27D000122877 /* SavedList.swift */,
 			);
 			path = Models;
@@ -351,19 +396,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2E38B327F2DDDA00122877 /* Extension+UIColor.swift in Sources */,
 				EA5CE2DA27C743880071F015 /* HStackSelection.swift in Sources */,
 				EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */,
 				EAB133E327A47CAD007F6553 /* WorkbookViewController+MailCompose.swift in Sources */,
 				EAF68F2327C0CE4800F2EDE6 /* PDFExport.swift in Sources */,
+				EA2E38B827F2E00200122877 /* Constants+FIR.swift in Sources */,
 				EA5CE2DF27C8E1420071F015 /* ProductFilterControllerNEW.swift in Sources */,
 				EA2E388427EE27D000122877 /* SavedList.swift in Sources */,
 				EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */,
 				EAA0CF792769573F00943912 /* WorkbookViewController.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
 				EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */,
+				EA2E38B127F2DDAB00122877 /* Extension+UIFont.swift in Sources */,
 				EA2E387B27E97B3B00122877 /* WorkbookDetailTVC2.swift in Sources */,
+				EA2E38BC27F2E3C700122877 /* Constants+UICollectionCell.swift in Sources */,
 				EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */,
 				EA2E388A27EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift in Sources */,
+				EA2E38AF27F2DD7100122877 /* Extension+UICollectionViewCell.swift in Sources */,
+				EA2E38B527F2DDF600122877 /* Extension+String.swift in Sources */,
 				EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */,
 				EA0AB09227CDB64A000D7D37 /* ActivitySpinner.swift in Sources */,
 				EA2E387E27E9A74900122877 /* ImageViewCollectionCell.swift in Sources */,
@@ -374,7 +425,8 @@
 				EAB133E527A494A0007F6553 /* CollectionCell+Views.swift in Sources */,
 				EA5CE2DC27C743C40071F015 /* VStackContent.swift in Sources */,
 				EAB133E027A47BFD007F6553 /* WorkbookViewController+DragDrop.swift in Sources */,
-				EA0AB09027CDB621000D7D37 /* Extensions.swift in Sources */,
+				EA0AB09027CDB621000D7D37 /* Extension+UIStoryboard.swift in Sources */,
+				EA2E38BA27F2E34200122877 /* Constants+ProductFilter.swift in Sources */,
 				EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */,
 				EA2E388027EA939F00122877 /* WorkbookImageViewController.swift in Sources */,
 				EA8914E027DC038300C8D8D3 /* Category.swift in Sources */,

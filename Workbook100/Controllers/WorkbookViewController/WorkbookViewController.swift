@@ -7,7 +7,6 @@
 
 import UIKit
 import MessageUI
-import Firebase
 
 protocol WorkbookViewControllerDelegate {
     func expandPanel()
@@ -32,7 +31,6 @@ class WorkbookViewController: UIViewController,
     @IBOutlet weak var rightMenu: UIBarButtonItem!
     @IBOutlet weak var cancelMultiButton: UIBarButtonItem!
     
-    var ref: DatabaseReference!
     var delegate: WorkbookViewControllerDelegate?
     var spinner = ActivitySpinner(style: .large)
     
@@ -67,13 +65,26 @@ class WorkbookViewController: UIViewController,
         layout.sectionInset = UIEdgeInsets(top: K.CollectionCell.padding, left: K.CollectionCell.padding, bottom: K.CollectionCell.padding, right: K.CollectionCell.padding)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseId)
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseId)
         collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseId)
         return collectionView
     }()
+        
+//    lazy var floatingSectionLabel: UILabel = {
+//        let label = UILabel(frame: CGRect(x: 8, y: 0, width: view.bounds.width, height: 60))
+//        label.textColor = .black
+//        label.font = UIFont(name: "Avenir Next Condensed Demi Bold Italic", size: 32)
+//        return label
+//    }()
+//
+//    lazy var titleSize: (width: CGFloat, height: CGFloat) = {
+//        let insetPadding: CGFloat = 8
+//        let width = view.frame.width - 2 * insetPadding
+//        let heightRatio: CGFloat = 0.85246
+//        return (width, width * heightRatio)
+//    }()
 
     @IBAction func productFilterTapped(_ sender: Any) {
         delegate?.expandPanel()
@@ -84,12 +95,6 @@ class WorkbookViewController: UIViewController,
         
         //If toggling back to single selection, remove all selections. Need to make it loop through ALL cells - visible and not visible
         for i in self.collectionView.indexPathsForVisibleItems {
-//            let cell = self.collectionView.cellForItem(at: i)!
-//            self.collectionView.deselectItem(at: i, animated: true)
-//            if let viewWTag = cell.viewWithTag(200) {
-//                viewWTag.removeFromSuperview()
-//            }
-            
             self.collectionView.deselectItem(at: i, animated: false)
         }
     }
@@ -120,87 +125,11 @@ class WorkbookViewController: UIViewController,
         spinner.startSpinner(in: view)
 
         //Firebase DB
-        ref = Database.database().reference()
-        ref.observe(DataEventType.value) { [self] (snapshot) in
-            K.items.removeAll()
-            
-            for itemSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
-                if let obj = itemSnapshot.value as? [String: AnyObject] {
-//                    let imageRef = Storage.storage().reference().child((obj[K.FIR.hashNeedThis] as! String) + ".jpg")
-                    
-                    let item = CollectionModel(hashNeedThis: obj[K.FIR.hashNeedThis] as! String,
-                                               division: obj[K.FIR.division] as! String,
-                                               collection: obj[K.FIR.collection] as! String,
-                                               productNameDescription: obj[K.FIR.productNameDescription] as! String,
-                                               productNameDescriptionSecondary: obj[K.FIR.productNameDescriptionSecondary] as! String,
-                                               productCategory: obj[K.FIR.productCategory] as! String,
-                                               productDepartment: obj[K.FIR.productDepartment] as! String,
-                                               launchSeason: obj[K.FIR.launchSeason] as! String,
-                                               seasonsCarried: obj[K.FIR.seasonsCarried] as! String,
-                                               productType: obj[K.FIR.productType] as! String,
-                                               productSubtype: obj[K.FIR.productSubtype] as! String,
-                                               productDetails: obj[K.FIR.productDetails] as! String,
-                                               youthWomen: obj[K.FIR.youthWomen] as! String,
-                                               colorway: obj[K.FIR.colorway] as! String,
-                                               carryOver: (obj[K.FIR.carryOver] as! String) == "TRUE",
-                                               essential: (obj[K.FIR.essential] as! String) == "TRUE",
-                                               skuCode: obj[K.FIR.skuCode] as! String,
-                                               sizes: [
-                                                CollectionModel.Size(size: obj[K.FIR.size0] as? String, colorwaySKU: obj[K.FIR.colorwaySKU0] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size1] as? String, colorwaySKU: obj[K.FIR.colorwaySKU1] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size2] as? String, colorwaySKU: obj[K.FIR.colorwaySKU2] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size3] as? String, colorwaySKU: obj[K.FIR.colorwaySKU3] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size4] as? String, colorwaySKU: obj[K.FIR.colorwaySKU4] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size5] as? String, colorwaySKU: obj[K.FIR.colorwaySKU5] as? String),
-                                                CollectionModel.Size(size: obj[K.FIR.size6] as? String, colorwaySKU: obj[K.FIR.colorwaySKU6] as? String),
-                                               ],
-                                               usMSRP: (obj[K.FIR.usRetailMSRP] as! NSNumber).doubleValue,
-                                               euMSRP: (obj[K.FIR.euRetailMSRP] as! NSNumber).doubleValue,
-                                               countryCode: obj[K.FIR.countryCode] as! String,
-                                               composition: obj[K.FIR.composition] as! String,
-                                               productDescription: obj[K.FIR.productDescription] as! String,
-                                               productFeatures: obj[K.FIR.productFeatures] as! String,
-                                               primaryImageURL: obj[K.FIR.primaryImageURL] as! String,
-                                               thumbURL: obj[K.FIR.thumbURL] as! String,
-                                               imageURLs: [obj[K.FIR.imageURL0] as! String,
-                                                           obj[K.FIR.imageURL1] as! String,
-                                                           obj[K.FIR.imageURL2] as! String,
-                                                           obj[K.FIR.imageURL3] as! String,
-                                                           obj[K.FIR.imageURL4] as! String,
-                                                           obj[K.FIR.imageURL5] as! String,
-                                                           obj[K.FIR.imageURL6] as! String,
-                                                           obj[K.FIR.imageURL7] as! String,
-                                                           obj[K.FIR.imageURL8] as! String,
-                                                           obj[K.FIR.imageURL9] as! String,
-                                                           obj[K.FIR.imageURL10] as! String],
-                                               image: nil,//imageRef,
-                                               savedLists: obj[K.FIR.savedLists] as? [String])
-                    
-                    if let savedLists = obj[K.FIR.savedLists] as? [String] {
-                        let _ = savedLists.map({
-                            if !K.savedLists.contains($0) {
-                                K.savedLists.append($0)
-                            }
-                        })
-                    }
-                    
-                    
-                    K.items.append(item)
-                }//end if let obj = itemSnapshot.value
-            }//end for itemSnapshot in snapshot.children
-
-            //Re-order everything according to Ludo 3/16/22
-            K.items = K.items
-                .sorted(by: { $0.productNameDescription < $1.productNameDescription })
-                .sorted(by: { $0.productType < $1.productType })
-            //add more sorted(by:) the last sorted(by:) has the highest sort priority
-            
+        K.initializeRecords {
             self.collectionView.reloadData()
-            spinner.stopSpinner()
-            
-            // 3-26-22 Moved setupRightMenu() here, i.e. after loading the collection model to ensure K.FIR.savedLists is populated so the right menu can present it.
-            setupRightMenu()
-        }//end ref.observe
+            self.setupRightMenu()
+            self.spinner.stopSpinner()
+        }
     }
     
     
@@ -223,7 +152,7 @@ class WorkbookViewController: UIViewController,
             let controller = nc.topViewController as! WorkbookDetailTVC2
 
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                controller.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+                controller.model = K.getFilteredItemsIfFiltered[indexPath.row]
             }
         }
     }
@@ -236,19 +165,14 @@ extension WorkbookViewController {
     
     //Data Source
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch (K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory) {
-//        case "Gloves":
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GloveCell.reuseId, for: indexPath) as! GloveCell
-//            cell.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
-//            cell.setViews()
-//            return cell
+        switch (K.getFilteredItemsIfFiltered[indexPath.row].productCategory) {
         case K.ProductFilter.wildcard:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
             return cell
         default:
-            if (K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory.count : K.items[indexPath.row].productCategory.count) > 0 {
+            if (K.getFilteredItemsIfFiltered[indexPath.row].productCategory.count) > 0 {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
-                cell.model = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row] : K.items[indexPath.row]
+                cell.model = K.getFilteredItemsIfFiltered[indexPath.row]
                 cell.setViews()
                 return cell
             }
@@ -257,9 +181,9 @@ extension WorkbookViewController {
             return cell
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return K.ProductFilter.isFiltered ? K.filteredItems.count : K.items.count
+        return K.getFilteredItemsIfFiltered.count
     }
     
     
@@ -275,16 +199,50 @@ extension WorkbookViewController {
     //Delegate Flow Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-//        let productCategory = K.ProductFilter.isFiltered ? K.filteredItems[indexPath.row].productCategory : K.items[indexPath.row].productCategory
         let multiplier: CGFloat = 1
-        
-//        if productCategory == "Gloves" {
-//            multiplier = 1.5
-//        }
         
         return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView) * multiplier,
                       height: K.CollectionCell.adjustedHeight(in: collectionView))
     }
+
+
+    // MARK: - Section Headers
+//
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        guard section > 0 else {
+//            return .zero
+//        }
+//
+//        return CGSize(width: view.frame.size.width, height: 40)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+//        guard section > 0 else {
+//            return .zero
+//        }
+//
+//        return CGSize(width: view.frame.size.width, height: 40)
+//    }
+//
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        navigationItem.titleView?.alpha = (scrollView.contentOffset.y - titleSize.height / 2) / (titleSize.height / 2)
+//
+//        if let indexPath = collectionView.indexPathForItem(at: CGPoint(x: scrollView.frame.size.width / 2,
+//                                                                       y: scrollView.contentOffset.y)) {
+//            if indexPath.section > 0 {
+//                floatingSectionLabel.text = K.getFilteredItemsIfFiltered[indexPath.section - 1].productNameDescription
+//                floatingSectionLabel.backgroundColor = .white
+//            }
+//            else {
+//                floatingSectionLabel.text = ""
+//                floatingSectionLabel.backgroundColor = .clear
+//            }
+//        }
+//    }
 }
 
 

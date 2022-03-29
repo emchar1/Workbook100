@@ -18,7 +18,12 @@ extension  WorkbookViewController {
                 guard let cell = self.collectionView.visibleCells.first, let indexPath = self.collectionView.indexPath(for: cell) else { return }
 
                 self.collectionView.performBatchUpdates({
-                    K.ProductFilter.isFiltered ? K.filteredItems.insert(CollectionModel.getBlankModel(), at: indexPath.row) : K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+                    if K.ProductFilter.isFiltered {
+                        K.filteredItems.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+                    }
+                    else {
+                        K.items.insert(CollectionModel.getBlankModel(), at: indexPath.row)
+                    }
                     
                     self.collectionView.insertItems(at: [IndexPath(item: indexPath.row, section: 0)])
                 }, completion: nil)
@@ -41,7 +46,7 @@ extension  WorkbookViewController {
                                         "EURetailMSRP",
                                         "CountryCode"]]
                 
-                for item in (K.ProductFilter.isFiltered ? K.filteredItems : K.items) {
+                for item in K.getFilteredItemsIfFiltered {
                     csv.append([item.skuCode,
                                 item.productNameDescription,
                                 item.productCategory,
@@ -82,9 +87,10 @@ extension  WorkbookViewController {
                     return
                 }
                 
-                let alert = UIAlertController(title: "Save", message: "Enter a name for your list", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Save List", message: "Enter a name for your list:", preferredStyle: .alert)
                 alert.addTextField()
                 alert.textFields![0].autocapitalizationType = .words
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
                     let textString = alert!.textFields![0].text!.trimmingCharacters(in: .whitespacesAndNewlines)
                     
@@ -111,7 +117,7 @@ extension  WorkbookViewController {
                     spinner.startSpinner(in: self.view)
 
                     //The bulk of the code needs to happen here!
-                    for (index, item) in (K.ProductFilter.isFiltered ? K.filteredItems : K.items).enumerated() {
+                    for (index, item) in K.getFilteredItemsIfFiltered.enumerated() {
                         if item.savedLists != nil {
                             item.savedLists!.append(textString)
                         }
@@ -121,7 +127,7 @@ extension  WorkbookViewController {
                         
                         K.updateFirebaseRecord(item: [K.FIR.savedLists: item.savedLists],
                                                databaseReference: Database.database().reference().child(item.hashNeedThis)) {
-                            if index >= (K.ProductFilter.isFiltered ? K.filteredItems : K.items).count - 1 {
+                            if index >= (K.getFilteredItemsIfFiltered.count - 1) {
                                 UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseInOut, animations: {
                                     savingLabel.text = "List Saved!"
                                     savingLabel.alpha = 0

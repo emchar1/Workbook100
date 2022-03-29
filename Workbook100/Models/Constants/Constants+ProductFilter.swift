@@ -1,38 +1,13 @@
 //
-//  Constants.swift
+//  Constants+ProductFilter.swift
 //  Workbook100
 //
-//  Created by Eddie Char on 12/23/21.
+//  Created by Eddie Char on 3/28/22.
 //
 
-import UIKit
-import Firebase
+import Foundation
 
-struct K {
-    static var items: [CollectionModel] = []
-    static var filteredItems: [CollectionModel] = []
-    static var remainingItems: [CollectionModel] {
-        Array(Set(items).symmetricDifference(Set(filteredItems)))
-    }
-    static var savedLists: [String] = []
-    
-    struct CollectionCell {
-        static var cellMultiplier: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
-        static let padding: CGFloat = 8
-        static let cornerRadius: CGFloat = 8
-        static let width: CGFloat = 200
-        static var height: CGFloat { width * 3 / 2 }
-
-        static func adjustedWidth(in view: UIView) -> CGFloat {
-            return view.bounds.width / cellMultiplier - (2 * padding)
-            
-        }        
-
-        static func adjustedHeight(in view: UIView) -> CGFloat {
-            return adjustedWidth(in: view) * 3 / 2
-        }
-    }
-    
+extension K {
     struct ProductFilter {
         static let wildcard = "[All]"
         static let segementedBoth = 0
@@ -47,7 +22,8 @@ struct K {
         static let selectionDivision: [String] = [wildcard, "Bike", "Moto", "Bike, Moto"]
 //        static let selectionLaunchSeason: [String] = [wildcard, "Essential", "FA17", "SP18", "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22"]
         static let selectionSeasonsCarried: [String] = [wildcard, "FA18", "SP19", "FA19", "SP20", "FA20", "SP21", "FA21", "SP22", "FA22", "SP23"]
-        static let selectionProductCategory: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Snow Goggle Accessories", "Snow Goggles", "Sunglass Parts and Lenses", "Sunglasses"]
+        static var selectionProductCategory: [String] = []
+//        static let selectionProductCategory: [String] = [wildcard, "Accessories", "Apparel", "Brad Binder", "Gear", "Gloves", "Goggle Accessories", "Goggles", "Helmet Parts and Accessories", "Helmets", "Protection", "Snow Goggle Accessories", "Snow Goggles", "Sunglass Parts and Lenses", "Sunglasses"]
         static let selectionProductDepartment: [String] = [wildcard, "Eyewear", "Hard Goods", "Soft Goods"]
         static let selectionProductType: [String] = [wildcard, "Accessories", "Backpack", "Beanie", "Bibs", "Bottoms", "Cap", "Fleece", "Gloves", "Goggle Case", "Goggle System", "Helmet Parts", "Helmet System", "Jackets", "Nose Parts", "Protection", "Replacement Lenses", "Socks", "Sunglass System", "Tear-Offs", "Tees", "Tops", "Umbrella", "Vest"]
         static let selectionProductSubtype: [String] = [wildcard, "Active Performance", "Athletic", "Base Layers", "Camper", "Casual", "Clear", "Dual", "Dual Pane", "Dual Pane Sonic Bumps", "Dual Pane Vented", "Elbow", "Flexfit", "Full Face", "HiPER", "Injected", "Jersey", "Knee", "Laminated", "Liners", "Mirror", "Misc.", "Mud", "Nose Bridges", "Nose Pads", "Open Face", "Pants", "Performance", "Perimeter Seal", "Photochromic", "Premium", "Regular", "Replacement Lenses", "Screws", "Shield", "Short Fingers", "Shorts", "Sleeves", "Snapback", "Sonic Bumps", "Spare Parts", "Sport Performance", "Standard", "Tech", "Trucker", "Unstructured", "Upper", "Varied", "Visors", "Water Resistant", "Waterproof", "Windproof", "Wool"]
@@ -392,140 +368,6 @@ struct K {
 //            sunglasses_sunglassSystem.search("Sport Performance")!.add(Category(""))
 
             return collection
-        }
-        
-    }
-}
-    
-
-
-// MARK: - Firebase stuff
-
-extension K {
-    struct FIR {
-        
-        // IMPORTANT: - When adding to this list, MUST add to the updateFirebaseRecord() function down below!!!
-        static let hashNeedThis = "HashNeedThis"
-        static let division = "Division"
-        static let collection = "Collection"
-        static let productNameDescription = "ProductNameDescription"
-        static let productNameDescriptionSecondary = "ProductNameDescriptionSecondary"
-        static let productCategory = "ProductCategory"
-        static let productDepartment = "ProductDepartment"
-        static let launchSeason = "LaunchSeason"
-        static let seasonsCarried = "SeasonsCarried"
-        static let productType = "ProductType"
-        static let productSubtype = "ProductSubtype"
-        static let productDetails = "ProductDetails"
-        static let youthWomen = "YouthWomen"
-        static let colorway = "Colorway"
-        static let carryOver = "CarryOver"
-        static let essential = "Essential"
-        static let skuCode = "SKUCode"
-        static let colorwaySKU0 = "ColorwaySKU0"
-        static let colorwaySKU1 = "ColorwaySKU1"
-        static let colorwaySKU2 = "ColorwaySKU2"
-        static let colorwaySKU3 = "ColorwaySKU3"
-        static let colorwaySKU4 = "ColorwaySKU4"
-        static let colorwaySKU5 = "ColorwaySKU5"
-        static let colorwaySKU6 = "ColorwaySKU6"
-        static let size0 = "Size0"
-        static let size1 = "Size1"
-        static let size2 = "Size2"
-        static let size3 = "Size3"
-        static let size4 = "Size4"
-        static let size5 = "Size5"
-        static let size6 = "Size6"
-        static let usRetailMSRP = "USRetailMSRP"
-        static let euRetailMSRP = "EURetailMSRP"
-        static let countryCode = "CountryCode"
-        static let composition = "Composition"
-        static let productDescription = "ProductDescription"
-        static let productFeatures = "ProductFeatures"
-        static let primaryImageURL = "primaryImageURL"
-        static let thumbURL = "thumbURL"
-        static let imageURL0 = "imageURL0"
-        static let imageURL1 = "imageURL1"
-        static let imageURL2 = "imageURL2"
-        static let imageURL3 = "imageURL3"
-        static let imageURL4 = "imageURL4"
-        static let imageURL5 = "imageURL5"
-        static let imageURL6 = "imageURL6"
-        static let imageURL7 = "imageURL7"
-        static let imageURL8 = "imageURL8"
-        static let imageURL9 = "imageURL9"
-        static let imageURL10 = "imageURL10"
-        static let savedLists = "savedLists"
-    }
-    
-    //Update lists in tandem!!!
-    static func updateFirebaseRecord(item: Any?, databaseReference: DatabaseReference!, completion: (() -> ())?) {
-        
-        
-        if let model = item as? CollectionModel {
-            let itemRef: [String: Any?] = [K.FIR.hashNeedThis: model.hashNeedThis,
-                                           K.FIR.division: model.division,
-                                           K.FIR.collection: model.collection,
-                                           K.FIR.productNameDescription: model.productNameDescription,
-                                           K.FIR.productNameDescriptionSecondary: model.productNameDescriptionSecondary,
-                                           K.FIR.productCategory: model.productCategory,
-                                           K.FIR.productDepartment: model.productDepartment,
-                                           K.FIR.launchSeason: model.launchSeason,
-                                           K.FIR.seasonsCarried: model.seasonsCarried,
-                                           K.FIR.productType: model.productType,
-                                           K.FIR.productSubtype: model.productSubtype,
-                                           K.FIR.productDetails: model.productDetails,
-                                           K.FIR.youthWomen: model.youthWomen,
-                                           K.FIR.colorway: model.colorway,
-                                           K.FIR.carryOver: model.carryOver ? "TRUE" : "FALSE",
-                                           K.FIR.essential: model.essential ? "TRUE" : "FALSE",
-                                           K.FIR.skuCode: model.skuCode,
-                                           K.FIR.colorwaySKU0: model.sizes[0].colorwaySKU ?? "",
-                                           K.FIR.colorwaySKU1: model.sizes[1].colorwaySKU ?? "",
-                                           K.FIR.colorwaySKU2: model.sizes[2].colorwaySKU ?? "",
-                                           K.FIR.colorwaySKU3: model.sizes[3].colorwaySKU ?? "",
-                                           K.FIR.colorwaySKU4: model.sizes[4].colorwaySKU ?? "",
-                                           K.FIR.colorwaySKU5: model.sizes[5].colorwaySKU ?? "",
-                                           K.FIR.colorwaySKU6: model.sizes[6].colorwaySKU ?? "",
-                                           K.FIR.size0: model.sizes[0].size ?? "",
-                                           K.FIR.size1: model.sizes[1].size ?? "",
-                                           K.FIR.size2: model.sizes[2].size ?? "",
-                                           K.FIR.size3: model.sizes[3].size ?? "",
-                                           K.FIR.size4: model.sizes[4].size ?? "",
-                                           K.FIR.size5: model.sizes[5].size ?? "",
-                                           K.FIR.size6: model.sizes[6].size ?? "",
-                                           K.FIR.usRetailMSRP: model.usMSRP,
-                                           K.FIR.euRetailMSRP: model.euMSRP,
-                                           K.FIR.countryCode: model.countryCode,
-                                           K.FIR.composition: model.composition,
-                                           K.FIR.productDescription: model.productDescription,
-                                           K.FIR.productFeatures: model.productFeatures,
-                                           K.FIR.primaryImageURL: model.primaryImageURL,
-                                           K.FIR.thumbURL: model.thumbURL,
-                                           K.FIR.imageURL0: model.imageURLs[0],
-                                           K.FIR.imageURL1: model.imageURLs[1],
-                                           K.FIR.imageURL2: model.imageURLs[2],
-                                           K.FIR.imageURL3: model.imageURLs[3],
-                                           K.FIR.imageURL4: model.imageURLs[4],
-                                           K.FIR.imageURL5: model.imageURLs[5],
-                                           K.FIR.imageURL6: model.imageURLs[6],
-                                           K.FIR.imageURL7: model.imageURLs[7],
-                                           K.FIR.imageURL8: model.imageURLs[8],
-                                           K.FIR.imageURL9: model.imageURLs[9],
-                                           K.FIR.imageURL10: model.imageURLs[10],
-                                           K.FIR.savedLists: model.savedLists
-            ]
-
-            //Now, SAVE!!!
-            databaseReference.setValue(itemRef) { error, dbRef in
-                completion?()
-            }
-        }
-        else {
-//            databaseReference.updateChildValues(item as! [AnyHashable : Any])
-            databaseReference.updateChildValues(item as! [AnyHashable : Any]) { error, dbRef in
-                completion?()
-            }
-        }
-    }
-}
+        }//end static var categories
+    }//end struct ProductFilter
+}//end extension K
