@@ -42,6 +42,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     let composition: String
     let productDescription: String
     let productFeatures: String
+    let lineList: String
     let primaryImageURL: String
     let thumbURL: String
     let imageURLs: [String]
@@ -94,6 +95,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
          composition: String,
          productDescription: String,
          productFeatures: String,
+         lineList: String,
          primaryImageURL: String,
          thumbURL: String,
          imageURLs: [String],
@@ -124,6 +126,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
         self.composition = composition
         self.productDescription = productDescription
         self.productFeatures = productFeatures
+        self.lineList = lineList
         self.primaryImageURL = primaryImageURL
         self.thumbURL = thumbURL
         self.imageURLs = imageURLs
@@ -158,7 +161,8 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                         CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003"),
                                         CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004"),
                                         CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005"),
-                                        CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006")
+                                        CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006"),
+                                        CollectionModel.Size(size: "Size 7", colorwaySKU: "00000-00007")
                                     ],
                                     usMSRP: 9.99,
                                     euMSRP: 10.01,
@@ -166,6 +170,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                     composition: "Composition",
                                     productDescription: "Product Description",
                                     productFeatures: "Product Features",
+                                    lineList: "Line List",
                                     primaryImageURL: "https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364", //100% Logo
                                     thumbURL: "https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364", //100% Logo
                                     imageURLs: ["https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364"],

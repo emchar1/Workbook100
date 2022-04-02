@@ -30,6 +30,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var size4Label: UILabel!
     @IBOutlet weak var size5Label: UILabel!
     @IBOutlet weak var size6Label: UILabel!
+    @IBOutlet weak var size7Label: UILabel!
     @IBOutlet weak var sku0Label: UILabel!
     @IBOutlet weak var sku1Label: UILabel!
     @IBOutlet weak var sku2Label: UILabel!
@@ -37,6 +38,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var sku4Label: UILabel!
     @IBOutlet weak var sku5Label: UILabel!
     @IBOutlet weak var sku6Label: UILabel!
+    @IBOutlet weak var sku7Label: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
 
     let imageSize: CGFloat = 200
@@ -85,6 +87,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         size4Label.text = model.sizes[4].size
         size5Label.text = model.sizes[5].size
         size6Label.text = model.sizes[6].size
+        size7Label.text = model.sizes[7].size
         sku0Label.text = model.sizes[0].colorwaySKU
         sku1Label.text = model.sizes[1].colorwaySKU
         sku2Label.text = model.sizes[2].colorwaySKU
@@ -92,6 +95,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         sku4Label.text = model.sizes[4].colorwaySKU
         sku5Label.text = model.sizes[5].colorwaySKU
         sku6Label.text = model.sizes[6].colorwaySKU
+        sku7Label.text = model.sizes[7].colorwaySKU
     }
     
     

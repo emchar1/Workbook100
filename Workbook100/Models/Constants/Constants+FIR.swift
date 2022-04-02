@@ -35,6 +35,7 @@ extension K {
         static let colorwaySKU4 = "ColorwaySKU4"
         static let colorwaySKU5 = "ColorwaySKU5"
         static let colorwaySKU6 = "ColorwaySKU6"
+        static let colorwaySKU7 = "ColorwaySKU7"
         static let size0 = "Size0"
         static let size1 = "Size1"
         static let size2 = "Size2"
@@ -42,12 +43,14 @@ extension K {
         static let size4 = "Size4"
         static let size5 = "Size5"
         static let size6 = "Size6"
+        static let size7 = "Size7"
         static let usRetailMSRP = "USRetailMSRP"
         static let euRetailMSRP = "EURetailMSRP"
         static let countryCode = "CountryCode"
         static let composition = "Composition"
         static let productDescription = "ProductDescription"
         static let productFeatures = "ProductFeatures"
+        static let lineList = "LineList"
         static let primaryImageURL = "primaryImageURL"
         static let thumbURL = "thumbURL"
         static let imageURL0 = "imageURL0"
@@ -91,6 +94,7 @@ extension K {
                                            K.FIR.colorwaySKU4: model.sizes[4].colorwaySKU ?? "",
                                            K.FIR.colorwaySKU5: model.sizes[5].colorwaySKU ?? "",
                                            K.FIR.colorwaySKU6: model.sizes[6].colorwaySKU ?? "",
+                                           K.FIR.colorwaySKU6: model.sizes[7].colorwaySKU ?? "",
                                            K.FIR.size0: model.sizes[0].size ?? "",
                                            K.FIR.size1: model.sizes[1].size ?? "",
                                            K.FIR.size2: model.sizes[2].size ?? "",
@@ -98,12 +102,14 @@ extension K {
                                            K.FIR.size4: model.sizes[4].size ?? "",
                                            K.FIR.size5: model.sizes[5].size ?? "",
                                            K.FIR.size6: model.sizes[6].size ?? "",
+                                           K.FIR.size6: model.sizes[7].size ?? "",
                                            K.FIR.usRetailMSRP: model.usMSRP,
                                            K.FIR.euRetailMSRP: model.euMSRP,
                                            K.FIR.countryCode: model.countryCode,
                                            K.FIR.composition: model.composition,
                                            K.FIR.productDescription: model.productDescription,
                                            K.FIR.productFeatures: model.productFeatures,
+                                           K.FIR.lineList: model.lineList,
                                            K.FIR.primaryImageURL: model.primaryImageURL,
                                            K.FIR.thumbURL: model.thumbURL,
                                            K.FIR.imageURL0: model.imageURLs[0],
@@ -169,6 +175,7 @@ extension K {
                                                 CollectionModel.Size(size: obj[K.FIR.size4] as? String, colorwaySKU: obj[K.FIR.colorwaySKU4] as? String),
                                                 CollectionModel.Size(size: obj[K.FIR.size5] as? String, colorwaySKU: obj[K.FIR.colorwaySKU5] as? String),
                                                 CollectionModel.Size(size: obj[K.FIR.size6] as? String, colorwaySKU: obj[K.FIR.colorwaySKU6] as? String),
+                                                CollectionModel.Size(size: obj[K.FIR.size7] as? String, colorwaySKU: obj[K.FIR.colorwaySKU7] as? String)
                                                ],
                                                usMSRP: (obj[K.FIR.usRetailMSRP] as! NSNumber).doubleValue,
                                                euMSRP: (obj[K.FIR.euRetailMSRP] as! NSNumber).doubleValue,
@@ -176,6 +183,7 @@ extension K {
                                                composition: obj[K.FIR.composition] as! String,
                                                productDescription: obj[K.FIR.productDescription] as! String,
                                                productFeatures: obj[K.FIR.productFeatures] as! String,
+                                               lineList: obj[K.FIR.lineList] as! String,
                                                primaryImageURL: obj[K.FIR.primaryImageURL] as! String,
                                                thumbURL: obj[K.FIR.thumbURL] as! String,
                                                imageURLs: [obj[K.FIR.imageURL0] as! String,
@@ -201,8 +209,8 @@ extension K {
             
             //Re-order everything according to Ludo 3/16/22
             K.items = K.items
-                .sorted(by: { $0.productNameDescription < $1.productNameDescription })
-                .sorted(by: { $0.productType < $1.productType })
+//                .sorted(by: { $0.productNameDescription < $1.productNameDescription })
+//                .sorted(by: { $0.productType < $1.productType })
                 //add more sorted(by:) the last sorted(by:) has the highest sort priority
 
             K.sortProductFilterSelections()
