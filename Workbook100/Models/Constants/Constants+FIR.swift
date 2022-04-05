@@ -228,12 +228,8 @@ extension K {
      */
     private static func populateProductFilterSelections(item: CollectionModel) {
         //Line List
-        for lineListItem in item.lineList.components(separatedBy: ",") {
-            let trimmed = lineListItem.trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            if !K.ProductFilter.selectionLineList.contains(trimmed) && trimmed != "" && trimmed != "removed" {
-                K.ProductFilter.selectionLineList.append(trimmed)
-            }
+        if !K.ProductFilter.selectionLineList.contains(item.lineList) && item.lineList != "" {
+            K.ProductFilter.selectionLineList.append(item.lineList)
         }
         
         //Collection
@@ -277,6 +273,7 @@ extension K {
     private static func sortProductFilterSelections() {
         //Saved Lists
         K.ProductFilter.selectionLineList = K.ProductFilter.selectionLineList.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionLineList = K.ProductFilter.selectionLineList.filter{ $0 != "[All]" }
 
         //Collection
         K.ProductFilter.selectionCollection = K.ProductFilter.selectionCollection.sorted(by: { $0 < $1 })
