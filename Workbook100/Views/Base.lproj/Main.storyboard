@@ -59,7 +59,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
-                            <tableViewSection headerTitle="Saved Lists" id="KD2-h8-uES" userLabel="Saved Lists">
+                            <tableViewSection headerTitle="Line List" id="KD2-h8-uES" userLabel="Saved Lists">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UWe-UC-c4l" customClass="ProductFilterCell" customModule="Workbook100" customModuleProvider="target">
                                         <rect key="frame" x="20" y="49" width="350" height="43.666667938232422"/>
@@ -387,12 +387,12 @@
                     <connections>
                         <outlet property="labelCollection" destination="PTH-Fk-S6S" id="v4p-wE-k2r"/>
                         <outlet property="labelDivision" destination="XGc-nV-8va" id="Jb7-cW-FSv"/>
+                        <outlet property="labelLineList" destination="oZf-e7-7q9" id="KBp-Vh-8Y6"/>
                         <outlet property="labelProductCategory" destination="sex-a1-HPY" id="ztO-4Z-It4"/>
                         <outlet property="labelProductClass" destination="ish-kh-wi2" id="D02-5h-xLu"/>
                         <outlet property="labelProductDetails" destination="Kzd-6n-ZYe" id="kYl-xs-W75"/>
                         <outlet property="labelProductSubtype" destination="i27-ia-PH5" id="yYp-e9-KXN"/>
                         <outlet property="labelProductType" destination="Uki-AH-Q5n" id="0if-eB-ecS"/>
-                        <outlet property="labelSavedLists" destination="oZf-e7-7q9" id="KBp-Vh-8Y6"/>
                         <outlet property="segmentedEssential" destination="PkO-yG-Nkj" id="Op6-xk-yZ5"/>
                         <outlet property="segmentedNew" destination="jOD-aJ-LYL" id="QYQ-8x-s8q"/>
                         <segue destination="PI5-Hy-7ng" kind="presentation" identifier="didSelectFilter" id="6XB-bB-61l"/>
@@ -1214,6 +1214,31 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Line List (Debug)" id="jgQ-nn-xVi">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Thk-Ab-5DD">
+                                        <rect key="frame" x="0.0" y="1302.3333301544189" width="390" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Thk-Ab-5DD" id="CzP-K3-KVC">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tg-zJ-f6w">
+                                                    <rect key="frame" x="20" y="12.333333333333334" width="350" height="19.333333333333329"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="8tg-zJ-f6w" secondAttribute="trailing" id="BhQ-O7-M2A"/>
+                                                <constraint firstItem="8tg-zJ-f6w" firstAttribute="leading" secondItem="CzP-K3-KVC" secondAttribute="leadingMargin" id="abN-Ac-ZEN"/>
+                                                <constraint firstItem="8tg-zJ-f6w" firstAttribute="centerY" secondItem="CzP-K3-KVC" secondAttribute="centerY" id="bAm-J9-bWj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="Nks-Vp-edx" id="a0r-yb-TJn"/>
@@ -1233,6 +1258,7 @@
                         <outlet property="collectionView" destination="NDs-Jm-eXM" id="ElD-op-cGk"/>
                         <outlet property="colorwayLabel" destination="ivr-ND-M5X" id="yXE-K7-yn9"/>
                         <outlet property="essentialLabel" destination="dQu-cb-zpu" id="wFz-lz-J3t"/>
+                        <outlet property="lineListLabel" destination="8tg-zJ-f6w" id="cui-Me-Zer"/>
                         <outlet property="newLabel" destination="NBy-cX-XyD" id="9xb-Kw-SC5"/>
                         <outlet property="productCategoryLabel" destination="nXM-Na-cRd" id="siI-Wq-wBw"/>
                         <outlet property="productDeptLabel" destination="DPD-TB-tfb" id="c3X-z8-3h9"/>

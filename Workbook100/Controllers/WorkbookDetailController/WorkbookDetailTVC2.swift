@@ -40,6 +40,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var sku6Label: UILabel!
     @IBOutlet weak var sku7Label: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var lineListLabel: UILabel!
 
     let imageSize: CGFloat = 200
     var model: CollectionModel!
@@ -96,6 +97,8 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         sku5Label.text = model.sizes[5].colorwaySKU
         sku6Label.text = model.sizes[6].colorwaySKU
         sku7Label.text = model.sizes[7].colorwaySKU
+        
+        lineListLabel.text = model.lineList
     }
     
     

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProductFilterControllerNEWDelegate {
-    func applyTapped(selectedSavedLists: String,
+    func applyTapped(selectedLineList: String,
                      selectedNew: Int,
                      selectedEssential: Int,
                      selectedCollection: String,
@@ -42,7 +42,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     
     // MARK: - Properties
     
-    @IBOutlet weak var labelSavedLists: UILabel!
+    @IBOutlet weak var labelLineList: UILabel!
     @IBOutlet weak var segmentedNew: UISegmentedControl!
     @IBOutlet weak var segmentedEssential: UISegmentedControl!
     @IBOutlet weak var labelCollection: UILabel!
@@ -54,7 +54,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     @IBOutlet weak var labelProductDetails: UILabel!
     
     let s = "; "
-    var selectedSavedLists: String! { didSet { labelSavedLists.text = selectedSavedLists }}
+    var selectedLineList: String! { didSet { labelLineList.text = selectedLineList }}
     var selectedCollection: String! { didSet { labelCollection.text = selectedCollection }}
     var selectedProductCategory: [String]! { didSet { labelProductCategory.text = selectedProductCategory.joined(separator: s) }}
     var selectedProductType: [String]! { didSet { labelProductType.text = selectedProductType.joined(separator: s) }}
@@ -67,7 +67,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     var delegate: ProductFilterControllerNEWDelegate?
     
     enum FilterItem: Int {
-        case savedLists = 0,
+        case lineList = 0,
              new,
              essential,
              collection,
@@ -90,7 +90,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     }
     
     private func resetFilters(clear: Bool = false) {
-        self.selectedSavedLists = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedSavedLists
+        self.selectedLineList = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedLineList
         self.segmentedNew.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedNew
         self.segmentedEssential.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedEssential
         self.selectedCollection = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedCollection
@@ -106,7 +106,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     // MARK: - Navigation
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
-        self.delegate?.applyTapped(selectedSavedLists: self.selectedSavedLists,
+        self.delegate?.applyTapped(selectedLineList: self.selectedLineList,
                                    selectedNew: self.segmentedNew.selectedSegmentIndex,
                                    selectedEssential: self.segmentedEssential.selectedSegmentIndex,
                                    selectedCollection: self.selectedCollection,
@@ -143,13 +143,13 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
             self.selectedSection = indexPath.section
             
             switch self.selectedSection {
-            case FilterItem.savedLists.rawValue:
-                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionSavedLists
-                controller.selectedItems = [self.selectedSavedLists]
+            case FilterItem.lineList.rawValue:
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionLineList
+                controller.selectedItems = [self.selectedLineList]
                 controller.allowsMultiSelection = false
-                controller.navigationItem.title! += " a Saved List"
+                controller.navigationItem.title! += " Line List"
                 
-                if K.ProductFilter.selectionSavedLists.isEmpty {
+                if K.ProductFilter.selectionLineList.isEmpty {
                     controller.startSpinner(in: controller.view,
                                             offset: CGPoint(x: 0, y: spinnerOffset))
                 }
@@ -275,9 +275,9 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
 extension ProductFilterControllerNEW {
     func didSelectItems(selectedItems: [String]) {
         switch self.selectedSection {
-        case FilterItem.savedLists.rawValue:
+        case FilterItem.lineList.rawValue:
             self.resetFilters(clear: true)
-            self.selectedSavedLists = selectedItems[0]
+            self.selectedLineList = selectedItems[0]
         case FilterItem.collection.rawValue: self.selectedCollection = selectedItems[0]
         case FilterItem.productCategory.rawValue:
             self.selectedProductCategory = selectedItems

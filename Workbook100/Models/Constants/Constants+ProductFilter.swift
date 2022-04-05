@@ -15,7 +15,7 @@ extension K {
         static let segementedOff = 2
         static let multiSeparator = "|"
         
-        static var selectionSavedLists: [String] = []
+        static var selectionLineList: [String] = []
         static var selectionCollection: [String] = []
         static var selectionDivision: [String] = []
         static var selectionProductCategory: [String] = []
@@ -24,7 +24,7 @@ extension K {
         static var selectionProductClass: [String] = []
         static var selectionProductDetails: [String] = []
 
-        static var selectedSavedLists: String = wildcard
+        static var selectedLineList: String = wildcard
         static var selectedNew: Int = segementedBoth
         static var selectedEssential: Int = segementedBoth
         static var selectedCollection: String = wildcard
@@ -36,7 +36,7 @@ extension K {
         static var selectedProductDetails: [String] = [wildcard]
         
         static var isFiltered: Bool {
-            return !(selectedSavedLists == wildcard &&
+            return !(selectedLineList == wildcard &&
                      selectedNew == segementedBoth &&
                      selectedEssential == segementedBoth &&
                      selectedCollection == wildcard &&

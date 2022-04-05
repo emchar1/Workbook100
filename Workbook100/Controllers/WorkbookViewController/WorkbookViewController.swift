@@ -255,7 +255,7 @@ extension WorkbookViewController {
 // MARK: - Product Filter Controller NEW Delegate
 
 extension WorkbookViewController {
-    func applyTapped(selectedSavedLists: String,
+    func applyTapped(selectedLineList: String,
                      selectedNew: Int,
                      selectedEssential: Int,
                      selectedCollection: String,
@@ -276,7 +276,7 @@ extension WorkbookViewController {
         let s = K.ProductFilter.multiSeparator
         
         //Set the global constant variables, i.e. make the changes "permanent."
-        K.ProductFilter.selectedSavedLists = selectedSavedLists
+        K.ProductFilter.selectedLineList = selectedLineList
         K.ProductFilter.selectedNew = selectedNew
         K.ProductFilter.selectedEssential = selectedEssential
         K.ProductFilter.selectedCollection = selectedCollection
@@ -288,7 +288,7 @@ extension WorkbookViewController {
         K.ProductFilter.selectedProductDetails = selectedProductDetails
 
         K.filteredItems = K.items.filter {
-            (selectedSavedLists == K.ProductFilter.wildcard ? true : ($0.savedLists ?? []).joined(separator: s).wrap(in: s).contains(selectedSavedLists.wrap(in: s))) &&
+            (selectedLineList == K.ProductFilter.wildcard ? true : $0.lineList == selectedLineList) &&
             
             (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
             

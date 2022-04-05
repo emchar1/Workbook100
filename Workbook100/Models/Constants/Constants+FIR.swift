@@ -227,12 +227,12 @@ extension K {
      Initializes the selections options for each filter item.
      */
     private static func populateProductFilterSelections(item: CollectionModel) {
-        //Saved Lists
-        if let savedLists = item.savedLists {
-            let _ = savedLists.map {
-                if !K.ProductFilter.selectionSavedLists.contains($0) {
-                    K.ProductFilter.selectionSavedLists.append($0)
-                }
+        //Line List
+        for lineListItem in item.lineList.components(separatedBy: ",") {
+            let trimmed = lineListItem.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if !K.ProductFilter.selectionLineList.contains(trimmed) && trimmed != "" && trimmed != "removed" {
+                K.ProductFilter.selectionLineList.append(trimmed)
             }
         }
         
@@ -276,7 +276,7 @@ extension K {
     
     private static func sortProductFilterSelections() {
         //Saved Lists
-        K.ProductFilter.selectionSavedLists = K.ProductFilter.selectionSavedLists.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionLineList = K.ProductFilter.selectionLineList.sorted(by: { $0 < $1 })
 
         //Collection
         K.ProductFilter.selectionCollection = K.ProductFilter.selectionCollection.sorted(by: { $0 < $1 })
