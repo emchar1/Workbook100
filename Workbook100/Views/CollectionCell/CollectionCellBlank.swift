@@ -27,4 +27,4 @@ class CollectionCellBlank: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("Error loading CollectionCellBlank")
     }
-}
+} 
