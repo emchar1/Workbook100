@@ -146,6 +146,8 @@ extension K {
     
     
     static func initializeRecords(completion: (() -> ())?) {
+        var filteredItemsFirstInitialized = K.filteredItems.isEmpty
+        
         //Firebase DB
         let ref = Database.database().reference()
         ref.observe(DataEventType.value) { [self] (snapshot) in
@@ -209,7 +211,7 @@ extension K {
                     K.items.append(item)
                     
                     //Also populate the filtered list, which it will be for the initial load, using lineListDefault.
-                    if item.lineList == K.ProductFilter.lineListDefault {
+                    if filteredItemsFirstInitialized {
                         K.filteredItems.append(item)
                     }
 
@@ -217,8 +219,10 @@ extension K {
                 }//end if let obj = itemSnapshot.value
             }//end for itemSnapshot in snapshot.children
             
+            filteredItemsFirstInitialized = false
+            
             //Re-order everything according to Ludo 3/16/22
-            K.items = K.items
+//            K.items = K.items
 //                .sorted(by: { $0.productNameDescription < $1.productNameDescription })
 //                .sorted(by: { $0.productType < $1.productType })
                 //add more sorted(by:) the last sorted(by:) has the highest sort priority
