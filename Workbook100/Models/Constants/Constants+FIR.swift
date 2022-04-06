@@ -50,6 +50,7 @@ extension K {
         static let composition = "Composition"
         static let productDescription = "ProductDescription"
         static let productFeatures = "ProductFeatures"
+        static let lineListOrder = "LineListOrder"
         static let lineList = "LineList"
         static let primaryImageURL = "primaryImageURL"
         static let thumbURL = "thumbURL"
@@ -65,6 +66,7 @@ extension K {
         static let imageURL9 = "imageURL9"
         static let imageURL10 = "imageURL10"
         static let savedLists = "savedLists"
+        static let isRemoved = "isRemoved"
     }
     
     //Update lists in tandem!!!
@@ -109,6 +111,7 @@ extension K {
                                            K.FIR.composition: model.composition,
                                            K.FIR.productDescription: model.productDescription,
                                            K.FIR.productFeatures: model.productFeatures,
+                                           K.FIR.lineListOrder: model.lineListOrder,
                                            K.FIR.lineList: model.lineList,
                                            K.FIR.primaryImageURL: model.primaryImageURL,
                                            K.FIR.thumbURL: model.thumbURL,
@@ -123,8 +126,8 @@ extension K {
                                            K.FIR.imageURL8: model.imageURLs[8],
                                            K.FIR.imageURL9: model.imageURLs[9],
                                            K.FIR.imageURL10: model.imageURLs[10],
-                                           K.FIR.savedLists: model.savedLists
-            ]
+                                           K.FIR.savedLists: model.savedLists,
+                                           K.FIR.isRemoved: model.isRemoved ? "TRUE" : "FALSE"]
 
             //Save entire model
             databaseReference.setValue(itemRef) { error, dbRef in
@@ -183,6 +186,7 @@ extension K {
                                                composition: obj[K.FIR.composition] as! String,
                                                productDescription: obj[K.FIR.productDescription] as! String,
                                                productFeatures: obj[K.FIR.productFeatures] as! String,
+                                               lineListOrder: (obj[K.FIR.lineListOrder] as! NSNumber).intValue,
                                                lineList: obj[K.FIR.lineList] as! String,
                                                primaryImageURL: obj[K.FIR.primaryImageURL] as! String,
                                                thumbURL: obj[K.FIR.thumbURL] as! String,
@@ -198,10 +202,16 @@ extension K {
                                                            obj[K.FIR.imageURL9] as! String,
                                                            obj[K.FIR.imageURL10] as! String],
                                                image: nil,
-                                               savedLists: obj[K.FIR.savedLists] as? [String])
+                                               savedLists: obj[K.FIR.savedLists] as? [String],
+                                               isRemoved: (obj[K.FIR.isRemoved] as? String ?? "FALSE") == "TRUE")
                     
                     //Populate items
                     K.items.append(item)
+                    
+                    //Also populate the filtered list, which it will be for the initial load, using lineListDefault.
+                    if item.lineList == K.ProductFilter.lineListDefault {
+                        K.filteredItems.append(item)
+                    }
 
                     K.populateProductFilterSelections(item: item)
                 }//end if let obj = itemSnapshot.value
@@ -273,7 +283,7 @@ extension K {
     private static func sortProductFilterSelections() {
         //Saved Lists
         K.ProductFilter.selectionLineList = K.ProductFilter.selectionLineList.sorted(by: { $0 < $1 })
-        K.ProductFilter.selectionLineList = K.ProductFilter.selectionLineList.filter{ $0 != "[All]" }
+        K.ProductFilter.selectionLineList = K.ProductFilter.selectionLineList.filter{ $0 != K.ProductFilter.wildcard }
 
         //Collection
         K.ProductFilter.selectionCollection = K.ProductFilter.selectionCollection.sorted(by: { $0 < $1 })

@@ -1246,6 +1246,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="kl8-3f-RFb">
+                        <barButtonItem key="leftBarButtonItem" title="Remove" id="dcQ-lo-7PC">
+                            <color key="tintColor" systemColor="systemRedColor"/>
+                            <connections>
+                                <action selector="removeTapped:" destination="Nks-Vp-edx" id="8zX-hO-2AI"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="HXd-T1-Iha">
                             <connections>
                                 <action selector="doneTapped:" destination="Nks-Vp-edx" id="qR4-J2-YDu"/>
@@ -1267,6 +1273,7 @@
                         <outlet property="productNameSecondaryLabel" destination="NGM-WT-qTH" id="hiO-lJ-VhG"/>
                         <outlet property="productSubtypeLabel" destination="oLv-16-ZvV" id="C3J-Ei-2hF"/>
                         <outlet property="productTypeLabel" destination="zbZ-G0-cM2" id="nF3-Y8-HKC"/>
+                        <outlet property="removeButton" destination="dcQ-lo-7PC" id="AWU-li-4fw"/>
                         <outlet property="size0Label" destination="90t-1m-5WF" id="yUq-t1-pXr"/>
                         <outlet property="size1Label" destination="DFG-0L-Ylu" id="bWQ-NT-xn7"/>
                         <outlet property="size2Label" destination="5Nn-TZ-0JB" id="Y5J-at-PMY"/>

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -41,9 +42,18 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var sku7Label: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lineListLabel: UILabel!
+    
+    @IBOutlet weak var removeButton: UIBarButtonItem!
 
     let imageSize: CGFloat = 200
     var model: CollectionModel!
+    var itemIsRemoved: Bool! {
+        didSet {
+            print("didSet itemIsRemoved")
+            removeButton.title = itemIsRemoved ? "Add" : "Remove"
+            removeButton.tintColor = itemIsRemoved ? .systemBlue : .systemRed
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +64,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         }
         
         title = model.productNameDescription
+        itemIsRemoved = model.isRemoved
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -98,12 +109,27 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         sku6Label.text = model.sizes[6].colorwaySKU
         sku7Label.text = model.sizes[7].colorwaySKU
         
-        lineListLabel.text = model.lineList
+        lineListLabel.text = model.lineList + " | " + (model.isRemoved ? "Removed" : "Not Removed")
     }
     
     
     @IBAction func doneTapped(_ sender: UIBarButtonItem) {
+        print(model.hashNeedThis)
+        print("model.isRemoved: \(model.isRemoved), itemIsRemoved: \(itemIsRemoved!)")
+
+        //Only save if a change was made
+        if itemIsRemoved != model.isRemoved {
+            print("writing to FIR...")
+            K.updateFirebaseRecord(item: [K.FIR.isRemoved: (model.isRemoved ? "TRUE" : "FALSE")],
+                                   databaseReference: Database.database().reference().child(model.hashNeedThis),
+                                   completion: nil)
+        }
+        
         dismiss(animated: true)
+    }
+    
+    @IBAction func removeTapped(_ sender: UIBarButtonItem) {
+        itemIsRemoved = !itemIsRemoved
     }
     
     

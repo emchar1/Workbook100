@@ -90,7 +90,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     }
     
     private func resetFilters(clear: Bool = false) {
-        self.selectedLineList = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedLineList
+        self.selectedLineList = clear ? K.ProductFilter.lineListDefault : K.ProductFilter.selectedLineList
         self.segmentedNew.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedNew
         self.segmentedEssential.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedEssential
         self.selectedCollection = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedCollection
@@ -144,7 +144,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
             
             switch self.selectedSection {
             case FilterItem.lineList.rawValue:
-                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionLineList
+                controller.selections = K.ProductFilter.selectionLineList
                 controller.selectedItems = [self.selectedLineList]
                 controller.allowsMultiSelection = false
                 controller.navigationItem.title! += " Line List"

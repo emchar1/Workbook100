@@ -179,6 +179,15 @@ extension WorkbookViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
                 cell.model = K.getFilteredItemsIfFiltered[indexPath.row]
                 cell.setViews()
+                
+                // FIXME: - Test alpha for isRemoved
+                if cell.model.isRemoved {
+                    cell.alpha = 0.2
+                }
+                else {
+                    cell.alpha = 1.0
+                }
+                
                 return cell
             }
 
@@ -288,7 +297,7 @@ extension WorkbookViewController {
         K.ProductFilter.selectedProductDetails = selectedProductDetails
 
         K.filteredItems = K.items.filter {
-            (selectedLineList == K.ProductFilter.wildcard ? true : $0.lineList == selectedLineList) &&
+            ($0.lineList == selectedLineList) &&
             
             (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
             

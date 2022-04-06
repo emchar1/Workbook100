@@ -10,6 +10,7 @@ import Foundation
 extension K {
     struct ProductFilter {
         static let wildcard = "[All]"
+        static let lineListDefault = "2W Distributor"
         static let segementedBoth = 0
         static let segementedOn = 1
         static let segementedOff = 2
@@ -24,7 +25,7 @@ extension K {
         static var selectionProductClass: [String] = []
         static var selectionProductDetails: [String] = []
 
-        static var selectedLineList: String = wildcard
+        static var selectedLineList: String = lineListDefault
         static var selectedNew: Int = segementedBoth
         static var selectedEssential: Int = segementedBoth
         static var selectedCollection: String = wildcard

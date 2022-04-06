@@ -42,6 +42,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     let composition: String
     let productDescription: String
     let productFeatures: String
+    let lineListOrder: Int
     let lineList: String
     let primaryImageURL: String
     let thumbURL: String
@@ -50,6 +51,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
     var savedLists: [String]?
     
     var id = UUID()
+    var isRemoved = false
     
     override var description: String {
         return skuCode
@@ -95,12 +97,14 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
          composition: String,
          productDescription: String,
          productFeatures: String,
+         lineListOrder: Int,
          lineList: String,
          primaryImageURL: String,
          thumbURL: String,
          imageURLs: [String],
          image: StorageReference?,
-         savedLists: [String]?) {
+         savedLists: [String]?,
+         isRemoved: Bool = false) {
 
         self.hashNeedThis = hashNeedThis
         self.division = division
@@ -126,12 +130,14 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
         self.composition = composition
         self.productDescription = productDescription
         self.productFeatures = productFeatures
+        self.lineListOrder = lineListOrder
         self.lineList = lineList
         self.primaryImageURL = primaryImageURL
         self.thumbURL = thumbURL
         self.imageURLs = imageURLs
         self.image = image
         self.savedLists = savedLists
+        self.isRemoved = isRemoved
         
         super.init()
     }
@@ -170,6 +176,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                     composition: "Composition",
                                     productDescription: "Product Description",
                                     productFeatures: "Product Features",
+                                    lineListOrder: 0,
                                     lineList: "Line List",
                                     primaryImageURL: "https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364", //100% Logo
                                     thumbURL: "https://cdn.shopify.com/s/files/1/0042/0190/6234/t/217/assets/logo.svg?v=1247933254295750364", //100% Logo
