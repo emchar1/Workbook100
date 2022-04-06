@@ -211,7 +211,7 @@ extension K {
                     K.items.append(item)
                     
                     //Also populate the filtered list, which it will be for the initial load, using lineListDefault.
-                    if filteredItemsFirstInitialized {
+                    if filteredItemsFirstInitialized && item.lineList == K.ProductFilter.lineListDefault {
                         K.filteredItems.append(item)
                     }
 
@@ -223,7 +223,7 @@ extension K {
             
             //Re-order everything according to Ludo 3/16/22
 //            K.items = K.items
-//                .sorted(by: { $0.productNameDescription < $1.productNameDescription })
+//                .sorted(by: { $0.productCategory < $1.productCategory })
 //                .sorted(by: { $0.productType < $1.productType })
                 //add more sorted(by:) the last sorted(by:) has the highest sort priority
 

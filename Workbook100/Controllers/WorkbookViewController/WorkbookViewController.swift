@@ -218,6 +218,21 @@ extension WorkbookViewController {
         return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView) * multiplier,
                       height: K.CollectionCell.adjustedHeight(in: collectionView))
     }
+//    
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        
+//        switch kind {
+//        case UICollectionView.elementKindSectionHeader:
+//            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+//                                                                         withReuseIdentifier: CollectionHeaderView.reuseIdentifier,
+//                                                                         for: indexPath) as! CollectionHeaderView
+//            header.label.text = K.ProductFilter.selectionProductCategory[indexPath.section - 1]
+//            header.configure()
+//            return header
+//        default:
+//            return UICollectionReusableView()
+//        }
+//    }
 
 
     // MARK: - Section Headers

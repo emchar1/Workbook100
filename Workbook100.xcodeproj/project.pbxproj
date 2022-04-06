@@ -15,6 +15,7 @@
 		EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E127759DA4006C12CF /* CollectionModel.swift */; };
 		EA22D4E42776DFCE006C12CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */; };
 		EA22D4E627770BE3006C12CF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22D4E527770BE3006C12CF /* LoginController.swift */; };
+		EA24D25227FE2ED90055B928 /* CollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA24D25127FE2ED90055B928 /* CollectionHeaderView.swift */; };
 		EA2E387B27E97B3B00122877 /* WorkbookDetailTVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387A27E97B3B00122877 /* WorkbookDetailTVC2.swift */; };
 		EA2E387E27E9A74900122877 /* ImageViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */; };
 		EA2E388027EA939F00122877 /* WorkbookImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */; };
@@ -57,6 +58,7 @@
 		EA22D4E127759DA4006C12CF /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		EA22D4E32776DFCE006C12CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EA22D4E527770BE3006C12CF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		EA24D25127FE2ED90055B928 /* CollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderView.swift; sourceTree = "<group>"; };
 		EA2E387A27E97B3B00122877 /* WorkbookDetailTVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookDetailTVC2.swift; sourceTree = "<group>"; };
 		EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCollectionCell.swift; sourceTree = "<group>"; };
 		EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookImageViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			children = (
 				EA5CE2DD27C749D40071F015 /* CollectionCell */,
 				EAB133EB27AE5EF9007F6553 /* ProductCategories */,
+				EA24D25127FE2ED90055B928 /* CollectionHeaderView.swift */,
 				EAA0CF7A2769573F00943912 /* Main.storyboard */,
 			);
 			path = Views;
@@ -407,6 +410,7 @@
 				EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */,
 				EAA0CF772769573F00943912 /* SceneDelegate.swift in Sources */,
 				EA22D4E627770BE3006C12CF /* LoginController.swift in Sources */,
+				EA24D25227FE2ED90055B928 /* CollectionHeaderView.swift in Sources */,
 				EAB133E527A494A0007F6553 /* CollectionCell+Views.swift in Sources */,
 				EAB133E027A47BFD007F6553 /* WorkbookViewController+DragDrop.swift in Sources */,
 				EA0AB09027CDB621000D7D37 /* Extension+UIStoryboard.swift in Sources */,

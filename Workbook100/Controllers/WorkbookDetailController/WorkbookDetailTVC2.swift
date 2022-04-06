@@ -65,6 +65,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         
         title = model.productNameDescription
         itemIsRemoved = model.isRemoved
+        removeButton.isEnabled = false
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
