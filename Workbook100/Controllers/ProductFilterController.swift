@@ -1,5 +1,5 @@
 //
-//  ProductFilterControllerNEW.swift
+//  ProductFilterController.swift
 //  Workbook100
 //
 //  Created by Eddie Char on 2/25/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProductFilterControllerNEWDelegate {
+protocol ProductFilterControllerDelegate {
     func applyTapped(selectedLineList: String,
                      selectedNew: Int,
                      selectedEssential: Int,
@@ -38,7 +38,7 @@ class ProductFilterCell: UITableViewCell {
 }
 
 
-class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControllerDelegate {
+class ProductFilterController: UITableViewController, ProductSubFilterControllerDelegate {
     
     // MARK: - Properties
     
@@ -64,7 +64,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     var selectedProductDetails: [String]! { didSet { labelProductDetails.text = selectedProductDetails.joined(separator: s) }}
     
     var selectedSection: Int?
-    var delegate: ProductFilterControllerNEWDelegate?
+    var delegate: ProductFilterControllerDelegate?
     
     enum FilterItem: Int {
         case lineList = 0,
@@ -130,7 +130,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelectFilter" {
             guard let indexPath = tableView.indexPathForSelectedRow else {
-                print("No indexPath found in prepare(for: sender:) in ProductFilterControllerNEW.")
+                print("No indexPath found in prepare(for: sender:) in ProductFilterController.")
                 return
             }
             
@@ -272,7 +272,7 @@ class ProductFilterControllerNEW: UITableViewController, ProductSubFilterControl
 
 // MARK: - Product Sub Filter Controller Delegate
 
-extension ProductFilterControllerNEW {
+extension ProductFilterController {
     func didSelectItems(selectedItems: [String]) {
         switch self.selectedSection {
         case FilterItem.lineList.rawValue:

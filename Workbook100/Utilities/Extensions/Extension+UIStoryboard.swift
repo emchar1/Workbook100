@@ -12,9 +12,9 @@ extension UIStoryboard {
         UIStoryboard(name: "Main", bundle: Bundle.main)
     }
     
-    // 2/26/22 Changed these from ProductFilterController to ProductFilterControllerNEW
-    static var leftViewController: ProductFilterControllerNEW? {
-        mainStoryboard.instantiateViewController(withIdentifier: "ProductFilterControllerNEW") as? ProductFilterControllerNEW
+    // 2/26/22 Changed these from ProductFilterController to ProductFilterControllerNEW. And back to ProductFilterController on 4/11/22.
+    static var leftViewController: ProductFilterController? {
+        mainStoryboard.instantiateViewController(withIdentifier: "ProductFilterController") as? ProductFilterController
     }
     
     static var centerViewController: WorkbookViewController? {

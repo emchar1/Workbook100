@@ -252,8 +252,10 @@ extension K {
         }
         
         //Division
-        if !K.ProductFilter.selectionDivision.contains(item.division) && item.division != "" {
-            K.ProductFilter.selectionDivision.append(item.division)
+        for singleDivision in item.division.components(separatedBy: ", ") {
+            if !K.ProductFilter.selectionDivision.contains(singleDivision) && singleDivision != "" {
+                K.ProductFilter.selectionDivision.append(singleDivision)
+            }
         }
         
         //Product Category

@@ -15,6 +15,7 @@ extension K {
         static let segementedOn = 1
         static let segementedOff = 2
         static let multiSeparator = "|"
+        static let jsonSeparator = ", "
         
         static var selectionLineList: [String] = []
         static var selectionCollection: [String] = []

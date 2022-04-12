@@ -24,6 +24,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var productTypeLabel: UILabel!
     @IBOutlet weak var productSubtypeLabel: UILabel!
     @IBOutlet weak var productDetailsLabel: UILabel!
+    @IBOutlet weak var divisionLabel: UILabel!
     @IBOutlet weak var size0Label: UILabel!
     @IBOutlet weak var size1Label: UILabel!
     @IBOutlet weak var size2Label: UILabel!
@@ -93,6 +94,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         productTypeLabel.text = model.productType
         productSubtypeLabel.text = model.productSubtype
         productDetailsLabel.text = model.productDetails
+        divisionLabel.text = model.division
         size0Label.text = model.sizes[0].size
         size1Label.text = model.sizes[1].size
         size2Label.text = model.sizes[2].size

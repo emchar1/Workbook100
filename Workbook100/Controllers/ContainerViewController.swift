@@ -21,7 +21,7 @@ class ContainerViewController: UIViewController, WorkbookViewControllerDelegate 
 
     var centerNavigationController: UINavigationController!
     var centerViewController: WorkbookViewController!
-    var leftViewController: ProductFilterControllerNEW?
+    var leftViewController: ProductFilterController?
     
     enum SlideOutState {
         case productFilterCollapsed, productFilterExpanded
