@@ -20,7 +20,7 @@
 		EA2E387E27E9A74900122877 /* ImageViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */; };
 		EA2E388027EA939F00122877 /* WorkbookImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */; };
 		EA2E388427EE27D000122877 /* SavedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E388327EE27D000122877 /* SavedList.swift */; };
-		EA2E388A27EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E388927EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift */; };
+		EA2E388A27EFC41E00122877 /* WorkbookViewController+RightSetupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E388927EFC41E00122877 /* WorkbookViewController+RightSetupMenu.swift */; };
 		EA2E38AF27F2DD7100122877 /* Extension+UICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */; };
 		EA2E38B127F2DDAB00122877 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */; };
 		EA2E38B327F2DDDA00122877 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */; };
@@ -63,7 +63,7 @@
 		EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCollectionCell.swift; sourceTree = "<group>"; };
 		EA2E387F27EA939F00122877 /* WorkbookImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookImageViewController.swift; sourceTree = "<group>"; };
 		EA2E388327EE27D000122877 /* SavedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedList.swift; sourceTree = "<group>"; };
-		EA2E388927EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookViewController+rightSetupMenu.swift"; sourceTree = "<group>"; };
+		EA2E388927EFC41E00122877 /* WorkbookViewController+RightSetupMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookViewController+RightSetupMenu.swift"; sourceTree = "<group>"; };
 		EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionViewCell.swift"; sourceTree = "<group>"; };
 		EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
 		EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 				EAA0CF782769573F00943912 /* WorkbookViewController.swift */,
 				EAB133DF27A47BFD007F6553 /* WorkbookViewController+DragDrop.swift */,
 				EAB133E227A47CAD007F6553 /* WorkbookViewController+MailCompose.swift */,
-				EA2E388927EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift */,
+				EA2E388927EFC41E00122877 /* WorkbookViewController+RightSetupMenu.swift */,
 			);
 			path = WorkbookViewController;
 			sourceTree = "<group>";
@@ -400,7 +400,7 @@
 				EA2E387B27E97B3B00122877 /* WorkbookDetailTVC2.swift in Sources */,
 				EA2E38BC27F2E3C700122877 /* Constants+UICollectionCell.swift in Sources */,
 				EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */,
-				EA2E388A27EFC41E00122877 /* WorkbookViewController+rightSetupMenu.swift in Sources */,
+				EA2E388A27EFC41E00122877 /* WorkbookViewController+RightSetupMenu.swift in Sources */,
 				EA2E38AF27F2DD7100122877 /* Extension+UICollectionViewCell.swift in Sources */,
 				EA2E38B527F2DDF600122877 /* Extension+String.swift in Sources */,
 				EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */,
