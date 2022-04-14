@@ -104,6 +104,13 @@ class ProductSubFilterController: UITableViewController {
             cell.label.textColor = .label
             cell.label.textAlignment = .natural
         }
+        
+        if cell.label.text == K.ProductFilter.wildcard {
+            cell.label.font = UIFont(name: "AvenirNext-Bold", size: 14)
+        }
+        else {
+            cell.label.font = UIFont(name: "AvenirNext-Regular", size: 14)
+        }
             
         return cell
     }

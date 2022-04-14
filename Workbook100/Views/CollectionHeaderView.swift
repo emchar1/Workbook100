@@ -14,12 +14,12 @@ class CollectionHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.text = "HEADER"
         label.textAlignment = .left
-        label.textColor = .black
-        label.font = UIFont(name: "Avenir Next Condensed Demi Bold Italic", size: 32)
+        label.font = UIFont(name: "AvenirNextCondensed-DemiBoldItalic", size: 32)
         return label
     }()
     
     func configure() {
+        label.text = label.text?.uppercased()
         addSubview(label)
     }
     

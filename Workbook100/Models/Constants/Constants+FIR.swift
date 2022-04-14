@@ -288,29 +288,29 @@ extension K {
     
     private static func sortProductFilterSelections() {
         //Saved Lists
-        K.ProductFilter.selectionLineList = K.ProductFilter.selectionLineList.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionLineList.sort()
         K.ProductFilter.selectionLineList = K.ProductFilter.selectionLineList.filter{ $0 != K.ProductFilter.wildcard }
 
         //Collection
-        K.ProductFilter.selectionCollection = K.ProductFilter.selectionCollection.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionCollection.sort()
         
         //Division
-        K.ProductFilter.selectionDivision = K.ProductFilter.selectionDivision.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionDivision.sort()
         
         //Product Category
-        K.ProductFilter.selectionProductCategory = K.ProductFilter.selectionProductCategory.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductCategory.sort()
         
         //Product Type
-        K.ProductFilter.selectionProductType = K.ProductFilter.selectionProductType.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductType.sort()
         
         //Product Subtype
-        K.ProductFilter.selectionProductSubtype = K.ProductFilter.selectionProductSubtype.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductSubtype.sort()
         
         //Product Class
-        K.ProductFilter.selectionProductClass = K.ProductFilter.selectionProductClass.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductClass.sort()
         
         //Product Details
-        K.ProductFilter.selectionProductDetails = K.ProductFilter.selectionProductDetails.sorted(by: { $0 < $1 })
+        K.ProductFilter.selectionProductDetails.sort()
     }
     
 }

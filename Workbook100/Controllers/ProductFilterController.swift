@@ -296,10 +296,10 @@ extension ProductFilterController {
     }
     
     private func resetFilterSpecific(productType: Bool, productSubtype: Bool, productClass: Bool) {
-        let resetMe = [K.ProductFilter.wildcard]
+        let resetFilters = [K.ProductFilter.wildcard]
 
-        if productType { self.selectedProductType = resetMe }
-        if productSubtype { self.selectedProductSubtype = resetMe }
-        if productClass { self.selectedProductClass = resetMe }
+        if productType { self.selectedProductType = resetFilters }
+        if productSubtype { self.selectedProductSubtype = resetFilters }
+        if productClass { self.selectedProductClass = resetFilters }
     }
 }

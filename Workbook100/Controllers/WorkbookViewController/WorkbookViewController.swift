@@ -69,16 +69,18 @@ class WorkbookViewController: UIViewController,
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseId)
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseId)
         collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseId)
+        collectionView.register(CollectionHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: CollectionHeaderView.reuseIdentifier)
         return collectionView
     }()
         
 //    lazy var floatingSectionLabel: UILabel = {
 //        let label = UILabel(frame: CGRect(x: 8, y: 0, width: view.bounds.width, height: 60))
-//        label.textColor = .black
-//        label.font = UIFont(name: "Avenir Next Condensed Demi Bold Italic", size: 32)
+//        label.font = UIFont(name: "AvenirNextCondensed-DemiBoldItalic", size: 32)
 //        return label
 //    }()
-//
+
 //    lazy var titleSize: (width: CGFloat, height: CGFloat) = {
 //        let insetPadding: CGFloat = 8
 //        let width = view.frame.width - 2 * insetPadding
@@ -152,12 +154,19 @@ class WorkbookViewController: UIViewController,
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard !K.ProductFilter.selectionProductCategory.isEmpty else { return }
+        
         if segue.identifier == "showDetailsTVC2" {
             let nc = segue.destination as! UINavigationController
             let controller = nc.topViewController as! WorkbookDetailTVC2
 
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                controller.model = K.getFilteredItemsIfFiltered[indexPath.row]
+                let itemForProductCategory = K.getFilteredItemsIfFiltered.filter {
+                    $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
+                }
+                
+                controller.model = itemForProductCategory[indexPath.row]
+//                controller.model = K.getFilteredItemsIfFiltered[indexPath.row]
             }
         }
     }
@@ -170,14 +179,23 @@ extension WorkbookViewController {
     
     //Data Source
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch (K.getFilteredItemsIfFiltered[indexPath.row].productCategory) {
+        guard !K.ProductFilter.selectionProductCategory.isEmpty else { return UICollectionViewCell() }
+
+        let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+            $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
+        }
+        
+        switch (itemForCategory[indexPath.row].productCategory) {
+//        switch (K.getFilteredItemsIfFiltered[indexPath.row].productCategory) {
         case K.ProductFilter.wildcard:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
             return cell
         default:
-            if (K.getFilteredItemsIfFiltered[indexPath.row].productCategory.count) > 0 {
+            if (itemForCategory[indexPath.row].productCategory.count) > 0 {
+//            if (K.getFilteredItemsIfFiltered[indexPath.row].productCategory.count) > 0 {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
-                cell.model = K.getFilteredItemsIfFiltered[indexPath.row]
+                cell.model = itemForCategory[indexPath.row]
+//                cell.model = K.getFilteredItemsIfFiltered[indexPath.row]
                 cell.setViews()
                 
                 // FIXME: - Test alpha for isRemoved
@@ -197,7 +215,14 @@ extension WorkbookViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return K.getFilteredItemsIfFiltered.count
+        guard !K.ProductFilter.selectionProductCategory.isEmpty else { return 0 }
+        
+        let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+            $0.productCategory == K.ProductFilter.selectionProductCategory[section]
+        }
+        
+        return itemForCategory.count
+//        return K.getFilteredItemsIfFiltered.count
     }
     
     
@@ -218,37 +243,44 @@ extension WorkbookViewController {
         return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView) * multiplier,
                       height: K.CollectionCell.adjustedHeight(in: collectionView))
     }
-//    
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        
-//        switch kind {
-//        case UICollectionView.elementKindSectionHeader:
-//            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
-//                                                                         withReuseIdentifier: CollectionHeaderView.reuseIdentifier,
-//                                                                         for: indexPath) as! CollectionHeaderView
-//            header.label.text = K.ProductFilter.selectionProductCategory[indexPath.section - 1]
-//            header.configure()
-//            return header
-//        default:
-//            return UICollectionReusableView()
-//        }
-//    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard !K.ProductFilter.selectionProductCategory.isEmpty else { return UICollectionReusableView() }
+
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                         withReuseIdentifier: CollectionHeaderView.reuseIdentifier,
+                                                                         for: indexPath) as! CollectionHeaderView
+            header.label.text = K.ProductFilter.selectionProductCategory[indexPath.section]
+            header.configure()
+            return header
+        default:
+            return UICollectionReusableView()
+        }
+    }
 
 
     // MARK: - Section Headers
-//
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        guard section > 0 else {
-//            return .zero
-//        }
-//
-//        return CGSize(width: view.frame.size.width, height: 40)
-//    }
-//
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return K.ProductFilter.selectionProductCategory.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+
+        let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+            $0.productCategory == K.ProductFilter.selectionProductCategory[section]
+        }
+
+        if itemForCategory.isEmpty {
+            return .zero
+        }
+        else {
+            return CGSize(width: view.frame.size.width, height: 80)
+        }
+    }
+
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
 //        guard section > 0 else {
 //            return .zero
@@ -263,7 +295,11 @@ extension WorkbookViewController {
 //        if let indexPath = collectionView.indexPathForItem(at: CGPoint(x: scrollView.frame.size.width / 2,
 //                                                                       y: scrollView.contentOffset.y)) {
 //            if indexPath.section > 0 {
-//                floatingSectionLabel.text = K.getFilteredItemsIfFiltered[indexPath.section - 1].productNameDescription
+//                let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+//                    $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
+//                }
+//                floatingSectionLabel.text = itemForCategory[indexPath.section].productCategory
+////                floatingSectionLabel.text = K.getFilteredItemsIfFiltered[indexPath.section].productNameDescription
 //                floatingSectionLabel.backgroundColor = .white
 //            }
 //            else {
@@ -272,7 +308,7 @@ extension WorkbookViewController {
 //            }
 //        }
 //    }
-//    
+    
 }
 
 
