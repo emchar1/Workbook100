@@ -209,14 +209,14 @@ extension ContainerViewController {
             currentState = .productFilterExpanded
             
             ContainerViewController.expandDistance = centerNavigationController.view.frame.width - centerPanelExpandedOffset
-            animateCenterPanelXPosition(targetPosition: ContainerViewController.expandDistance)
+            animateCenterPanelXPosition(targetPosition: ContainerViewController.expandDistance, shouldExpand: shouldExpand)
             centerViewController.view.isUserInteractionEnabled = false
             
             // 2/21/22 Added this to set the trailing constraint on the hStack in the ProductFilterController object.
 //            leftViewController?.expandDistance = centerNavigationController.view.frame.width - expandDistance
         }
         else {
-            animateCenterPanelXPosition(targetPosition: 0) { _ in
+            animateCenterPanelXPosition(targetPosition: 0, shouldExpand: shouldExpand) { _ in
                 self.currentState = .productFilterCollapsed
                 self.centerViewController.view.isUserInteractionEnabled = true
                 self.leftViewController?.view.removeFromSuperview()
@@ -231,12 +231,12 @@ extension ContainerViewController {
         - targetPosition: the end position after the animation has occurred
         - completion: completion handler, handles what to do after the animation completes
      */
-    private func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)? = nil) {
-        UIView.animate(withDuration: 0.5,
+    private func animateCenterPanelXPosition(targetPosition: CGFloat, shouldExpand: Bool, completion: ((Bool) -> Void)? = nil) {
+        UIView.animate(withDuration: shouldExpand ? 1.0 : 0.25,
                        delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0,
-                       options: .curveEaseInOut,
+                       usingSpringWithDamping: shouldExpand ? 0.8 : 1.0,
+                       initialSpringVelocity: shouldExpand ? 8 : 0,
+                       options: shouldExpand ? .curveEaseIn : .curveEaseIn,
                        animations: {
             self.centerNavigationController.view.frame.origin.x = targetPosition
         }, completion: completion)
