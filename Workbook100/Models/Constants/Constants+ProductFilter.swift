@@ -25,6 +25,7 @@ extension K {
         static var selectionProductSubtype: [String] = []
         static var selectionProductClass: [String] = []
         static var selectionProductDetails: [String] = []
+        static var selectionSeasonsCarried: [String] = []
 
         static var selectedLineList: String = lineListDefault
         static var selectedNew: Int = segementedBoth
@@ -36,12 +37,14 @@ extension K {
         static var selectedDivision: [String] = [wildcard]
         static var selectedProductClass: [String] = [wildcard]
         static var selectedProductDetails: [String] = [wildcard]
+        static var selectedSeasonsCarried: [String] = [wildcard]
         
         static var isFiltered: Bool {
             return !(selectedLineList == wildcard &&
                      selectedNew == segementedBoth &&
                      selectedEssential == segementedBoth &&
                      selectedCollection == wildcard &&
+                     selectedSeasonsCarried == [wildcard] &&
                      selectedProductCategory == [wildcard] &&
                      selectedProductType == [wildcard] &&
                      selectedProductSubtype == [wildcard] &&

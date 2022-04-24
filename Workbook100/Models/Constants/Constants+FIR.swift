@@ -279,10 +279,16 @@ extension K {
         }
         
         //Product Details
-        if !K.ProductFilter.selectionProductDetails.contains(item.productDetails) && item.productDetails != "" {
-            K.ProductFilter.selectionProductDetails.append(item.productDetails)
-        }
+//        if !K.ProductFilter.selectionProductDetails.contains(item.productDetails) && item.productDetails != "" {
+//            K.ProductFilter.selectionProductDetails.append(item.productDetails)
+//        }
         
+        //Seasons Carried
+        for singleSeasonsCarried in item.seasonsCarried.components(separatedBy: ", ") {
+            if !K.ProductFilter.selectionSeasonsCarried.contains(singleSeasonsCarried) && singleSeasonsCarried != "" {
+                K.ProductFilter.selectionSeasonsCarried.append(singleSeasonsCarried)
+            }
+        }
     }
     
     
@@ -309,8 +315,11 @@ extension K {
         //Product Class
         K.ProductFilter.selectionProductClass.sort()
         
-        //Product Details
-        K.ProductFilter.selectionProductDetails.sort()
+//        //Product Details
+//        K.ProductFilter.selectionProductDetails.sort()
+        
+        //Seasons Carried... does the same thing as .sort() but I'm just being extra
+        K.ProductFilter.selectionSeasonsCarried.sort()
     }
     
 }

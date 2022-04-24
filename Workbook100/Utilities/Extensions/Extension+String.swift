@@ -11,5 +11,17 @@ extension String {
     func wrap(in separator: String) -> String {
         return separator + self + separator
     }
+    
+    func containsElementInArray(_ array: [String]) -> Bool {
+//        //Similarly...
+//        for item in array {
+//            if self.contains(item) {
+//                return true
+//            }
+//        }
+//        
+//        return false
+        
+        return array.contains { contains($0) }
+    }
 }
-

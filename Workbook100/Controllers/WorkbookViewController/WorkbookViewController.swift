@@ -319,6 +319,7 @@ extension WorkbookViewController {
                      selectedNew: Int,
                      selectedEssential: Int,
                      selectedCollection: String,
+                     selectedSeasonsCarried: [String],
                      selectedProductCategory: [String],
                      selectedProductType: [String],
                      selectedProductSubtype: [String],
@@ -340,13 +341,13 @@ extension WorkbookViewController {
         K.ProductFilter.selectedNew = selectedNew
         K.ProductFilter.selectedEssential = selectedEssential
         K.ProductFilter.selectedCollection = selectedCollection
+        K.ProductFilter.selectedSeasonsCarried = selectedSeasonsCarried
         K.ProductFilter.selectedProductCategory = selectedProductCategory
         K.ProductFilter.selectedProductType = selectedProductType
         K.ProductFilter.selectedProductSubtype = selectedProductSubtype
         K.ProductFilter.selectedDivision = selectedDivision
         K.ProductFilter.selectedProductClass = selectedProductClass
         K.ProductFilter.selectedProductDetails = selectedProductDetails
-
         
         //Populate K.filteredItems, using for-in loop, not the elegant array.filter...
         K.filteredItems = []
@@ -360,75 +361,22 @@ extension WorkbookViewController {
                 
                 (selectedCollection == K.ProductFilter.wildcard || item.collection == selectedCollection) &&
                 
-                (selectedProductCategory.joined().contains(K.ProductFilter.wildcard) || selectedProductCategory.joined(separator: s).wrap(in: s).contains(item.productCategory.wrap(in: s))) &&
+                (selectedProductCategory.jContains(K.ProductFilter.wildcard) || selectedProductCategory.joinAndWrap(in: s).contains(item.productCategory.wrap(in: s))) &&
                 
-                (selectedProductType.joined().contains(K.ProductFilter.wildcard) || selectedProductType.joined(separator: s).wrap(in: s).contains(item.productType.wrap(in: s))) &&
+                (selectedProductType.jContains(K.ProductFilter.wildcard) || selectedProductType.joinAndWrap(in: s).contains(item.productType.wrap(in: s))) &&
                 
-                (selectedProductSubtype.joined().contains(K.ProductFilter.wildcard) || selectedProductSubtype.joined(separator: s).wrap(in: s).contains(item.productSubtype.wrap(in: s))) &&
+                (selectedProductSubtype.jContains(K.ProductFilter.wildcard) || selectedProductSubtype.joinAndWrap(in: s).contains(item.productSubtype.wrap(in: s))) &&
                 
-                (selectedProductClass.joined().contains(K.ProductFilter.wildcard) || selectedProductClass.joined(separator: s).wrap(in: s).contains(item.productClass.wrap(in: s))) &&
+                (selectedProductClass.jContains(K.ProductFilter.wildcard) || selectedProductClass.joinAndWrap(in: s).contains(item.productClass.wrap(in: s))) &&
+            
                 
-                (selectedProductDetails.joined().contains(K.ProductFilter.wildcard) || selectedProductDetails.joined(separator: s).wrap(in: s).contains(item.productDetails.wrap(in: s))) {
+                (selectedSeasonsCarried.jContains(K.ProductFilter.wildcard) || selectedSeasonsCarried.joinAndWrap(in: s).containsElementInArray(item.seasonsCarried.components(separatedBy: K.ProductFilter.jsonSeparator))) &&
                 
-                if selectedDivision.joined().contains(K.ProductFilter.wildcard) {
-                    K.filteredItems.append(item)
-                }
-                else {
-                    for division in item.division.components(separatedBy: K.ProductFilter.jsonSeparator) {
-                        if selectedDivision.joined().contains(division) {
-                            K.filteredItems.append(item)
-                        }
-                    }
-                }
+                (selectedDivision.jContains(K.ProductFilter.wildcard) || selectedDivision.joinAndWrap(in: s).containsElementInArray(item.division.components(separatedBy: K.ProductFilter.jsonSeparator))) {
+                
+                K.filteredItems.append(item)
             } //end if
         } //end for
-        
-        /*
-        K.filteredItems = K.items.filter {
-            ($0.lineList == selectedLineList) &&
-            
-            (selectedNew == K.ProductFilter.segementedBoth ? true : $0.carryOver == (selectedNew == K.ProductFilter.segementedOff)) &&
-            
-            (selectedEssential == K.ProductFilter.segementedBoth ? true : $0.essential == (selectedEssential == K.ProductFilter.segementedOn)) &&
-            
-            (selectedCollection == K.ProductFilter.wildcard ? true : $0.collection == selectedCollection) &&
-            
-            (selectedProductCategory.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductCategory.joined(separator: s).wrap(in: s).contains($0.productCategory.wrap(in: s))) &&
-            
-            (selectedProductType.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductType.joined(separator: s).wrap(in: s).contains($0.productType.wrap(in: s))) &&
-            
-            (selectedProductSubtype.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductSubtype.joined(separator: s).wrap(in: s).contains($0.productSubtype.wrap(in: s))) &&
-            
-            /*
-            //This one's funky. Some divisions are Bike, Moto and need to be able to separate them out, i.e. Bike filter will give you Bike, Moto. Moto filter will give you Bike, Moto.
-            for divn in $0.division.components(separatedBy: K.ProductFilter.jsonSeparator) {
-                (selectedDivision.joined().contains(K.ProductFilter.wildcard) ? true : selectedDivision.joined(separator: s).wrap(in: s).contains($0.division.wrap(in: s)))
-            } &&
-            */
-//            (selectedDivision.joined().contains(K.ProductFilter.wildcard) ? true : $0.division.components(separatedBy: K.ProductFilter.jsonSeparator).filter { $0.contains(where: selectedDivision.contains($0))}) &&
-            
-            (selectedProductClass.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductClass.joined(separator: s).wrap(in: s).contains($0.productClass.wrap(in: s))) &&
-            
-            (selectedProductDetails.joined().contains(K.ProductFilter.wildcard) ? true : selectedProductDetails.joined(separator: s).wrap(in: s).contains($0.productDetails.wrap(in: s)))
-        }
-        
-        
-        // FIXME: - O(N^2) YIKES!
-        //Do divisions separately because I can't figure it out in the filter above 😡
-        if !selectedDivision.contains(K.ProductFilter.wildcard) {
-            var filteredItems = [CollectionModel]()
-            
-            for filteredItem in K.filteredItems {
-                for division in filteredItem.division.components(separatedBy: K.ProductFilter.jsonSeparator) {
-                    if selectedDivision.joined().contains(division) {
-                        filteredItems.append(filteredItem)
-                    }
-                }
-            }
-            
-            K.filteredItems = filteredItems
-        }
-        */
         
                 
         //Show a "No results found" label if the filtered list is empty

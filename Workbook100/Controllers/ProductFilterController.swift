@@ -12,6 +12,7 @@ protocol ProductFilterControllerDelegate {
                      selectedNew: Int,
                      selectedEssential: Int,
                      selectedCollection: String,
+                     selectedSeasonsCarried: [String],
                      selectedProductCategory: [String],
                      selectedProductType: [String],
                      selectedProductSubtype: [String],
@@ -46,6 +47,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
     @IBOutlet weak var segmentedNew: UISegmentedControl!
     @IBOutlet weak var segmentedEssential: UISegmentedControl!
     @IBOutlet weak var labelCollection: UILabel!
+    @IBOutlet weak var labelSeasonsCarried: UILabel!
     @IBOutlet weak var labelProductCategory: UILabel!
     @IBOutlet weak var labelProductType: UILabel!
     @IBOutlet weak var labelProductSubtype: UILabel!
@@ -56,6 +58,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
     let s = "; "
     var selectedLineList: String! { didSet { labelLineList.text = selectedLineList }}
     var selectedCollection: String! { didSet { labelCollection.text = selectedCollection }}
+    var selectedSeasonsCarried: [String]! { didSet { labelSeasonsCarried.text = selectedSeasonsCarried.joined(separator: s) }}
     var selectedProductCategory: [String]! { didSet { labelProductCategory.text = selectedProductCategory.joined(separator: s) }}
     var selectedProductType: [String]! { didSet { labelProductType.text = selectedProductType.joined(separator: s) }}
     var selectedProductSubtype: [String]! { didSet { labelProductSubtype.text = selectedProductSubtype.joined(separator: s) }}
@@ -71,6 +74,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
              new,
              essential,
              collection,
+             seasonsCarried,
              productCategory,
              productType,
              productSubtype,
@@ -94,6 +98,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
         self.segmentedNew.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedNew
         self.segmentedEssential.selectedSegmentIndex = clear ? K.ProductFilter.segementedBoth : K.ProductFilter.selectedEssential
         self.selectedCollection = clear ? K.ProductFilter.wildcard : K.ProductFilter.selectedCollection
+        self.selectedSeasonsCarried = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedSeasonsCarried
         self.selectedProductCategory = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductCategory
         self.selectedProductType = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductType
         self.selectedProductSubtype = clear ? [K.ProductFilter.wildcard] : K.ProductFilter.selectedProductSubtype
@@ -110,13 +115,13 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                                    selectedNew: self.segmentedNew.selectedSegmentIndex,
                                    selectedEssential: self.segmentedEssential.selectedSegmentIndex,
                                    selectedCollection: self.selectedCollection,
+                                   selectedSeasonsCarried: self.selectedSeasonsCarried,
                                    selectedProductCategory: self.selectedProductCategory,
                                    selectedProductType: self.selectedProductType,
                                    selectedProductSubtype: self.selectedProductSubtype,
                                    selectedDivision: self.selectedDivision,
                                    selectedProductClass: self.selectedProductClass,
-                                   selectedProductDetails: self.selectedProductDetails
-        )
+                                   selectedProductDetails: self.selectedProductDetails)
     }
     
     @IBAction func clearButtonTapped(_ sender: UIButton) {
@@ -150,8 +155,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                 controller.navigationItem.title! += " Line List"
                 
                 if K.ProductFilter.selectionLineList.isEmpty {
-                    controller.startSpinner(in: controller.view,
-                                            offset: CGPoint(x: 0, y: spinnerOffset))
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.collection.rawValue:
                 controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionCollection
@@ -160,8 +164,15 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                 controller.navigationItem.title! += " Collection"
                 
                 if K.ProductFilter.selectionCollection.isEmpty {
-                    controller.startSpinner(in: controller.view,
-                                            offset: CGPoint(x: 0, y: spinnerOffset))
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
+                }
+            case FilterItem.seasonsCarried.rawValue:
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionSeasonsCarried
+                controller.selectedItems = self.selectedSeasonsCarried
+                controller.navigationItem.title! += " Seasons Carried"
+                
+                if K.ProductFilter.selectionSeasonsCarried.isEmpty {
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productCategory.rawValue:
                 controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductCategory
@@ -169,8 +180,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                 controller.navigationItem.title! += " Product Category"
                 
                 if K.ProductFilter.selectionProductCategory.isEmpty {
-                    controller.startSpinner(in: controller.view,
-                                            offset: CGPoint(x: 0, y: spinnerOffset))
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productType.rawValue:
                 if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()) {
@@ -184,8 +194,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                 controller.navigationItem.title! += " Product Type"
                 
                 if K.ProductFilter.selectionProductType.isEmpty {
-                    controller.startSpinner(in: controller.view,
-                                            offset: CGPoint(x: 0, y: spinnerOffset))
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productSubtype.rawValue:
                 if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()),
@@ -200,8 +209,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                 controller.navigationItem.title! += " Product Subtype"
                 
                 if K.ProductFilter.selectionProductSubtype.isEmpty {
-                    controller.startSpinner(in: controller.view,
-                                            offset: CGPoint(x: 0, y: spinnerOffset))
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.division.rawValue:
                 controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionDivision
@@ -209,8 +217,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                 controller.navigationItem.title! += " Division"
                 
                 if K.ProductFilter.selectionDivision.isEmpty {
-                    controller.startSpinner(in: controller.view,
-                                            offset: CGPoint(x: 0, y: spinnerOffset))
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productClass.rawValue:
                 if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()),
@@ -226,8 +233,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                 controller.navigationItem.title! += " Product Class"
                 
                 if K.ProductFilter.selectionProductClass.isEmpty {
-                    controller.startSpinner(in: controller.view,
-                                            offset: CGPoint(x: 0, y: spinnerOffset))
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productDetails.rawValue:
                 controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductDetails
@@ -235,8 +241,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                 controller.navigationItem.title! += " Product Details"
                 
                 if K.ProductFilter.selectionProductDetails.isEmpty {
-                    controller.startSpinner(in: controller.view,
-                                            offset: CGPoint(x: 0, y: spinnerOffset))
+                    controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             default:
                 controller.selectedItems = ["Wrong selection!"]
@@ -279,6 +284,7 @@ extension ProductFilterController {
             self.resetFilters(clear: true)
             self.selectedLineList = selectedItems[0]
         case FilterItem.collection.rawValue: self.selectedCollection = selectedItems[0]
+        case FilterItem.seasonsCarried.rawValue: self.selectedSeasonsCarried = selectedItems
         case FilterItem.productCategory.rawValue:
             self.selectedProductCategory = selectedItems
             resetFilterSpecific(productType: true, productSubtype: true, productClass: true)

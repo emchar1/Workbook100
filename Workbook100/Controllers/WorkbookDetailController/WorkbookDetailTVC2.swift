@@ -43,6 +43,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var sku7Label: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lineListLabel: UILabel!
+    @IBOutlet weak var seasonsCarriedLabel: UILabel!
     
     @IBOutlet weak var removeButton: UIBarButtonItem!
 
@@ -113,6 +114,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         sku7Label.text = model.sizes[7].colorwaySKU
         
         lineListLabel.text = model.lineList + " | " + (model.isRemoved ? "Removed" : "Not Removed")
+        seasonsCarriedLabel.text = model.seasonsCarried
     }
     
     

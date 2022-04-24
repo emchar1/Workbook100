@@ -44,6 +44,7 @@
 		EAB133E527A494A0007F6553 /* CollectionCell+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */; };
 		EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */; };
 		EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133EC27AE5F3A007F6553 /* GloveCell.swift */; };
+		EAE6473128149E5500FBE6C3 /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6473028149E5500FBE6C3 /* Extension+Array.swift */; };
 		EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2BA0727A2306500CD4856 /* CSVMake.swift */; };
 		EAF68F2327C0CE4800F2EDE6 /* PDFExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		EAB133E427A494A0007F6553 /* CollectionCell+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+Views.swift"; sourceTree = "<group>"; };
 		EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellBlank.swift; sourceTree = "<group>"; };
 		EAB133EC27AE5F3A007F6553 /* GloveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloveCell.swift; sourceTree = "<group>"; };
+		EAE6473028149E5500FBE6C3 /* Extension+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Array.swift"; sourceTree = "<group>"; };
 		EAEC851E27B35FE900684ECF /* Workbook100.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Workbook100.entitlements; sourceTree = "<group>"; };
 		EAF2BA0727A2306500CD4856 /* CSVMake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMake.swift; sourceTree = "<group>"; };
 		EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExport.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */,
 				EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */,
 				EA2E38B427F2DDF600122877 /* Extension+String.swift */,
+				EAE6473028149E5500FBE6C3 /* Extension+Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				EA2E388027EA939F00122877 /* WorkbookImageViewController.swift in Sources */,
 				EA8914E027DC038300C8D8D3 /* Category.swift in Sources */,
 				EA22D4E027754129006C12CF /* Constants.swift in Sources */,
+				EAE6473128149E5500FBE6C3 /* Extension+Array.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
