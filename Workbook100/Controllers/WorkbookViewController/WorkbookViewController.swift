@@ -108,8 +108,8 @@ class WorkbookViewController: UIViewController,
         super.viewDidLoad()
         
         collectionView.dragInteractionEnabled = true
-//        collectionView.dragDelegate = self
-//        collectionView.dropDelegate = self
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -164,8 +164,10 @@ class WorkbookViewController: UIViewController,
                 let itemForProductCategory = K.getFilteredItemsIfFiltered.filter {
                     $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
                 }
-                
+
                 controller.model = itemForProductCategory[indexPath.row]
+                
+                //Uncomment this for flat CollectionView (no product category headers)
 //                controller.model = K.getFilteredItemsIfFiltered[indexPath.row]
             }
         }
@@ -184,18 +186,23 @@ extension WorkbookViewController {
         let itemForCategory = K.getFilteredItemsIfFiltered.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
         }
-        
+
         switch (itemForCategory[indexPath.row].productCategory) {
+        //Uncomment this for flat CollectionView (no product category headers)
 //        switch (K.getFilteredItemsIfFiltered[indexPath.row].productCategory) {
         case K.ProductFilter.wildcard:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
             return cell
         default:
             if (itemForCategory[indexPath.row].productCategory.count) > 0 {
+            //Uncomment this for flat CollectionView (no product category headers)
 //            if (K.getFilteredItemsIfFiltered[indexPath.row].productCategory.count) > 0 {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
                 cell.model = itemForCategory[indexPath.row]
+
+                //Uncomment this for flat CollectionView (no product category headers)
 //                cell.model = K.getFilteredItemsIfFiltered[indexPath.row]
+
                 cell.setViews()
                 
                 // FIXME: - Test alpha for isRemoved
@@ -220,8 +227,10 @@ extension WorkbookViewController {
         let itemForCategory = K.getFilteredItemsIfFiltered.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[section]
         }
-        
+
         return itemForCategory.count
+        
+        //Uncomment this for flat CollectionView (no product category headers)
 //        return K.getFilteredItemsIfFiltered.count
     }
     
@@ -268,7 +277,7 @@ extension WorkbookViewController {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-
+        
         let itemForCategory = K.getFilteredItemsIfFiltered.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[section]
         }
@@ -279,16 +288,15 @@ extension WorkbookViewController {
         else {
             return CGSize(width: view.frame.size.width, height: 80)
         }
-    }
 
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        //Uncomment this for flat CollectionView (no product category headers)
 //        guard section > 0 else {
 //            return .zero
 //        }
 //
 //        return CGSize(width: view.frame.size.width, height: 40)
-//    }
-//
+    }
+    
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        navigationItem.titleView?.alpha = (scrollView.contentOffset.y - titleSize.height / 2) / (titleSize.height / 2)
 //
