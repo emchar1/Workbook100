@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController, WorkbookViewControllerDelegate {
+class ContainerViewController: UIViewController, LineListViewControllerDelegate {
     
     // MARK: - Properties
     
@@ -20,7 +20,7 @@ class ContainerViewController: UIViewController, WorkbookViewControllerDelegate 
     }
 
     var centerNavigationController: UINavigationController!
-    var centerViewController: WorkbookViewController!
+    var centerViewController: LineListViewController!
     var leftViewController: ProductFilterController?
     
     enum SlideOutState {
@@ -95,7 +95,7 @@ class ContainerViewController: UIViewController, WorkbookViewControllerDelegate 
 }
 
 
-// MARK: - WorkbookViewControllerDelegate
+// MARK: - LineListViewControllerDelegate
 
 extension ContainerViewController {
     /**

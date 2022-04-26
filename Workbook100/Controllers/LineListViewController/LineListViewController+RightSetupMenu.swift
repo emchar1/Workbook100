@@ -1,5 +1,5 @@
 //
-//  WorkbookViewController+RightSetupMenu.swift
+//  LineListViewController+RightSetupMenu.swift
 //  Workbook100
 //
 //  Created by Eddie Char on 3/26/22.
@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-extension  WorkbookViewController {
+extension  LineListViewController {
     func setupRightMenu() {
         let menuItems: [UIAction] = [
             

@@ -1,5 +1,5 @@
 //
-//  WorkbookImageViewController.swift
+//  LineListImageViewController.swift
 //  Workbook100
 //
 //  Created by Eddie Char on 3/22/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WorkbookImageViewController: UIViewController, UIScrollViewDelegate {
+class LineListImageViewController: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
     var imageView: UIImageView!
     var dismissButton: UIButton!

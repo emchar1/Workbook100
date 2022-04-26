@@ -1,5 +1,5 @@
 //
-//  WorkbookViewController+DragDrop.swift
+//  LineListViewController+DragDrop.swift
 //  Workbook100
 //
 //  Created by Eddie Char on 1/28/22.
@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Drag n Drop
  
-extension WorkbookViewController {
+extension LineListViewController {
     
     // MARK: - Drag Delegate
     

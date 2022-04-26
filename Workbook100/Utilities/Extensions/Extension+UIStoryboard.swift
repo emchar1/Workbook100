@@ -17,8 +17,8 @@ extension UIStoryboard {
         mainStoryboard.instantiateViewController(withIdentifier: "ProductFilterController") as? ProductFilterController
     }
     
-    static var centerViewController: WorkbookViewController? {
-        mainStoryboard.instantiateViewController(withIdentifier: "WorkbookViewController") as? WorkbookViewController
+    static var centerViewController: LineListViewController? {
+        mainStoryboard.instantiateViewController(withIdentifier: "LineListViewController") as? LineListViewController
     }
     
     // FIXME: - Test

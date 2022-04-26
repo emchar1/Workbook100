@@ -1,5 +1,5 @@
 //
-//  WorkbookDetailTVC2.swift
+//  LineListDetailTVC2.swift
 //  Workbook100
 //
 //  Created by Eddie Char on 3/21/22.
@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     // MARK: - Properties
     
@@ -144,7 +144,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
                let indexPath = indexPaths.first,
                let url = URL(string: model.imageURLs[indexPath.row]) {
                 
-                let controller = segue.destination as! WorkbookImageViewController
+                let controller = segue.destination as! LineListImageViewController
                 
                 controller.title = model.productNameDescription
 //                controller.imageArray = model.imageURLs
@@ -159,7 +159,7 @@ class WorkbookDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
 
 // MARK: - TableView Delegate
 
-extension WorkbookDetailTVC2 {
+extension LineListDetailTVC2 {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let defaultHeight: CGFloat = 44
         
@@ -181,7 +181,7 @@ extension WorkbookDetailTVC2 {
 
 // MARK: - Collection View Delegate, Data Source, Flow Layout
 
-extension WorkbookDetailTVC2 {
+extension LineListDetailTVC2 {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productImageCell", for: indexPath) as! ImageViewCollectionCell
         

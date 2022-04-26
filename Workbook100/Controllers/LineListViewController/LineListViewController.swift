@@ -1,5 +1,5 @@
 //
-//  WorkbookViewController.swift
+//  LineListViewController.swift
 //  Workbook100
 //
 //  Created by Eddie Char on 12/14/21.
@@ -8,15 +8,15 @@
 import UIKit
 import MessageUI
 
-protocol WorkbookViewControllerDelegate {
+protocol LineListViewControllerDelegate {
     func expandPanel()
     func collapsePanel()
 }
 
 
-// MARK: - Workbook View Controller MAIN CLASS
+// MARK: - LineList View Controller MAIN CLASS
 
-class WorkbookViewController: UIViewController,
+class LineListViewController: UIViewController,
                               UICollectionViewDelegate,
                               UICollectionViewDataSource,
                               UICollectionViewDelegateFlowLayout,
@@ -31,7 +31,7 @@ class WorkbookViewController: UIViewController,
     @IBOutlet weak var rightMenu: UIBarButtonItem!
     @IBOutlet weak var cancelMultiButton: UIBarButtonItem!
     
-    var delegate: WorkbookViewControllerDelegate?
+    var delegate: LineListViewControllerDelegate?
     var spinner = ActivitySpinner(style: .large)
     
     var noResultsLabel: UILabel = {
@@ -107,9 +107,9 @@ class WorkbookViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dragInteractionEnabled = true
-        collectionView.dragDelegate = self
-        collectionView.dropDelegate = self
+//        collectionView.dragInteractionEnabled = true
+//        collectionView.dragDelegate = self
+//        collectionView.dropDelegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -158,7 +158,7 @@ class WorkbookViewController: UIViewController,
         
         if segue.identifier == "showDetailsTVC2" {
             let nc = segue.destination as! UINavigationController
-            let controller = nc.topViewController as! WorkbookDetailTVC2
+            let controller = nc.topViewController as! LineListDetailTVC2
 
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
                 let itemForProductCategory = K.getFilteredItemsIfFiltered.filter {
@@ -177,7 +177,7 @@ class WorkbookViewController: UIViewController,
        
 // MARK: - Data Source, Delegate, Flow Layout
 
-extension WorkbookViewController {
+extension LineListViewController {
     
     //Data Source
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -322,7 +322,7 @@ extension WorkbookViewController {
 
 // MARK: - Product Filter Controller NEW Delegate
 
-extension WorkbookViewController {
+extension LineListViewController {
     func applyTapped(selectedLineList: String,
                      selectedNew: Int,
                      selectedEssential: Int,

@@ -1,5 +1,5 @@
 //
-//  WorkbookViewController+MailCompose.swift
+//  LineListViewController+MailCompose.swift
 //  Workbook100
 //
 //  Created by Eddie Char on 1/28/22.
@@ -11,7 +11,7 @@ import UIKit
 
 // MARK: - MF Mail Compose View Controller Delegate
 
-extension WorkbookViewController {
+extension LineListViewController {
     func mailOrder(for data: Data) {
         guard MFMailComposeViewController.canSendMail() else {
             print("Unable to export from Simulator. Try it on a device.")
