@@ -8,7 +8,7 @@
 import UIKit
 import MessageUI
 
-protocol LineListViewControllerDelegate {
+protocol LineListViewControllerDelegate: AnyObject {
     func expandPanel()
     func collapsePanel()
 }
@@ -31,7 +31,7 @@ class LineListViewController: UIViewController,
     @IBOutlet weak var rightMenu: UIBarButtonItem!
     @IBOutlet weak var cancelMultiButton: UIBarButtonItem!
     
-    var delegate: LineListViewControllerDelegate?
+    weak var delegate: LineListViewControllerDelegate?
     var spinner = ActivitySpinner(style: .large)
     
     var noResultsLabel: UILabel = {

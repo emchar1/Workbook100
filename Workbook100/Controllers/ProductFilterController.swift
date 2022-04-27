@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProductFilterControllerDelegate {
+protocol ProductFilterControllerDelegate: AnyObject {
     func applyTapped(selectedLineList: String,
                      selectedNew: Int,
                      selectedEssential: Int,
@@ -67,7 +67,7 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
     var selectedProductDetails: [String]! { didSet { labelProductDetails.text = selectedProductDetails.joined(separator: s) }}
     
     var selectedSection: Int?
-    var delegate: ProductFilterControllerDelegate?
+    weak var delegate: ProductFilterControllerDelegate?
     
     enum FilterItem: Int {
         case lineList = 0,

@@ -16,7 +16,7 @@ class ProductSubFilterCell: UITableViewCell {
 }
 
 
-protocol ProductSubFilterControllerDelegate {
+protocol ProductSubFilterControllerDelegate: AnyObject {
     func didSelectItems(selectedItems: [String])
 }
 
@@ -33,7 +33,7 @@ class ProductSubFilterController: UITableViewController {
             singleMultiButton.isEnabled = allowsMultiSelection
         }
     }
-    var delegate: ProductSubFilterControllerDelegate?
+    weak var delegate: ProductSubFilterControllerDelegate?
     
     private let spinner = ActivitySpinner()
     private var isSingle = true
