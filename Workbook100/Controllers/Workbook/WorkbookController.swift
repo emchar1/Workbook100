@@ -25,18 +25,18 @@ class WorkbookController: UIViewController,
         super.viewDidLoad()
         view.backgroundColor = .magenta
         
-        let inset: CGFloat = 80
+        let inset: CGFloat = 40
 
         flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = 20
+        flowLayout.minimumLineSpacing = 80
         flowLayout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
         
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: flowLayout)
-        collectionView.isPagingEnabled = true
+        collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseId)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseId)
-        collectionView.backgroundColor = .gray
-        
+        collectionView.backgroundColor = UIColor(white: 0.6, alpha: 1.0)
+
         collectionView.delegate = self
         collectionView.dataSource = self
 //        collectionView.dragDelegate = self
@@ -53,45 +53,57 @@ class WorkbookController: UIViewController,
         collectionView.frame = view.frame
         collectionView.collectionViewLayout.invalidateLayout()
     }
-    
-//    private func configureCollectionViewLayoutItemSize() {
-//        let inset: CGFloat = 50
-//
-//        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
-//        flowLayout.itemSize = CGSize(width: 200, height: 200)
-//    }
 }
 
 
 // MARK: - Collection View stuff
 extension WorkbookController {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellPage.reuseId, for: indexPath) as? CollectionCellPage else { return UICollectionViewCell() }
         
-        switch indexPath.section {
-        case 0:
-            cell.backgroundColor = .red
-        case 1:
-            cell.backgroundColor = .orange
-            
-            let cb = UITableViewCell()
-            cb.backgroundColor = .purple
-            cb.translatesAutoresizingMaskIntoConstraints = false
-            cell.addSubview(cb)
-            
-            NSLayoutConstraint.activate([cb.widthAnchor.constraint(equalTo: cell.widthAnchor, multiplier: 0.75),
-                                         cb.heightAnchor.constraint(equalTo: cell.heightAnchor, multiplier: 0.75),
-                                         cb.centerXAnchor.constraint(equalTo: cell.centerXAnchor),
-                                         cb.centerYAnchor.constraint(equalTo: cell.centerYAnchor)])
-        case 2:
-            cell.backgroundColor = .green
-        default:
-            cell.backgroundColor = .blue
-        }
+//        if cell.contentView.subviews.count == 0 {
+//            for i in 0..<3 {
+//                for j in 0..<3 {
+//                    let padding: CGFloat = 5
+//                    let subCell = CollectionCellBlank()
+//                    subCell.backgroundColor = .systemPink
+//                    subCell.translatesAutoresizingMaskIntoConstraints = false
+//                    
+//                    cell.contentView.addSubview(subCell)
+//                    NSLayoutConstraint.activate([subCell.topAnchor.constraint(equalTo: cell.contentView.topAnchor,
+//                                                                              constant: CGFloat(i) * cell.contentView.frame.height / 3),
+//                                                 subCell.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor,
+//                                                                                  constant: CGFloat(j) * cell.contentView.frame.width / 3),
+//                                                 subCell.widthAnchor.constraint(equalToConstant: cell.contentView.frame.width / 3 - padding),
+//                                                 subCell.heightAnchor.constraint(equalToConstant: cell.contentView.frame.height / 3 - padding)])
+//                }
+//            }
+//        }
+        
+//        switch indexPath.section {
+//        case 0:
+//            cell.backgroundColor = .red
+//        case 1:
+//            cell.backgroundColor = .orange
+//
+//            let cb = UITableViewCell()
+//            cb.backgroundColor = .purple
+//            cb.translatesAutoresizingMaskIntoConstraints = false
+//            cell.addSubview(cb)
+//
+//            NSLayoutConstraint.activate([cb.widthAnchor.constraint(equalTo: cell.widthAnchor, multiplier: 0.75),
+//                                         cb.heightAnchor.constraint(equalTo: cell.heightAnchor, multiplier: 0.75),
+//                                         cb.centerXAnchor.constraint(equalTo: cell.centerXAnchor),
+//                                         cb.centerYAnchor.constraint(equalTo: cell.centerYAnchor)])
+//        case 2:
+//            cell.backgroundColor = .green
+//        default:
+//            cell.backgroundColor = .blue
+//        }
         
         return cell
     }
@@ -105,8 +117,22 @@ extension WorkbookController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150,//collectionView.frame.width,
-                      height: 150)//collectionView.frame.height * 2 / 3)
+        var width: CGFloat
+        var height: CGFloat
+        let factor: CGFloat = 8.5 / 14.0
+        
+        if UIDevice.current.orientation.isLandscape {
+            height = collectionView.frame.height - 240
+            print("height: \(height)")
+            width = height / factor
+        }
+        else {
+            width = collectionView.frame.width
+            print("width: \(width)")
+            height = width * factor
+        }
+        
+        return CGSize(width: width, height: height)
     }
 }
 

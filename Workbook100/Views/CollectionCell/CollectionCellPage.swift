@@ -10,6 +10,13 @@ import UIKit
 class CollectionCellPage: UICollectionViewCell {
     class var reuseId: String { "CollectionCellPage" }
     
+    let containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .orange
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
 //    override var isSelected: Bool {
 //        didSet {
 //            setSelected(isSelected, in: contentView)
@@ -20,11 +27,19 @@ class CollectionCellPage: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.backgroundColor = .systemYellow
-        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
+        backgroundColor = .white
+        contentView.layer.shadowColor = UIColor.darkGray.cgColor
+        contentView.layer.shadowOffset = CGSize(width: 8, height: 8)
+        contentView.layer.shadowOpacity = 0.5
+        
+        contentView.addSubview(containerView)
+        NSLayoutConstraint.activate([containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                                    containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                                    contentView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                                    contentView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)])
     }
     
     required init?(coder: NSCoder) {
-        fatalError("Error loading CollectionCellBlank")
+        fatalError("Error loading CollectionCellPage")
     }
 }
