@@ -12,7 +12,7 @@ class CollectionCellPage: UICollectionViewCell {
     
     let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .orange
+        view.backgroundColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

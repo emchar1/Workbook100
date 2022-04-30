@@ -15,33 +15,36 @@ class WorkbookController: UIViewController,
                           UICollectionViewDragDelegate,
                           UICollectionViewDropDelegate,
                           UIPopoverPresentationControllerDelegate,
-                          MFMailComposeViewControllerDelegate,
-                          ProductFilterControllerDelegate {
+                          MFMailComposeViewControllerDelegate {
     
     var collectionView: UICollectionView!
     var flowLayout: UICollectionViewFlowLayout!
+    var dataColors: [[UIColor]] = [[.red, .orange, .systemPink, .yellow, .green, .cyan, .systemIndigo, .purple, .magenta],
+                                   [.yellow, .green, .cyan],
+                                   [.cyan, .blue, .purple],
+                                   [.purple, .magenta, .systemPink]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .magenta
+        view.backgroundColor = .brown
         
-        let inset: CGFloat = 40
+        let inset: CGFloat = 80
 
         flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = 80
+        flowLayout.minimumLineSpacing = 40
         flowLayout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
         
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: flowLayout)
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createCustomLayout())
         collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseId)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseId)
         collectionView.backgroundColor = UIColor(white: 0.6, alpha: 1.0)
 
         collectionView.delegate = self
         collectionView.dataSource = self
-//        collectionView.dragDelegate = self
-//        collectionView.dropDelegate = self
-//        collectionView.dragInteractionEnabled = true
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
+        collectionView.dragInteractionEnabled = true
         view.addSubview(collectionView)
     }
     
@@ -58,12 +61,18 @@ class WorkbookController: UIViewController,
 
 // MARK: - Collection View stuff
 extension WorkbookController {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return dataColors.count
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dataColors[section].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellPage.reuseId, for: indexPath) as? CollectionCellPage else { return UICollectionViewCell() }
+        
+        cell.containerView.backgroundColor = dataColors[indexPath.section][indexPath.row]
         
 //        if cell.contentView.subviews.count == 0 {
 //            for i in 0..<3 {
@@ -107,11 +116,7 @@ extension WorkbookController {
         
         return cell
     }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
-    }
-    
+        
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
@@ -120,25 +125,53 @@ extension WorkbookController {
         var width: CGFloat
         var height: CGFloat
         let factor: CGFloat = 8.5 / 14.0
-        
+
         if UIDevice.current.orientation.isLandscape {
-            height = collectionView.frame.height - 240
-            print("height: \(height)")
+            height = collectionView.frame.height
             width = height / factor
         }
         else {
             width = collectionView.frame.width
-            print("width: \(width)")
             height = width * factor
         }
-        
+
         return CGSize(width: width, height: height)
+    }
+    
+    //Allows for nested cells in Section -> Group -> Item hierarchy
+    func createCustomLayout() -> UICollectionViewLayout {
+        let padding: CGFloat = 5
+        
+        let layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1))
+
+            let leadingItem = NSCollectionLayoutItem(layoutSize: layoutSize)
+            leadingItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
+            let leadingGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: leadingItem, count: 3)
+
+            let trailingItem = NSCollectionLayoutItem(layoutSize: layoutSize)
+            trailingItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
+            let trailingGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: trailingItem, count: 3)
+            
+            let containerGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(self.view.frame.width))
+            let containerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: containerGroupSize, subitems: [leadingGroup, trailingGroup])
+            
+            let section = NSCollectionLayoutSection(group: containerGroup)
+            section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+            
+            return section
+        }
+        
+        return layout
     }
 }
 
 
 // MARK: - Product Filter Delegate
-extension WorkbookController {
+extension WorkbookController: ProductFilterControllerDelegate {
     func applyTapped(selectedLineList: String, selectedNew: Int, selectedEssential: Int, selectedCollection: String, selectedSeasonsCarried: [String], selectedProductCategory: [String], selectedProductType: [String], selectedProductSubtype: [String], selectedDivision: [String], selectedProductClass: [String], selectedProductDetails: [String]) {
         
         print("applyTapped")

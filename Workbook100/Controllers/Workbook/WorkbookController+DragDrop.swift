@@ -14,7 +14,8 @@ extension WorkbookController {
     // MARK: - Drag Delegate
     
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let item = K.getFilteredItemsIfFiltered[indexPath.row]
+//        let item = K.getFilteredItemsIfFiltered[indexPath.row]
+        let item = dataColors[indexPath.section][indexPath.row]
         let itemProvider = NSItemProvider(object: item)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         
@@ -55,14 +56,16 @@ extension WorkbookController {
         //Reordering of single cell
         if let item = coordinator.items.first, let sourceIndexPath = item.sourceIndexPath {
             collectionView.performBatchUpdates({
-                if K.ProductFilter.isFiltered {
-                    K.filteredItems.remove(at: sourceIndexPath.item)
-                    K.filteredItems.insert(item.dragItem.localObject as! CollectionModel, at: destinationIndexPath.item)
-                }
-                else {
-                    K.items.remove(at: sourceIndexPath.item)
-                    K.items.insert(item.dragItem.localObject as! CollectionModel, at: destinationIndexPath.item)
-                }
+//                if K.ProductFilter.isFiltered {
+//                    K.filteredItems.remove(at: sourceIndexPath.item)
+//                    K.filteredItems.insert(item.dragItem.localObject as! CollectionModel, at: destinationIndexPath.item)
+//                }
+//                else {
+//                    K.items.remove(at: sourceIndexPath.item)
+//                    K.items.insert(item.dragItem.localObject as! CollectionModel, at: destinationIndexPath.item)
+//                }
+                dataColors[sourceIndexPath.section].remove(at: sourceIndexPath.item)
+                dataColors[sourceIndexPath.section].insert(item.dragItem.localObject as! UIColor, at: destinationIndexPath.item)
 
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
