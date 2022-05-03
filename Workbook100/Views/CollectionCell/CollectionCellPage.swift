@@ -8,7 +8,7 @@
 import UIKit
 
 class CollectionCellPage: UICollectionViewCell {
-    class var reuseId: String { "CollectionCellPage" }
+    class var reuseID: String { "CollectionCellPage" }
     
     let containerView: UIView = {
         let view = UIView()

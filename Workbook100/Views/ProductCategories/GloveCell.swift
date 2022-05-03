@@ -8,7 +8,7 @@
 import UIKit
 
 class GloveCell: CollectionCell {
-    override class var reuseId: String { "GloveCell" }
+    override class var reuseID: String { "GloveCell" }
     var hStack: CollectionCellStack!
     var labelSizes: CollectionCellLabel!
     

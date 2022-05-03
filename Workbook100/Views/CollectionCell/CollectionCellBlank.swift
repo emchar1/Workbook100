@@ -8,7 +8,7 @@
 import UIKit
 
 class CollectionCellBlank: UICollectionViewCell {
-    class var reuseId: String { "CollectionCellBlank" }
+    class var reuseID: String { "CollectionCellBlank" }
     
     override var isSelected: Bool {
         didSet {

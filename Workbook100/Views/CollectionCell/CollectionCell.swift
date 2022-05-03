@@ -10,7 +10,7 @@ import UIKit
 class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
-    class var reuseId: String { "CollectionCell" }
+    class var reuseID: String { "CollectionCell" }
     var spinner = ActivitySpinner()
     var model: CollectionModel!
 

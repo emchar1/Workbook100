@@ -8,7 +8,7 @@
 import UIKit
 
 class CollectionHeaderView: UICollectionReusableView {
-    static let reuseIdentifier = "HeaderID"
+    class var reuseID: String { "HeaderID" }
     
     let label: UILabel = {
         let label = UILabel()

@@ -66,12 +66,12 @@ class LineListViewController: UIViewController,
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseId)
-        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseId)
-        collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseId)
+        collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
+        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseID)
+        collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseID)
         collectionView.register(CollectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: CollectionHeaderView.reuseIdentifier)
+                                withReuseIdentifier: CollectionHeaderView.reuseID)
         return collectionView
     }()
         
@@ -191,13 +191,13 @@ extension LineListViewController {
         //Uncomment this for flat CollectionView (no product category headers)
 //        switch (K.getFilteredItemsIfFiltered[indexPath.row].productCategory) {
         case K.ProductFilter.wildcard:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as! CollectionCellBlank
             return cell
         default:
             if (itemForCategory[indexPath.row].productCategory.count) > 0 {
             //Uncomment this for flat CollectionView (no product category headers)
 //            if (K.getFilteredItemsIfFiltered[indexPath.row].productCategory.count) > 0 {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseId, for: indexPath) as! CollectionCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as! CollectionCell
                 cell.model = itemForCategory[indexPath.row]
 
                 //Uncomment this for flat CollectionView (no product category headers)
@@ -216,7 +216,7 @@ extension LineListViewController {
                 return cell
             }
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseId, for: indexPath) as! CollectionCellBlank
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as! CollectionCellBlank
             return cell
         }
     }
@@ -259,7 +259,7 @@ extension LineListViewController {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
-                                                                         withReuseIdentifier: CollectionHeaderView.reuseIdentifier,
+                                                                         withReuseIdentifier: CollectionHeaderView.reuseID,
                                                                          for: indexPath) as! CollectionHeaderView
             header.label.text = K.ProductFilter.selectionProductCategory[indexPath.section]
             header.configure()
