@@ -13,7 +13,7 @@ final class BackgroundSupplementaryView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor(white: 0.95, alpha: 1)
+        backgroundColor = UIColor(white: 1, alpha: 1)
     }
     
     required init?(coder: NSCoder) {

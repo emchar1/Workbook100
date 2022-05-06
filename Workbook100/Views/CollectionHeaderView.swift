@@ -19,6 +19,7 @@ class CollectionHeaderView: UICollectionReusableView {
     }()
     
     func configure() {
+//        backgroundColor = .yellow
         label.text = label.text?.uppercased()
         addSubview(label)
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="no9-KT-TAR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bZc-S1-Ykv">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -505,7 +505,7 @@
         <!--Line List DetailTVC2-->
         <scene sceneID="6FZ-k2-KZ2">
             <objects>
-                <tableViewController id="Nks-Vp-edx" customClass="LineListDetailTVC2" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LineListDetailTVC2" id="Nks-Vp-edx" customClass="LineListDetailTVC2" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="wt9-KG-CMc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1394,7 +1394,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sd9-xe-pD2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3420" y="1048.5781990521327"/>
+            <point key="canvasLocation" x="3457" y="1049"/>
         </scene>
         <!--Line List Image View Controller-->
         <scene sceneID="MOe-KF-OaM">
@@ -1410,7 +1410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYi-Ot-0DO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4386.1538461538457" y="1042.8909952606634"/>
+            <point key="canvasLocation" x="4394" y="1049"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="E3s-Hw-hCj">
@@ -1566,7 +1566,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jeo-YW-1jv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2491" y="1832"/>
+            <point key="canvasLocation" x="2545" y="1832"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gs8-xr-txu">
@@ -1584,7 +1584,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zgd-NZ-K80" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2620" y="1048.5781990521327"/>
+            <point key="canvasLocation" x="2545" y="1049"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gJM-IW-9zu">
@@ -1615,11 +1615,41 @@
                         <viewLayoutGuide key="safeArea" id="1xN-9V-oB3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dzg-mb-A6v"/>
+                    <navigationItem key="navigationItem" id="dzg-mb-A6v">
+                        <barButtonItem key="leftBarButtonItem" title="+ Section" id="cKE-Be-Qn5">
+                            <connections>
+                                <action selector="addSection:" destination="a9c-Ls-B8G" id="vqd-Zh-w3d"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="+ Item" id="a3n-e3-rKy">
+                            <connections>
+                                <action selector="addItem:" destination="a9c-Ls-B8G" id="zQ1-KB-81q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="u9q-iv-kJV" kind="presentation" identifier="showDetailsTVC2" id="MNd-68-2MZ"/>
+                        <segue destination="rQv-vd-j81" kind="presentation" identifier="showProductList" id="YFz-OP-ir2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sg1-3E-Tgu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-129" y="168"/>
+            <point key="canvasLocation" x="880" y="168"/>
+        </scene>
+        <!--Product List Controller-->
+        <scene sceneID="mD0-nB-Ite">
+            <objects>
+                <viewController id="rQv-vd-j81" customClass="ProductListController" customModule="Workbook100" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mHW-me-nEU">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="o9e-Dc-ijw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iWZ-qA-AAo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2545" y="168"/>
         </scene>
         <!--Workbook-->
         <scene sceneID="hhT-27-Em8">
@@ -1638,9 +1668,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oyE-Xn-uCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1058" y="168"/>
+            <point key="canvasLocation" x="-129" y="168"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="MNd-68-2MZ"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="100icon" width="910" height="911"/>
         <image name="eye" catalog="system" width="128" height="81"/>
