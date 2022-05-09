@@ -212,7 +212,6 @@
 				EA5CE2DD27C749D40071F015 /* CollectionCell */,
 				EAB133EB27AE5EF9007F6553 /* ProductCategories */,
 				EA24D25127FE2ED90055B928 /* CollectionHeaderView.swift */,
-				EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */,
 				EAA0CF7A2769573F00943912 /* Main.storyboard */,
 			);
 			path = Views;
@@ -293,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				EAB133EC27AE5F3A007F6553 /* GloveCell.swift */,
+				EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */,
 			);
 			path = ProductCategories;
 			sourceTree = "<group>";
@@ -627,7 +627,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -642,7 +642,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.9;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -662,7 +662,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -677,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.9;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";

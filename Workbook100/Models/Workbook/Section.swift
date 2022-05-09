@@ -9,9 +9,10 @@ import Foundation
 
 
 enum SectionType: Int, CaseIterable {
-    case oneByOne
-    case twoByOne
-    case sixByThree
+    case size_1x1
+    case size_2x1
+    case size_6x3
+    case size_3x3x2
 }
 
 final class Section: NSObject, Comparable, Identifiable, NSItemProviderWriting {
@@ -20,7 +21,7 @@ final class Section: NSObject, Comparable, Identifiable, NSItemProviderWriting {
     var data: [Any]
     
     override var description: String {
-        return "This is a section with id: \(id) and sectionType: \(type). There is also an array here. Would you like to see the contents of the array? Y/N. Jk you select one"
+        return "This is a section with id: \(id) and sectionType: \(type). There is also an array here. Would you like to see the contents of the array? Y/N. Jk you can't actually select it, obviously."
     }
     
     init(id: Int, type: SectionType, data: [Any]) {

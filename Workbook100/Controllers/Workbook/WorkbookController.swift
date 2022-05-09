@@ -59,10 +59,10 @@ class WorkbookController: UIViewController,
     }
     
     private func refreshData() {
-        let section0 = Section(id: 0, type: .oneByOne, data: Array(repeating: 0, count: 1)) //Array(K.getFilteredItemsIfFiltered[0...0]))
-        let section1 = Section(id: 1, type: .twoByOne, data: Array(repeating: 1, count: 2)) //Array(K.getFilteredItemsIfFiltered[1...2]))
-        let section2 = Section(id: 2, type: .sixByThree, data: Array(K.getFilteredItemsIfFiltered[3...20]))
-        let section3 = Section(id: 3, type: .twoByOne, data: Array(repeating: 0, count: 2)) //Array(K.getFilteredItemsIfFiltered[21...22]))
+        let section0 = Section(id: 0, type: .size_1x1, data: Array(repeating: 0, count: 1)) //Array(K.getFilteredItemsIfFiltered[0...0]))
+        let section1 = Section(id: 1, type: .size_2x1, data: Array(repeating: 1, count: 2)) //Array(K.getFilteredItemsIfFiltered[1...2]))
+        let section2 = Section(id: 2, type: .size_6x3, data: Array(repeating: 2, count: 18)) //Array(K.getFilteredItemsIfFiltered[3...20]))
+        let section3 = Section(id: 3, type: .size_2x1, data: Array(repeating: 1, count: 2)) //Array(K.getFilteredItemsIfFiltered[21...22]))
         allSections = [section0, section1, section2, section3]
         
         print("Controls refreshed!")
@@ -94,24 +94,32 @@ class WorkbookController: UIViewController,
 //            }
 //        }
 
-        let alertController = UIAlertController(title: "Add Section", message: "Add a section, asshole", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Add Section", message: "Select a Section to Add:", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "One by One", style: .default, handler: { _ in
-            if let highestSection = (self.allSections.max { first, second in first.id >= second.id }) {
-                self.didAddSection(id: highestSection.id, type: .oneByOne, data: Array(repeating: 0, count: 1))
+            if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_1x1, data: Array(repeating: 0, count: 1))
             }
         }))
                                   
         alertController.addAction(UIAlertAction(title: "Two by One", style: .default, handler: { _ in
-            if let highestSection = (self.allSections.max { first, second in first.id >= second.id }) {
-                self.didAddSection(id: highestSection.id, type: .twoByOne, data: Array(repeating: 0, count: 2))
+            if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_2x1, data: Array(repeating: 1, count: 2))
             }
         }))
 
         alertController.addAction(UIAlertAction(title: "Six by Three", style: .default, handler: { _ in
-            if let highestSection = (self.allSections.max { first, second in first.id >= second.id }) {
-                self.didAddSection(id: highestSection.id, type: .sixByThree, data: Array(repeating: 0, count: 18))
+            if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_6x3, data: Array(repeating: 2, count: 18))
             }
         }))
+        
+        alertController.addAction(UIAlertAction(title: "(Three by Three) by Two", style: .default, handler: { _ in
+            if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_3x3x2, data: Array(repeating: 3, count: 10))
+            }
+        }))
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
 //        alertController.popoverPresentationController?.barButtonItem = sender
 //        alertController.popoverPresentationController?.sourceView = collectionView
@@ -124,7 +132,7 @@ class WorkbookController: UIViewController,
     }
     
     private func didAddSection(id: Int, type: SectionType, data: Array<Any>) {
-        self.allSections.append(Section(id: id, type: type, data: data))
+        self.allSections.append(Section(id: id + 1, type: type, data: data))
         self.collectionView.reloadData()
         self.collectionView.scrollToItem(at: IndexPath(row: 0, section: self.allSections.count - 1), at: .top, animated: true)
     }
@@ -152,7 +160,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if allSections[indexPath.section].data[indexPath.row] is CollectionModel {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as? CollectionCell else { return UICollectionViewCell() }
-            
+
             cell.model = allSections[indexPath.section].data[indexPath.row] as? CollectionModel
             cell.setViews()
 
@@ -161,9 +169,17 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
         else if allSections[indexPath.section].data[indexPath.row] is Int {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { return UICollectionViewCell() }
             
+            switch allSections[indexPath.section].data[indexPath.row] as! Int {
+            case 0: cell.contentView.backgroundColor = .magenta
+            case 1: cell.contentView.backgroundColor = .cyan
+            case 2: cell.contentView.backgroundColor = .yellow
+            case 3: cell.contentView.backgroundColor = .systemPink
+            default: cell.contentView.backgroundColor = .gray
+            }
+            
             return cell
         }
-        
+
         return UICollectionViewCell()
     }
     
@@ -192,96 +208,163 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
     
 extension WorkbookController {
     private func makeLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { (section: Int,
+                                                            environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             switch self.allSections[section].type {
-            case .oneByOne: return self.createOneByOne()
-            case .twoByOne: return self.createTwoByOne()
-            case .sixByThree: return self.createSixByThree()
+            case .size_1x1: return self.layoutSection(layoutGroupSizeHeight: 753 / 1164, layoutGroupCount: 1)
+            case .size_2x1: return self.layoutSection(layoutGroupSizeHeight: 753 / 1164, layoutGroupCount: 2)
+            case .size_6x3: return self.layoutSection(layoutGroupSizeHeight: 753 / 1164 / 3, layoutGroupCount: 6)
+            case .size_3x3x2: return self.layoutSectionWithSub()
             }
         }
         
         return layout
     }
     
-    private func createOneByOne() ->  NSCollectionLayoutSection {
-        let padding: CGFloat = 8
-        let sectionMultiplier: CGFloat = 4
-        let backgroundMultiplier: CGFloat = 4
-
+    private func layoutSection(padding: CGFloat = 8,
+                               sectionMultiplier: CGFloat = 4,
+                               backgroundMultiplier: CGFloat = 4,
+                               layoutGroupSizeHeight: CGFloat,
+                               layoutGroupCount: Int) -> NSCollectionLayoutSection {
+        
         let layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
         
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(3/4))
-        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 1)
-
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(layoutGroupSizeHeight))
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: layoutGroupCount)
+        
         let section = NSCollectionLayoutSection(group: layoutGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: padding * sectionMultiplier, leading: padding * sectionMultiplier, bottom: padding * sectionMultiplier, trailing: padding * sectionMultiplier)
+        section.contentInsets = NSDirectionalEdgeInsets(top: padding * sectionMultiplier,
+                                                        leading: padding * sectionMultiplier,
+                                                        bottom: padding * sectionMultiplier,
+                                                        trailing: padding * sectionMultiplier)
+        section.decorationItems = setBackgroundItem(padding: padding * backgroundMultiplier)
         
-        let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: BackgroundSupplementaryView.reuseID)
-        backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: padding * backgroundMultiplier, leading: padding * backgroundMultiplier, bottom: padding * backgroundMultiplier, trailing: padding * backgroundMultiplier)
+//        let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
+//        let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: CollectionHeaderView.reuseID, alignment: .bottom)
+//        section.boundarySupplementaryItems = [headerItem]
+
+        return section
+    }
+    
+    private func layoutSectionWithSub(padding: CGFloat = 8,
+                                      sectionMultiplier: CGFloat = 4,
+                                      backgroundMultiplier: CGFloat = 4) -> NSCollectionLayoutSection {
         
-        section.decorationItems = [backgroundItem]
-        section.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(8)),
-            elementKind: UICollectionView.elementKindSectionFooter,
-            alignment: .bottom)]
+        let layoutMainItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
+        let layoutMainItem = NSCollectionLayoutItem(layoutSize: layoutMainItemSize)
+        layoutMainItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
+
+        let layoutSubItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 3), heightDimension: .fractionalHeight(1))
+        let layoutSubItem = NSCollectionLayoutItem(layoutSize: layoutSubItemSize)
+        layoutSubItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
+
+        let layoutSubGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1 / 3))
+        let layoutSubGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSubGroupSize, subitem: layoutSubItem, count: 3)
+        
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
+        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitem: layoutSubGroup, count: 3)
+        
+        let layoutMainGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(753 / 1164))
+        let layoutMainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutMainGroupSize, subitems: [layoutGroup, layoutMainItem])
+
+        let section = NSCollectionLayoutSection(group: layoutMainGroup)
+        section.contentInsets = NSDirectionalEdgeInsets(top: padding * sectionMultiplier,
+                                                        leading: padding * sectionMultiplier,
+                                                        bottom: padding * sectionMultiplier,
+                                                        trailing: padding * sectionMultiplier)
+        section.decorationItems = setBackgroundItem(padding: padding * backgroundMultiplier)
         
         return section
     }
     
-    private func createTwoByOne() ->  NSCollectionLayoutSection {
-        let padding: CGFloat = 8
-        let sectionMultiplier: CGFloat = 4
-        let backgroundMultiplier: CGFloat = 4
-
-        let layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
-        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
-        
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(3/4))
-        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 2)
-
-        let section = NSCollectionLayoutSection(group: layoutGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: padding * sectionMultiplier, leading: padding * sectionMultiplier, bottom: padding * sectionMultiplier, trailing: padding * sectionMultiplier)
-        
+    private func setBackgroundItem(padding: CGFloat) -> [NSCollectionLayoutDecorationItem] {
         let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: BackgroundSupplementaryView.reuseID)
-        backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: padding * backgroundMultiplier, leading: padding * backgroundMultiplier, bottom: padding * backgroundMultiplier, trailing: padding * backgroundMultiplier)
+        backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
         
-        section.decorationItems = [backgroundItem]
-        
-        return section
+        return [backgroundItem]
     }
     
-    private func createSixByThree() ->  NSCollectionLayoutSection {
-        let padding: CGFloat = 8
-        let sectionMultiplier: CGFloat = 8
-        let backgroundMultiplier: CGFloat = 4
-
-        let layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
-        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
-        
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1/4))
-        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 6)
-
-        let section = NSCollectionLayoutSection(group: layoutGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: padding * sectionMultiplier, leading: padding * sectionMultiplier, bottom: padding * sectionMultiplier, trailing: padding * sectionMultiplier)
-        
-        let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: BackgroundSupplementaryView.reuseID)
-        backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: padding * backgroundMultiplier, leading: padding * backgroundMultiplier, bottom: padding * backgroundMultiplier, trailing: padding * backgroundMultiplier)
-        
-        section.decorationItems = [backgroundItem]
-        section.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(8)),
-            elementKind: UICollectionView.elementKindSectionFooter,
-            alignment: .bottom)]
-
-        
-        return section
-    }
-    
-    
+//    private func layout_1x1() ->  NSCollectionLayoutSection {
+//        let padding: CGFloat = 8
+//        let sectionMultiplier: CGFloat = 4
+//        let backgroundMultiplier: CGFloat = 4
+//
+//        let layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+//        let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
+//        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
+//
+//        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(3/4))
+//        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 1)
+//
+//        let section = NSCollectionLayoutSection(group: layoutGroup)
+//        section.contentInsets = NSDirectionalEdgeInsets(top: padding * sectionMultiplier, leading: padding * sectionMultiplier, bottom: padding * sectionMultiplier, trailing: padding * sectionMultiplier)
+//
+//        let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: BackgroundSupplementaryView.reuseID)
+//        backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: padding * backgroundMultiplier, leading: padding * backgroundMultiplier, bottom: padding * backgroundMultiplier, trailing: padding * backgroundMultiplier)
+//
+//        section.decorationItems = [backgroundItem]
+////        section.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(
+////            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(8)),
+////            elementKind: UICollectionView.elementKindSectionFooter,
+////            alignment: .bottom)]
+//
+//        return section
+//    }
+//
+//    private func layout_2x1() ->  NSCollectionLayoutSection {
+//        let padding: CGFloat = 8
+//        let sectionMultiplier: CGFloat = 4
+//        let backgroundMultiplier: CGFloat = 4
+//
+//        let layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+//        let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
+//        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
+//
+//        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(3/4))
+//        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 2)
+//
+//        let section = NSCollectionLayoutSection(group: layoutGroup)
+//        section.contentInsets = NSDirectionalEdgeInsets(top: padding * sectionMultiplier, leading: padding * sectionMultiplier, bottom: padding * sectionMultiplier, trailing: padding * sectionMultiplier)
+//
+//        let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: BackgroundSupplementaryView.reuseID)
+//        backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: padding * backgroundMultiplier, leading: padding * backgroundMultiplier, bottom: padding * backgroundMultiplier, trailing: padding * backgroundMultiplier)
+//
+//        section.decorationItems = [backgroundItem]
+//
+//        return section
+//    }
+//
+//    private func layout_6x3() ->  NSCollectionLayoutSection {
+//        let padding: CGFloat = 8
+//        let sectionMultiplier: CGFloat = 8
+//        let backgroundMultiplier: CGFloat = 4
+//
+//        let layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+//        let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
+//        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
+//
+//        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1/4))
+//        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 6)
+//
+//        let section = NSCollectionLayoutSection(group: layoutGroup)
+//        section.contentInsets = NSDirectionalEdgeInsets(top: padding * sectionMultiplier, leading: padding * sectionMultiplier, bottom: padding * sectionMultiplier, trailing: padding * sectionMultiplier)
+//
+//        let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: BackgroundSupplementaryView.reuseID)
+//        backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: padding * backgroundMultiplier, leading: padding * backgroundMultiplier, bottom: padding * backgroundMultiplier, trailing: padding * backgroundMultiplier)
+//
+//        section.decorationItems = [backgroundItem]
+////        section.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(
+////            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(8)),
+////            elementKind: UICollectionView.elementKindSectionFooter,
+////            alignment: .bottom)]
+//
+//
+//        return section
+//    }
+//
+//
     //Allows for nested cells in Section -> Group -> Item hierarchy
 //    func createCustomLayout() -> UICollectionViewLayout {
 //        let layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
