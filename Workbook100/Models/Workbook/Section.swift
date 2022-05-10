@@ -5,7 +5,7 @@
 //  Created by Eddie Char on 5/4/22.
 //
 
-import Foundation
+import UIKit
 
 
 enum SectionType: Int, CaseIterable {
@@ -16,6 +16,9 @@ enum SectionType: Int, CaseIterable {
 }
 
 final class Section: NSObject, Comparable, Identifiable, NSItemProviderWriting {
+    static let backgroundPadding: CGFloat = 40
+    static let resolution: CGFloat = 520 / 800
+    
     let id: Int
     let type: SectionType
     var data: [Any]
