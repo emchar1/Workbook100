@@ -116,7 +116,7 @@ class CollectionCell: UICollectionViewCell {
         //==SETUP==//
         //Content View
 //        contentView.backgroundColor = .magenta
-        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
+//        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
         contentView.clipsToBounds = true
 
         //VStack
