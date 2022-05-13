@@ -19,8 +19,11 @@ class CollectionCellLabelBubble: UILabel {
         self.textColor = type == .essential ? .systemBackground : .white
         self.textAlignment = .center
         self.font = .workbookBubbleTitle
-        self.layer.cornerRadius = 8
+        self.layer.cornerRadius = 12
         self.clipsToBounds = true
+        
+        adjustsFontSizeToFitWidth = true
+        minimumScaleFactor = 0.05
         
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false

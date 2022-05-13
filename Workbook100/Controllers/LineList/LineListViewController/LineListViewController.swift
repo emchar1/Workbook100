@@ -320,7 +320,7 @@ extension LineListViewController {
 }
 
 
-// MARK: - Product Filter Controller NEW Delegate
+// MARK: - Product Filter Controller Delegate
 
 extension LineListViewController {
     func applyTapped(selectedLineList: String,

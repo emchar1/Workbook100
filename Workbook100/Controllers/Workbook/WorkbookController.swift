@@ -20,6 +20,7 @@ class WorkbookController: UIViewController,
 //    var refreshControl = UIRefreshControl()
     
     var allSections: [Section]!
+    var selectedIndexPath: IndexPath?
     
     //can't delete this for now because it's used in drag/drop
     var dataColors: [[UIColor]] = [[.red, .orange, .systemPink, .yellow, .green, .cyan, .systemIndigo, .purple, .magenta],
@@ -56,6 +57,17 @@ class WorkbookController: UIViewController,
         
         refreshData()
     }
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        
+//        if let collectionView = collectionView {
+//            collectionView.reloadData()
+//            print("reloaded")
+//        }
+//        
+//        print("resize")
+//    }
     
     private func refreshData() {
         let section0 = Section(id: 0, type: .size_1x1, data: [0]) //Array(K.getFilteredItemsIfFiltered[0...0]))
@@ -104,7 +116,7 @@ class WorkbookController: UIViewController,
         
         alertController.addAction(UIAlertAction(title: "(Three by Three) by Two", style: .default, handler: { _ in
             if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
-                self.didAddSection(id: highestSection.id, type: .size_3x3x2, data: [K.items[20]] + Array(repeating: 3, count: 9))
+                self.didAddSection(id: highestSection.id, type: .size_3x3x2, data: Array(K.items[0...9]))
             }
         }))
 
@@ -136,9 +148,17 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
+        selectedIndexPath = indexPath
         
-        
+        if allSections[indexPath.section].data[indexPath.row] is CollectionModel {
+            performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
+        }
+        else if allSections[indexPath.section].data[indexPath.row] is Int {
+            let vc = ProductListController()
+            vc.delegate = self
+            present(vc, animated: true)
+        }
+
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
@@ -403,11 +423,14 @@ extension WorkbookController {
 }
 
 
-// MARK: - Product Filter Delegate
+// MARK: - Product List Controller Delegate {
 
-extension WorkbookController: ProductFilterControllerDelegate {
-    func applyTapped(selectedLineList: String, selectedNew: Int, selectedEssential: Int, selectedCollection: String, selectedSeasonsCarried: [String], selectedProductCategory: [String], selectedProductType: [String], selectedProductSubtype: [String], selectedDivision: [String], selectedProductClass: [String], selectedProductDetails: [String]) {
+extension WorkbookController: ProductListControllerDelegate {
+    func didSelectItem(item: CollectionModel) {
+        guard let selectedIndexPath = selectedIndexPath else { return }
         
-        print("applyTapped")
+        allSections[selectedIndexPath.section].data[selectedIndexPath.row] = item
+        
+        collectionView.reloadData()
     }
 }

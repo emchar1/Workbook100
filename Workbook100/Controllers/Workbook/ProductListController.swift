@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol ProductListControllerDelegate {
+    func didSelectItem(item: CollectionModel)
+}
+
 class ProductListController: UIViewController {
     let tableView = UITableView()
+    
+    var delegate: ProductListControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,18 +33,19 @@ class ProductListController: UIViewController {
 
 extension ProductListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return K.items.count
+        return K.getFilteredItemsIfFiltered.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ProductListCell.reuseID, for: indexPath) as! ProductListCell
         
-        cell.label.text = K.items[indexPath.row].skuCode
+        cell.label.text = K.getFilteredItemsIfFiltered[indexPath.row].skuCode
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.didSelectItem(item: K.getFilteredItemsIfFiltered[indexPath.row])
         dismiss(animated: true)
     }
 }

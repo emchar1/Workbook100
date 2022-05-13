@@ -7,6 +7,11 @@
 
 import UIKit
 
+//Need this Obj-C wrapper to supress an error when compiling for non-Mac Catalyst simulator. But need AppKit for Mac Catalyst
+#if targetEnvironment(macCatalyst)
+import AppKit
+#endif
+
 class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties

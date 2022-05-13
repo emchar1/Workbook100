@@ -20,6 +20,9 @@ class CollectionCellLabel: UILabel {
 //        self.textColor = .black
         self.numberOfLines = (type != .title) ? 0 : 1
         
+        adjustsFontSizeToFitWidth = true
+        minimumScaleFactor = 0.05
+        
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false
         }
