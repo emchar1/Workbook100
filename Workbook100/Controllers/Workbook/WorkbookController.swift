@@ -21,6 +21,7 @@ class WorkbookController: UIViewController,
     
     var allSections: [Section]!
     var selectedIndexPath: IndexPath?
+    var imagePicker: ImagePicker!
     
     //can't delete this for now because it's used in drag/drop
     var dataColors: [[UIColor]] = [[.red, .orange, .systemPink, .yellow, .green, .cyan, .systemIndigo, .purple, .magenta],
@@ -53,7 +54,7 @@ class WorkbookController: UIViewController,
         
         view.addSubview(collectionView)
         
-        
+        imagePicker = ImagePicker(presentationController: self, delegate: self)
         
         refreshData()
     }
@@ -93,6 +94,10 @@ class WorkbookController: UIViewController,
     
     // MARK: - UI Bar Button Items
     
+    @IBAction func addItem(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "showProductList", sender: nil)
+    }
+    
     @IBAction func addSection(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Add Section", message: "Select a Section to Add:", preferredStyle: .alert)
         
@@ -124,10 +129,6 @@ class WorkbookController: UIViewController,
         present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func addItem(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "showProductList", sender: nil)
-    }
-    
     private func didAddSection(id: Int, type: SectionType, data: Array<Any>) {
         self.allSections.append(Section(id: id + 1, type: type, data: data))
         self.collectionView.reloadData()
@@ -150,31 +151,40 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         
-        if allSections[indexPath.section].data[indexPath.row] is CollectionModel {
+        let comparisonValue = allSections[indexPath.section].data[indexPath.row]
+        
+        if comparisonValue is CollectionModel {
             performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
         }
-        else if allSections[indexPath.section].data[indexPath.row] is Int {
-            let vc = ProductListController()
-            vc.delegate = self
-            present(vc, animated: true)
+        else if let comparisonValue = comparisonValue as? Int {
+            if comparisonValue == 0 {
+                imagePicker.present(from: collectionView)
+            }
+            else {
+                let vc = ProductListController()
+                vc.delegate = self
+                present(vc, animated: true)
+            }
         }
 
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if allSections[indexPath.section].data[indexPath.row] is CollectionModel {
+        let comparisonValue = allSections[indexPath.section].data[indexPath.row]
+        
+        if let comparisonValue = comparisonValue as? CollectionModel {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as? CollectionCell else { return UICollectionViewCell() }
 
-            cell.model = allSections[indexPath.section].data[indexPath.row] as? CollectionModel
+            cell.model = comparisonValue
             cell.setViews()
 
             return cell
         }
-        else if allSections[indexPath.section].data[indexPath.row] is Int {
+        else if let comparisonValue = comparisonValue as? Int {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { return UICollectionViewCell() }
             
-            switch allSections[indexPath.section].data[indexPath.row] as! Int {
+            switch comparisonValue {
             case 0: cell.contentView.backgroundColor = .magenta
             case 1: cell.contentView.backgroundColor = .cyan
             case 2: cell.contentView.backgroundColor = .orange
@@ -286,7 +296,7 @@ extension WorkbookController {
 }
 
 
-// MARK: - Product List Controller Delegate {
+// MARK: - Product List Controller Delegate
 
 extension WorkbookController: ProductListControllerDelegate {
     func didSelectItem(item: CollectionModel) {
@@ -295,5 +305,16 @@ extension WorkbookController: ProductListControllerDelegate {
         allSections[selectedIndexPath.section].data[selectedIndexPath.row] = item
         
         collectionView.reloadData()
+    }
+}
+
+
+// MARK: - Image Picker Delegate
+
+extension WorkbookController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        print("Did select an image!")
+        
+        
     }
 }

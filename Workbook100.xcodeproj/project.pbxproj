@@ -51,6 +51,7 @@
 		EAB133E327A47CAD007F6553 /* LineListViewController+MailCompose.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E227A47CAD007F6553 /* LineListViewController+MailCompose.swift */; };
 		EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */; };
 		EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133EC27AE5F3A007F6553 /* GloveCell.swift */; };
+		EAB5FE182832122D000DD5C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5FE172832122D000DD5C8 /* ImagePicker.swift */; };
 		EAD957522819E1EF00D18200 /* CollectionCellPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD957512819E1EF00D18200 /* CollectionCellPage.swift */; };
 		EAE6473128149E5500FBE6C3 /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6473028149E5500FBE6C3 /* Extension+Array.swift */; };
 		EAE64735281799DA00FBE6C3 /* WorkbookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE64734281799DA00FBE6C3 /* WorkbookController.swift */; };
@@ -107,6 +108,7 @@
 		EAB133E227A47CAD007F6553 /* LineListViewController+MailCompose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LineListViewController+MailCompose.swift"; sourceTree = "<group>"; };
 		EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellBlank.swift; sourceTree = "<group>"; };
 		EAB133EC27AE5F3A007F6553 /* GloveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloveCell.swift; sourceTree = "<group>"; };
+		EAB5FE172832122D000DD5C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		EAD957512819E1EF00D18200 /* CollectionCellPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellPage.swift; sourceTree = "<group>"; };
 		EAE6473028149E5500FBE6C3 /* Extension+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Array.swift"; sourceTree = "<group>"; };
 		EAE64734281799DA00FBE6C3 /* WorkbookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookController.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				EAF2BA0727A2306500CD4856 /* CSVMake.swift */,
 				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
 				EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */,
+				EAB5FE172832122D000DD5C8 /* ImagePicker.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				EA2E388427EE27D000122877 /* SavedList.swift in Sources */,
 				EA0AB06427C9CA56000D7D37 /* ProductSubFilterController.swift in Sources */,
 				EAA0CF792769573F00943912 /* LineListViewController.swift in Sources */,
+				EAB5FE182832122D000DD5C8 /* ImagePicker.swift in Sources */,
 				EA38B4E9282AE31C0030269A /* CollectionCell+Stack.swift in Sources */,
 				EAE64735281799DA00FBE6C3 /* WorkbookController.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
