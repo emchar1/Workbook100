@@ -15,17 +15,30 @@ enum SectionType: Int, CaseIterable {
     case size_3x3x2
 }
 
-final class Section: NSObject, Comparable, Identifiable, NSItemProviderWriting {
-    static let backgroundPadding: CGFloat = 40
-    static let resolution: CGFloat = 520 / 800
+enum SectionCellType: Int {
+    case photo = 0
+    case text
+    case item
+}
+
+final class Section: NSObject {
     
+    // MARK: - Properties
+    
+    static let backgroundPadding: CGFloat = 40
+    static let aspectRatio: CGFloat = 520 / 800
+    
+    //Section properties
     let id: Int
     let type: SectionType
     var data: [Any]
     
     override var description: String {
-        return "This is a section with id: \(id) and sectionType: \(type). There is also an array here. Would you like to see the contents of the array? Y/N. Jk you can't actually select it, obviously."
+        return "id: \(id); sectionType: \(type); data: \(data)"
     }
+    
+    
+    // MARK: - Initialization
     
     init(id: Int, type: SectionType, data: [Any]) {
         self.id = id
@@ -33,6 +46,28 @@ final class Section: NSObject, Comparable, Identifiable, NSItemProviderWriting {
         self.data = data
     }
     
+    convenience init(id: Int, type: SectionType) {
+        var data: [SectionCellType]
+        
+        switch type {
+        case .size_1x1:
+            data = [.photo]
+        case .size_2x1:
+            data = [.text, .photo]
+        case .size_6x3:
+            data = Array(repeating: .item, count: 18)
+        case .size_3x3x2:
+            data = Array(repeating: .item, count: 9) + [.photo]
+        }
+        
+        self.init(id: id, type: type, data: data)
+    }
+}
+
+
+// MARK: - Comparable, Identifiable
+
+extension Section: Comparable, Identifiable {
     static func < (lhs: Section, rhs: Section) -> Bool {
         lhs.id < rhs.id
     }
@@ -45,7 +80,7 @@ final class Section: NSObject, Comparable, Identifiable, NSItemProviderWriting {
 
 // MARK: - NSItemProviderWriting
 
-extension Section {
+extension Section: NSItemProviderWriting {
     static var writableTypeIdentifiersForItemProvider: [String] {
         return []
     }

@@ -6,15 +6,22 @@
 //
 
 import UIKit
+import Photos
 
 protocol ImagePickerDelegate: AnyObject {
     func didSelect(image: UIImage?)
 }
 
 class ImagePicker: NSObject {
+    
+    // MARK: - Properties
+    
     private let pickerController = UIImagePickerController()
     private weak var presentationController: UIViewController?
     private weak var delegate: ImagePickerDelegate?
+    
+    
+    // MARK: - Initialization
     
     init(presentationController: UIViewController, delegate: ImagePickerDelegate) {
         super.init()
@@ -26,6 +33,9 @@ class ImagePicker: NSObject {
         pickerController.allowsEditing = true
         pickerController.mediaTypes = ["public.image"]
     }
+    
+    
+    // MARK: - Helper Functions
     
     func present(from sourceView: UIView) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -48,7 +58,9 @@ class ImagePicker: NSObject {
             alertController.popoverPresentationController?.permittedArrowDirections = [.down, .up]
         }
         
-        presentationController?.present(alertController, animated: true)
+        presentationController?.present(alertController, animated: true) { [unowned self] in
+            requestPhotos()
+        }
     }
     
     private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
@@ -60,6 +72,9 @@ class ImagePicker: NSObject {
         }
     }
 }
+
+
+// MARK: - UIImagePickerController Delegate
 
 extension ImagePicker: UIImagePickerControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -75,13 +90,32 @@ extension ImagePicker: UIImagePickerControllerDelegate {
     }
     
     private func pickerController(_ controller: UIImagePickerController, didSelect image: UIImage?) {
-        controller.dismiss(animated: true, completion: nil)
-        
         delegate?.didSelect(image: image)
+
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 
 
+// MARK: - UINavigationConroller Delegate
+
 extension ImagePicker: UINavigationControllerDelegate {
-    
+    func requestPhotos() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized: return
+        case .denied: return
+        case .restricted: return
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { granted in
+                if granted == .authorized {
+                    print("Photos granted.")
+                    return
+                }
+                else {
+                    //Present message to allow photos...
+                }
+            }
+        default: return
+        }
+    }
 }

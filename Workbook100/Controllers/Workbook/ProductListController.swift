@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProductListControllerDelegate {
-    func didSelectItem(item: CollectionModel)
+    func didSelect(item: CollectionModel)
 }
 
 class ProductListController: UIViewController {
@@ -45,7 +45,7 @@ extension ProductListController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectItem(item: K.getFilteredItemsIfFiltered[indexPath.row])
+        delegate?.didSelect(item: K.getFilteredItemsIfFiltered[indexPath.row])
         dismiss(animated: true)
     }
 }

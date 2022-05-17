@@ -11,18 +11,16 @@ import UIKit
 class WorkbookController: UIViewController,
                           UICollectionViewDragDelegate,
                           UICollectionViewDropDelegate,
-                          UIPopoverPresentationControllerDelegate,
-                          MFMailComposeViewControllerDelegate {
+                          UIPopoverPresentationControllerDelegate {
     
     // MARK: - Properties
     
     var collectionView: UICollectionView!
-//    var refreshControl = UIRefreshControl()
-    
-    var allSections: [Section]!
-    var selectedIndexPath: IndexPath?
     var imagePicker: ImagePicker!
+    var workbookSections: [Section]!
+    var selectedIndexPath: IndexPath?
     
+//    var refreshControl = UIRefreshControl()
     //can't delete this for now because it's used in drag/drop
     var dataColors: [[UIColor]] = [[.red, .orange, .systemPink, .yellow, .green, .cyan, .systemIndigo, .purple, .magenta],
                                    [.yellow, .green, .cyan],
@@ -35,52 +33,48 @@ class WorkbookController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
                 
+        imagePicker = ImagePicker(presentationController: self, delegate: self)
+
+        initializeCollectionView()
+        initializeSections()
+    }
+    
+    private func initializeCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: makeLayout())
-        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseID)
-        collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseID)
-        collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
-        collectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CollectionHeaderView.reuseID)
-        collectionView.collectionViewLayout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: BackgroundSupplementaryView.reuseID)
+
         collectionView.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
+
+        //Did this in lieu of viewDidLayoutSubviews() because this seems more elegant...
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
-        collectionView.dragInteractionEnabled = true
+        collectionView.dragInteractionEnabled = false
+
+        //Register the various Collection View cells
+        collectionView.collectionViewLayout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: BackgroundSupplementaryView.reuseID)
+        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseID)
+        collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseID)
+        collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
+        collectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: CollectionHeaderView.reuseID)
         
-        //Did this in lieu of viewDidLayoutSubviews() because this seems more elegant...
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        //Finally, add the collectionView to the subview
         view.addSubview(collectionView)
+    }
         
-        imagePicker = ImagePicker(presentationController: self, delegate: self)
+    private func initializeSections() {
+        let section0 = Section(id: 0, type: .size_1x1)
+        let section1 = Section(id: 1, type: .size_2x1)
+        let section2 = Section(id: 2, type: .size_6x3)
+        let section3 = Section(id: 3, type: .size_2x1)
         
-        refreshData()
+        workbookSections = [section0, section1, section2, section3]
     }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        
-//        if let collectionView = collectionView {
-//            collectionView.reloadData()
-//            print("reloaded")
-//        }
-//        
-//        print("resize")
-//    }
-    
-    private func refreshData() {
-        let section0 = Section(id: 0, type: .size_1x1, data: [0]) //Array(K.getFilteredItemsIfFiltered[0...0]))
-        let section1 = Section(id: 1, type: .size_2x1, data: [0, 1]) //Array(K.getFilteredItemsIfFiltered[1...2]))
-        let section2 = Section(id: 2, type: .size_6x3, data: Array(repeating: 2, count: 18)) //Array(K.getFilteredItemsIfFiltered[3...20]))
-        let section3 = Section(id: 3, type: .size_2x1, data: [1, 0]) //Array(K.getFilteredItemsIfFiltered[21...22]))
-        allSections = [section0, section1, section2, section3]
-        
-        print("Controls refreshed!")
-    }
-    
-//    //Not elegant!
+//    //This is replaced by collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 //    override func viewDidLayoutSubviews() {
 //        super.viewDidLayoutSubviews()
 //
@@ -102,26 +96,26 @@ class WorkbookController: UIViewController,
         let alertController = UIAlertController(title: "Add Section", message: "Select a Section to Add:", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "One by One", style: .default, handler: { _ in
-            if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
-                self.didAddSection(id: highestSection.id, type: .size_1x1, data: [0])
+            if let highestSection = (self.workbookSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_1x1)
             }
         }))
                                   
         alertController.addAction(UIAlertAction(title: "Two by One", style: .default, handler: { _ in
-            if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
-                self.didAddSection(id: highestSection.id, type: .size_2x1, data: [0, 1])
+            if let highestSection = (self.workbookSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_2x1)
             }
         }))
 
         alertController.addAction(UIAlertAction(title: "Six by Three", style: .default, handler: { _ in
-            if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
-                self.didAddSection(id: highestSection.id, type: .size_6x3, data: Array(repeating: 2, count: 18))
+            if let highestSection = (self.workbookSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_6x3)
             }
         }))
         
         alertController.addAction(UIAlertAction(title: "(Three by Three) by Two", style: .default, handler: { _ in
-            if let highestSection = (self.allSections.max { first, second in first.id < second.id }) {
-                self.didAddSection(id: highestSection.id, type: .size_3x3x2, data: Array(K.items[0...9]))
+            if let highestSection = (self.workbookSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_3x3x2)
             }
         }))
 
@@ -129,10 +123,10 @@ class WorkbookController: UIViewController,
         present(alertController, animated: true, completion: nil)
     }
     
-    private func didAddSection(id: Int, type: SectionType, data: Array<Any>) {
-        self.allSections.append(Section(id: id + 1, type: type, data: data))
+    private func didAddSection(id: Int, type: SectionType) {
+        self.workbookSections.append(Section(id: id + 1, type: type))
         self.collectionView.reloadData()
-        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: self.allSections.count - 1), at: .top, animated: true)
+        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: self.workbookSections.count - 1), at: .top, animated: true)
     }
 }
 
@@ -141,23 +135,24 @@ class WorkbookController: UIViewController,
 
 extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return allSections.count
+        return workbookSections.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allSections[section].data.count
+        return workbookSections[section].data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
+        print("selectedIndexPath: \(selectedIndexPath!)")
         
-        let comparisonValue = allSections[indexPath.section].data[indexPath.row]
+        let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
         if comparisonValue is CollectionModel {
             performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
         }
-        else if let comparisonValue = comparisonValue as? Int {
-            if comparisonValue == 0 {
+        else if let comparisonValue = comparisonValue as? SectionCellType {
+            if comparisonValue == .photo {
                 imagePicker.present(from: collectionView)
             }
             else {
@@ -171,8 +166,20 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let comparisonValue = allSections[indexPath.section].data[indexPath.row]
+        let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
+        if let comparisonValue = comparisonValue as? SectionCellType {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { return UICollectionViewCell() }
+            
+            switch comparisonValue {
+            case .photo: cell.contentView.backgroundColor = .magenta
+            case .text: cell.contentView.backgroundColor = .systemPink
+            case .item: cell.contentView.backgroundColor = .orange
+            }
+            
+            return cell
+        }
+
         if let comparisonValue = comparisonValue as? CollectionModel {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as? CollectionCell else { return UICollectionViewCell() }
 
@@ -181,21 +188,25 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
 
             return cell
         }
-        else if let comparisonValue = comparisonValue as? Int {
+                
+        if let comparisonValue = comparisonValue as? UIImage {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { return UICollectionViewCell() }
             
-            switch comparisonValue {
-            case 0: cell.contentView.backgroundColor = .magenta
-            case 1: cell.contentView.backgroundColor = .cyan
-            case 2: cell.contentView.backgroundColor = .orange
-            case 3: cell.contentView.backgroundColor = .systemPink
-            default: cell.contentView.backgroundColor = .gray
-            }
+            let imageView = UIImageView()
+            imageView.image = comparisonValue
+            imageView.contentMode = .scaleAspectFill
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            cell.contentView.addSubview(imageView)
             
+            NSLayoutConstraint.activate([imageView.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+                                         imageView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
+                                         cell.contentView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+                                         cell.contentView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)])
             return cell
         }
 
         return UICollectionViewCell()
+        
     }
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -219,13 +230,13 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
 }
     
     
-    // MARK: - Collection View Compositional Layout - NEW STUFF!!
+// MARK: - Collection View Compositional Layout
     
 extension WorkbookController {
     private func makeLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (section: Int,
                                                             environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            switch self.allSections[section].type {
+            switch self.workbookSections[section].type {
             case .size_1x1: return self.layoutSection(widthCount: 1, heightCount: 1, padding: 0)
             case .size_2x1: return self.layoutSection(widthCount: 2, heightCount: 1, padding: 0)
             case .size_6x3: return self.layoutSection(widthCount: 6, heightCount: 3)
@@ -243,7 +254,7 @@ extension WorkbookController {
         layoutItem.contentInsets = setContentInsets(padding: padding)
         
         let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                     heightDimension: .fractionalWidth(Section.resolution / CGFloat(heightCount)))
+                                                     heightDimension: .fractionalWidth(Section.aspectRatio / CGFloat(heightCount)))
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: widthCount)
         
         let section = NSCollectionLayoutSection(group: layoutGroup)
@@ -273,7 +284,7 @@ extension WorkbookController {
         let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitem: layoutSubGroup, count: 3)
         
-        let layoutMainGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(Section.resolution))
+        let layoutMainGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(Section.aspectRatio))
         let layoutMainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutMainGroupSize, subitems: [layoutGroup, layoutMainItem])
 
         let section = NSCollectionLayoutSection(group: layoutMainGroup)
@@ -296,25 +307,23 @@ extension WorkbookController {
 }
 
 
-// MARK: - Product List Controller Delegate
+extension WorkbookController: ProductListControllerDelegate, ImagePickerDelegate {
+    // MARK: - Product List Controller Delegate
 
-extension WorkbookController: ProductListControllerDelegate {
-    func didSelectItem(item: CollectionModel) {
+    func didSelect(item: CollectionModel) {
         guard let selectedIndexPath = selectedIndexPath else { return }
         
-        allSections[selectedIndexPath.section].data[selectedIndexPath.row] = item
-        
+        workbookSections[selectedIndexPath.section].data[selectedIndexPath.row] = item
         collectionView.reloadData()
     }
-}
 
+    
+    // MARK: - Image Picker Delegate
 
-// MARK: - Image Picker Delegate
-
-extension WorkbookController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        print("Did select an image!")
+        guard let image = image, let selectedIndexPath = selectedIndexPath else { return }
         
-        
+        workbookSections[selectedIndexPath.section].data[selectedIndexPath.row] = image
+        collectionView.reloadData()
     }
 }
