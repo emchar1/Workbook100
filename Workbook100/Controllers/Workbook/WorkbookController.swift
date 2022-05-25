@@ -58,6 +58,8 @@ class WorkbookController: UIViewController,
         collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseID)
         collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseID)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
+        collectionView.register(CollectionCellImage.self, forCellWithReuseIdentifier: CollectionCellImage.reuseID)
+        collectionView.register(CollectionCellText.self, forCellWithReuseIdentifier: CollectionCellText.reuseID)
         collectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                                 withReuseIdentifier: CollectionHeaderView.reuseID)
         
@@ -89,7 +91,13 @@ class WorkbookController: UIViewController,
     // MARK: - UI Bar Button Items
     
     @IBAction func addItem(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "showProductList", sender: nil)
+//        performSegue(withIdentifier: "showProductList", sender: nil)
+        
+        for section in workbookSections {
+            for datum in section.data {
+                print("Section: \(section), Data: \(datum)")
+            }
+        }
     }
     
     @IBAction func addSection(_ sender: UIBarButtonItem) {
@@ -155,6 +163,11 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             if comparisonValue == .photo {
                 imagePicker.present(from: collectionView)
             }
+            else if comparisonValue == .text {
+                let vc = TextEntryController()
+                vc.delegate = self
+                present(vc, animated: true)
+            }
             else {
                 let vc = ProductListController()
                 vc.delegate = self
@@ -169,7 +182,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
         let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
         if let comparisonValue = comparisonValue as? SectionCellType {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { fatalError("Unknown collectionView cell returned!") }
             
             switch comparisonValue {
             case .photo: cell.contentView.backgroundColor = .magenta
@@ -181,7 +194,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
         }
 
         if let comparisonValue = comparisonValue as? CollectionModel {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as? CollectionCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as? CollectionCell else { fatalError("Unknown collectionView cell returned!") }
 
             cell.model = comparisonValue
             cell.setViews()
@@ -190,23 +203,25 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
         }
                 
         if let comparisonValue = comparisonValue as? UIImage {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellImage.reuseID, for: indexPath) as? CollectionCellImage else { fatalError("Unknown collectionView cell returned!") }
             
-            let imageView = UIImageView()
-            imageView.image = comparisonValue
-            imageView.contentMode = .scaleAspectFill
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            cell.contentView.addSubview(imageView)
+            cell.imageView.image = comparisonValue
+
+            return cell
+        }
+        
+        if let comparisonValue = comparisonValue as? (title: String, description: String) {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellText.reuseID, for: indexPath) as? CollectionCellText else { fatalError("Unknown collectionView cell returned!") }
             
-            NSLayoutConstraint.activate([imageView.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
-                                         imageView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
-                                         cell.contentView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
-                                         cell.contentView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)])
+            cell.titleLabel.text = comparisonValue.title
+            cell.descriptionLabel.text = comparisonValue.description
+            
             return cell
         }
 
-        return UICollectionViewCell()
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { fatalError("Unknown collectionView cell returned!") }
+        cell.contentView.backgroundColor = .lightGray
+        return cell
     }
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -324,6 +339,18 @@ extension WorkbookController: ProductListControllerDelegate, ImagePickerDelegate
         guard let image = image, let selectedIndexPath = selectedIndexPath else { return }
         
         workbookSections[selectedIndexPath.section].data[selectedIndexPath.row] = image
+        collectionView.reloadData()
+    }
+}
+
+
+// MARK: - TextEntryController Delegate
+
+extension WorkbookController: TextEntryControllerDelegate {
+    func saveText(title: String, description: String) {
+        guard let selectedIndexPath = selectedIndexPath else { return }
+        
+        workbookSections[selectedIndexPath.section].data[selectedIndexPath.row] = (title, description)
         collectionView.reloadData()
     }
 }

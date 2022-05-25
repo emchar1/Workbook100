@@ -28,6 +28,8 @@
 		EA2E38B827F2E00200122877 /* Constants+FIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B727F2E00200122877 /* Constants+FIR.swift */; };
 		EA2E38BA27F2E34200122877 /* Constants+ProductFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */; };
 		EA2E38BC27F2E3C700122877 /* Constants+UICollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */; };
+		EA3559D6283613CA00A7B2E6 /* CollectionCellText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3559D5283613CA00A7B2E6 /* CollectionCellText.swift */; };
+		EA3559D8283718BE00A7B2E6 /* TextEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3559D7283718BE00A7B2E6 /* TextEntryController.swift */; };
 		EA38B4DF2820E7000030269A /* BackgroundSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */; };
 		EA38B4E228232E6E0030269A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4E128232E6E0030269A /* Section.swift */; };
 		EA38B4E428250B120030269A /* ProductListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4E328250B120030269A /* ProductListController.swift */; };
@@ -52,6 +54,7 @@
 		EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */; };
 		EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133EC27AE5F3A007F6553 /* GloveCell.swift */; };
 		EAB5FE182832122D000DD5C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5FE172832122D000DD5C8 /* ImagePicker.swift */; };
+		EAB5FE1A283452F4000DD5C8 /* CollectionCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5FE19283452F4000DD5C8 /* CollectionCellImage.swift */; };
 		EAD957522819E1EF00D18200 /* CollectionCellPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD957512819E1EF00D18200 /* CollectionCellPage.swift */; };
 		EAE6473128149E5500FBE6C3 /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6473028149E5500FBE6C3 /* Extension+Array.swift */; };
 		EAE64735281799DA00FBE6C3 /* WorkbookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE64734281799DA00FBE6C3 /* WorkbookController.swift */; };
@@ -83,6 +86,8 @@
 		EA2E38B727F2E00200122877 /* Constants+FIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+FIR.swift"; sourceTree = "<group>"; };
 		EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+ProductFilter.swift"; sourceTree = "<group>"; };
 		EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+UICollectionCell.swift"; sourceTree = "<group>"; };
+		EA3559D5283613CA00A7B2E6 /* CollectionCellText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellText.swift; sourceTree = "<group>"; };
+		EA3559D7283718BE00A7B2E6 /* TextEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEntryController.swift; sourceTree = "<group>"; };
 		EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSupplementaryView.swift; sourceTree = "<group>"; };
 		EA38B4E128232E6E0030269A /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		EA38B4E328250B120030269A /* ProductListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListController.swift; sourceTree = "<group>"; };
@@ -109,6 +114,7 @@
 		EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellBlank.swift; sourceTree = "<group>"; };
 		EAB133EC27AE5F3A007F6553 /* GloveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloveCell.swift; sourceTree = "<group>"; };
 		EAB5FE172832122D000DD5C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		EAB5FE19283452F4000DD5C8 /* CollectionCellImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellImage.swift; sourceTree = "<group>"; };
 		EAD957512819E1EF00D18200 /* CollectionCellPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellPage.swift; sourceTree = "<group>"; };
 		EAE6473028149E5500FBE6C3 /* Extension+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Array.swift"; sourceTree = "<group>"; };
 		EAE64734281799DA00FBE6C3 /* WorkbookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookController.swift; sourceTree = "<group>"; };
@@ -164,8 +170,8 @@
 				EA0AB09127CDB64A000D7D37 /* ActivitySpinner.swift */,
 				EAF2BA0727A2306500CD4856 /* CSVMake.swift */,
 				EA53FF9C276D211000D22042 /* ImageLoader.swift */,
-				EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */,
 				EAB5FE172832122D000DD5C8 /* ImagePicker.swift */,
+				EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -173,12 +179,12 @@
 		EA2E38B627F2DE8900122877 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				EA0AB08F27CDB620000D7D37 /* Extension+UIStoryboard.swift */,
-				EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */,
-				EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */,
-				EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */,
-				EA2E38B427F2DDF600122877 /* Extension+String.swift */,
 				EAE6473028149E5500FBE6C3 /* Extension+Array.swift */,
+				EA2E38B427F2DDF600122877 /* Extension+String.swift */,
+				EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */,
+				EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */,
+				EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */,
+				EA0AB08F27CDB620000D7D37 /* Extension+UIStoryboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -187,9 +193,9 @@
 			isa = PBXGroup;
 			children = (
 				EA22D4DF27754129006C12CF /* Constants.swift */,
-				EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */,
-				EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */,
 				EA2E38B727F2E00200122877 /* Constants+FIR.swift */,
+				EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */,
+				EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -205,10 +211,10 @@
 		EA38B4E7282AE3040030269A /* CollectionCell+Views */ = {
 			isa = PBXGroup;
 			children = (
-				EA38B4E8282AE31C0030269A /* CollectionCell+Stack.swift */,
-				EA38B4EA282AE3420030269A /* CollectionCell+LabelBubble.swift */,
 				EA38B4EC282AE3700030269A /* CollectionCell+Label.swift */,
+				EA38B4EA282AE3420030269A /* CollectionCell+LabelBubble.swift */,
 				EA38B4EE282AE3980030269A /* CollectionCell+RuleLine.swift */,
+				EA38B4E8282AE31C0030269A /* CollectionCell+Stack.swift */,
 			);
 			path = "CollectionCell+Views";
 			sourceTree = "<group>";
@@ -241,9 +247,11 @@
 			isa = PBXGroup;
 			children = (
 				EA38B4E7282AE3040030269A /* CollectionCell+Views */,
-				EAD957512819E1EF00D18200 /* CollectionCellPage.swift */,
-				EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */,
 				EA53FF9A276D200F00D22042 /* CollectionCell.swift */,
+				EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */,
+				EAB5FE19283452F4000DD5C8 /* CollectionCellImage.swift */,
+				EAD957512819E1EF00D18200 /* CollectionCellPage.swift */,
+				EA3559D5283613CA00A7B2E6 /* CollectionCellText.swift */,
 				EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */,
 			);
 			path = CollectionCell;
@@ -290,8 +298,8 @@
 			children = (
 				EA38B4E028232E480030269A /* Workbook */,
 				EA2E38BD27F2E3F500122877 /* Constants */,
-				EA22D4E127759DA4006C12CF /* CollectionModel.swift */,
 				EA8914DF27DC038300C8D8D3 /* Category.swift */,
+				EA22D4E127759DA4006C12CF /* CollectionModel.swift */,
 				EA2E388327EE27D000122877 /* SavedList.swift */,
 			);
 			path = Models;
@@ -311,8 +319,8 @@
 		EAB133EB27AE5EF9007F6553 /* ProductCategories */ = {
 			isa = PBXGroup;
 			children = (
-				EAB133EC27AE5F3A007F6553 /* GloveCell.swift */,
 				EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */,
+				EAB133EC27AE5F3A007F6553 /* GloveCell.swift */,
 			);
 			path = ProductCategories;
 			sourceTree = "<group>";
@@ -333,6 +341,7 @@
 				EAE647362817ADA500FBE6C3 /* WorkbookController+DragDrop.swift */,
 				EA38B4E328250B120030269A /* ProductListController.swift */,
 				EA38B4E528250BF60030269A /* ProductListCell.swift */,
+				EA3559D7283718BE00A7B2E6 /* TextEntryController.swift */,
 			);
 			path = Workbook;
 			sourceTree = "<group>";
@@ -468,7 +477,9 @@
 				EAA0CF792769573F00943912 /* LineListViewController.swift in Sources */,
 				EAB5FE182832122D000DD5C8 /* ImagePicker.swift in Sources */,
 				EA38B4E9282AE31C0030269A /* CollectionCell+Stack.swift in Sources */,
+				EAB5FE1A283452F4000DD5C8 /* CollectionCellImage.swift in Sources */,
 				EAE64735281799DA00FBE6C3 /* WorkbookController.swift in Sources */,
+				EA3559D8283718BE00A7B2E6 /* TextEntryController.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,
 				EAE647372817ADA500FBE6C3 /* WorkbookController+DragDrop.swift in Sources */,
 				EAB133E727A499DC007F6553 /* CollectionCellBlank.swift in Sources */,
@@ -488,6 +499,7 @@
 				EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */,
 				EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */,
 				EAA0CF772769573F00943912 /* SceneDelegate.swift in Sources */,
+				EA3559D6283613CA00A7B2E6 /* CollectionCellText.swift in Sources */,
 				EA22D4E627770BE3006C12CF /* LoginController.swift in Sources */,
 				EA24D25227FE2ED90055B928 /* CollectionHeaderView.swift in Sources */,
 				EAB133E027A47BFD007F6553 /* LineListViewController+DragDrop.swift in Sources */,

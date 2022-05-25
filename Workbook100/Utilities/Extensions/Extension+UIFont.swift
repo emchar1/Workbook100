@@ -16,4 +16,7 @@ extension UIFont {
     static let workbookMenuTitle = UIFont(name: "AvenirNext-DemiBold", size: 12)!
     static let workbookMenuSelection = UIFont(name: "AvenirNext-Regular", size: 12)!
     static let workbookNoimg = UIFont(name: "AvenirNext-Regular", size: 16)!
+    
+    static let workbookTextTitle = UIFont(name: "HelveticaNeue-Bold", size: 96)!
+    static let workbookTextDescription = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 12)!
 }
