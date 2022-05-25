@@ -13,6 +13,7 @@ class CollectionHeaderView: UICollectionReusableView {
     let label: UILabel = {
         let label = UILabel()
         label.text = "HEADER"
+        label.textColor = .black
         label.textAlignment = .left
         label.font = UIFont(name: "AvenirNextCondensed-DemiBoldItalic", size: 32)
         return label

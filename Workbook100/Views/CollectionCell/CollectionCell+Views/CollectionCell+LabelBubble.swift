@@ -16,14 +16,14 @@ class CollectionCellLabelBubble: UILabel {
         super.init(frame: frame)
 
         self.text = text
-        self.textColor = type == .essential ? .systemBackground : .white
+        self.textColor = .white
         self.textAlignment = .center
         self.font = .workbookBubbleTitle
-        self.layer.cornerRadius = 12
+        self.layer.cornerRadius = 8
         self.clipsToBounds = true
         
-        adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.05
+//        adjustsFontSizeToFitWidth = true
+//        minimumScaleFactor = 0.05
         
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +42,7 @@ class CollectionCellLabelBubble: UILabel {
             self.backgroundColor = .red
             self.text = "New"
         case .essential:
-            self.backgroundColor = .label
+            self.backgroundColor = .black
             self.text = "Essential"
         case .nothing:
             self.backgroundColor = .clear

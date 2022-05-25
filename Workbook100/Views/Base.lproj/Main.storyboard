@@ -23,14 +23,14 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Line List" id="Cc4-pe-DPn">
                         <barButtonItem key="leftBarButtonItem" image="line.3.horizontal.circle" id="vzw-Ae-vga">
-                            <color key="tintColor" systemColor="labelColor"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="productFilterTapped:" destination="BYZ-38-t0r" id="cfL-7z-8xb"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="gearshape" catalog="system" id="P9D-VW-Dvi">
-                                <color key="tintColor" systemColor="labelColor"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </barButtonItem>
                             <barButtonItem enabled="NO" systemItem="cancel" id="vc7-6a-blf">
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -17,11 +17,11 @@ class CollectionCellLabel: UILabel {
         super.init(frame: frame)
 
         self.text = text
-//        self.textColor = .black
+        self.textColor = .black
         self.numberOfLines = (type != .title) ? 0 : 1
         
-        adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.05
+//        adjustsFontSizeToFitWidth = true
+//        minimumScaleFactor = 0.05
         
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false

@@ -33,7 +33,7 @@ class CollectionCell: UICollectionViewCell {
     var productImageNoImg: UILabel = {
         let noimg = UILabel()
         noimg.text = "No Image"
-        noimg.textColor = .gray
+        noimg.textColor = .red
         noimg.translatesAutoresizingMaskIntoConstraints = false
         return noimg
     }()
@@ -120,7 +120,7 @@ class CollectionCell: UICollectionViewCell {
         
         //==SETUP==//
         //Content View
-//        contentView.backgroundColor = .magenta
+        contentView.backgroundColor = .white
 //        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
         contentView.clipsToBounds = true
 
