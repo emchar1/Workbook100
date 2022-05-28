@@ -6,19 +6,41 @@
 //
 
 import UIKit
-import Darwin
 
 class CollectionCellLabel: UILabel {
+    
+    // MARK: - Properties
+    
     enum LabelType {
         case title, subtitle, productSize
     }
     
+    var type: LabelType {
+        didSet {
+            customizeType(type)
+        }
+    }
+    
+    
+    // MARK: - Initialization
+    
     init(frame: CGRect = .zero, type: LabelType, text: String) {
+        self.type = type
         super.init(frame: frame)
-
         self.text = text
+
+        commonInit(type: type)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.type = .title
+        super.init(coder: coder)
+        
+        commonInit(type: type)
+    }
+    
+    private func commonInit(type: LabelType) {
         self.textColor = .black
-        self.numberOfLines = (type != .title) ? 0 : 1
         
 //        adjustsFontSizeToFitWidth = true
 //        minimumScaleFactor = 0.05
@@ -26,15 +48,14 @@ class CollectionCellLabel: UILabel {
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false
         }
-        
-        customizeType(type)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    
+    // MARK: - Helper Functions
     
     private func customizeType(_ type: LabelType) {
+        self.numberOfLines = (type != .title) ? 0 : 1
+
         switch type {
         case .title:
             self.font = .workbookTitle

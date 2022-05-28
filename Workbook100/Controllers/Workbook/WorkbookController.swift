@@ -55,7 +55,7 @@ class WorkbookController: UIViewController,
 
         //Register the various Collection View cells
         collectionView.collectionViewLayout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: BackgroundSupplementaryView.reuseID)
-        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseID)
+        collectionView.register(CollectionCellOLD.self, forCellWithReuseIdentifier: CollectionCellOLD.reuseID)
         collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseID)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
         collectionView.register(CollectionCellImage.self, forCellWithReuseIdentifier: CollectionCellImage.reuseID)
@@ -194,7 +194,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
         }
 
         if let comparisonValue = comparisonValue as? CollectionModel {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as? CollectionCell else { fatalError("Unknown collectionView cell returned!") }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellOLD.reuseID, for: indexPath) as? CollectionCellOLD else { fatalError("Unknown collectionView cell returned!") }
 
             cell.model = comparisonValue
             cell.setViews()

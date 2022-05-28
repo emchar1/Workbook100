@@ -2,59 +2,45 @@
 //  CollectionCell.swift
 //  Workbook100
 //
-//  Created by Eddie Char on 12/17/21.
+//  Created by Eddie Char on 5/27/22.
 //
 
 import UIKit
 
-//Need this Obj-C wrapper to supress an error when compiling for non-Mac Catalyst simulator. But need AppKit for Mac Catalyst
-#if targetEnvironment(macCatalyst)
-import AppKit
-#endif
-
 class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
-    class var reuseID: String { "CollectionCell" }
-    var spinner = ActivitySpinner()
-    var model: CollectionModel!
-
-    var vStack: CollectionCellStack!
+    @IBOutlet weak var labelNew: CollectionCellLabelBubble!
+    @IBOutlet weak var labelEssential: CollectionCellLabelBubble!
+    @IBOutlet weak var labelBlank: CollectionCellLabelBubble!
+    @IBOutlet weak var labelTitle: CollectionCellLabel!
+    @IBOutlet weak var labelSubtitle: CollectionCellLabel!
+    @IBOutlet weak var productImage: UIImageView!
+    @IBOutlet weak var productImageNoImg: UILabel!
+    @IBOutlet weak var labelSKULeft: CollectionCellLabel!
+    @IBOutlet weak var labelSKURight: CollectionCellLabel!
     
-    var hStackTop: CollectionCellStack!
-    var labelNew: CollectionCellLabelBubble!
-    var labelEssential: CollectionCellLabelBubble!
-    var labelNothing: CollectionCellLabelBubble!
-    
-    var labelTitle: CollectionCellLabel!
-    var labelSubtitle: CollectionCellLabel!
-    
-    var productImage: UIImageView!
-    var productImageNoImg: UILabel = {
-        let noimg = UILabel()
-        noimg.text = "No Image"
-        noimg.textColor = .red
-        noimg.translatesAutoresizingMaskIntoConstraints = false
-        return noimg
-    }()
-    
-    override var isSelected: Bool {
-        didSet {
-            setSelected(isSelected, in: contentView)
-        }
-    }
+    private var spinner = ActivitySpinner()
+    private var model: CollectionModel!
     
     
     // MARK: - Initialization
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        model = CollectionModel.getBlankModel()
 
         setupViews()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented.")
+    private func setupViews() {
+        labelNew.type = .new
+        labelEssential.type = .essential
+        labelBlank.type = .blank
+        labelTitle.type = .title
+        labelSubtitle.type = .subtitle
+        labelSKULeft.type = .productSize
+        labelSKURight.type = .productSize
     }
     
     //THIS PREVENTS IMAGES FROM RECYCLE LOADING, WHICH LOOKS WEIRD!!
@@ -65,110 +51,68 @@ class CollectionCell: UICollectionViewCell {
         productImage.cancelImageLoad()
     }
     
-    func setViews() {
-        //New & Essential Stack
-        hStackTop.subviews[0].isHidden = model.carryOver
-        hStackTop.subviews[1].isHidden = !model.essential
-        hStackTop.subviews[2].isHidden = !(model.carryOver && !model.essential)
+    
+    // MARK: - Helper Functions
 
-        //Product Title
+    /**
+     Sets the views. Call this usually from cellForRowAt in the View Controller
+     */
+    func setViews(with model: CollectionModel) {
+        self.model = model
+        
+        labelNew.isHidden = model.carryOver
+        labelEssential.isHidden = !model.essential
+        labelBlank.isHidden = !(model.carryOver && !model.essential)
+        
         labelTitle.text = model.productNameDescription
-        
-        switch model.productCategory {
-        case "Accessories":
-            labelSubtitle.text = model.colorway + "\n"
-        case "Apparel":
-            if model.productType == "Cap" {
-                labelSubtitle.text = model.colorway + "/" + model.productSubtype + "\n" + model.productDetails
-            }
-            else {
-                labelSubtitle.text = model.colorway + "\n" + model.productNameDescriptionSecondary
-            }
-        case "Goggles":
-            labelSubtitle.text = model.colorway + "\n" + model.productNameDescriptionSecondary
-        case "Gear", "Gloves", "Helmets", "Protection":
-            labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
-        default:
-            labelSubtitle.text = model.productNameDescriptionSecondary + "\n" + model.colorway
-        }
-        
-        //OLD WAY Uses images saved in Firebase Storage
-//        if let image = model.image {
-//            image.downloadURL { (url, error) in
-//                self.productImageNoImg.isHidden = (url != nil ? true : false)
-//            }
-//
-//            productImage.sd_setImage(with: image)
-//        }
+        labelSubtitle.text = model.productNameDescriptionSecondary
         
         //NEW WAY Product Image - Load images from Amplifi using ImageLoader Utility
         if let url = URL(string: model.thumbURL) {
-            spinner.startSpinner(in: contentView)
-            productImage.loadImage(at: url, completion: { self.spinner.stopSpinner() })
-            productImageNoImg.isHidden = true
+            spinner.startSpinner(in: productImage)
+            productImage.loadImage(at: url, completion: {
+                self.spinner.stopSpinner()
+            })
+            
+            productImageNoImg.isHidden = model.thumbURL != "#N/A" ? true : false
         }
-        else {
-            productImageNoImg.isHidden = false
-        }
+        
+        let sizes = layoutSizes()
+        labelSKULeft.text = sizes.left
+        labelSKURight.text = sizes.right
     }
     
-    
-    // MARK: - Helper Functions
-    
-    func setupViews() {
-        self.model = CollectionModel.getBlankModel()
+    private func layoutSizes() -> (left: String, right: String) {
+        var leftReturn = ""
+        var rightReturn = ""
+        var sizesCount = 0
+        var sizesCountHalved: Int {
+            Int(ceil(Double(sizesCount) / 2.0))
+        }
+        var maxSizesCountHalved: Int {
+            Int(ceil(Double(model.sizes.count) / 2.0))
+        }
         
-        //==SETUP==//
-        //Content View
-        contentView.backgroundColor = .white
-//        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
-        contentView.clipsToBounds = true
-
-        //VStack
-        vStack = CollectionCellStack(distribution: .fill, alignment: .fill, axis: .vertical)
+        //Get the number of viable sizes
+        for (i, size) in model.sizes.enumerated() {
+            if size.size == "" && size.colorwaySKU == "" {
+                sizesCount = i
+                break
+            }
+        }
         
-        //New & Essential Stack
-        hStackTop = CollectionCellStack(spacing: 2, distribution: .fillEqually, alignment: .fill, axis: .horizontal)
-        labelNew = CollectionCellLabelBubble(type: .new)
-        labelEssential = CollectionCellLabelBubble(type: .essential)
-        labelNothing = CollectionCellLabelBubble(type: .nothing)
+        //Populate left side
+        for i in 0..<sizesCountHalved {
+            leftReturn += "\(model.sizes[i])"
+            leftReturn += (i < sizesCountHalved - 1) ? "\n" : ""
+        }
         
-        //Product Title
-        labelTitle = CollectionCellLabel(type: .title, text: model.productNameDescription)
-        labelSubtitle = CollectionCellLabel(type: .subtitle, text: model.productNameDescriptionSecondary)
+        //Populate right side
+        for i in sizesCountHalved..<sizesCount {
+            rightReturn += "\(model.sizes[i])"
+            rightReturn += (i < sizesCount - 1) ? "\n" : ""
+        }
         
-        //Product Image
-        productImage = UIImageView()
-        
-
-        
-        //==SUBVIEWS==//
-        //VStack
-        contentView.addSubview(vStack)
-        NSLayoutConstraint.activate([vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
-                                     vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                                     contentView.trailingAnchor.constraint(equalTo: vStack.trailingAnchor),
-                                     contentView.bottomAnchor.constraint(equalTo: vStack.bottomAnchor)])
-        
-        //New & Essential Stack
-        vStack.addArrangedSubview(hStackTop)
-        hStackTop.addArrangedSubview(labelNew)
-        hStackTop.addArrangedSubview(labelEssential)
-        hStackTop.addArrangedSubview(labelNothing)
-        
-        //Product Title
-        vStack.addArrangedSubview(labelTitle)
-        vStack.addArrangedSubview(labelSubtitle)
-
-        //Product Image
-        productImage.contentMode = .scaleAspectFill
-        productImage.clipsToBounds = true
-        productImage.backgroundColor = .workbookSuperLightGray
-        productImage.translatesAutoresizingMaskIntoConstraints = false
-        vStack.addArrangedSubview(productImage)
-        NSLayoutConstraint.activate([productImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)])
-        productImage.addSubview(productImageNoImg)
-        NSLayoutConstraint.activate([productImageNoImg.centerXAnchor.constraint(equalTo: productImage.centerXAnchor),
-                                     productImageNoImg.centerYAnchor.constraint(equalTo: productImage.centerYAnchor)])
+        return (leftReturn, rightReturn)
     }
 }

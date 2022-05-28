@@ -67,8 +67,9 @@ class LineListViewController: UIViewController,
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(UINib(nibName: "CollectionCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
-        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.reuseID)
+        collectionView.register(CollectionCellOLD.self, forCellWithReuseIdentifier: CollectionCellOLD.reuseID)
         collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseID)
         collectionView.register(CollectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -198,21 +199,20 @@ extension LineListViewController {
             if (itemForCategory[indexPath.row].productCategory.count) > 0 {
             //Uncomment this for flat CollectionView (no product category headers)
 //            if (K.getFilteredItemsIfFiltered[indexPath.row].productCategory.count) > 0 {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as! CollectionCell
-                cell.model = itemForCategory[indexPath.row]
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionCell
 
                 //Uncomment this for flat CollectionView (no product category headers)
 //                cell.model = K.getFilteredItemsIfFiltered[indexPath.row]
 
-                cell.setViews()
+                cell.setViews(with: itemForCategory[indexPath.row])
                 
-                // FIXME: - Test alpha for isRemoved
-                if cell.model.isRemoved {
-                    cell.alpha = 0.2
-                }
-                else {
-                    cell.alpha = 1.0
-                }
+//                // FIXME: - Test alpha for isRemoved
+//                if cell.model.isRemoved {
+//                    cell.alpha = 0.2
+//                }
+//                else {
+//                    cell.alpha = 1.0
+//                }
                 
                 return cell
             }

@@ -8,14 +8,40 @@
 import UIKit
 
 class CollectionCellLabelBubble: UILabel {
+    
+    // MARK: - Properties
+    
     enum LabelBubbleType {
-        case new, essential, nothing
+        case new, essential, blank
     }
     
+    var type: LabelBubbleType {
+        didSet {
+            customizeType(type)
+        }
+    }
+    
+    
+    // MARK: - Initialization
+    
     init(frame: CGRect = .zero, type: LabelBubbleType) {
+        self.type = type
         super.init(frame: frame)
 
-        self.text = text
+        commonInit(type: type)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.type = .new
+        super.init(coder: coder)
+        
+        commonInit(type: type)
+    }
+    
+    
+    // MARK: - Helper Functions
+    
+    private func commonInit(type: LabelBubbleType) {
         self.textColor = .white
         self.textAlignment = .center
         self.font = .workbookBubbleTitle
@@ -28,12 +54,6 @@ class CollectionCellLabelBubble: UILabel {
         if frame == .zero {
             self.translatesAutoresizingMaskIntoConstraints = false
         }
-        
-        customizeType(type)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func customizeType(_ type: LabelBubbleType) {
@@ -44,7 +64,7 @@ class CollectionCellLabelBubble: UILabel {
         case .essential:
             self.backgroundColor = .black
             self.text = "Essential"
-        case .nothing:
+        case .blank:
             self.backgroundColor = .clear
             self.text = ""
         }

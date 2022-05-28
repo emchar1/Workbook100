@@ -38,8 +38,9 @@
 		EA38B4EB282AE3420030269A /* CollectionCell+LabelBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4EA282AE3420030269A /* CollectionCell+LabelBubble.swift */; };
 		EA38B4ED282AE3700030269A /* CollectionCell+Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4EC282AE3700030269A /* CollectionCell+Label.swift */; };
 		EA38B4EF282AE3980030269A /* CollectionCell+RuleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4EE282AE3980030269A /* CollectionCell+RuleLine.swift */; };
-		EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9A276D200F00D22042 /* CollectionCell.swift */; };
+		EA53FF9B276D200F00D22042 /* CollectionCellOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9A276D200F00D22042 /* CollectionCellOLD.swift */; };
 		EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9C276D211000D22042 /* ImageLoader.swift */; };
+		EA56ED8E284007AE0029F1A3 /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA56ED8D284007AE0029F1A3 /* CollectionCell.xib */; };
 		EA5CE2DF27C8E1420071F015 /* ProductFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5CE2DE27C8E1420071F015 /* ProductFilterController.swift */; };
 		EA8914E027DC038300C8D8D3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8914DF27DC038300C8D8D3 /* Category.swift */; };
 		EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91E071279366DC00DE630E /* ContainerViewController.swift */; };
@@ -59,6 +60,7 @@
 		EAE6473128149E5500FBE6C3 /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6473028149E5500FBE6C3 /* Extension+Array.swift */; };
 		EAE64735281799DA00FBE6C3 /* WorkbookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE64734281799DA00FBE6C3 /* WorkbookController.swift */; };
 		EAE647372817ADA500FBE6C3 /* WorkbookController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE647362817ADA500FBE6C3 /* WorkbookController+DragDrop.swift */; };
+		EAE988D02840C8F900C3649D /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE988CF2840C8F900C3649D /* CollectionCell.swift */; };
 		EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2BA0727A2306500CD4856 /* CSVMake.swift */; };
 		EAF68F2327C0CE4800F2EDE6 /* PDFExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */; };
 /* End PBXBuildFile section */
@@ -96,8 +98,9 @@
 		EA38B4EA282AE3420030269A /* CollectionCell+LabelBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+LabelBubble.swift"; sourceTree = "<group>"; };
 		EA38B4EC282AE3700030269A /* CollectionCell+Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+Label.swift"; sourceTree = "<group>"; };
 		EA38B4EE282AE3980030269A /* CollectionCell+RuleLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+RuleLine.swift"; sourceTree = "<group>"; };
-		EA53FF9A276D200F00D22042 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		EA53FF9A276D200F00D22042 /* CollectionCellOLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellOLD.swift; sourceTree = "<group>"; };
 		EA53FF9C276D211000D22042 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		EA56ED8D284007AE0029F1A3 /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
 		EA5CE2DE27C8E1420071F015 /* ProductFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFilterController.swift; sourceTree = "<group>"; };
 		EA8914DF27DC038300C8D8D3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EA91E071279366DC00DE630E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 		EAE6473028149E5500FBE6C3 /* Extension+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Array.swift"; sourceTree = "<group>"; };
 		EAE64734281799DA00FBE6C3 /* WorkbookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookController.swift; sourceTree = "<group>"; };
 		EAE647362817ADA500FBE6C3 /* WorkbookController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookController+DragDrop.swift"; sourceTree = "<group>"; };
+		EAE988CF2840C8F900C3649D /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		EAEC851E27B35FE900684ECF /* Workbook100.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Workbook100.entitlements; sourceTree = "<group>"; };
 		EAF2BA0727A2306500CD4856 /* CSVMake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVMake.swift; sourceTree = "<group>"; };
 		EAF68F2227C0CE4800F2EDE6 /* PDFExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExport.swift; sourceTree = "<group>"; };
@@ -247,7 +251,9 @@
 			isa = PBXGroup;
 			children = (
 				EA38B4E7282AE3040030269A /* CollectionCell+Views */,
-				EA53FF9A276D200F00D22042 /* CollectionCell.swift */,
+				EA53FF9A276D200F00D22042 /* CollectionCellOLD.swift */,
+				EA56ED8D284007AE0029F1A3 /* CollectionCell.xib */,
+				EAE988CF2840C8F900C3649D /* CollectionCell.swift */,
 				EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */,
 				EAB5FE19283452F4000DD5C8 /* CollectionCellImage.swift */,
 				EAD957512819E1EF00D18200 /* CollectionCellPage.swift */,
@@ -407,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAA0CF812769574100943912 /* LaunchScreen.storyboard in Resources */,
+				EA56ED8E284007AE0029F1A3 /* CollectionCell.xib in Resources */,
 				EA22D4E42776DFCE006C12CF /* GoogleService-Info.plist in Resources */,
 				EAA0CF7E2769574100943912 /* Assets.xcassets in Resources */,
 				EAA0CF7C2769573F00943912 /* Main.storyboard in Resources */,
@@ -486,6 +493,7 @@
 				EA2E38B127F2DDAB00122877 /* Extension+UIFont.swift in Sources */,
 				EA2E387B27E97B3B00122877 /* LineListDetailTVC2.swift in Sources */,
 				EA38B4DF2820E7000030269A /* BackgroundSupplementaryView.swift in Sources */,
+				EAE988D02840C8F900C3649D /* CollectionCell.swift in Sources */,
 				EA2E38BC27F2E3C700122877 /* Constants+UICollectionCell.swift in Sources */,
 				EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */,
 				EA2E388A27EFC41E00122877 /* LineListViewController+RightSetupMenu.swift in Sources */,
@@ -505,7 +513,7 @@
 				EAB133E027A47BFD007F6553 /* LineListViewController+DragDrop.swift in Sources */,
 				EA0AB09027CDB621000D7D37 /* Extension+UIStoryboard.swift in Sources */,
 				EA2E38BA27F2E34200122877 /* Constants+ProductFilter.swift in Sources */,
-				EA53FF9B276D200F00D22042 /* CollectionCell.swift in Sources */,
+				EA53FF9B276D200F00D22042 /* CollectionCellOLD.swift in Sources */,
 				EA2E388027EA939F00122877 /* LineListImageViewController.swift in Sources */,
 				EA8914E027DC038300C8D8D3 /* Category.swift in Sources */,
 				EA22D4E027754129006C12CF /* Constants.swift in Sources */,
