@@ -18,7 +18,7 @@ class RuleLine: UIView {
         super.init(coder: coder)
         
         // FIXME: - Line doesn't go to the end
-        commonInit(from: CGPoint(x: 0, y: bounds.height / 2), to: CGPoint(x: bounds.width, y: bounds.height / 2))
+        commonInit(from: CGPoint(x: 0, y: bounds.height / 2), to: CGPoint(x: bounds.width * 2, y: bounds.height / 2))
     }
     
     private func commonInit(from: CGPoint, to: CGPoint) {

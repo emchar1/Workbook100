@@ -20,6 +20,7 @@ class CollectionCell: UICollectionViewCell {
     @IBOutlet weak var labelSKULeft: CollectionCellLabel!
     @IBOutlet weak var labelSKURight: CollectionCellLabel!
     
+    class var reuseID: String { "CollectionCell" }
     private var spinner = ActivitySpinner()
     private var model: CollectionModel!
     

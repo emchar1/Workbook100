@@ -50,10 +50,10 @@
                                     <constraint firstAttribute="height" constant="20" id="wj3-lf-2sE"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSn-Ui-nm9" customClass="CollectionCellLabel" customModule="Workbook100" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSn-Ui-nm9" customClass="CollectionCellLabel" customModule="Workbook100" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="200" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="dWQ-eG-g6E"/>
+                                    <constraint firstAttribute="height" constant="20" id="zsl-sc-2av"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -96,7 +96,6 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLF-Df-GRY" customClass="RuleLine" customModule="Workbook100" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="10"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="Oq2-aW-h4B"/>
                                         </constraints>
@@ -146,9 +145,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
