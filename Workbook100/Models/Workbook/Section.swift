@@ -15,7 +15,7 @@ enum SectionType: Int, CaseIterable {
     case size_3x3x2
 }
 
-enum SectionCellType: Int {
+enum SectionPlaceholder: Int {
     case photo = 0
     case text
     case item
@@ -47,7 +47,7 @@ final class Section: NSObject {
     }
     
     convenience init(id: Int, type: SectionType) {
-        var data: [SectionCellType]
+        var data: [SectionPlaceholder]
         
         switch type {
         case .size_1x1:

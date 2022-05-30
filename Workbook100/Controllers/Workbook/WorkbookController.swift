@@ -8,6 +8,7 @@
 import MessageUI
 import UIKit
 import Firebase
+import FirebaseFirestoreSwift
 
 class WorkbookController: UIViewController,
                           UICollectionViewDragDelegate,
@@ -96,11 +97,13 @@ class WorkbookController: UIViewController,
 //        performSegue(withIdentifier: "showProductList", sender: nil)
 //        var docRef: DocumentReference!
 //        docRef = Firestore.firestore().collection("Workbooks").document()
-//
+
 //        do {
-//            try docRef.setData(from: )
+//            try docRef.setData(from: workbookSections)
 //        }
-        
+//        catch {
+//            print("Error saving to Firestore db!")
+//        }
         
         for section in workbookSections {
             print("Section: \(section.id), \(section.type)")
@@ -170,7 +173,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
         if comparisonValue is CollectionModel {
             performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
         }
-        else if let comparisonValue = comparisonValue as? SectionCellType {
+        else if let comparisonValue = comparisonValue as? SectionPlaceholder {
             if comparisonValue == .photo {
                 imagePicker.present(from: collectionView)
             }
@@ -192,7 +195,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
-        if let comparisonValue = comparisonValue as? SectionCellType {
+        if let comparisonValue = comparisonValue as? SectionPlaceholder {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { fatalError("Unknown collectionView cell returned!") }
             
             switch comparisonValue {

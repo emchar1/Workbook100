@@ -9,6 +9,7 @@ target 'Workbook100' do
   # Pods for Workbook100
   pod 'Firebase/Auth'       #Authentication
   pod 'Firebase/Firestore'  #Firestore
+  pod 'FirebaseFirestoreSwift'	#Firestore Swift (for @DocumentID)
   pod 'Firebase/Database'   #Realtime Database
   pod 'FirebaseUI/Storage'  #Cloud Storage
 #  pod 'Firebase/Analytics'  #Analytics
