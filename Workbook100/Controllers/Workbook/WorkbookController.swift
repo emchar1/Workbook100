@@ -7,6 +7,7 @@
 
 import MessageUI
 import UIKit
+import Firebase
 
 class WorkbookController: UIViewController,
                           UICollectionViewDragDelegate,
@@ -91,12 +92,20 @@ class WorkbookController: UIViewController,
     
     // MARK: - UI Bar Button Items
     
-    @IBAction func addItem(_ sender: UIBarButtonItem) {
+    @IBAction func saveWorkbook(_ sender: UIBarButtonItem) {
 //        performSegue(withIdentifier: "showProductList", sender: nil)
+//        var docRef: DocumentReference!
+//        docRef = Firestore.firestore().collection("Workbooks").document()
+//
+//        do {
+//            try docRef.setData(from: )
+//        }
+        
         
         for section in workbookSections {
+            print("Section: \(section.id), \(section.type)")
             for datum in section.data {
-                print("Section: \(section), Data: \(datum)")
+                print("     Data: \(datum)")
             }
         }
     }
