@@ -95,22 +95,46 @@ class WorkbookController: UIViewController,
     
     @IBAction func saveWorkbook(_ sender: UIBarButtonItem) {
 //        performSegue(withIdentifier: "showProductList", sender: nil)
-//        var docRef: DocumentReference!
-//        docRef = Firestore.firestore().collection("Workbooks").document()
+        var docRef: DocumentReference!
+        docRef = Firestore.firestore().collection("Workbooks").document("SP23 Apparel")
 
-//        do {
-//            try docRef.setData(from: workbookSections)
-//        }
-//        catch {
-//            print("Error saving to Firestore db!")
-//        }
+        var docData: [String: Any] = [:]
         
         for section in workbookSections {
-            print("Section: \(section.id), \(section.type)")
-            for datum in section.data {
-                print("     Data: \(datum)")
+            var dataData: [String: Any] = [:]
+
+            for (index, datum) in section.data.enumerated() {
+                
+                switch datum {
+                case is SectionPlaceholder:
+                    dataData["\(index)"] = (datum as! SectionPlaceholder).rawValue
+                case is UIImage:
+                    dataData["\(index)"] = "image of some sort"
+                case is (title: String, description: String):
+                    dataData["\(index)"] = "dsf"
+                case is CollectionModel:
+                    print((datum as! CollectionModel).skuCode)
+                default:
+                    print("Incorrect datum")
+                }
+                
+                if let datum = datum as? SectionPlaceholder {
+                    dataData["\(index)"] = datum.rawValue
+                }
+                else if datum is UIImage {
+                    dataData["\(index)"] = "image of some sort"
+                }
+                else if let datum = datum as? (title: String, description: String)  {
+                    dataData["\(index)"] = datum.title + " " + datum.description
+                }
             }
+            print(dataData)
+
+            docData["\(section.id)"] = ["type": section.type.rawValue,
+                                        "data": dataData]
         }
+
+        docRef.setData(docData)
     }
     
     @IBAction func addSection(_ sender: UIBarButtonItem) {
@@ -149,6 +173,45 @@ class WorkbookController: UIViewController,
         self.workbookSections.append(Section(id: id + 1, type: type))
         self.collectionView.reloadData()
         self.collectionView.scrollToItem(at: IndexPath(row: 0, section: self.workbookSections.count - 1), at: .top, animated: true)
+    }
+    
+    /**
+     Saves the image to Firebase Storage.
+     */
+    private func putInStorage(withData data: Data?,
+                              forFilename filename: String,
+                              contentType metadataContentType: String) {
+        guard let data = data else {
+            print("Error creating data file.")
+            return
+        }
+                
+        let storageRef = Storage.storage().reference().child("SP23 - Apparel").child(filename)
+        let metadata = StorageMetadata()
+        metadata.contentType = metadataContentType
+        
+        let uploadTask = storageRef.putData(data, metadata: metadata) { (storageMetadata, error) in
+            guard error == nil else {
+                print("   Error uploading data to Firebase Storage: \(error!.localizedDescription)")
+                return
+            }
+            
+            storageRef.downloadURL { (url, error) in
+                guard let uploadURL = url else {
+                    print("   Error with the uploadURL: \(error!.localizedDescription)")
+                    return
+                }
+                
+                print("   File uploaded: \(uploadURL)")
+            }
+        }
+        
+        //Do I need to capture all these???
+//        uploadTask.observe(.resume) { (snapshot) in print("Upload resumed.....") }
+//        uploadTask.observe(.pause) { (snapshot) in print("Upload paused.....") }
+//        uploadTask.observe(.progress) { (snapshot) in print("Upload progress event.....") }
+        uploadTask.observe(.success) { (snapshot) in print("Data upload SUCCESSFUL!") }
+        uploadTask.observe(.failure) { (snapshot) in print("Data upload FAILED!") }
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 
-enum SectionType: Int, CaseIterable {
+enum SectionType: String, CaseIterable {
     case size_1x1
     case size_2x1
     case size_6x3
