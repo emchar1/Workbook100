@@ -17,9 +17,10 @@ class WorkbookController: UIViewController,
     
     // MARK: - Properties
     
+    let workbookName = "SP23 Apparel"
     var collectionView: UICollectionView!
     var imagePicker: ImagePicker!
-    var workbookSections: [Section]!
+    var workbookSections: [SectionModel]!
     var selectedIndexPath: IndexPath?
     
 //    var refreshControl = UIRefreshControl()
@@ -28,17 +29,27 @@ class WorkbookController: UIViewController,
                                    [.yellow, .green, .cyan],
                                    [.cyan, .blue, .purple],
                                    [.purple, .magenta, .systemPink]]
-
+    
+    //Firebase
+    var docRef: DocumentReference!
+    var docData: [String: Any]!
+    
     
     // MARK: - Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+
         imagePicker = ImagePicker(presentationController: self, delegate: self)
 
+        initializeFirebase()
         initializeCollectionView()
         initializeSections()
+    }
+    
+    private func initializeFirebase() {
+        docRef = Firestore.firestore().collection(K.FIRWorkbooks.collection).document(workbookName)
+        docData = [:]
     }
     
     private func initializeCollectionView() {
@@ -71,13 +82,78 @@ class WorkbookController: UIViewController,
     }
         
     private func initializeSections() {
-        let section0 = Section(id: 0, type: .size_1x1)
-        let section1 = Section(id: 1, type: .size_2x1)
-        let section2 = Section(id: 2, type: .size_6x3)
-        let section3 = Section(id: 3, type: .size_2x1)
+        //Prevents crash while Firestore is loading the doc...
+        workbookSections = []
         
-        workbookSections = [section0, section1, section2, section3]
+//        let section0 = Section(id: 0, type: .size_1x1)
+//        let section1 = Section(id: 1, type: .size_2x1)
+//        let section2 = Section(id: 2, type: .size_6x3)
+//        let section3 = Section(id: 3, type: .size_2x1)
+//
+//        self.workbookSections = [section0, section1, section2, section3]
+//        self.collectionView.reloadData()
+        
+        docRef.getDocument { (snapshot, error) in
+            guard error == nil else {
+                print("Error getting Section document: \(error!.localizedDescription)")
+                return
+            }
+            
+            guard let snapshot = snapshot else { return }
+            
+            do {
+                let sectionFIR: SectionFIR = try snapshot.data(as: SectionFIR.self)
+                
+                self.initializeSectionsHelper(sectionFIR: sectionFIR)
+            }
+            catch {
+                print("Error dowloading Section Firestore data: \(error)")
+                self.workbookSections = [SectionModel(id: 0, type: .size_1x1)]
+                self.collectionView.reloadData()
+            }
+            
+            
+//            guard let snapshot = snapshot, let snapshotData = snapshot.data() else { return }
+//
+//            if snapshot.exists {
+//                //Download Section from Firestore
+//
+//
+//                let section0 = Section(id: 0, type: .size_1x1)
+//                let section1 = Section(id: 1, type: .size_2x1)
+//                let section2 = Section(id: 2, type: .size_6x3)
+//                let section3 = Section(id: 3, type: .size_2x1)
+//
+//                self.workbookSections = [section0, section1, section2, section3]
+//                self.collectionView.reloadData()
+//            }
+//            else {
+//                //Simple Template
+//                let section0 = Section(id: 0, type: .size_1x1)
+//                let section1 = Section(id: 1, type: .size_2x1)
+//                let section2 = Section(id: 2, type: .size_6x3)
+//                let section3 = Section(id: 3, type: .size_2x1)
+//
+//                self.workbookSections = [section0, section1, section2, section3]
+//                self.collectionView.reloadData()
+//            }
+        }
     }
+    
+    private func initializeSectionsHelper(sectionFIR: SectionFIR) {
+        for (index, sectionData) in sectionFIR.sections.enumerated() {
+            let section = SectionModel(id: index, type: SectionType(rawValue: sectionData.type) ?? .size_1x1, data: sectionData.data)
+            
+//            section.convertData(&section.data)
+
+            workbookSections.append(section)
+
+            print(workbookSections.last?.type)
+        }
+        
+        collectionView.reloadData()
+    }
+    
     
 //    //This is replaced by collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 //    override func viewDidLayoutSubviews() {
@@ -94,47 +170,38 @@ class WorkbookController: UIViewController,
     // MARK: - UI Bar Button Items
     
     @IBAction func saveWorkbook(_ sender: UIBarButtonItem) {
-//        performSegue(withIdentifier: "showProductList", sender: nil)
-        var docRef: DocumentReference!
-        docRef = Firestore.firestore().collection("Workbooks").document("SP23 Apparel")
-
-        var docData: [String: Any] = [:]
+        var sectionData: [Any] = []
         
-        for section in workbookSections {
-            var dataData: [String: Any] = [:]
+        for (iindex, section) in workbookSections.enumerated() {
+            var dataData: [Any] = []
 
-            for (index, datum) in section.data.enumerated() {
-                
+            for (jindex, datum) in section.data.enumerated() {
                 switch datum {
                 case is SectionPlaceholder:
-                    dataData["\(index)"] = (datum as! SectionPlaceholder).rawValue
+                    dataData.append(SectionModel.sectionSectionPlaceholder + "\((datum as! SectionPlaceholder).rawValue)")
                 case is UIImage:
-                    dataData["\(index)"] = "image of some sort"
-                case is (title: String, description: String):
-                    dataData["\(index)"] = "dsf"
+                    let imageString = UUID().uuidString + ".png"
+
+                    dataData.append(SectionModel.sectionImage + imageString)
+                    
+                    putInStorage(withData: (datum as! UIImage).pngData(), forFilename: imageString, contentType: "image/png")
+                case is SectionText:
+                    let datumText = datum as! SectionText
+                    dataData.append(SectionModel.sectionText + datumText.title + "|" + datumText.description)
                 case is CollectionModel:
-                    print((datum as! CollectionModel).skuCode)
+                    dataData.append(SectionModel.sectionItem + (workbookSections[iindex].data[jindex] as! CollectionModel).skuCode)
                 default:
-                    print("Incorrect datum")
-                }
-                
-                if let datum = datum as? SectionPlaceholder {
-                    dataData["\(index)"] = datum.rawValue
-                }
-                else if datum is UIImage {
-                    dataData["\(index)"] = "image of some sort"
-                }
-                else if let datum = datum as? (title: String, description: String)  {
-                    dataData["\(index)"] = datum.title + " " + datum.description
+                    print("Unknown datum")
                 }
             }
-            print(dataData)
-
-            docData["\(section.id)"] = ["type": section.type.rawValue,
-                                        "data": dataData]
+            
+            sectionData.append([SectionNaming.type: section.type.rawValue, SectionNaming.data: dataData])
         }
-
+        
+        docData[SectionNaming.sections] = sectionData
         docRef.setData(docData)
+        
+        print("Workbook saved!")
     }
     
     @IBAction func addSection(_ sender: UIBarButtonItem) {
@@ -170,7 +237,7 @@ class WorkbookController: UIViewController,
     }
     
     private func didAddSection(id: Int, type: SectionType) {
-        self.workbookSections.append(Section(id: id + 1, type: type))
+        self.workbookSections.append(SectionModel(id: id + 1, type: type))
         self.collectionView.reloadData()
         self.collectionView.scrollToItem(at: IndexPath(row: 0, section: self.workbookSections.count - 1), at: .top, animated: true)
     }
@@ -186,7 +253,7 @@ class WorkbookController: UIViewController,
             return
         }
                 
-        let storageRef = Storage.storage().reference().child("SP23 - Apparel").child(filename)
+        let storageRef = Storage.storage().reference().child(filename)
         let metadata = StorageMetadata()
         metadata.contentType = metadataContentType
         
@@ -242,6 +309,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             else if comparisonValue == .text {
                 let vc = TextEntryController()
+                vc.view.backgroundColor = .white
                 vc.delegate = self
                 present(vc, animated: true)
             }
@@ -288,7 +356,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         }
         
-        if let comparisonValue = comparisonValue as? (title: String, description: String) {
+        if let comparisonValue = comparisonValue as? SectionText {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellText.reuseID, for: indexPath) as? CollectionCellText else { fatalError("Unknown collectionView cell returned!") }
             
             cell.titleLabel.text = comparisonValue.title
@@ -347,12 +415,12 @@ extension WorkbookController {
         layoutItem.contentInsets = setContentInsets(padding: padding)
         
         let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                     heightDimension: .fractionalWidth(Section.aspectRatio / CGFloat(heightCount)))
+                                                     heightDimension: .fractionalWidth(SectionModel.aspectRatio / CGFloat(heightCount)))
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: widthCount)
         
         let section = NSCollectionLayoutSection(group: layoutGroup)
-        section.contentInsets = setContentInsets(padding: Section.backgroundPadding + padding)
-        section.decorationItems = setBackgroundItem(padding: Section.backgroundPadding)
+        section.contentInsets = setContentInsets(padding: SectionModel.backgroundPadding + padding)
+        section.decorationItems = setBackgroundItem(padding: SectionModel.backgroundPadding)
         
 //        let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
 //        let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: CollectionHeaderView.reuseID, alignment: .bottom)
@@ -365,7 +433,7 @@ extension WorkbookController {
         
         let layoutMainItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
         let layoutMainItem = NSCollectionLayoutItem(layoutSize: layoutMainItemSize)
-        layoutMainItem.contentInsets = setContentInsets(padding: padding)
+        layoutMainItem.contentInsets = setContentInsets(padding: 0)
 
         let layoutSubItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 3), heightDimension: .fractionalHeight(1))
         let layoutSubItem = NSCollectionLayoutItem(layoutSize: layoutSubItemSize)
@@ -377,12 +445,12 @@ extension WorkbookController {
         let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitem: layoutSubGroup, count: 3)
         
-        let layoutMainGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(Section.aspectRatio))
+        let layoutMainGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(SectionModel.aspectRatio))
         let layoutMainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutMainGroupSize, subitems: [layoutGroup, layoutMainItem])
 
         let section = NSCollectionLayoutSection(group: layoutMainGroup)
-        section.contentInsets = setContentInsets(padding: Section.backgroundPadding + padding)
-        section.decorationItems = setBackgroundItem(padding: Section.backgroundPadding)
+        section.contentInsets = setContentInsets(padding: SectionModel.backgroundPadding + 0)
+        section.decorationItems = setBackgroundItem(padding: SectionModel.backgroundPadding)
         
         return section
     }
@@ -425,10 +493,10 @@ extension WorkbookController: ProductListControllerDelegate, ImagePickerDelegate
 // MARK: - TextEntryController Delegate
 
 extension WorkbookController: TextEntryControllerDelegate {
-    func saveText(title: String, description: String) {
+    func saveText(text: SectionText) {
         guard let selectedIndexPath = selectedIndexPath else { return }
         
-        workbookSections[selectedIndexPath.section].data[selectedIndexPath.row] = (title, description)
+        workbookSections[selectedIndexPath.section].data[selectedIndexPath.row] = text
         collectionView.reloadData()
     }
 }

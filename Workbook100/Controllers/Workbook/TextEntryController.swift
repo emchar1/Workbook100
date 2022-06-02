@@ -8,8 +8,9 @@
 import UIKit
 import CoreGraphics
 
+typealias SectionText = (title: String, description: String)
 protocol TextEntryControllerDelegate: AnyObject {
-    func saveText(title: String, description: String)
+    func saveText(text: SectionText)
 }
 
 class TextEntryController: UIViewController {
@@ -73,7 +74,7 @@ class TextEntryController: UIViewController {
     }
     
     @objc func saveButtonTapped(_ sender: UIButton) {
-        delegate?.saveText(title: titleTF.text!, description: descriptionTF.text!)
+        delegate?.saveText(text: (titleTF.text!, descriptionTF.text!))
         dismiss(animated: true)
     }
 }

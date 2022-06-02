@@ -8,6 +8,11 @@
 import Firebase
 
 extension K {
+    struct FIRWorkbooks {
+        static let collection = "Workbooks"
+        
+    }
+
     struct FIR {
         
         // IMPORTANT: - When adding to this list, MUST add to the updateFirebaseRecord() function down below!!!

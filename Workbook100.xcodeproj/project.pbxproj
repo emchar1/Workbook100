@@ -31,7 +31,7 @@
 		EA3559D6283613CA00A7B2E6 /* CollectionCellText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3559D5283613CA00A7B2E6 /* CollectionCellText.swift */; };
 		EA3559D8283718BE00A7B2E6 /* TextEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3559D7283718BE00A7B2E6 /* TextEntryController.swift */; };
 		EA38B4DF2820E7000030269A /* BackgroundSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */; };
-		EA38B4E228232E6E0030269A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4E128232E6E0030269A /* Section.swift */; };
+		EA38B4E228232E6E0030269A /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4E128232E6E0030269A /* SectionModel.swift */; };
 		EA38B4E428250B120030269A /* ProductListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4E328250B120030269A /* ProductListController.swift */; };
 		EA38B4E628250BF60030269A /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4E528250BF60030269A /* ProductListCell.swift */; };
 		EA38B4E9282AE31C0030269A /* CollectionCell+Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4E8282AE31C0030269A /* CollectionCell+Stack.swift */; };
@@ -42,6 +42,7 @@
 		EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA53FF9C276D211000D22042 /* ImageLoader.swift */; };
 		EA56ED8E284007AE0029F1A3 /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA56ED8D284007AE0029F1A3 /* CollectionCell.xib */; };
 		EA5CE2DF27C8E1420071F015 /* ProductFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5CE2DE27C8E1420071F015 /* ProductFilterController.swift */; };
+		EA7A6CF3284736EF00058673 /* SectionFIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7A6CF2284736EF00058673 /* SectionFIR.swift */; };
 		EA8914E027DC038300C8D8D3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8914DF27DC038300C8D8D3 /* Category.swift */; };
 		EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91E071279366DC00DE630E /* ContainerViewController.swift */; };
 		EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF742769573F00943912 /* AppDelegate.swift */; };
@@ -92,7 +93,7 @@
 		EA3559D5283613CA00A7B2E6 /* CollectionCellText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellText.swift; sourceTree = "<group>"; };
 		EA3559D7283718BE00A7B2E6 /* TextEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEntryController.swift; sourceTree = "<group>"; };
 		EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSupplementaryView.swift; sourceTree = "<group>"; };
-		EA38B4E128232E6E0030269A /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		EA38B4E128232E6E0030269A /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
 		EA38B4E328250B120030269A /* ProductListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListController.swift; sourceTree = "<group>"; };
 		EA38B4E528250BF60030269A /* ProductListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
 		EA38B4E8282AE31C0030269A /* CollectionCell+Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+Stack.swift"; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		EA53FF9C276D211000D22042 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		EA56ED8D284007AE0029F1A3 /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
 		EA5CE2DE27C8E1420071F015 /* ProductFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFilterController.swift; sourceTree = "<group>"; };
+		EA7A6CF2284736EF00058673 /* SectionFIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFIR.swift; sourceTree = "<group>"; };
 		EA8914DF27DC038300C8D8D3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EA91E071279366DC00DE630E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		EAA0CF712769573F00943912 /* Workbook100.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workbook100.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +209,8 @@
 		EA38B4E028232E480030269A /* Workbook */ = {
 			isa = PBXGroup;
 			children = (
-				EA38B4E128232E6E0030269A /* Section.swift */,
+				EA38B4E128232E6E0030269A /* SectionModel.swift */,
+				EA7A6CF2284736EF00058673 /* SectionFIR.swift */,
 			);
 			path = Workbook;
 			sourceTree = "<group>";
@@ -475,7 +478,7 @@
 				EAB133E327A47CAD007F6553 /* LineListViewController+MailCompose.swift in Sources */,
 				EAF68F2327C0CE4800F2EDE6 /* PDFExport.swift in Sources */,
 				EA2E38B827F2E00200122877 /* Constants+FIR.swift in Sources */,
-				EA38B4E228232E6E0030269A /* Section.swift in Sources */,
+				EA38B4E228232E6E0030269A /* SectionModel.swift in Sources */,
 				EA38B4ED282AE3700030269A /* CollectionCell+Label.swift in Sources */,
 				EA5CE2DF27C8E1420071F015 /* ProductFilterController.swift in Sources */,
 				EA38B4EF282AE3980030269A /* CollectionCell+RuleLine.swift in Sources */,
@@ -501,6 +504,7 @@
 				EA2E38B527F2DDF600122877 /* Extension+String.swift in Sources */,
 				EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */,
 				EA38B4E628250BF60030269A /* ProductListCell.swift in Sources */,
+				EA7A6CF3284736EF00058673 /* SectionFIR.swift in Sources */,
 				EA0AB09227CDB64A000D7D37 /* ActivitySpinner.swift in Sources */,
 				EAD957522819E1EF00D18200 /* CollectionCellPage.swift in Sources */,
 				EA2E387E27E9A74900122877 /* ImageViewCollectionCell.swift in Sources */,
