@@ -85,14 +85,6 @@ class WorkbookController: UIViewController,
         //Prevents crash while Firestore is loading the doc...
         workbookSections = []
         
-//        let section0 = Section(id: 0, type: .size_1x1)
-//        let section1 = Section(id: 1, type: .size_2x1)
-//        let section2 = Section(id: 2, type: .size_6x3)
-//        let section3 = Section(id: 3, type: .size_2x1)
-//
-//        self.workbookSections = [section0, section1, section2, section3]
-//        self.collectionView.reloadData()
-        
         docRef.getDocument { (snapshot, error) in
             guard error == nil else {
                 print("Error getting Section document: \(error!.localizedDescription)")
@@ -107,36 +99,10 @@ class WorkbookController: UIViewController,
                 self.initializeSectionsHelper(sectionFIR: sectionFIR)
             }
             catch {
-                print("Error dowloading Section Firestore data: \(error)")
+                print("Error dowloading Section Firestore data. Creating new workbook of size_1x1: \(error)")
                 self.workbookSections = [SectionModel(id: 0, type: .size_1x1)]
                 self.collectionView.reloadData()
             }
-            
-            
-//            guard let snapshot = snapshot, let snapshotData = snapshot.data() else { return }
-//
-//            if snapshot.exists {
-//                //Download Section from Firestore
-//
-//
-//                let section0 = Section(id: 0, type: .size_1x1)
-//                let section1 = Section(id: 1, type: .size_2x1)
-//                let section2 = Section(id: 2, type: .size_6x3)
-//                let section3 = Section(id: 3, type: .size_2x1)
-//
-//                self.workbookSections = [section0, section1, section2, section3]
-//                self.collectionView.reloadData()
-//            }
-//            else {
-//                //Simple Template
-//                let section0 = Section(id: 0, type: .size_1x1)
-//                let section1 = Section(id: 1, type: .size_2x1)
-//                let section2 = Section(id: 2, type: .size_6x3)
-//                let section3 = Section(id: 3, type: .size_2x1)
-//
-//                self.workbookSections = [section0, section1, section2, section3]
-//                self.collectionView.reloadData()
-//            }
         }
     }
     
@@ -144,14 +110,17 @@ class WorkbookController: UIViewController,
         for (index, sectionData) in sectionFIR.sections.enumerated() {
             let section = SectionModel(id: index, type: SectionType(rawValue: sectionData.type) ?? .size_1x1, data: sectionData.data)
             
-//            section.convertData(&section.data)
-
-            workbookSections.append(section)
-
-            print(workbookSections.last?.type)
+            //This function seems sloppy, but it works!
+            section.convertData(section.data, completion: { newSectionData in
+                section.data = newSectionData
+                self.workbookSections.append(section)
+                
+                //need to sort because order of appending depends on if it's an image or not...
+                self.workbookSections.sort { $0.id < $1.id }
+                
+                self.collectionView.reloadData()
+            })
         }
-        
-        collectionView.reloadData()
     }
     
     
@@ -180,11 +149,32 @@ class WorkbookController: UIViewController,
                 case is SectionPlaceholder:
                     dataData.append(SectionModel.sectionSectionPlaceholder + "\((datum as! SectionPlaceholder).rawValue)")
                 case is UIImage:
+                    // FIXME: - Reuse image if it exists!
+//                    let imageString = UUID().uuidString + ".png"
+//
+//                    dataData.append(SectionModel.sectionImage + imageString)
+//
+//                    putInStorage(withData: (datum as! UIImage).pngData(), forFilename: imageString, contentType: "image/png")
+
+                    
+                    
                     let imageString = UUID().uuidString + ".png"
+                    let imageRef = Storage.storage().reference().child("\((datum as! UIImage).pngData()!)")
+                    
+                    imageRef.getData(maxSize: SectionModel.maxImageSize * SectionModel.mb) { (data, error) in
+                        if error == nil {
+//                            dataData.append(SectionModel.sectionImage + /*This isn't right... --->*/"\(datum as! UIImage)")
+                            print("Image already found!")
+                        }
+                        else {
+//                            dataData.append(SectionModel.sectionImage + imageString)
+                            
+                            self.putInStorage(withData: (datum as! UIImage).pngData(), forFilename: imageString, contentType: "image/png")
+                            print("Image not found!!")
+                        }
+                    }
 
                     dataData.append(SectionModel.sectionImage + imageString)
-                    
-                    putInStorage(withData: (datum as! UIImage).pngData(), forFilename: imageString, contentType: "image/png")
                 case is SectionText:
                     let datumText = datum as! SectionText
                     dataData.append(SectionModel.sectionText + datumText.title + "|" + datumText.description)
@@ -216,6 +206,12 @@ class WorkbookController: UIViewController,
         alertController.addAction(UIAlertAction(title: "Two by One", style: .default, handler: { _ in
             if let highestSection = (self.workbookSections.max { first, second in first.id < second.id }) {
                 self.didAddSection(id: highestSection.id, type: .size_2x1)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Two by One Reversed", style: .default, handler: { _ in
+            if let highestSection = (self.workbookSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_2x1reversed)
             }
         }))
 
@@ -352,7 +348,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellImage.reuseID, for: indexPath) as? CollectionCellImage else { fatalError("Unknown collectionView cell returned!") }
             
             cell.imageView.image = comparisonValue
-
+            
             return cell
         }
         
@@ -400,6 +396,7 @@ extension WorkbookController {
             switch self.workbookSections[section].type {
             case .size_1x1: return self.layoutSection(widthCount: 1, heightCount: 1, padding: 0)
             case .size_2x1: return self.layoutSection(widthCount: 2, heightCount: 1, padding: 0)
+            case .size_2x1reversed: return self.layoutSection(widthCount: 2, heightCount: 1, padding: 0)
             case .size_6x3: return self.layoutSection(widthCount: 6, heightCount: 3)
             case .size_3x3x2: return self.layoutSectionWithSub()
             }

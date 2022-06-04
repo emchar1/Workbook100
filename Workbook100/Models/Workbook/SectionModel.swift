@@ -14,6 +14,7 @@ import Firebase
 enum SectionType: String, CaseIterable {
     case size_1x1
     case size_2x1
+    case size_2x1reversed
     case size_6x3
     case size_3x3x2
 }
@@ -71,6 +72,8 @@ final class SectionModel: NSObject {
             data = [.photo]
         case .size_2x1:
             data = [.text, .photo]
+        case .size_2x1reversed:
+            data = [.photo, .text]
         case .size_6x3:
             data = Array(repeating: .item, count: 18)
         case .size_3x3x2:
@@ -84,30 +87,36 @@ final class SectionModel: NSObject {
     // MARK: - Helper Functions
     
     /**
-     Converts data from Firestore into Workbook-friendly cells.
+     Converts data from Firestore into Workbook-friendly cells. The completion handler, the way it passes the parameter, data into it to return the new data, seems messy
      */
-    // FIXME: - THis isn't working!!!
-    func convertData(_ data: inout [Any]) {
+    func convertData(_ data: [Any], completion: @escaping ([Any]) -> ()) {
         var newData: [Any] = []
+        var isImage = false
         
         for datum in data {
             guard let datum = datum as? String else { return }
             
             let datumPrefix = datum.prefix(SectionModel.sectionPrefix)
+            let datumSuffix = datum.dropFirst(SectionModel.sectionPrefix)
             
             switch datumPrefix {
             case SectionModel.sectionSectionPlaceholder:
-                newData.append(SectionPlaceholder(rawValue: Int(datum.dropFirst(SectionModel.sectionPrefix)) ?? 0)!)
+                newData.append(SectionPlaceholder(rawValue: Int(datumSuffix) ?? 0)!)
             case SectionModel.sectionImage:
-                // FIXME: - Image is not showing and is getting eaten in Firestore.
-                let imageRef = Storage.storage().reference().child("\(datum.dropFirst(SectionModel.sectionPrefix))")
+                let imageRef = Storage.storage().reference().child("\(datumSuffix)")
                 
+                isImage = true
+                
+                //This closure, calls my closure!
                 imageRef.getData(maxSize: SectionModel.maxImageSize * SectionModel.mb) { (data, error) in
                     guard error == nil else { return print("Error getting imageRef in SectionModel: \(error!)")}
                     
                     newData.append(UIImage(data: data!) ?? UIImage(named: "noimg")!)
+                    completion(newData)
                 }
             case SectionModel.sectionText:
+                guard datum.contains("|") else { return }
+
                 let textArray = datum.dropFirst(SectionModel.sectionPrefix).components(separatedBy: "|")
                 
                 newData.append((textArray[0], textArray[1]))
@@ -118,12 +127,13 @@ final class SectionModel: NSObject {
             default:
                 print("Invalid section!")
             }
-            
-            data = newData
         }
         
-        //data = newData (something like that...)
+        if !isImage {
+            completion(newData)
+        }
     }
+    
 }
 
 
