@@ -155,7 +155,7 @@ extension K {
         
         //Firebase DB
         let ref = Database.database().reference()
-        ref.observe(DataEventType.value) { [self] (snapshot) in
+        ref.observe(DataEventType.value) { snapshot in
             K.items.removeAll()
             
             for itemSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
@@ -235,9 +235,6 @@ extension K {
             K.sortProductFilterSelections()
 
             completion?()
-
-            //Discardable result, otherwise get Warning that self is unused
-            let _ = self
         }//end ref.observe
     }//end func initializeRecords()
     
