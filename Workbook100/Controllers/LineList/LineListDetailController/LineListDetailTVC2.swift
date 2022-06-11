@@ -125,9 +125,9 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         //Only save if a change was made
         if itemIsRemoved != model.isRemoved {
             print("writing to FIR...")
-            K.updateFirebaseRecord(item: [K.FIR.isRemoved: (model.isRemoved ? "TRUE" : "FALSE")],
-                                   databaseReference: Database.database().reference().child(model.hashNeedThis),
-                                   completion: nil)
+            FIRManager.updateFirebaseRecord(item: [FIRManager.FIR.isRemoved: (model.isRemoved ? "TRUE" : "FALSE")],
+                                            databaseReference: Database.database().reference().child(model.hashNeedThis),
+                                            completion: nil)
         }
         
         dismiss(animated: true)

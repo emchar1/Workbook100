@@ -25,13 +25,16 @@ class CollectionCellText: UICollectionViewCell {
         
         descriptionLabel.font = .workbookTextDescription
         descriptionLabel.textColor = .black
+        descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
                                      titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height / 4),
+                                     contentView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 40),
                                      descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
-                                     descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40)])
+                                     descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+                                     contentView.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor, constant: 40)])
     }
     
     required init?(coder: NSCoder) {

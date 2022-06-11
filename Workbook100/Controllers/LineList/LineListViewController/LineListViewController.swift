@@ -128,11 +128,14 @@ class LineListViewController: UIViewController,
 
         spinner.startSpinner(in: view)
 
-        //Firebase DB
-        K.initializeRecords {
-            self.collectionView.reloadData()
-            self.setupRightMenu()
-            self.spinner.stopSpinner()
+        // FIXME: - This duplicates item list because it's also called in WorkbookController
+        FIRManager.initializeRecords { [unowned self] allItems in
+//            K.items.removeAll()
+//            K.items = allItems
+
+            collectionView.reloadData()
+            setupRightMenu()
+            spinner.stopSpinner()
         }
     }
     

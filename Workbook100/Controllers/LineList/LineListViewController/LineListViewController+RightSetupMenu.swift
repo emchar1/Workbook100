@@ -125,8 +125,8 @@ extension  LineListViewController {
                             item.savedLists = [textString]
                         }
                         
-                        K.updateFirebaseRecord(item: [K.FIR.savedLists: item.savedLists],
-                                               databaseReference: Database.database().reference().child(item.hashNeedThis)) {
+                        FIRManager.updateFirebaseRecord(item: [FIRManager.FIR.savedLists: item.savedLists],
+                                                        databaseReference: Database.database().reference().child(item.hashNeedThis)) {
                             if index >= (K.getFilteredItemsIfFiltered.count - 1) {
                                 UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseInOut, animations: {
                                     savingLabel.text = "List Saved!"
@@ -136,7 +136,7 @@ extension  LineListViewController {
                                     savingLabel.removeFromSuperview()
                                 })
                             }
-                        }//end K.updateFirebaseRecord()
+                        }//end FIRManager.updateFirebaseRecord()
                     }//end for(index, item)
                 }))//end alert.addAction...[OK]
                 

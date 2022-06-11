@@ -80,6 +80,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
             //Save password to UserDefaults
             UserDefaults.standard.set(email, forKey: "loginEmail")
             UserDefaults.standard.set(password, forKey: "loginPassword")
+            
+            //FIXME: - Initialize FIR Records
+            //This needs to be called once, here instead of in two places - LineListViewController and WorkbookController. But how to have them wait until this is done loading...
+//            FIRManager.initializeRecords(completion: nil)
 
             self.performSegue(withIdentifier: "LoginSegue", sender: nil)
         }

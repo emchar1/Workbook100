@@ -17,11 +17,15 @@ class WorkbookController: UIViewController,
     
     // MARK: - Properties
     
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var addSectionButton: UIBarButtonItem!
+    
     let workbookName = "SP23 Apparel"
     var collectionView: UICollectionView!
     var imagePicker: ImagePicker!
     var workbookSections: [SectionModel]!
     var selectedIndexPath: IndexPath?
+    var spinner = ActivitySpinner(style: .large)
     
 //    var refreshControl = UIRefreshControl()
     //can't delete this for now because it's used in drag/drop
@@ -41,14 +45,27 @@ class WorkbookController: UIViewController,
         super.viewDidLoad()
 
         imagePicker = ImagePicker(presentationController: self, delegate: self)
+        saveButton.isEnabled = false
+        addSectionButton.isEnabled = false
+        spinner.startSpinner(in: view)
 
-        initializeFirebase()
-        initializeCollectionView()
-        initializeSections()
+        // FIXME: - This duplicates item list because it's also called in LineListViewController
+        FIRManager.initializeRecords { [unowned self] allItems in
+//            K.items.removeAll()
+//            K.items = allItems
+            
+            initializeFirestore()
+            initializeCollectionView()
+            initializeSections()
+            
+            saveButton.isEnabled = true
+            addSectionButton.isEnabled = true
+            spinner.stopSpinner()
+        }
     }
     
-    private func initializeFirebase() {
-        docRef = Firestore.firestore().collection(K.FIRWorkbooks.collection).document(workbookName)
+    private func initializeFirestore() {
+        docRef = Firestore.firestore().collection(FIRManager.FIRWorkbooks.collection).document(workbookName)
         docData = [:]
     }
     
@@ -326,9 +343,9 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { fatalError("Unknown collectionView cell returned!") }
             
             switch comparisonValue {
-            case .photo: cell.contentView.backgroundColor = .magenta
-            case .text: cell.contentView.backgroundColor = .systemPink
-            case .item: cell.contentView.backgroundColor = .orange
+            case .photo: cell.contentView.backgroundColor = .systemGray4
+            case .text: cell.contentView.backgroundColor = .systemGray5
+            case .item: cell.contentView.backgroundColor = .systemGray6
             }
             
             return cell
