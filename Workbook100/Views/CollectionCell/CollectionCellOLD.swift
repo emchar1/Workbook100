@@ -129,7 +129,7 @@ class CollectionCellOLD: UICollectionViewCell {
         //==SETUP==//
         //Content View
         contentView.backgroundColor = .blue
-//        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
+//        contentView.layer.cornerRadius = CollectionCellOLD.cornerRadius
         contentView.clipsToBounds = true
 
         //VStack
@@ -149,9 +149,9 @@ class CollectionCellOLD: UICollectionViewCell {
         productImage = UIImageView()
         
         //hStackBottom
-        ruleLine = RuleLine(frame: CGRect(x: 0, y: 0, width: K.CollectionCell.width, height: 20),
-                            from: CGPoint(x: 0, y: K.CollectionCell.height / 2),
-                            to: CGPoint(x: frame.width, y: K.CollectionCell.height / 2))
+        ruleLine = RuleLine(frame: CGRect(x: 0, y: 0, width: CollectionCellOLD.collectionCellWidth, height: 20),
+                            from: CGPoint(x: 0, y: CollectionCellOLD.collectionCellHeight / 2),
+                            to: CGPoint(x: frame.width, y: CollectionCellOLD.collectionCellHeight / 2))
         hStackBottom = CollectionCellStack(distribution: .fillEqually, alignment: .fill, axis: .horizontal)
         labelSizesLeft = CollectionCellLabel(type: .productSize, text: layoutSizes().left)
         labelSizesRight = CollectionCellLabel(type: .productSize, text: layoutSizes().right)

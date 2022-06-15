@@ -27,7 +27,6 @@
 		EA2E38B527F2DDF600122877 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B427F2DDF600122877 /* Extension+String.swift */; };
 		EA2E38B827F2E00200122877 /* FIRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B727F2E00200122877 /* FIRManager.swift */; };
 		EA2E38BA27F2E34200122877 /* Constants+ProductFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */; };
-		EA2E38BC27F2E3C700122877 /* Constants+UICollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */; };
 		EA3559D6283613CA00A7B2E6 /* CollectionCellText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3559D5283613CA00A7B2E6 /* CollectionCellText.swift */; };
 		EA3559D8283718BE00A7B2E6 /* TextEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3559D7283718BE00A7B2E6 /* TextEntryController.swift */; };
 		EA38B4DF2820E7000030269A /* BackgroundSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */; };
@@ -89,7 +88,6 @@
 		EA2E38B427F2DDF600122877 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		EA2E38B727F2E00200122877 /* FIRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRManager.swift; sourceTree = "<group>"; };
 		EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+ProductFilter.swift"; sourceTree = "<group>"; };
-		EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+UICollectionCell.swift"; sourceTree = "<group>"; };
 		EA3559D5283613CA00A7B2E6 /* CollectionCellText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellText.swift; sourceTree = "<group>"; };
 		EA3559D7283718BE00A7B2E6 /* TextEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEntryController.swift; sourceTree = "<group>"; };
 		EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSupplementaryView.swift; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 			children = (
 				EA22D4DF27754129006C12CF /* Constants.swift */,
 				EA2E38B927F2E34200122877 /* Constants+ProductFilter.swift */,
-				EA2E38BB27F2E3C700122877 /* Constants+UICollectionCell.swift */,
 				EA2E38B727F2E00200122877 /* FIRManager.swift */,
 			);
 			path = Constants;
@@ -497,7 +494,6 @@
 				EA2E387B27E97B3B00122877 /* LineListDetailTVC2.swift in Sources */,
 				EA38B4DF2820E7000030269A /* BackgroundSupplementaryView.swift in Sources */,
 				EAE988D02840C8F900C3649D /* CollectionCell.swift in Sources */,
-				EA2E38BC27F2E3C700122877 /* Constants+UICollectionCell.swift in Sources */,
 				EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */,
 				EA2E388A27EFC41E00122877 /* LineListViewController+RightSetupMenu.swift in Sources */,
 				EA2E38AF27F2DD7100122877 /* Extension+UICollectionViewCell.swift in Sources */,

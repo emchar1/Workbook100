@@ -60,9 +60,10 @@ class LineListViewController: UIViewController,
     }
     
     let collectionView: UICollectionView = {
+        let padding: CGFloat = 8
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: K.CollectionCell.padding, left: K.CollectionCell.padding, bottom: K.CollectionCell.padding, right: K.CollectionCell.padding)
+        layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
@@ -208,7 +209,9 @@ extension LineListViewController {
 //                cell.model = K.getFilteredItemsIfFiltered[indexPath.row]
 
                 cell.setViews(with: itemForCategory[indexPath.row])
-                
+//                cell.transformCell(in: collectionView)
+//                cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+//                transformCell(cell)
 //                // FIXME: - Test alpha for isRemoved
 //                if cell.model.isRemoved {
 //                    cell.alpha = 0.2
@@ -251,10 +254,7 @@ extension LineListViewController {
     //Delegate Flow Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let multiplier: CGFloat = 1
-        
-        return CGSize(width: K.CollectionCell.adjustedWidth(in: collectionView) * multiplier,
-                      height: K.CollectionCell.adjustedHeight(in: collectionView))
+        return CGSize(width: UICollectionViewCell.collectionCellWidth, height: UICollectionViewCell.collectionCellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -319,6 +319,20 @@ extension LineListViewController {
 //                floatingSectionLabel.backgroundColor = .clear
 //            }
 //        }
+//    }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        collectionView.visibleCells.forEach { transformCell($0) }
+//    }
+//
+//    func transformCell(_ cell: UICollectionViewCell) {
+//        let cellFrame = cell.convert(cell.bounds, to: self.view)
+//        let transformOffset: CGFloat = 0//collectionView.bounds.height * 2 / 3
+//        let percent = max(min((cellFrame.minY - transformOffset) / (collectionView.bounds.height - transformOffset), 1), 0)
+//        let maxScaleDifference: CGFloat = 0.8
+//        let scale = percent * maxScaleDifference
+//
+//        cell.transform = CGAffineTransform(scaleX: 1 - scale, y: 1 - scale)
 //    }
     
 }

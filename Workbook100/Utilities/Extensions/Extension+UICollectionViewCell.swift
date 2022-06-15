@@ -8,6 +8,36 @@
 import UIKit
 
 extension UICollectionViewCell {
+    // MARK: - Properties
+
+    static let collectionCellWidth: CGFloat = 180
+    static var collectionCellHeight: CGFloat { collectionCellWidth * 3 / 2 }
+
+//    static var cellMultiplier: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
+//    static let padding: CGFloat = 8
+//    static let customCornerRadius: CGFloat = 8
+
+//    /**
+//     Obtains the width = view.bounds.width / cellMultiplier - (2 x padding), where cellMultiplier = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
+//     */
+//    static func adjustedWidth(in view: UIView) -> CGFloat {
+//        return view.bounds.width / cellMultiplier - (2 * padding)
+//
+//    }
+//
+//    /**
+//     Obtains the height = adjustedWidth x 1.5
+//     */
+//    static func adjustedHeight(in view: UIView) -> CGFloat {
+//        return adjustedWidth(in: view) * 3 / 2
+//    }
+    
+    
+    // MARK: - Functions
+    
+    /**
+     Used to toggle the select feature of a CollectionCell.
+     */
     func setSelected(_ isSelected: Bool, in contentView: UIView) {
         let overlayTag = 100
         
@@ -28,6 +58,7 @@ extension UICollectionViewCell {
             return view
         }()
         
+        //Nested function
         func removeOverlay() {
             if let viewWithTag = contentView.viewWithTag(overlayTag) {
                 viewWithTag.removeFromSuperview()
@@ -47,5 +78,21 @@ extension UICollectionViewCell {
         else {
             removeOverlay()
         }
+    }
+    
+    /**
+     Resizes the cell to the prescribed dimensions
+     */
+    func transformCell(in contentView: UIView) {
+//        let cellFrame = self.convert(self.bounds, to: contentView)
+//        let transformOffset: CGFloat = 0//collectionView.bounds.height * 2 / 3
+//        let percent: CGFloat = 1//max(min((cellFrame.minY - transformOffset) / (contentView.bounds.height - transformOffset), 1), 0)
+//        let maxScaleDifference: CGFloat = 0.8
+//        let scale = percent * maxScaleDifference
+        
+//        self.transform = CGAffineTransform(scaleX: 1 - scale, y: 1 - scale)
+        let factor = contentView.bounds.width / 6 - (7 * 8)
+        let scale = factor / UICollectionViewCell.collectionCellWidth // factor
+        self.transform = CGAffineTransform(scaleX: scale, y: scale)
     }
 }

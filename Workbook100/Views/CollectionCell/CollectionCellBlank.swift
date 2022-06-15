@@ -21,7 +21,6 @@ class CollectionCellBlank: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.backgroundColor = .lightGray
-//        contentView.layer.cornerRadius = K.CollectionCell.cornerRadius
     }
     
     required init?(coder: NSCoder) {
