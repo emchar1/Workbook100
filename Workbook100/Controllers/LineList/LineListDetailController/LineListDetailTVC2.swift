@@ -69,7 +69,7 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         itemIsRemoved = model.isRemoved
         removeButton.isEnabled = false
         
-        let padding: CGFloat = 8
+        let padding: CGFloat = CollectionCell.collectionCellPadding
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)

@@ -10,11 +10,11 @@ import UIKit
 class CollectionCellBlank: UICollectionViewCell {
     class var reuseID: String { "CollectionCellBlank" }
     
-    override var isSelected: Bool {
-        didSet {
-            setSelected(isSelected, in: contentView)
-        }
-    }
+//    override var isSelected: Bool {
+//        didSet {
+//            setSelected(isSelected, in: contentView)
+//        }
+//    }
 
     
     override init(frame: CGRect) {

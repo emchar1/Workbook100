@@ -34,6 +34,11 @@ class LineListViewController: UIViewController,
     weak var delegate: LineListViewControllerDelegate?
     var spinner = ActivitySpinner(style: .large)
     
+    //Need these to update the anchors when the device orientation changes!! And it seems to work!
+    var collectionViewWidthAnchor: NSLayoutConstraint!
+    var collectionViewHeightAnchor: NSLayoutConstraint!
+    var numberOfTimesSetAnchorCalled = 0
+    
     var noResultsLabel: UILabel = {
         let label = UILabel()
         label.font = .workbookTitle
@@ -60,7 +65,7 @@ class LineListViewController: UIViewController,
     }
     
     let collectionView: UICollectionView = {
-        let padding: CGFloat = 8
+        let padding: CGFloat = CollectionCell.collectionCellPadding
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
@@ -70,8 +75,8 @@ class LineListViewController: UIViewController,
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil), forCellWithReuseIdentifier: "Cell")
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
-        collectionView.register(CollectionCellOLD.self, forCellWithReuseIdentifier: CollectionCellOLD.reuseID)
-        collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseID)
+//        collectionView.register(CollectionCellOLD.self, forCellWithReuseIdentifier: CollectionCellOLD.reuseID)
+//        collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseID)
         collectionView.register(CollectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: CollectionHeaderView.reuseID)
@@ -118,10 +123,24 @@ class LineListViewController: UIViewController,
         
         
         view.addSubview(collectionView)
-        NSLayoutConstraint.activate([collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-                                     collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                     view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
-                                     view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
+//        NSLayoutConstraint.activate([collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+//                                     collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//                                     view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+//                                     view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
+        
+        
+
+        
+        
+        NSLayoutConstraint.activate([collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                     collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+        
+        //Is this a safer bet to ensure collectionViewWidthAnchor and collectionViewHeightAnchor will be set before first use?
+        if setCollectionViewWidthAndHeightAnchors() {
+            NSLayoutConstraint.activate([collectionViewWidthAnchor, collectionViewHeightAnchor])
+        }
+        
+        
         
         view.addSubview(noResultsLabel)
         NSLayoutConstraint.activate([noResultsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -137,6 +156,53 @@ class LineListViewController: UIViewController,
             collectionView.reloadData()
             setupRightMenu()
             spinner.stopSpinner()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    @discardableResult
+    private func setCollectionViewWidthAndHeightAnchors() -> Bool {
+        let widthAnchor = (CollectionCell.collectionCellWidth * CollectionCell.itemsPerRow) + ((1.5 * CollectionCell.itemsPerRow) * CollectionCell.collectionCellPadding)
+
+        // FIXME: - Sooooo view.bounds.height works for iPad, view.bounds.width works for iPhone
+        let viewBounds = (UIDevice.current.userInterfaceIdiom == .pad && numberOfTimesSetAnchorCalled > 0) ? view.bounds.height : view.bounds.width
+        let scale = (viewBounds < widthAnchor) ? (viewBounds / widthAnchor) : (widthAnchor / viewBounds)
+                
+        collectionView.transform = CGAffineTransform(scaleX: scale, y: scale)
+
+        collectionViewWidthAnchor = collectionView.widthAnchor.constraint(equalToConstant: widthAnchor)
+        collectionViewHeightAnchor = collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1 / scale)
+        
+        numberOfTimesSetAnchorCalled += 1
+        
+        print("widthAnchor: \(widthAnchor), view.bounds.width: \(view.bounds.width), view.bounds.height: \(view.bounds.height), scale: \(scale), numberOfTimesSetAnchorCalled: \(numberOfTimesSetAnchorCalled)")
+
+        return true
+    }
+    
+    @objc private func orientationDidChange(_ notification: NSNotification) {
+        NSLayoutConstraint.deactivate([collectionViewWidthAnchor, collectionViewHeightAnchor])
+        
+        if setCollectionViewWidthAndHeightAnchors() {
+            NSLayoutConstraint.activate([collectionViewWidthAnchor, collectionViewHeightAnchor])
+        }
+          
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                CollectionCell.itemsPerRow = windowScene.interfaceOrientation.isLandscape ? 3 : 6
+            }
+            
+            if windowScene.interfaceOrientation.isLandscape {
+                print("I am landscape")
+            }
+            else {
+                print("Portraiture")
+            }
         }
     }
     
@@ -254,7 +320,7 @@ extension LineListViewController {
     //Delegate Flow Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: UICollectionViewCell.collectionCellWidth, height: UICollectionViewCell.collectionCellHeight)
+        return CGSize(width: CollectionCell.collectionCellWidth, height: CollectionCell.collectionCellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

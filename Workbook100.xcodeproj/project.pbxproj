@@ -185,7 +185,6 @@
 			children = (
 				EAE6473028149E5500FBE6C3 /* Extension+Array.swift */,
 				EA2E38B427F2DDF600122877 /* Extension+String.swift */,
-				EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */,
 				EA2E38B227F2DDDA00122877 /* Extension+UIColor.swift */,
 				EA2E38B027F2DDAB00122877 /* Extension+UIFont.swift */,
 				EA0AB08F27CDB620000D7D37 /* Extension+UIStoryboard.swift */,
@@ -251,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				EA38B4E7282AE3040030269A /* CollectionCell+Views */,
-				EA53FF9A276D200F00D22042 /* CollectionCellOLD.swift */,
 				EA56ED8D284007AE0029F1A3 /* CollectionCell.xib */,
 				EAE988CF2840C8F900C3649D /* CollectionCell.swift */,
 				EAB133E627A499DC007F6553 /* CollectionCellBlank.swift */,
@@ -261,6 +259,17 @@
 				EA2E387D27E9A74900122877 /* ImageViewCollectionCell.swift */,
 			);
 			path = CollectionCell;
+			sourceTree = "<group>";
+		};
+		EA7A0569285E33F9009FD43A /* Delete? */ = {
+			isa = PBXGroup;
+			children = (
+				EA2E38AE27F2DD7100122877 /* Extension+UICollectionViewCell.swift */,
+				EA53FF9A276D200F00D22042 /* CollectionCellOLD.swift */,
+				EAB133EC27AE5F3A007F6553 /* GloveCell.swift */,
+				EA2E388327EE27D000122877 /* SavedList.swift */,
+			);
+			path = "Delete?";
 			sourceTree = "<group>";
 		};
 		EAA0CF682769573F00943912 = {
@@ -284,6 +293,7 @@
 		EAA0CF732769573F00943912 /* Workbook100 */ = {
 			isa = PBXGroup;
 			children = (
+				EA7A0569285E33F9009FD43A /* Delete? */,
 				EAA0CF742769573F00943912 /* AppDelegate.swift */,
 				EAA0CF762769573F00943912 /* SceneDelegate.swift */,
 				EAEC851E27B35FE900684ECF /* Workbook100.entitlements */,
@@ -306,7 +316,6 @@
 				EA2E38BD27F2E3F500122877 /* Constants */,
 				EA8914DF27DC038300C8D8D3 /* Category.swift */,
 				EA22D4E127759DA4006C12CF /* CollectionModel.swift */,
-				EA2E388327EE27D000122877 /* SavedList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,7 +335,6 @@
 			isa = PBXGroup;
 			children = (
 				EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */,
-				EAB133EC27AE5F3A007F6553 /* GloveCell.swift */,
 			);
 			path = ProductCategories;
 			sourceTree = "<group>";

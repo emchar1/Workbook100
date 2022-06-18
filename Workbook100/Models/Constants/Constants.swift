@@ -21,7 +21,7 @@ struct K {
     /**
      Returns the difference of filtered items, i.e. 1 - [filteredItems].
      */
-    static var getRemainingItems: [CollectionModel] {
+    static var getRemainingItemsIfFiltered: [CollectionModel] {
         Array(Set(items).symmetricDifference(Set(filteredItems)))
     }
 }

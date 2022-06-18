@@ -86,7 +86,7 @@ class WorkbookController: UIViewController,
         //Register the various Collection View cells
         collectionView.collectionViewLayout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: BackgroundSupplementaryView.reuseID)
         collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil), forCellWithReuseIdentifier: "Cell")
-        collectionView.register(CollectionCellOLD.self, forCellWithReuseIdentifier: CollectionCellOLD.reuseID)
+//        collectionView.register(CollectionCellOLD.self, forCellWithReuseIdentifier: CollectionCellOLD.reuseID)
         collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseID)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
         collectionView.register(CollectionCellImage.self, forCellWithReuseIdentifier: CollectionCellImage.reuseID)
@@ -339,13 +339,20 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
+        // FIXME: - Testing things out...
+        let itemScale: CGFloat = 0.5
+        
         if let comparisonValue = comparisonValue as? SectionPlaceholder {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { fatalError("Unknown collectionView cell returned!") }
             
             switch comparisonValue {
-            case .photo: cell.contentView.backgroundColor = .systemGray4
-            case .text: cell.contentView.backgroundColor = .systemGray5
-            case .item: cell.contentView.backgroundColor = .systemGray6
+            case .photo:
+                cell.contentView.backgroundColor = .systemGray4
+            case .text:
+                cell.contentView.backgroundColor = .systemGray5
+            case .item:
+                cell.contentView.backgroundColor = .systemGray6
+                cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
             }
             
             return cell
@@ -357,6 +364,9 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             }
 
             cell.setViews(with: comparisonValue)
+            
+            // FIXME: - Testing things out...
+            cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
 
             return cell
         }
@@ -414,7 +424,7 @@ extension WorkbookController {
             case .size_1x1: return self.layoutSection(widthCount: 1, heightCount: 1, padding: 0)
             case .size_2x1: return self.layoutSection(widthCount: 2, heightCount: 1, padding: 0)
             case .size_2x1reversed: return self.layoutSection(widthCount: 2, heightCount: 1, padding: 0)
-            case .size_6x3: return self.layoutSection(widthCount: 6, heightCount: 3)
+            case .size_6x3: return self.layoutSection(widthCount: 6, heightCount: 3, isCollectionCell: true)
             case .size_3x3x2: return self.layoutSectionWithSub()
             }
         }
@@ -422,9 +432,17 @@ extension WorkbookController {
         return layout
     }
     
-    private func layoutSection(widthCount: Int, heightCount: Int, padding: CGFloat = 8) -> NSCollectionLayoutSection {
+    private func layoutSection(widthCount: Int, heightCount: Int, padding: CGFloat = 8, isCollectionCell: Bool = false) -> NSCollectionLayoutSection {
+        var layoutItemSize: NSCollectionLayoutSize
         
-        let layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        // FIXME: - Trying to get CollectionCell dimensions to be a specific size
+        if isCollectionCell {
+            layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(CollectionCell.collectionCellWidth), heightDimension: .absolute(CollectionCell.collectionCellHeight))
+        }
+        else {
+            layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        }
+        
         let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
         layoutItem.contentInsets = setContentInsets(padding: padding)
         

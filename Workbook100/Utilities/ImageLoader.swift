@@ -49,7 +49,7 @@ class UIImageLoader {
                 }
             }
             catch {
-                print("Error getting image: \(error.localizedDescription)")
+//                print("Error getting image: \(error.localizedDescription)")
             }
         }
         
