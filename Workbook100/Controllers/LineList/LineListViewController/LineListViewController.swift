@@ -32,7 +32,6 @@ class LineListViewController: UIViewController,
     @IBOutlet weak var cancelMultiButton: UIBarButtonItem!
     
     weak var delegate: LineListViewControllerDelegate?
-    var spinner = ActivitySpinner(style: .large)
     
     //Need these to update the anchors when the device orientation changes!! And it seems to work!
     var collectionViewWidthAnchor: NSLayoutConstraint!
@@ -129,9 +128,7 @@ class LineListViewController: UIViewController,
 //                                     view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
         
         
-
-        
-        
+    
         NSLayoutConstraint.activate([collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                                      collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
         
@@ -146,32 +143,20 @@ class LineListViewController: UIViewController,
         NSLayoutConstraint.activate([noResultsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                                      noResultsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
 
-        spinner.startSpinner(in: view)
-
-        // FIXME: - This duplicates item list because it's also called in WorkbookController
-        FIRManager.initializeRecords { [unowned self] allItems in
-//            K.items.removeAll()
-//            K.items = allItems
-
-            collectionView.reloadData()
-            setupRightMenu()
-            spinner.stopSpinner()
-        }
+//        collectionView.reloadData()
+        setupRightMenu()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
-    @discardableResult
-    private func setCollectionViewWidthAndHeightAnchors() -> Bool {
+    @discardableResult private func setCollectionViewWidthAndHeightAnchors() -> Bool {
         let widthAnchor = (CollectionCell.collectionCellWidth * CollectionCell.itemsPerRow) + ((1.5 * CollectionCell.itemsPerRow) * CollectionCell.collectionCellPadding)
-
-        // FIXME: - Sooooo view.bounds.height works for iPad, view.bounds.width works for iPhone
         let viewBounds = (UIDevice.current.userInterfaceIdiom == .pad && numberOfTimesSetAnchorCalled > 0) ? view.bounds.height : view.bounds.width
-        let scale = (viewBounds < widthAnchor) ? (viewBounds / widthAnchor) : (widthAnchor / viewBounds)
+        let scale = viewBounds / widthAnchor
                 
         collectionView.transform = CGAffineTransform(scaleX: scale, y: scale)
 
@@ -180,11 +165,11 @@ class LineListViewController: UIViewController,
         
         numberOfTimesSetAnchorCalled += 1
         
-        print("widthAnchor: \(widthAnchor), view.bounds.width: \(view.bounds.width), view.bounds.height: \(view.bounds.height), scale: \(scale), numberOfTimesSetAnchorCalled: \(numberOfTimesSetAnchorCalled)")
+        print("view.bounds(width: \(view.bounds.width), height: \(view.bounds.height)), widthAnchor: \(widthAnchor), scale: \(scale), numberOfTimesSetAnchorCalled: \(numberOfTimesSetAnchorCalled)")
 
         return true
     }
-    
+
     @objc private func orientationDidChange(_ notification: NSNotification) {
         NSLayoutConstraint.deactivate([collectionViewWidthAnchor, collectionViewHeightAnchor])
         
@@ -213,10 +198,11 @@ class LineListViewController: UIViewController,
     
     
     // MARK: - Orientation Transition
-        
+      
+    //Is this even needed anymore???
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
+
         coordinator.animate(alongsideTransition: { _ in
             self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: nil)

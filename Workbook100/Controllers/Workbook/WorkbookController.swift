@@ -25,7 +25,6 @@ class WorkbookController: UIViewController,
     var imagePicker: ImagePicker!
     var workbookSections: [SectionModel]!
     var selectedIndexPath: IndexPath?
-    var spinner = ActivitySpinner(style: .large)
     
 //    var refreshControl = UIRefreshControl()
     //can't delete this for now because it's used in drag/drop
@@ -45,23 +44,12 @@ class WorkbookController: UIViewController,
         super.viewDidLoad()
 
         imagePicker = ImagePicker(presentationController: self, delegate: self)
-        saveButton.isEnabled = false
-        addSectionButton.isEnabled = false
-        spinner.startSpinner(in: view)
 
-        // FIXME: - This duplicates item list because it's also called in LineListViewController
-        FIRManager.initializeRecords { [unowned self] allItems in
-//            K.items.removeAll()
-//            K.items = allItems
-            
-            initializeFirestore()
-            initializeCollectionView()
-            initializeSections()
-            
-            saveButton.isEnabled = true
-            addSectionButton.isEnabled = true
-            spinner.stopSpinner()
-        }
+        initializeFirestore()
+        initializeCollectionView()
+        initializeSections()
+        
+        collectionView.layoutSubviews()
     }
     
     private func initializeFirestore() {
@@ -166,7 +154,7 @@ class WorkbookController: UIViewController,
                 case is SectionPlaceholder:
                     dataData.append(SectionModel.sectionSectionPlaceholder + "\((datum as! SectionPlaceholder).rawValue)")
                 case is UIImage:
-                    // FIXME: - Reuse image if it exists!
+                    // FIXME: - Reuse image if it exists! - I think this can be deleted??? 6/19/22
 //                    let imageString = UUID().uuidString + ".png"
 //
 //                    dataData.append(SectionModel.sectionImage + imageString)
@@ -350,8 +338,11 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell.contentView.backgroundColor = .systemGray4
             case .text:
                 cell.contentView.backgroundColor = .systemGray5
+                
+                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             case .item:
                 cell.contentView.backgroundColor = .systemGray6
+
                 cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
             }
             
@@ -365,7 +356,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
 
             cell.setViews(with: comparisonValue)
             
-            // FIXME: - Testing things out...
+            // FIXME: - Testing out CGAffineTransform
             cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
 
             return cell
@@ -375,7 +366,9 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellImage.reuseID, for: indexPath) as? CollectionCellImage else { fatalError("Unknown collectionView cell returned!") }
             
             cell.imageView.image = comparisonValue
-            
+            // FIXME: - Testing out CGAffineTransform
+//            cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+
             return cell
         }
         
@@ -384,6 +377,9 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.titleLabel.text = comparisonValue.title
             cell.descriptionLabel.text = comparisonValue.description
+            // FIXME: - Testing out CGAffineTransform
+//            cell.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
+
             
             return cell
         }
@@ -421,10 +417,10 @@ extension WorkbookController {
         let layout = UICollectionViewCompositionalLayout { (section: Int,
                                                             environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             switch self.workbookSections[section].type {
-            case .size_1x1: return self.layoutSection(widthCount: 1, heightCount: 1, padding: 0)
-            case .size_2x1: return self.layoutSection(widthCount: 2, heightCount: 1, padding: 0)
-            case .size_2x1reversed: return self.layoutSection(widthCount: 2, heightCount: 1, padding: 0)
-            case .size_6x3: return self.layoutSection(widthCount: 6, heightCount: 3, isCollectionCell: true)
+            case .size_1x1: return self.layoutSection(widthCount: 1, heightCount: 1, sectionType: .size_1x1, padding: 0)
+            case .size_2x1: return self.layoutSection(widthCount: 2, heightCount: 1, sectionType: .size_2x1, padding: 0)
+            case .size_2x1reversed: return self.layoutSection(widthCount: 2, heightCount: 1, sectionType: .size_2x1reversed, padding: 0)
+            case .size_6x3: return self.layoutSection(widthCount: 6, heightCount: 3, sectionType: .size_6x3)
             case .size_3x3x2: return self.layoutSectionWithSub()
             }
         }
@@ -432,16 +428,21 @@ extension WorkbookController {
         return layout
     }
     
-    private func layoutSection(widthCount: Int, heightCount: Int, padding: CGFloat = 8, isCollectionCell: Bool = false) -> NSCollectionLayoutSection {
+    private func layoutSection(widthCount: Int, heightCount: Int, sectionType: SectionType, padding: CGFloat = 8) -> NSCollectionLayoutSection {
         var layoutItemSize: NSCollectionLayoutSize
         
         // FIXME: - Trying to get CollectionCell dimensions to be a specific size
-        if isCollectionCell {
+        switch sectionType {
+        case .size_2x1, .size_2x1reversed:
+            layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(1028), heightDimension: .absolute(800))
+        case .size_3x3x2:
+            layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        case .size_6x3:
             layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(CollectionCell.collectionCellWidth), heightDimension: .absolute(CollectionCell.collectionCellHeight))
-        }
-        else {
+        default:
             layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         }
+        
         
         let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
         layoutItem.contentInsets = setContentInsets(padding: padding)

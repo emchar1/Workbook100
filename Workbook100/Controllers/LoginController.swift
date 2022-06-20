@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SwiftUI
 
 class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
@@ -14,17 +15,22 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginErrorLabel: UILabel!
     @IBOutlet weak var peekPasswordButton: UIButton!
     
+    var loadingView = UIHostingController(rootView: LoadingView())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginErrorLabel.alpha = 0
-                
         let email = UserDefaults.standard.string(forKey: "loginEmail")
         let password = UserDefaults.standard.string(forKey: "loginPassword")
         let attributedEmailPlaceholder = NSAttributedString(string: "Email address",
                                                             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         let attributedPasswordPlaceholder = NSAttributedString(string: "Password",
                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+
+        loginErrorLabel.alpha = 0
+        loadingView.view.alpha = 0
+        loadingView.view.backgroundColor = .clear
+        loadingView.view.translatesAutoresizingMaskIntoConstraints = false
         
         emailField.delegate = self
         passwordField.delegate = self
@@ -66,9 +72,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBAction func loginPressed(_ sender: UIButton) {
         guard let email = emailField.text, let password = passwordField.text else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { [unowned self] (authResult, error) in
             guard error == nil else {
-                self.loginErrorLabel.alpha = 1
+                loginErrorLabel.alpha = 1
                 UIView.animate(withDuration: 0.5, delay: 2.0, options: .curveEaseIn, animations: {
                     self.loginErrorLabel.alpha = 0
                 }, completion: nil)
@@ -80,12 +86,22 @@ class LoginController: UIViewController, UITextFieldDelegate {
             //Save password to UserDefaults
             UserDefaults.standard.set(email, forKey: "loginEmail")
             UserDefaults.standard.set(password, forKey: "loginPassword")
+                        
+            view.addSubview(loadingView.view)
+            addChild(loadingView)
+            NSLayoutConstraint.activate([loadingView.view.topAnchor.constraint(equalTo: view.topAnchor),
+                                         loadingView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                         view.trailingAnchor.constraint(equalTo: loadingView.view.trailingAnchor),
+                                         view.bottomAnchor.constraint(equalTo: loadingView.view.bottomAnchor)])
             
-            //FIXME: - Initialize FIR Records
-            //This needs to be called once, here instead of in two places - LineListViewController and WorkbookController. But how to have them wait until this is done loading...
-//            FIRManager.initializeRecords(completion: nil)
-
-            self.performSegue(withIdentifier: "LoginSegue", sender: nil)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.loadingView.view.alpha = 1.0
+            }, completion: nil)
+            
+            FIRManager.initializeRecords { [unowned self] _ in
+                loadingView.removeFromParent()
+                performSegue(withIdentifier: "LoginSegue", sender: nil)
+            }
         }
     }
 }
