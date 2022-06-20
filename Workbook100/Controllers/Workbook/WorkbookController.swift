@@ -327,7 +327,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
-        // FIXME: - Testing things out...
+        // FIXME: - Testing out CGAffineTransform
         let itemScale: CGFloat = 0.5
         
         if let comparisonValue = comparisonValue as? SectionPlaceholder {
