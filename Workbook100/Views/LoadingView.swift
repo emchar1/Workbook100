@@ -34,6 +34,7 @@ struct LoadingView: View {
                     
                     withAnimation(repeated) {
                         zAxisRotation = 360 * 20
+//                        scale = 2.0
                     }
                 }
         }
@@ -66,7 +67,7 @@ struct Flower: View {
             Capsule()
 //                .stroke(lineWidth: 5)
                 .offset(y: 50)
-                .frame(width: 35, height: 70)
+                .frame(width: 17, height: 35)
                 .opacity(0.5)
                 .foregroundColor(color)
                 .rotationEffect(.degrees(rotation))

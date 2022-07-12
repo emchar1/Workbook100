@@ -11,9 +11,14 @@ import Firebase
 import FirebaseFirestoreSwift
 
 class WorkbookController: UIViewController,
+                          UICollectionViewDelegate,
+                          UICollectionViewDataSource,
                           UICollectionViewDragDelegate,
                           UICollectionViewDropDelegate,
-                          UIPopoverPresentationControllerDelegate {
+                          UIPopoverPresentationControllerDelegate,
+                          ProductListControllerDelegate,
+                          ImagePickerDelegate,
+                          TextEntryControllerDelegate {
     
     // MARK: - Properties
     
@@ -26,8 +31,7 @@ class WorkbookController: UIViewController,
     var workbookSections: [SectionModel]!
     var selectedIndexPath: IndexPath?
     
-//    var refreshControl = UIRefreshControl()
-    //can't delete this for now because it's used in drag/drop
+    // FIXME: - Can't delete this for now because it's used in drag/drop
     var dataColors: [[UIColor]] = [[.red, .orange, .systemPink, .yellow, .green, .cyan, .systemIndigo, .purple, .magenta],
                                    [.yellow, .green, .cyan],
                                    [.cyan, .blue, .purple],
@@ -74,12 +78,13 @@ class WorkbookController: UIViewController,
         //Register the various Collection View cells
         collectionView.collectionViewLayout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: BackgroundSupplementaryView.reuseID)
         collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil), forCellWithReuseIdentifier: "Cell")
-//        collectionView.register(CollectionCellOLD.self, forCellWithReuseIdentifier: CollectionCellOLD.reuseID)
+        collectionView.register(UINib(nibName: CollectionCellGloves.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCellGloves.reuseID)
         collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseID)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
         collectionView.register(CollectionCellImage.self, forCellWithReuseIdentifier: CollectionCellImage.reuseID)
         collectionView.register(CollectionCellText.self, forCellWithReuseIdentifier: CollectionCellText.reuseID)
-        collectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+        collectionView.register(CollectionHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                                 withReuseIdentifier: CollectionHeaderView.reuseID)
         
         //Finally, add the collectionView to the subview
@@ -120,7 +125,7 @@ class WorkbookController: UIViewController,
                 section.data = newSectionData
                 self.workbookSections.append(section)
                 
-                //need to sort because order of appending depends on if it's an image or not...
+                //Need to sort because order of appending depends on if it's an image or not...
                 self.workbookSections.sort { $0.id < $1.id }
                 
                 self.collectionView.reloadData()
@@ -284,9 +289,9 @@ class WorkbookController: UIViewController,
 }
 
 
-// MARK: - Collection View
+// MARK: - Collection View Delegate and DataSource
 
-extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension WorkbookController {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return workbookSections.count
     }
@@ -328,7 +333,7 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
         let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
         // FIXME: - Testing out CGAffineTransform
-        let itemScale: CGFloat = 0.5
+//        let itemScale: CGFloat = 0.5
         
         if let comparisonValue = comparisonValue as? SectionPlaceholder {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { fatalError("Unknown collectionView cell returned!") }
@@ -339,27 +344,39 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
             case .text:
                 cell.contentView.backgroundColor = .systemGray5
                 
-                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+//                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             case .item:
                 cell.contentView.backgroundColor = .systemGray6
 
-                cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
+//                cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
             }
             
             return cell
         }
 
         if let comparisonValue = comparisonValue as? CollectionModel {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionCell else {
-                fatalError("Unknown collectionView cell returned!")
-            }
-
-            cell.setViews(with: comparisonValue)
             
-            // FIXME: - Testing out CGAffineTransform
-            cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
-
-            return cell
+            switch comparisonValue.productCategory {
+            case "Gloves":
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellGloves.reuseID, for: indexPath) as! CollectionCellGloves
+                cell.setViews(with: comparisonValue)
+                return cell
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionCell
+                cell.setViews(with: comparisonValue)
+                return cell
+            }
+            
+//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionCell else {
+//                fatalError("Unknown collectionView cell returned!")
+//            }
+//
+//            cell.setViews(with: comparisonValue)
+//
+//            // FIXME: - Testing out CGAffineTransform
+////            cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
+//
+//            return cell
         }
                 
         if let comparisonValue = comparisonValue as? UIImage {
@@ -388,14 +405,6 @@ extension WorkbookController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.contentView.backgroundColor = .lightGray
         return cell
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
-//        if scrollView.contentOffset.y < -200 {
-//            refreshData()
-//            collectionView.reloadData()
-//        }
-//    }
     
     // FIXME: - Footer not working
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -433,12 +442,14 @@ extension WorkbookController {
         
         // FIXME: - Trying to get CollectionCell dimensions to be a specific size
         switch sectionType {
-        case .size_2x1, .size_2x1reversed:
-            layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(1028), heightDimension: .absolute(800))
-        case .size_3x3x2:
-            layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        case .size_6x3:
-            layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(CollectionCell.collectionCellWidth), heightDimension: .absolute(CollectionCell.collectionCellHeight))
+//        case .size_2x1, .size_2x1reversed:
+//            layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(1028), heightDimension: .absolute(800))
+//        case .size_3x3x2:
+//            layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+//        case .size_6x3:
+//            layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(CollectionCell.collectionCellWidth), heightDimension: .absolute(CollectionCell.collectionCellHeight))
+//
+//            print("collectionCellWidth: \(CollectionCell.collectionCellWidth), collectionCellHeight: \(CollectionCell.collectionCellHeight)")
         default:
             layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         }
@@ -501,7 +512,7 @@ extension WorkbookController {
 }
 
 
-extension WorkbookController: ProductListControllerDelegate, ImagePickerDelegate {
+extension WorkbookController {
     // MARK: - Product List Controller Delegate
 
     func didSelect(item: CollectionModel) {
@@ -520,12 +531,10 @@ extension WorkbookController: ProductListControllerDelegate, ImagePickerDelegate
         workbookSections[selectedIndexPath.section].data[selectedIndexPath.row] = image
         collectionView.reloadData()
     }
-}
+    
+    
+    // MARK: - TextEntryController Delegate
 
-
-// MARK: - TextEntryController Delegate
-
-extension WorkbookController: TextEntryControllerDelegate {
     func saveText(text: SectionText) {
         guard let selectedIndexPath = selectedIndexPath else { return }
         

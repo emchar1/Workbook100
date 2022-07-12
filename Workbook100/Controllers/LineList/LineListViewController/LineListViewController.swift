@@ -73,9 +73,8 @@ class LineListViewController: UIViewController,
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil), forCellWithReuseIdentifier: "Cell")
+        collectionView.register(UINib(nibName: CollectionCellGloves.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCellGloves.reuseID)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
-//        collectionView.register(CollectionCellOLD.self, forCellWithReuseIdentifier: CollectionCellOLD.reuseID)
-//        collectionView.register(GloveCell.self, forCellWithReuseIdentifier: GloveCell.reuseID)
         collectionView.register(CollectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: CollectionHeaderView.reuseID)
@@ -122,21 +121,12 @@ class LineListViewController: UIViewController,
         
         
         view.addSubview(collectionView)
-//        NSLayoutConstraint.activate([collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-//                                     collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//                                     view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
-//                                     view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)])
-        
-        
-    
         NSLayoutConstraint.activate([collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                                      collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
         
-        //Is this a safer bet to ensure collectionViewWidthAnchor and collectionViewHeightAnchor will be set before first use?
         if setCollectionViewWidthAndHeightAnchors() {
             NSLayoutConstraint.activate([collectionViewWidthAnchor, collectionViewHeightAnchor])
         }
-        
         
         
         view.addSubview(noResultsLabel)
@@ -251,6 +241,15 @@ extension LineListViewController {
         case K.ProductFilter.wildcard:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as! CollectionCellBlank
             return cell
+        case "Gloves":
+            if (itemForCategory[indexPath.row].productCategory.count) > 0 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellGloves.reuseID, for: indexPath) as! CollectionCellGloves
+                cell.setViews(with: itemForCategory[indexPath.row])
+                return cell
+            }
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as! CollectionCellBlank
+            return cell
         default:
             if (itemForCategory[indexPath.row].productCategory.count) > 0 {
             //Uncomment this for flat CollectionView (no product category headers)
@@ -306,7 +305,16 @@ extension LineListViewController {
     //Delegate Flow Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: CollectionCell.collectionCellWidth, height: CollectionCell.collectionCellHeight)
+        let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+            $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
+        }
+        
+        switch itemForCategory[indexPath.row].productCategory {
+        case "Gloves":
+            return CGSize(width: CollectionCellGloves.collectionCellWidth, height: CollectionCellGloves.collectionCellHeight)
+        default:
+            return CGSize(width: CollectionCell.collectionCellWidth, height: CollectionCell.collectionCellHeight)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
