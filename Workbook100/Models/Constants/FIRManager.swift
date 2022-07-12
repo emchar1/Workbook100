@@ -56,6 +56,14 @@ struct FIRManager {
         static let size5 = "Size5"
         static let size6 = "Size6"
         static let size7 = "Size7"
+        static let qoh0 = "QOH0"
+        static let qoh1 = "QOH1"
+        static let qoh2 = "QOH2"
+        static let qoh3 = "QOH3"
+        static let qoh4 = "QOH4"
+        static let qoh5 = "QOH5"
+        static let qoh6 = "QOH6"
+        static let qoh7 = "QOH7"
         static let usRetailMSRP = "USRetailMSRP"
         static let euRetailMSRP = "EURetailMSRP"
         static let countryCode = "CountryCode"
@@ -194,14 +202,30 @@ struct FIRManager {
                                                essential: (obj[FIRManager.FIR.essential] as! String) == "TRUE",
                                                skuCode: obj[FIRManager.FIR.skuCode] as! String,
                                                sizes: [
-                                                CollectionModel.Size(size: obj[FIRManager.FIR.size0] as? String, colorwaySKU: obj[FIRManager.FIR.colorwaySKU0] as? String),
-                                                CollectionModel.Size(size: obj[FIRManager.FIR.size1] as? String, colorwaySKU: obj[FIRManager.FIR.colorwaySKU1] as? String),
-                                                CollectionModel.Size(size: obj[FIRManager.FIR.size2] as? String, colorwaySKU: obj[FIRManager.FIR.colorwaySKU2] as? String),
-                                                CollectionModel.Size(size: obj[FIRManager.FIR.size3] as? String, colorwaySKU: obj[FIRManager.FIR.colorwaySKU3] as? String),
-                                                CollectionModel.Size(size: obj[FIRManager.FIR.size4] as? String, colorwaySKU: obj[FIRManager.FIR.colorwaySKU4] as? String),
-                                                CollectionModel.Size(size: obj[FIRManager.FIR.size5] as? String, colorwaySKU: obj[FIRManager.FIR.colorwaySKU5] as? String),
-                                                CollectionModel.Size(size: obj[FIRManager.FIR.size6] as? String, colorwaySKU: obj[FIRManager.FIR.colorwaySKU6] as? String),
-                                                CollectionModel.Size(size: obj[FIRManager.FIR.size7] as? String, colorwaySKU: obj[FIRManager.FIR.colorwaySKU7] as? String)
+                                                CollectionModel.Size(size: obj[FIRManager.FIR.size0] as? String,
+                                                                     colorwaySKU: obj[FIRManager.FIR.colorwaySKU0] as? String,
+                                                                     qoh: obj[FIRManager.FIR.qoh0] as? Int),
+                                                CollectionModel.Size(size: obj[FIRManager.FIR.size1] as? String,
+                                                                     colorwaySKU: obj[FIRManager.FIR.colorwaySKU1] as? String,
+                                                                     qoh: obj[FIRManager.FIR.qoh1] as? Int),
+                                                CollectionModel.Size(size: obj[FIRManager.FIR.size2] as? String,
+                                                                     colorwaySKU: obj[FIRManager.FIR.colorwaySKU2] as? String,
+                                                                     qoh: obj[FIRManager.FIR.qoh2] as? Int),
+                                                CollectionModel.Size(size: obj[FIRManager.FIR.size3] as? String,
+                                                                     colorwaySKU: obj[FIRManager.FIR.colorwaySKU3] as? String,
+                                                                     qoh: obj[FIRManager.FIR.qoh3] as? Int),
+                                                CollectionModel.Size(size: obj[FIRManager.FIR.size4] as? String,
+                                                                     colorwaySKU: obj[FIRManager.FIR.colorwaySKU4] as? String,
+                                                                     qoh: obj[FIRManager.FIR.qoh4] as? Int),
+                                                CollectionModel.Size(size: obj[FIRManager.FIR.size5] as? String,
+                                                                     colorwaySKU: obj[FIRManager.FIR.colorwaySKU5] as? String,
+                                                                     qoh: obj[FIRManager.FIR.qoh5] as? Int),
+                                                CollectionModel.Size(size: obj[FIRManager.FIR.size6] as? String,
+                                                                     colorwaySKU: obj[FIRManager.FIR.colorwaySKU6] as? String,
+                                                                     qoh: obj[FIRManager.FIR.qoh6] as? Int),
+                                                CollectionModel.Size(size: obj[FIRManager.FIR.size7] as? String,
+                                                                     colorwaySKU: obj[FIRManager.FIR.colorwaySKU7] as? String,
+                                                                     qoh: obj[FIRManager.FIR.qoh7] as? Int)
                                                ],
                                                usMSRP: (obj[FIRManager.FIR.usRetailMSRP] as! NSNumber).doubleValue,
                                                euMSRP: (obj[FIRManager.FIR.euRetailMSRP] as! NSNumber).doubleValue,
