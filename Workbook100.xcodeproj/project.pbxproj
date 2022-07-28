@@ -60,6 +60,8 @@
 		EAB133ED27AE5F3A007F6553 /* GloveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB133EC27AE5F3A007F6553 /* GloveCell.swift */; };
 		EAB5FE182832122D000DD5C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5FE172832122D000DD5C8 /* ImagePicker.swift */; };
 		EAB5FE1A283452F4000DD5C8 /* CollectionCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5FE19283452F4000DD5C8 /* CollectionCellImage.swift */; };
+		EAD2C0E6287E78F6002A01F1 /* CollectionCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD2C0E5287E78F6002A01F1 /* CollectionCell2.xib */; };
+		EAD2C0E8287E7B06002A01F1 /* CollectionCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2C0E7287E7B06002A01F1 /* CollectionCell2.swift */; };
 		EAD957522819E1EF00D18200 /* CollectionCellPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD957512819E1EF00D18200 /* CollectionCellPage.swift */; };
 		EAE6473128149E5500FBE6C3 /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6473028149E5500FBE6C3 /* Extension+Array.swift */; };
 		EAE64735281799DA00FBE6C3 /* WorkbookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE64734281799DA00FBE6C3 /* WorkbookController.swift */; };
@@ -127,6 +129,8 @@
 		EAB133EC27AE5F3A007F6553 /* GloveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloveCell.swift; sourceTree = "<group>"; };
 		EAB5FE172832122D000DD5C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		EAB5FE19283452F4000DD5C8 /* CollectionCellImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellImage.swift; sourceTree = "<group>"; };
+		EAD2C0E5287E78F6002A01F1 /* CollectionCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell2.xib; sourceTree = "<group>"; };
+		EAD2C0E7287E7B06002A01F1 /* CollectionCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell2.swift; sourceTree = "<group>"; };
 		EAD957512819E1EF00D18200 /* CollectionCellPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellPage.swift; sourceTree = "<group>"; };
 		EAE6473028149E5500FBE6C3 /* Extension+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Array.swift"; sourceTree = "<group>"; };
 		EAE64734281799DA00FBE6C3 /* WorkbookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookController.swift; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 			children = (
 				EA56ED8D284007AE0029F1A3 /* CollectionCell.xib */,
 				EAE988CF2840C8F900C3649D /* CollectionCell.swift */,
+				EAD2C0E5287E78F6002A01F1 /* CollectionCell2.xib */,
+				EAD2C0E7287E7B06002A01F1 /* CollectionCell2.swift */,
 				EA49809A2862CA8300AA2FE7 /* CollectionCellGloves.xib */,
 				EA49809C2862E87D00AA2FE7 /* CollectionCellGloves.swift */,
 			);
@@ -446,6 +452,7 @@
 				EA22D4E42776DFCE006C12CF /* GoogleService-Info.plist in Resources */,
 				EAA0CF7E2769574100943912 /* Assets.xcassets in Resources */,
 				EAA0CF7C2769573F00943912 /* Main.storyboard in Resources */,
+				EAD2C0E6287E78F6002A01F1 /* CollectionCell2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +533,7 @@
 				EA38B4DF2820E7000030269A /* BackgroundSupplementaryView.swift in Sources */,
 				EAE988D02840C8F900C3649D /* CollectionCell.swift in Sources */,
 				EAF2BA0827A2306500CD4856 /* CSVMake.swift in Sources */,
+				EAD2C0E8287E7B06002A01F1 /* CollectionCell2.swift in Sources */,
 				EA2E388A27EFC41E00122877 /* LineListViewController+RightSetupMenu.swift in Sources */,
 				EA2E38AF27F2DD7100122877 /* Extension+UICollectionViewCell.swift in Sources */,
 				EA2E38B527F2DDF600122877 /* Extension+String.swift in Sources */,
@@ -703,12 +711,14 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Workbook100/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Workbook100 needs access to your camera.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Workbook100 needs access to your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -739,12 +749,14 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Workbook100/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Workbook100 needs access to your camera.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Workbook100 needs access to your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

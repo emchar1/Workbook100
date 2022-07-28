@@ -77,7 +77,7 @@ class WorkbookController: UIViewController,
 
         //Register the various Collection View cells
         collectionView.collectionViewLayout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: BackgroundSupplementaryView.reuseID)
-        collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil), forCellWithReuseIdentifier: "Cell")
+        collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCell.reuseID)
         collectionView.register(UINib(nibName: CollectionCellGloves.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCellGloves.reuseID)
         collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseID)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
@@ -362,12 +362,14 @@ extension WorkbookController {
                 cell.setViews(with: comparisonValue)
                 return cell
             default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as! CollectionCell
                 cell.setViews(with: comparisonValue)
+                print(cell.frame.size)
+//                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 return cell
             }
             
-//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CollectionCell else {
+//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as? CollectionCell else {
 //                fatalError("Unknown collectionView cell returned!")
 //            }
 //

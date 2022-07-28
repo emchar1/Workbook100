@@ -41,6 +41,14 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var sku5Label: UILabel!
     @IBOutlet weak var sku6Label: UILabel!
     @IBOutlet weak var sku7Label: UILabel!
+    @IBOutlet weak var qoh0Label: UILabel!
+    @IBOutlet weak var qoh1Label: UILabel!
+    @IBOutlet weak var qoh2Label: UILabel!
+    @IBOutlet weak var qoh3Label: UILabel!
+    @IBOutlet weak var qoh4Label: UILabel!
+    @IBOutlet weak var qoh5Label: UILabel!
+    @IBOutlet weak var qoh6Label: UILabel!
+    @IBOutlet weak var qoh7Label: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lineListLabel: UILabel!
     @IBOutlet weak var seasonsCarriedLabel: UILabel!
@@ -81,6 +89,9 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     }
     
     private func loadModel() {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
         newLabel.isHidden = model.carryOver ? true : false
         essentialLabel.isHidden = model.essential ? false : true
         collectionLabel.text = model.collection
@@ -110,7 +121,14 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         sku5Label.text = model.sizes[5].colorwaySKU
         sku6Label.text = model.sizes[6].colorwaySKU
         sku7Label.text = model.sizes[7].colorwaySKU
-        
+        qoh0Label.text = model.sizes[0].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[0].qoh!))!)"
+        qoh1Label.text = model.sizes[1].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[1].qoh!))!)"
+        qoh2Label.text = model.sizes[2].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[2].qoh!))!)"
+        qoh3Label.text = model.sizes[3].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[3].qoh!))!)"
+        qoh4Label.text = model.sizes[4].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[4].qoh!))!)"
+        qoh5Label.text = model.sizes[5].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[5].qoh!))!)"
+        qoh6Label.text = model.sizes[6].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[6].qoh!))!)"
+        qoh7Label.text = model.sizes[7].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[7].qoh!))!)"
         lineListLabel.text = model.lineList + " | " + (model.isRemoved ? "Removed" : "Not Removed")
         seasonsCarriedLabel.text = model.seasonsCarried
     }
@@ -163,9 +181,21 @@ extension LineListDetailTVC2 {
         
         switch indexPath.section {
         case 3:
-            guard model.sizes[indexPath.row].colorwaySKU!.count > 0 || model.sizes[indexPath.row].size!.count > 0 else {
-                return 0
-            }
+//            print(indexPath.row)
+//            guard let colorwaySKU = model.sizes[indexPath.row].colorwaySKU else {
+//                print("colorwaySKU is nil")
+//                return 0
+//            }
+//
+//            guard let size = model.sizes[indexPath.row].size else {
+//                print("size is nil")
+//                return 0
+//            }
+//
+//            guard colorwaySKU.count > 0 || size.count > 0 else {
+//            guard model.sizes[indexPath.row].colorwaySKU!.count > 0 || model.sizes[indexPath.row].size!.count > 0 else {
+//                return 0
+//            }
             
             return defaultHeight
         case 4:

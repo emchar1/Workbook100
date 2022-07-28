@@ -63,14 +63,14 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
         let qoh: Int?
 
         var description: String {
-            guard let size = size, let sku = colorwaySKU, sku.count > 0, let qoh = qoh else {
+            guard let size = size, let sku = colorwaySKU, sku.count > 0/*, let qoh = qoh*/ else {
                 return ""
             }
             
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .decimal
 
-            return size + ": " + sku + " (QOH: " + numberFormatter.string(from: NSNumber(value: qoh))! + ")"
+            return size + ": " + sku// + ", QOH: " + numberFormatter.string(from: NSNumber(value: qoh))!
         }
     }
     

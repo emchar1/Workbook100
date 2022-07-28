@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoadingView: View {
     @State var zAxisRotation = 0.0
-    @State var scale = 1.0
+    @State var scale = 0.5
     
     var body: some View {
         ZStack {
@@ -29,12 +29,12 @@ struct LoadingView: View {
                 .scaleEffect(scale)
                 .rotationEffect(.degrees(zAxisRotation), anchor: .center)
                 .onAppear {
-                    let baseAnimation = Animation.linear(duration: 30.0)
+                    let baseAnimation = Animation.linear(duration: 40)
                     let repeated = baseAnimation.repeatForever()
                     
                     withAnimation(repeated) {
-                        zAxisRotation = 360 * 20
-//                        scale = 2.0
+                        zAxisRotation = 360 * 20 
+//                        scale = 3
                     }
                 }
         }
