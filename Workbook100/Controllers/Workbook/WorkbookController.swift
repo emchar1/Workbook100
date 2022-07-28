@@ -306,24 +306,41 @@ extension WorkbookController {
         
         let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
-        if comparisonValue is CollectionModel {
-            performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
-        }
-        else if let comparisonValue = comparisonValue as? SectionPlaceholder {
-            if comparisonValue == .photo {
+        switch comparisonValue {
+        case is SectionPlaceholder:
+            let comparisonValue = comparisonValue as! SectionPlaceholder
+            
+            switch comparisonValue {
+            case .photo:
                 imagePicker.present(from: collectionView)
-            }
-            else if comparisonValue == .text {
+            case .text:
                 let vc = TextEntryController()
                 vc.view.backgroundColor = .white
                 vc.delegate = self
                 present(vc, animated: true)
-            }
-            else {
+            case .item:
                 let vc = ProductListController()
                 vc.delegate = self
                 present(vc, animated: true)
             }
+        case is CollectionModel:
+            let vc = ProductListController()
+            vc.delegate = self
+            present(vc, animated: true)
+//            performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
+        case is UIImage:
+            imagePicker.present(from: collectionView)
+        case is SectionText:
+            let comparisonValue = comparisonValue as! SectionText
+            
+            let vc = TextEntryController()
+            vc.view.backgroundColor = .white
+            vc.delegate = self
+            vc.titleTF.text = comparisonValue.title
+            vc.descriptionTF.text = comparisonValue.description
+            present(vc, animated: true)
+        default:
+            print("Unknown cell type!")
         }
 
         collectionView.deselectItem(at: indexPath, animated: true)
