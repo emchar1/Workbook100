@@ -19,4 +19,6 @@ extension UIFont {
     
     static let workbookTextTitle = UIFont(name: "HelveticaNeue-Bold", size: 96)!
     static let workbookTextDescription = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 12)!
+    
+    static let productListViewText = UIFont(name: "AvenirNext-Regular", size: 11)!
 }

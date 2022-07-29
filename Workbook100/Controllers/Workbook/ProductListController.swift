@@ -20,6 +20,7 @@ class ProductListController: UIViewController {
         super.viewDidLoad()
         
         allItems = K.items.filter { model in
+            // FIXME: - WTF is this???
             model.lineList == K.ProductFilter.wildcard
         }
         
@@ -67,8 +68,10 @@ extension ProductListController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ProductListCell.reuseID, for: indexPath) as! ProductListCell
         
-        cell.labelSKU.text = itemForCategory[indexPath.row].skuCode
-        cell.labelDesc.text = itemForCategory[indexPath.row].productCategory + " - " + itemForCategory[indexPath.row].productNameDescription + " - " + itemForCategory[indexPath.row].productNameDescriptionSecondary
+        cell.setViews(itemForCategory[indexPath.row])
+        
+//        cell.labelSKU.text = itemForCategory[indexPath.row].skuCode
+//        cell.labelDesc.text = itemForCategory[indexPath.row].productCategory + " - " + itemForCategory[indexPath.row].productNameDescription + " - " + itemForCategory[indexPath.row].productNameDescriptionSecondary
         
         return cell
     }
@@ -93,6 +96,6 @@ extension ProductListController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return ProductListCell.imageSize
     }
 }

@@ -381,7 +381,6 @@ extension WorkbookController {
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as! CollectionCell
                 cell.setViews(with: comparisonValue)
-                print(cell.frame.size)
 //                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 return cell
             }
