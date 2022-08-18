@@ -195,6 +195,10 @@ class ProductListCell: UITableViewCell {
     }
     
     func setViews(_ model: CollectionModel) {
+        labelNew.type = .new
+        labelEssential.type = .essential
+        labelBlank.type = .blank
+        
         labelNew.isHidden = model.carryOver
         labelEssential.isHidden = !model.essential
 //        labelBlank.isHidden = !(model.carryOver && !model.essential)

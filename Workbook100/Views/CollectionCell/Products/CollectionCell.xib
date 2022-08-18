@@ -141,7 +141,7 @@
                 <outlet property="productImage" destination="SJY-fm-AYQ" id="EJv-Y5-pgW"/>
                 <outlet property="productImageNoImg" destination="xZi-zz-nsU" id="oqk-wa-kC5"/>
             </connections>
-            <point key="canvasLocation" x="2.8985507246376816" y="-359.26339285714283"/>
+            <point key="canvasLocation" x="2.8985507246376816" y="-359.59821428571428"/>
         </collectionViewCell>
     </objects>
     <resources>

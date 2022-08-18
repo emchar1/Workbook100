@@ -42,7 +42,9 @@ class CollectionCellLabelBubble: UILabel {
     // MARK: - Helper Functions
     
     private func commonInit(type: LabelBubbleType) {
+        self.text = "NewEssential"
         self.textColor = .white
+        self.backgroundColor = .gray
         self.textAlignment = .center
         self.font = .workbookBubbleTitle
         self.layer.cornerRadius = 8

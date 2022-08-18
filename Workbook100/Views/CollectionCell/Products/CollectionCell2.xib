@@ -77,9 +77,18 @@
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rd0-0u-D5L" userLabel="RemoveView">
+                                        <rect key="frame" x="167" y="0.0" width="25" height="25"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="8eD-1S-72i"/>
+                                            <constraint firstAttribute="width" constant="25" id="Wz6-A9-8M2"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LHi-89-YFy" secondAttribute="height" multiplier="1:1" id="1S4-2k-ZUU"/>
+                                    <constraint firstItem="rd0-0u-D5L" firstAttribute="top" secondItem="LHi-89-YFy" secondAttribute="top" id="3Ho-uw-GlB"/>
                                     <constraint firstAttribute="bottom" secondItem="kXn-eM-8Yu" secondAttribute="bottom" id="8QE-2l-k90"/>
                                     <constraint firstItem="m3y-dp-9sB" firstAttribute="top" secondItem="LHi-89-YFy" secondAttribute="top" id="J7l-zo-tYY"/>
                                     <constraint firstAttribute="trailing" secondItem="kXn-eM-8Yu" secondAttribute="trailing" id="YHZ-Vd-woE"/>
@@ -89,6 +98,7 @@
                                     <constraint firstItem="m3y-dp-9sB" firstAttribute="leading" secondItem="LHi-89-YFy" secondAttribute="leading" id="dSP-np-6zN"/>
                                     <constraint firstItem="kXn-eM-8Yu" firstAttribute="leading" secondItem="LHi-89-YFy" secondAttribute="leading" id="dV5-2E-Bsk"/>
                                     <constraint firstItem="kXn-eM-8Yu" firstAttribute="top" secondItem="LHi-89-YFy" secondAttribute="top" id="fi9-es-cF1"/>
+                                    <constraint firstAttribute="trailing" secondItem="rd0-0u-D5L" secondAttribute="trailing" constant="8" id="t1F-nV-iCd"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Cok-nd-wo4" userLabel="Bottom Stack">
@@ -147,11 +157,15 @@
                 <outlet property="labelTitle" destination="Gcr-dI-mbO" id="Svw-Tv-J1J"/>
                 <outlet property="productImage" destination="kXn-eM-8Yu" id="DFu-TR-se3"/>
                 <outlet property="productImageNoImg" destination="fWh-2m-kLQ" id="Aaf-Xn-OJY"/>
+                <outlet property="removeView" destination="rd0-0u-D5L" id="Hox-gf-Ym4"/>
             </connections>
             <point key="canvasLocation" x="-14.492753623188406" y="-245.75892857142856"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -711,7 +711,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				EXCLUDED_ARCHS = "";
@@ -729,7 +729,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.10;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -749,7 +749,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Workbook100/Workbook100.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				EXCLUDED_ARCHS = "";
@@ -767,7 +767,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.10;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.Workbook100";
 				PRODUCT_NAME = "$(TARGET_NAME)";

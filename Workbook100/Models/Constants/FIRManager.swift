@@ -64,6 +64,14 @@ struct FIRManager {
         static let qoh5 = "QOH5"
         static let qoh6 = "QOH6"
         static let qoh7 = "QOH7"
+        static let status0 = "Status0"
+        static let status1 = "Status1"
+        static let status2 = "Status2"
+        static let status3 = "Status3"
+        static let status4 = "Status4"
+        static let status5 = "Status5"
+        static let status6 = "Status6"
+        static let status7 = "Status7"
         static let usRetailMSRP = "USRetailMSRP"
         static let euRetailMSRP = "EURetailMSRP"
         static let countryCode = "CountryCode"
@@ -124,7 +132,23 @@ struct FIRManager {
                                            FIRManager.FIR.size4: model.sizes[4].size ?? "",
                                            FIRManager.FIR.size5: model.sizes[5].size ?? "",
                                            FIRManager.FIR.size6: model.sizes[6].size ?? "",
-                                           FIRManager.FIR.size6: model.sizes[7].size ?? "",
+                                           FIRManager.FIR.size7: model.sizes[7].size ?? "",
+                                           FIRManager.FIR.qoh0: model.sizes[0].qoh ?? "",
+                                           FIRManager.FIR.qoh1: model.sizes[1].qoh ?? "",
+                                           FIRManager.FIR.qoh2: model.sizes[2].qoh ?? "",
+                                           FIRManager.FIR.qoh3: model.sizes[3].qoh ?? "",
+                                           FIRManager.FIR.qoh4: model.sizes[4].qoh ?? "",
+                                           FIRManager.FIR.qoh5: model.sizes[5].qoh ?? "",
+                                           FIRManager.FIR.qoh6: model.sizes[6].qoh ?? "",
+                                           FIRManager.FIR.qoh7: model.sizes[7].qoh ?? "",
+                                           FIRManager.FIR.status0: model.sizes[0].status ?? "",
+                                           FIRManager.FIR.status1: model.sizes[1].status ?? "",
+                                           FIRManager.FIR.status2: model.sizes[2].status ?? "",
+                                           FIRManager.FIR.status3: model.sizes[3].status ?? "",
+                                           FIRManager.FIR.status4: model.sizes[4].status ?? "",
+                                           FIRManager.FIR.status5: model.sizes[5].status ?? "",
+                                           FIRManager.FIR.status6: model.sizes[6].status ?? "",
+                                           FIRManager.FIR.status7: model.sizes[7].status ?? "",
                                            FIRManager.FIR.usRetailMSRP: model.usMSRP,
                                            FIRManager.FIR.euRetailMSRP: model.euMSRP,
                                            FIRManager.FIR.countryCode: model.countryCode,
@@ -204,28 +228,36 @@ struct FIRManager {
                                                sizes: [
                                                 CollectionModel.Size(size: obj[FIRManager.FIR.size0] as? String,
                                                                      colorwaySKU: obj[FIRManager.FIR.colorwaySKU0] as? String,
-                                                                     qoh: obj[FIRManager.FIR.qoh0] as? Int),
+                                                                     qoh: obj[FIRManager.FIR.qoh0] as? Int,
+                                                                     status: obj[FIRManager.FIR.status0] as? Int),
                                                 CollectionModel.Size(size: obj[FIRManager.FIR.size1] as? String,
                                                                      colorwaySKU: obj[FIRManager.FIR.colorwaySKU1] as? String,
-                                                                     qoh: obj[FIRManager.FIR.qoh1] as? Int),
+                                                                     qoh: obj[FIRManager.FIR.qoh1] as? Int,
+                                                                     status: obj[FIRManager.FIR.status1] as? Int),
                                                 CollectionModel.Size(size: obj[FIRManager.FIR.size2] as? String,
                                                                      colorwaySKU: obj[FIRManager.FIR.colorwaySKU2] as? String,
-                                                                     qoh: obj[FIRManager.FIR.qoh2] as? Int),
+                                                                     qoh: obj[FIRManager.FIR.qoh2] as? Int,
+                                                                     status: obj[FIRManager.FIR.status2] as? Int),
                                                 CollectionModel.Size(size: obj[FIRManager.FIR.size3] as? String,
                                                                      colorwaySKU: obj[FIRManager.FIR.colorwaySKU3] as? String,
-                                                                     qoh: obj[FIRManager.FIR.qoh3] as? Int),
+                                                                     qoh: obj[FIRManager.FIR.qoh3] as? Int,
+                                                                     status: obj[FIRManager.FIR.status3] as? Int),
                                                 CollectionModel.Size(size: obj[FIRManager.FIR.size4] as? String,
                                                                      colorwaySKU: obj[FIRManager.FIR.colorwaySKU4] as? String,
-                                                                     qoh: obj[FIRManager.FIR.qoh4] as? Int),
+                                                                     qoh: obj[FIRManager.FIR.qoh4] as? Int,
+                                                                     status: obj[FIRManager.FIR.status4] as? Int),
                                                 CollectionModel.Size(size: obj[FIRManager.FIR.size5] as? String,
                                                                      colorwaySKU: obj[FIRManager.FIR.colorwaySKU5] as? String,
-                                                                     qoh: obj[FIRManager.FIR.qoh5] as? Int),
+                                                                     qoh: obj[FIRManager.FIR.qoh5] as? Int,
+                                                                     status: obj[FIRManager.FIR.status5] as? Int),
                                                 CollectionModel.Size(size: obj[FIRManager.FIR.size6] as? String,
                                                                      colorwaySKU: obj[FIRManager.FIR.colorwaySKU6] as? String,
-                                                                     qoh: obj[FIRManager.FIR.qoh6] as? Int),
+                                                                     qoh: obj[FIRManager.FIR.qoh6] as? Int,
+                                                                     status: obj[FIRManager.FIR.status6] as? Int),
                                                 CollectionModel.Size(size: obj[FIRManager.FIR.size7] as? String,
                                                                      colorwaySKU: obj[FIRManager.FIR.colorwaySKU7] as? String,
-                                                                     qoh: obj[FIRManager.FIR.qoh7] as? Int)
+                                                                     qoh: obj[FIRManager.FIR.qoh7] as? Int,
+                                                                     status: obj[FIRManager.FIR.status7] as? Int)
                                                ],
                                                usMSRP: (obj[FIRManager.FIR.usRetailMSRP] as! NSNumber).doubleValue,
                                                euMSRP: (obj[FIRManager.FIR.euRetailMSRP] as! NSNumber).doubleValue,

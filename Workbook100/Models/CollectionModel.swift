@@ -61,6 +61,7 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
         let size: String?
         let colorwaySKU: String?
         let qoh: Int?
+        let status: Int?
 
         var description: String {
             guard let size = size, let sku = colorwaySKU, sku.count > 0/*, let qoh = qoh*/ else {
@@ -165,14 +166,14 @@ final class CollectionModel: NSObject, Comparable, Identifiable, NSItemProviderW
                                     essential: true,
                                     skuCode: "00000-00000",
                                     sizes: [
-                                        CollectionModel.Size(size: "Size 0", colorwaySKU: "00000-00000", qoh: 9999),
-                                        CollectionModel.Size(size: "Size 1", colorwaySKU: "00000-00001", qoh: 9999),
-                                        CollectionModel.Size(size: "Size 2", colorwaySKU: "00000-00002", qoh: 9999),
-                                        CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003", qoh: 9999),
-                                        CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004", qoh: 9999),
-                                        CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005", qoh: 9999),
-                                        CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006", qoh: 9999),
-                                        CollectionModel.Size(size: "Size 7", colorwaySKU: "00000-00007", qoh: 9999)
+                                        CollectionModel.Size(size: "Size 0", colorwaySKU: "00000-00000", qoh: 9999, status: 9999),
+                                        CollectionModel.Size(size: "Size 1", colorwaySKU: "00000-00001", qoh: 9999, status: 9999),
+                                        CollectionModel.Size(size: "Size 2", colorwaySKU: "00000-00002", qoh: 9999, status: 9999),
+                                        CollectionModel.Size(size: "Size 3", colorwaySKU: "00000-00003", qoh: 9999, status: 9999),
+                                        CollectionModel.Size(size: "Size 4", colorwaySKU: "00000-00004", qoh: 9999, status: 9999),
+                                        CollectionModel.Size(size: "Size 5", colorwaySKU: "00000-00005", qoh: 9999, status: 9999),
+                                        CollectionModel.Size(size: "Size 6", colorwaySKU: "00000-00006", qoh: 9999, status: 9999),
+                                        CollectionModel.Size(size: "Size 7", colorwaySKU: "00000-00007", qoh: 9999, status: 9999)
                                     ],
                                     usMSRP: 9.99,
                                     euMSRP: 10.01,

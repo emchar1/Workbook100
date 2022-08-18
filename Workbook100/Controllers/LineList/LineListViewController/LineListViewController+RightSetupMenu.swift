@@ -47,6 +47,8 @@ extension  LineListViewController {
                                         "CountryCode"]]
                 
                 for item in K.getFilteredItemsIfFiltered {
+                    guard !item.isRemoved else { continue}
+                    
                     csv.append([item.skuCode,
                                 item.productNameDescription,
                                 item.productCategory,

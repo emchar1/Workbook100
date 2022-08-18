@@ -20,10 +20,12 @@ class CollectionCell2: UICollectionViewCell {
     @IBOutlet weak var labelSize: CollectionCellLabel!
     @IBOutlet weak var labelSKU: CollectionCellLabel!
     @IBOutlet weak var labelQOH: CollectionCellLabel!
+    @IBOutlet weak var removeView: UIView!
+    private var removeImage: UIImageView!
 
     class var reuseID: String { "CollectionCell2" }
     private var spinner = ActivitySpinner()
-    private var model: CollectionModel!
+    var model: CollectionModel!
     
     //Dimensions
     static let collectionCellWidth: CGFloat = 180
@@ -50,6 +52,27 @@ class CollectionCell2: UICollectionViewCell {
         labelSize.type = .productSize
         labelSKU.type = .productSize
         labelQOH.type = .productSize
+        
+        removeImage = UIImageView(image: UIImage(systemName: "xmark"))
+        removeImage.tintColor = .systemRed
+        removeImage.isHidden = true
+        removeImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        removeView.backgroundColor = .white
+        removeView.alpha = 0.5
+        removeView.layer.borderWidth = 2
+        removeView.layer.borderColor = UIColor.gray.cgColor
+        removeView.layer.cornerRadius = 6
+        removeView.clipsToBounds = true
+        removeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRemoveItem(_:))))
+        removeView.addSubview(removeImage)
+        
+        NSLayoutConstraint.activate([
+            removeImage.topAnchor.constraint(equalTo: removeView.topAnchor),
+            removeImage.leadingAnchor.constraint(equalTo: removeView.leadingAnchor),
+            removeView.trailingAnchor.constraint(equalTo: removeImage.trailingAnchor),
+            removeView.bottomAnchor.constraint(equalTo: removeImage.bottomAnchor)
+        ])
     }
     
     //THIS PREVENTS IMAGES FROM RECYCLE LOADING, WHICH LOOKS WEIRD!!
@@ -89,13 +112,15 @@ class CollectionCell2: UICollectionViewCell {
         labelSize.text = layoutSizes().size
         labelSKU.text = layoutSizes().sku
         labelQOH.text = layoutSizes().qoh
+        removeImage.isHidden = model.isRemoved ? false : true
     }
     
-    private func layoutSizes() -> (size: String, sku: String, qoh: String) {
+    private func layoutSizes() -> (size: String, sku: String, qoh: String, status: String) {
         let numberFormatter = NumberFormatter()
         var sizes = ""
         var skus = ""
         var qohs = ""
+        var statuses = ""
         
         numberFormatter.numberStyle = .decimal
         
@@ -104,11 +129,13 @@ class CollectionCell2: UICollectionViewCell {
                 sizes += "\(size.size ?? "NA"): \n"
                 skus += "\(size.colorwaySKU ?? "XXXXX-XXXXX")\n"
                 qohs += "QOH: \(numberFormatter.string(from: NSNumber(value: size.qoh ?? -9999))!)\n"
+                statuses += "Status: \(numberFormatter.string(from: NSNumber(value: size.status ?? -9999))!)\n"
             }
             else {
                 sizes += "\n"
                 skus += "\n"
                 qohs += "\n"
+                statuses += "\n"
             }
             
 //            sizes += "\(size.size ?? "NA"): " + ((i >= model.sizes.count) ? "" : "\n")
@@ -116,6 +143,11 @@ class CollectionCell2: UICollectionViewCell {
 //            qohs += "QOH: \(size.qoh ?? -9999)" + ((i >= model.sizes.count) ? "" : "\n")
         }
         
-        return (sizes, skus, qohs)
+        return (sizes, skus, qohs, statuses)
+    }
+
+    @objc private func didRemoveItem(_ sender: UITapGestureRecognizer) {
+        model.isRemoved.toggle()
+        removeImage.isHidden = model.isRemoved ? false : true
     }
 }
