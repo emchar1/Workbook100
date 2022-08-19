@@ -25,7 +25,7 @@ class WorkbookController: UIViewController,
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var addSectionButton: UIBarButtonItem!
     
-    let workbookName = "SP23 Apparel"
+    let workbookName = "SP23 Apparel-2"
     var collectionView: UICollectionView!
     var imagePicker: ImagePicker!
     var workbookSections: [SectionModel]!
@@ -352,10 +352,10 @@ extension WorkbookController {
         // FIXME: - Testing out CGAffineTransform
 //        let itemScale: CGFloat = 0.5
         
-        if let comparisonValue = comparisonValue as? SectionPlaceholder {
+        if let placeholder = comparisonValue as? SectionPlaceholder {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { fatalError("Unknown collectionView cell returned!") }
             
-            switch comparisonValue {
+            switch placeholder {
             case .photo:
                 cell.contentView.backgroundColor = .systemGray4
             case .text:
@@ -371,16 +371,16 @@ extension WorkbookController {
             return cell
         }
 
-        if let comparisonValue = comparisonValue as? CollectionModel {
+        if let model = comparisonValue as? CollectionModel {
             
-            switch comparisonValue.productCategory {
+            switch model.productCategory {
             case "Gloves":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellGloves.reuseID, for: indexPath) as! CollectionCellGloves
-                cell.setViews(with: comparisonValue)
+                cell.setViews(with: model)
                 return cell
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as! CollectionCell
-                cell.setViews(with: comparisonValue)
+                cell.setViews(with: model)
 //                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 return cell
             }
@@ -397,21 +397,21 @@ extension WorkbookController {
 //            return cell
         }
                 
-        if let comparisonValue = comparisonValue as? UIImage {
+        if let img = comparisonValue as? UIImage {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellImage.reuseID, for: indexPath) as? CollectionCellImage else { fatalError("Unknown collectionView cell returned!") }
             
-            cell.imageView.image = comparisonValue
+            cell.imageView.image = img
             // FIXME: - Testing out CGAffineTransform
 //            cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
 
             return cell
         }
         
-        if let comparisonValue = comparisonValue as? SectionText {
+        if let text = comparisonValue as? SectionText {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellText.reuseID, for: indexPath) as? CollectionCellText else { fatalError("Unknown collectionView cell returned!") }
             
-            cell.titleLabel.text = comparisonValue.title
-            cell.descriptionLabel.text = comparisonValue.description
+            cell.titleLabel.text = text.title
+            cell.descriptionLabel.text = text.description
             // FIXME: - Testing out CGAffineTransform
 //            cell.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
 
