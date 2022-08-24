@@ -25,7 +25,7 @@ class WorkbookController: UIViewController,
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var addSectionButton: UIBarButtonItem!
     
-    let workbookName = "SP23 Apparel"
+    let workbookName = "SP23 Apparel-3"
     var collectionView: UICollectionView!
     var imagePicker: ImagePicker!
     var workbookSections: [SectionModel]!
@@ -159,26 +159,14 @@ class WorkbookController: UIViewController,
                 case is SectionPlaceholder:
                     dataData.append(SectionModel.sectionSectionPlaceholder + "\((datum as! SectionPlaceholder).rawValue)")
                 case is UIImage:
-                    // FIXME: - Reuse image if it exists! - I think this can be deleted??? 6/19/22
-//                    let imageString = UUID().uuidString + ".png"
-//
-//                    dataData.append(SectionModel.sectionImage + imageString)
-//
-//                    putInStorage(withData: (datum as! UIImage).pngData(), forFilename: imageString, contentType: "image/png")
-
-                    
-                    
                     let imageString = UUID().uuidString + ".png"
                     let imageRef = Storage.storage().reference().child("\((datum as! UIImage).pngData()!)")
                     
                     imageRef.getData(maxSize: SectionModel.maxImageSize * SectionModel.mb) { (data, error) in
                         if error == nil {
-//                            dataData.append(SectionModel.sectionImage + /*This isn't right... --->*/"\(datum as! UIImage)")
                             print("Image already found!")
                         }
                         else {
-//                            dataData.append(SectionModel.sectionImage + imageString)
-                            
                             self.putInStorage(withData: (datum as! UIImage).pngData(), forFilename: imageString, contentType: "image/png")
                             print("Image not found!!")
                         }
@@ -279,10 +267,6 @@ class WorkbookController: UIViewController,
             }
         }
         
-        //Do I need to capture all these???
-//        uploadTask.observe(.resume) { (snapshot) in print("Upload resumed.....") }
-//        uploadTask.observe(.pause) { (snapshot) in print("Upload paused.....") }
-//        uploadTask.observe(.progress) { (snapshot) in print("Upload progress event.....") }
         uploadTask.observe(.success) { (snapshot) in print("Data upload SUCCESSFUL!") }
         uploadTask.observe(.failure) { (snapshot) in print("Data upload FAILED!") }
     }
@@ -327,7 +311,6 @@ extension WorkbookController {
             let vc = ProductListController()
             vc.delegate = self
             present(vc, animated: true)
-//            performSegue(withIdentifier: "showDetailsTVC2", sender: nil)
         case is UIImage:
             imagePicker.present(from: collectionView)
         case is SectionText:
@@ -349,9 +332,6 @@ extension WorkbookController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let comparisonValue = workbookSections[indexPath.section].data[indexPath.row]
         
-        // FIXME: - Testing out CGAffineTransform
-//        let itemScale: CGFloat = 0.5
-        
         if let placeholder = comparisonValue as? SectionPlaceholder {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellBlank.reuseID, for: indexPath) as? CollectionCellBlank else { fatalError("Unknown collectionView cell returned!") }
             
@@ -360,12 +340,8 @@ extension WorkbookController {
                 cell.contentView.backgroundColor = .systemGray4
             case .text:
                 cell.contentView.backgroundColor = .systemGray5
-                
-//                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             case .item:
                 cell.contentView.backgroundColor = .systemGray6
-
-//                cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
             }
             
             return cell
@@ -384,25 +360,12 @@ extension WorkbookController {
 //                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 return cell
             }
-            
-//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as? CollectionCell else {
-//                fatalError("Unknown collectionView cell returned!")
-//            }
-//
-//            cell.setViews(with: comparisonValue)
-//
-//            // FIXME: - Testing out CGAffineTransform
-////            cell.transform = CGAffineTransform(scaleX: itemScale, y: itemScale)
-//
-//            return cell
         }
                 
         if let img = comparisonValue as? UIImage {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCellImage.reuseID, for: indexPath) as? CollectionCellImage else { fatalError("Unknown collectionView cell returned!") }
             
             cell.imageView.image = img
-            // FIXME: - Testing out CGAffineTransform
-//            cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
 
             return cell
         }
@@ -412,9 +375,6 @@ extension WorkbookController {
             
             cell.titleLabel.text = text.title
             cell.descriptionLabel.text = text.description
-            // FIXME: - Testing out CGAffineTransform
-//            cell.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
-
             
             return cell
         }
@@ -423,6 +383,8 @@ extension WorkbookController {
         cell.contentView.backgroundColor = .lightGray
         return cell
     }
+    
+    
     
     // FIXME: - Footer not working
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -456,10 +418,10 @@ extension WorkbookController {
     }
     
     private func layoutSection(widthCount: Int, heightCount: Int, sectionType: SectionType, padding: CGFloat = 8) -> NSCollectionLayoutSection {
-        var layoutItemSize: NSCollectionLayoutSize
-        
+
         // FIXME: - Trying to get CollectionCell dimensions to be a specific size
-        switch sectionType {
+//        var layoutItemSize: NSCollectionLayoutSize
+//        switch sectionType {
 //        case .size_2x1, .size_2x1reversed:
 //            layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(1028), heightDimension: .absolute(800))
 //        case .size_3x3x2:
@@ -468,11 +430,12 @@ extension WorkbookController {
 //            layoutItemSize = NSCollectionLayoutSize(widthDimension: .absolute(CollectionCell.collectionCellWidth), heightDimension: .absolute(CollectionCell.collectionCellHeight))
 //
 //            print("collectionCellWidth: \(CollectionCell.collectionCellWidth), collectionCellHeight: \(CollectionCell.collectionCellHeight)")
-        default:
-            layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        }
+//        default:
+//            layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+//        }
         
         
+        let layoutItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: layoutItemSize)
         layoutItem.contentInsets = setContentInsets(padding: padding)
         
