@@ -49,6 +49,14 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var qoh5Label: UILabel!
     @IBOutlet weak var qoh6Label: UILabel!
     @IBOutlet weak var qoh7Label: UILabel!
+    @IBOutlet weak var status0Label: UILabel!
+    @IBOutlet weak var status1Label: UILabel!
+    @IBOutlet weak var status2Label: UILabel!
+    @IBOutlet weak var status3Label: UILabel!
+    @IBOutlet weak var status4Label: UILabel!
+    @IBOutlet weak var status5Label: UILabel!
+    @IBOutlet weak var status6Label: UILabel!
+    @IBOutlet weak var status7Label: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lineListLabel: UILabel!
     @IBOutlet weak var seasonsCarriedLabel: UILabel!
@@ -129,6 +137,14 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         qoh5Label.text = model.sizes[5].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[5].qoh!))!)"
         qoh6Label.text = model.sizes[6].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[6].qoh!))!)"
         qoh7Label.text = model.sizes[7].qoh == nil ? "" : "QOH: \(numberFormatter.string(from: NSNumber(value: model.sizes[7].qoh!))!)"
+        status0Label.text = model.sizes[0].status == nil ? "" : "Status: \(numberFormatter.string(from: NSNumber(value: model.sizes[0].status!))!)"
+        status1Label.text = model.sizes[1].status == nil ? "" : "Status: \(numberFormatter.string(from: NSNumber(value: model.sizes[1].status!))!)"
+        status2Label.text = model.sizes[2].status == nil ? "" : "Status: \(numberFormatter.string(from: NSNumber(value: model.sizes[2].status!))!)"
+        status3Label.text = model.sizes[3].status == nil ? "" : "Status: \(numberFormatter.string(from: NSNumber(value: model.sizes[3].status!))!)"
+        status4Label.text = model.sizes[4].status == nil ? "" : "Status: \(numberFormatter.string(from: NSNumber(value: model.sizes[4].status!))!)"
+        status5Label.text = model.sizes[5].status == nil ? "" : "Status: \(numberFormatter.string(from: NSNumber(value: model.sizes[5].status!))!)"
+        status6Label.text = model.sizes[6].status == nil ? "" : "Status: \(numberFormatter.string(from: NSNumber(value: model.sizes[6].status!))!)"
+        status7Label.text = model.sizes[7].status == nil ? "" : "Status: \(numberFormatter.string(from: NSNumber(value: model.sizes[7].status!))!)"
         lineListLabel.text = model.lineList + " | " + (model.isRemoved ? "Removed" : "Not Removed")
         seasonsCarriedLabel.text = model.seasonsCarried
     }

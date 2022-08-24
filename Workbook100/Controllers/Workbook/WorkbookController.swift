@@ -25,7 +25,7 @@ class WorkbookController: UIViewController,
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var addSectionButton: UIBarButtonItem!
     
-    let workbookName = "SP23 Apparel-2"
+    let workbookName = "SP23 Apparel"
     var collectionView: UICollectionView!
     var imagePicker: ImagePicker!
     var workbookSections: [SectionModel]!
@@ -481,7 +481,7 @@ extension WorkbookController {
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: widthCount)
         
         let section = NSCollectionLayoutSection(group: layoutGroup)
-        section.contentInsets = setContentInsets(padding: SectionModel.backgroundPadding + padding)
+        section.contentInsets = setContentInsets(padding: SectionModel.backgroundPadding + 0)
         section.decorationItems = setBackgroundItem(padding: SectionModel.backgroundPadding)
         
 //        let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))

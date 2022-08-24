@@ -597,19 +597,25 @@
                                                     <rect key="frame" x="20" y="12.333333333333334" width="310" height="19.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90t-1m-5WF">
-                                                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="19.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjm-Ye-6kX">
-                                                            <rect key="frame" x="103.33333333333334" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="77.666666666666686" y="0.0" width="77.333333333333314" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mr-c3-QZy">
-                                                            <rect key="frame" x="206.66666666666666" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="155" y="0.0" width="77.666666666666686" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4I-TH-INe">
+                                                            <rect key="frame" x="232.66666666666666" y="0.0" width="77.333333333333343" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -635,19 +641,25 @@
                                                     <rect key="frame" x="20" y="12.333333333333334" width="310" height="19.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFG-0L-Ylu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="19.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7p-8R-Puz">
-                                                            <rect key="frame" x="103.33333333333334" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="77.666666666666686" y="0.0" width="77.333333333333314" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhN-pv-Ukk">
-                                                            <rect key="frame" x="206.66666666666666" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="155" y="0.0" width="77.666666666666686" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnz-rR-PPO">
+                                                            <rect key="frame" x="232.66666666666666" y="0.0" width="77.333333333333343" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -673,19 +685,25 @@
                                                     <rect key="frame" x="20" y="12.333333333333334" width="310" height="19.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Nn-TZ-0JB">
-                                                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="19.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73L-cR-3ds">
-                                                            <rect key="frame" x="103.33333333333334" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="77.666666666666686" y="0.0" width="77.333333333333314" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cg-3W-Sdh">
-                                                            <rect key="frame" x="206.66666666666666" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="155" y="0.0" width="77.666666666666686" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXa-Ei-nwr">
+                                                            <rect key="frame" x="232.66666666666666" y="0.0" width="77.333333333333343" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -711,19 +729,25 @@
                                                     <rect key="frame" x="20" y="12.333333333333334" width="310" height="19.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kz0-j5-l3H">
-                                                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="19.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtb-qN-2Kb">
-                                                            <rect key="frame" x="103.33333333333334" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="77.666666666666686" y="0.0" width="77.333333333333314" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDb-av-0U2">
-                                                            <rect key="frame" x="206.66666666666666" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="155" y="0.0" width="77.666666666666686" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4g-7t-AIR">
+                                                            <rect key="frame" x="232.66666666666666" y="0.0" width="77.333333333333343" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -749,19 +773,25 @@
                                                     <rect key="frame" x="20" y="12.333333333333334" width="310" height="19.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLg-X2-TMe">
-                                                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="19.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6k-Xo-3kJ">
-                                                            <rect key="frame" x="103.33333333333334" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="77.666666666666686" y="0.0" width="77.333333333333314" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4y5-0d-4Cj">
-                                                            <rect key="frame" x="206.66666666666666" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="155" y="0.0" width="77.666666666666686" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcb-5S-Ee8">
+                                                            <rect key="frame" x="232.66666666666666" y="0.0" width="77.333333333333343" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -787,19 +817,25 @@
                                                     <rect key="frame" x="20" y="12.333333333333334" width="310" height="19.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWC-9u-6pp">
-                                                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="19.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBJ-SN-C7T">
-                                                            <rect key="frame" x="103.33333333333334" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="77.666666666666686" y="0.0" width="77.333333333333314" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdo-ht-ipM">
-                                                            <rect key="frame" x="206.66666666666666" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="155" y="0.0" width="77.666666666666686" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhe-I6-lWX">
+                                                            <rect key="frame" x="232.66666666666666" y="0.0" width="77.333333333333343" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -825,19 +861,25 @@
                                                     <rect key="frame" x="20" y="12.333333333333334" width="310" height="19.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcz-0d-6Yz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="19.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teE-h6-hQN">
-                                                            <rect key="frame" x="103.33333333333334" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="77.666666666666686" y="0.0" width="77.333333333333314" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imo-lB-Atm">
-                                                            <rect key="frame" x="206.66666666666666" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="155" y="0.0" width="77.666666666666686" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zn2-kp-6IU">
+                                                            <rect key="frame" x="232.66666666666666" y="0.0" width="77.333333333333343" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -863,19 +905,25 @@
                                                     <rect key="frame" x="20" y="12.333333333333334" width="310" height="19.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLo-3g-uVs">
-                                                            <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="19.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZ2-1O-k9I">
-                                                            <rect key="frame" x="103.33333333333334" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="77.666666666666686" y="0.0" width="77.333333333333314" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l34-Z6-GjM">
-                                                            <rect key="frame" x="206.66666666666666" y="0.0" width="103.33333333333334" height="19.333333333333332"/>
+                                                            <rect key="frame" x="155" y="0.0" width="77.666666666666686" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59g-GJ-f3N">
+                                                            <rect key="frame" x="232.66666666666666" y="0.0" width="77.333333333333343" height="19.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1420,6 +1468,14 @@
                         <outlet property="sku5Label" destination="IBJ-SN-C7T" id="rVo-aC-Ubo"/>
                         <outlet property="sku6Label" destination="teE-h6-hQN" id="3dD-QY-ho1"/>
                         <outlet property="sku7Label" destination="RZ2-1O-k9I" id="eEj-gX-Lyl"/>
+                        <outlet property="status0Label" destination="D4I-TH-INe" id="aOw-sy-Iv5"/>
+                        <outlet property="status1Label" destination="hnz-rR-PPO" id="lHD-2g-NUx"/>
+                        <outlet property="status2Label" destination="jXa-Ei-nwr" id="Ji2-23-xGR"/>
+                        <outlet property="status3Label" destination="h4g-7t-AIR" id="arW-aH-zCg"/>
+                        <outlet property="status4Label" destination="vcb-5S-Ee8" id="JKx-Iv-kPK"/>
+                        <outlet property="status5Label" destination="Rhe-I6-lWX" id="NOI-84-yhz"/>
+                        <outlet property="status6Label" destination="zn2-kp-6IU" id="2Df-em-2c9"/>
+                        <outlet property="status7Label" destination="59g-GJ-f3N" id="AEe-0c-ptE"/>
                         <segue destination="pnD-lz-pb9" kind="presentation" identifier="imageSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="XFQ-te-Zw1"/>
                     </connections>
                 </tableViewController>

@@ -54,7 +54,7 @@ struct Flower: View {
         ForEach((0..<numPetals), id: \.self) {
             Petal(color: /*Color(hue: Double($0 * (360 / numPetals)) / 360,
                                saturation: 1.0,
-                            brightness: 1.0)*/.orange,
+                            brightness: 1.0)*/.green,
                   rotation: Double($0 * (360 / numPetals)))
         }
     }
