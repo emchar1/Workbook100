@@ -25,10 +25,9 @@ class CollectionCell: UICollectionViewCell {
     private var model: CollectionModel!
     
     //Dimensions
-    static let collectionCellWidth: CGFloat = 180
-    static var collectionCellHeight: CGFloat { collectionCellWidth * 3 / 2 }
-    static var collectionCellPadding: CGFloat = 8
-    static var itemsPerRow: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
+//    static let collectionCellWidth: CGFloat = 1
+//    static var collectionCellHeight: CGFloat { collectionCellWidth / 0.65 }
+//    static var itemsPerRow: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
     
     
     // MARK: - Initialization
@@ -88,6 +87,15 @@ class CollectionCell: UICollectionViewCell {
         labelSKULeft.text = sizes.left
         labelSKURight.text = sizes.right
     }
+    
+    /**
+     Scales the cell to fit the compositional layout item size.
+     */
+//    func calculateScaleTransform(cellSize: CGSize) {
+////        transform = CGAffineTransform(scaleX: cellSize.width / CollectionCell.collectionCellWidth,
+////                                      y: cellSize.height / CollectionCell.collectionCellHeight)
+//        transform = CGAffineTransform(scaleX: 1, y: 1 / 1)
+//    }
     
     private func layoutSizes() -> (left: String, right: String) {
         var leftReturn = ""

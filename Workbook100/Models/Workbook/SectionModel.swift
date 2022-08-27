@@ -38,9 +38,9 @@ final class SectionModel: NSObject {
     static let backgroundPadding: CGFloat = 40
     
     /**
-     Aspect ratio of a page in the InDesign workbook
+     Aspect ratio of a page in the InDesign workbook, originally 520/800 per inDesign Workbooks
      */
-    static let aspectRatio: CGFloat = 520 / 800
+    static let aspectRatio: CGFloat = 600 / 800//520 / 800
     
     static let sectionSectionPlaceholder = "sec: "
     static let sectionImage = "img: "

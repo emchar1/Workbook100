@@ -85,7 +85,7 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         itemIsRemoved = model.isRemoved
         removeButton.isEnabled = false
         
-        let padding: CGFloat = CollectionCell.collectionCellPadding
+        let padding: CGFloat = 8
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
@@ -196,7 +196,7 @@ extension LineListDetailTVC2 {
         let defaultHeight: CGFloat = 44
         
         switch indexPath.section {
-        case 3:
+//        case 3:
 //            print(indexPath.row)
 //            guard let colorwaySKU = model.sizes[indexPath.row].colorwaySKU else {
 //                print("colorwaySKU is nil")
@@ -212,8 +212,8 @@ extension LineListDetailTVC2 {
 //            guard model.sizes[indexPath.row].colorwaySKU!.count > 0 || model.sizes[indexPath.row].size!.count > 0 else {
 //                return 0
 //            }
-            
-            return defaultHeight
+//            
+//            return defaultHeight
         case 4:
             return imageSize
         default:

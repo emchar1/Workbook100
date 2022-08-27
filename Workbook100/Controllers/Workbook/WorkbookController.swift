@@ -13,8 +13,8 @@ import FirebaseFirestoreSwift
 class WorkbookController: UIViewController,
                           UICollectionViewDelegate,
                           UICollectionViewDataSource,
-                          UICollectionViewDragDelegate,
-                          UICollectionViewDropDelegate,
+//                          UICollectionViewDragDelegate,
+//                          UICollectionViewDropDelegate,
                           UIPopoverPresentationControllerDelegate,
                           ProductListControllerDelegate,
                           ImagePickerDelegate,
@@ -32,10 +32,10 @@ class WorkbookController: UIViewController,
     var selectedIndexPath: IndexPath?
     
     // FIXME: - Can't delete this for now because it's used in drag/drop
-    var dataColors: [[UIColor]] = [[.red, .orange, .systemPink, .yellow, .green, .cyan, .systemIndigo, .purple, .magenta],
-                                   [.yellow, .green, .cyan],
-                                   [.cyan, .blue, .purple],
-                                   [.purple, .magenta, .systemPink]]
+//    var dataColors: [[UIColor]] = [[.red, .orange, .systemPink, .yellow, .green, .cyan, .systemIndigo, .purple, .magenta],
+//                                   [.yellow, .green, .cyan],
+//                                   [.cyan, .blue, .purple],
+//                                   [.purple, .magenta, .systemPink]]
     
     //Firebase
     var docRef: DocumentReference!
@@ -54,6 +54,11 @@ class WorkbookController: UIViewController,
         initializeSections()
         
         collectionView.layoutSubviews()
+        
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(orientationDidChange(_:)),
+//                                               name: UIDevice.orientationDidChangeNotification,
+//                                               object: nil)
     }
     
     private func initializeFirestore() {
@@ -71,14 +76,11 @@ class WorkbookController: UIViewController,
 
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.dragDelegate = self
-        collectionView.dropDelegate = self
-        collectionView.dragInteractionEnabled = false
+//        collectionView.dragDelegate = self
+//        collectionView.dropDelegate = self
+//        collectionView.dragInteractionEnabled = false
 
         //Register the various Collection View cells
-        collectionView.collectionViewLayout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: BackgroundSupplementaryView.reuseID)
-        collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCell.reuseID)
-        collectionView.register(UINib(nibName: CollectionCellGloves.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCellGloves.reuseID)
         collectionView.register(CollectionCellPage.self, forCellWithReuseIdentifier: CollectionCellPage.reuseID)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
         collectionView.register(CollectionCellImage.self, forCellWithReuseIdentifier: CollectionCellImage.reuseID)
@@ -86,7 +88,13 @@ class WorkbookController: UIViewController,
         collectionView.register(CollectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                                 withReuseIdentifier: CollectionHeaderView.reuseID)
-        
+        collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil),
+                                forCellWithReuseIdentifier: CollectionCell.reuseID)
+        collectionView.register(UINib(nibName: CollectionCellGloves.reuseID, bundle: nil),
+                                forCellWithReuseIdentifier: CollectionCellGloves.reuseID)
+        collectionView.collectionViewLayout.register(BackgroundSupplementaryView.self,
+                                                     forDecorationViewOfKind: BackgroundSupplementaryView.reuseID)
+
         //Finally, add the collectionView to the subview
         view.addSubview(collectionView)
     }
@@ -132,6 +140,27 @@ class WorkbookController: UIViewController,
             })
         }
     }
+    
+//    @objc private func orientationDidChange(_ notification: NSNotification) {
+////        for workbookSection in workbookSections {
+////            for comparisonValue in workbookSection.data {
+////                guard let model = comparisonValue as? CollectionModel else { continue }
+////
+////
+////            }
+////        }
+//
+//        for cell in collectionView.visibleCells {
+//            if let cell = cell as? CollectionCell {
+//
+////                collectionView.collectionViewLayout = makeLayout()
+//                cell.calculateScaleTransform(cellSize: getCellSize(widthCount: 6, heightCount: 3))
+//            }
+//        }
+//
+//        collectionView.reloadData()
+//        print("rotated")
+//    }
     
     
 //    //This is replaced by collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -239,9 +268,7 @@ class WorkbookController: UIViewController,
     /**
      Saves the image to Firebase Storage.
      */
-    private func putInStorage(withData data: Data?,
-                              forFilename filename: String,
-                              contentType metadataContentType: String) {
+    private func putInStorage(withData data: Data?, forFilename filename: String, contentType metadataContentType: String) {
         guard let data = data else {
             print("Error creating data file.")
             return
@@ -321,6 +348,7 @@ extension WorkbookController {
             vc.delegate = self
             vc.titleTF.text = comparisonValue.title
             vc.descriptionTF.text = comparisonValue.description
+            
             present(vc, animated: true)
         default:
             print("Unknown cell type!")
@@ -357,7 +385,7 @@ extension WorkbookController {
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as! CollectionCell
                 cell.setViews(with: model)
-//                cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+//                cell.calculateScaleTransform(cellSize: getCellSize(widthCount: 6, heightCount: 3))
                 return cell
             }
         }
@@ -490,6 +518,19 @@ extension WorkbookController {
         
         return [backgroundItem]
     }
+    
+//    private func getCellSize(widthCount: Int, heightCount: Int, padding: CGFloat = 8) -> CGSize {
+//        func totalPaddingFor(_ count: Int) -> CGFloat {
+//            return 2 * padding - 2 * padding * (CGFloat(count) - 1)
+//        }
+//
+//        let cellWidth = (view.frame.width - 2 * SectionModel.backgroundPadding - totalPaddingFor(widthCount)) / CGFloat(widthCount)
+//        let cellHeight = ((view.frame.width - 2 * SectionModel.backgroundPadding) * SectionModel.aspectRatio - totalPaddingFor(heightCount)) / CGFloat(heightCount)
+//
+//        print(CGSize(width: cellWidth, height: cellHeight))
+//
+//        return CGSize(width: cellWidth, height: cellHeight)
+//    }
 }
 
 

@@ -281,6 +281,7 @@
 				EA53FF9A276D200F00D22042 /* CollectionCellOLD.swift */,
 				EAB133EC27AE5F3A007F6553 /* GloveCell.swift */,
 				EA2E388327EE27D000122877 /* SavedList.swift */,
+				EAE647362817ADA500FBE6C3 /* WorkbookController+DragDrop.swift */,
 			);
 			path = "Delete?";
 			sourceTree = "<group>";
@@ -378,7 +379,6 @@
 			isa = PBXGroup;
 			children = (
 				EAE64734281799DA00FBE6C3 /* WorkbookController.swift */,
-				EAE647362817ADA500FBE6C3 /* WorkbookController+DragDrop.swift */,
 				EA38B4E328250B120030269A /* ProductListController.swift */,
 				EA38B4E528250BF60030269A /* ProductListCell.swift */,
 				EA3559D7283718BE00A7B2E6 /* TextEntryController.swift */,
