@@ -18,8 +18,9 @@ class CollectionCell2: UICollectionViewCell {
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var productImageNoImg: UILabel!
     @IBOutlet weak var labelSize: CollectionCellLabel!
-    @IBOutlet weak var labelSKU: CollectionCellLabel!
     @IBOutlet weak var labelQOH: CollectionCellLabel!
+    @IBOutlet weak var labelStatus: CollectionCellLabel!
+    @IBOutlet weak var labelROS: CollectionCellLabel!
     @IBOutlet weak var removeView: UIView!
     private var removeImage: UIImageView!
 
@@ -50,9 +51,10 @@ class CollectionCell2: UICollectionViewCell {
         labelTitle.type = .title
         labelSubtitle.type = .subtitle
         labelSize.type = .productSize
-        labelSKU.type = .productSize
         labelQOH.type = .productSize
-        
+        labelStatus.type = .productSize
+        labelROS.type = .productSize
+
         removeImage = UIImageView(image: UIImage(systemName: "xmark"))
         removeImage.tintColor = .systemRed
         removeImage.isHidden = true
@@ -110,17 +112,19 @@ class CollectionCell2: UICollectionViewCell {
         }
         
         labelSize.text = layoutSizes().size
-        labelSKU.text = layoutSizes().sku
         labelQOH.text = layoutSizes().qoh
+        labelStatus.text = layoutSizes().status
+        labelROS.text = layoutSizes().ros
         removeImage.isHidden = model.isRemoved ? false : true
     }
     
-    private func layoutSizes() -> (size: String, sku: String, qoh: String, status: String) {
+    private func layoutSizes() -> (size: String, sku: String, qoh: String, status: String, ros: String) {
         let numberFormatter = NumberFormatter()
         var sizes = ""
         var skus = ""
         var qohs = ""
         var statuses = ""
+        var roses = ""
         
         numberFormatter.numberStyle = .decimal
         
@@ -130,12 +134,14 @@ class CollectionCell2: UICollectionViewCell {
                 skus += "\(size.colorwaySKU ?? "XXXXX-XXXXX")\n"
                 qohs += "QOH: \(numberFormatter.string(from: NSNumber(value: size.qoh ?? -9999))!)\n"
                 statuses += "Status: \(numberFormatter.string(from: NSNumber(value: size.status ?? -9999))!)\n"
+                roses += "ROS: N/A\n"
             }
             else {
                 sizes += "\n"
                 skus += "\n"
                 qohs += "\n"
                 statuses += "\n"
+                roses += "\n"
             }
             
 //            sizes += "\(size.size ?? "NA"): " + ((i >= model.sizes.count) ? "" : "\n")
@@ -143,7 +149,7 @@ class CollectionCell2: UICollectionViewCell {
 //            qohs += "QOH: \(size.qoh ?? -9999)" + ((i >= model.sizes.count) ? "" : "\n")
         }
         
-        return (sizes, skus, qohs, statuses)
+        return (sizes, skus, qohs, statuses, roses)
     }
 
     @objc private func didRemoveItem(_ sender: UITapGestureRecognizer) {

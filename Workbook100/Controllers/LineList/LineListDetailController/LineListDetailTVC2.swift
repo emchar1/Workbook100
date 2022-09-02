@@ -25,6 +25,9 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var productSubtypeLabel: UILabel!
     @IBOutlet weak var productDetailsLabel: UILabel!
     @IBOutlet weak var divisionLabel: UILabel!
+    @IBOutlet weak var qohTotalLabel: UILabel!
+    @IBOutlet weak var statusTotalLabel: UILabel!
+    @IBOutlet weak var rosTotalLabel: UILabel!
     @IBOutlet weak var size0Label: UILabel!
     @IBOutlet weak var size1Label: UILabel!
     @IBOutlet weak var size2Label: UILabel!
@@ -100,6 +103,16 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
+        var qohTotal = 0
+        var statusTotal = 0
+        var rosTotal = 0
+        
+        for size in model.sizes {
+            qohTotal += size.qoh ?? 0
+            statusTotal += size.status ?? 0
+            rosTotal += 0
+        }
+        
         newLabel.isHidden = model.carryOver ? true : false
         essentialLabel.isHidden = model.essential ? false : true
         collectionLabel.text = model.collection
@@ -113,6 +126,9 @@ class LineListDetailTVC2: UITableViewController, UICollectionViewDelegate, UICol
         productSubtypeLabel.text = model.productSubtype
         productDetailsLabel.text = model.productDetails
         divisionLabel.text = model.division
+        qohTotalLabel.text = "QOH: \(numberFormatter.string(from: NSNumber(value: qohTotal))!)"
+        statusTotalLabel.text = "Status: \(numberFormatter.string(from: NSNumber(value: statusTotal))!)"
+        rosTotalLabel.text = "Rate of Sale: \(numberFormatter.string(from: NSNumber(value: rosTotal))!)"
         size0Label.text = model.sizes[0].size
         size1Label.text = model.sizes[1].size
         size2Label.text = model.sizes[2].size

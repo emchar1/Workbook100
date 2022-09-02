@@ -44,10 +44,23 @@ extension  LineListViewController {
                                         "Essential",
                                         "USRetailMSRP",
                                         "EURetailMSRP",
-                                        "CountryCode"]]
+                                        "CountryCode",
+                                        "QOH",
+                                        "Status",
+                                        "ROS"]]
                 
                 for item in K.getFilteredItemsIfFiltered {
                     guard !item.isRemoved else { continue}
+                    
+                    var qoh = 0
+                    var status = 0
+                    var ros = 0
+                    
+                    for size in item.sizes {
+                        qoh += size.qoh ?? 0
+                        status += size.status ?? 0
+                        ros += 0
+                    }
                     
                     csv.append([item.skuCode,
                                 item.productNameDescription,
@@ -61,7 +74,10 @@ extension  LineListViewController {
                                 item.essential ? "TRUE" : "FALSE",
                                 "\(item.usMSRP)",
                                 "\(item.euMSRP)",
-                                item.countryCode])
+                                item.countryCode,
+                                "\(qoh)",
+                                "\(status)",
+                                "\(ros)"])
                 }
                 
                 self.mailOrder(for: CSVMake.commaSeparatedValueDataForLines(csv))
@@ -81,6 +97,7 @@ extension  LineListViewController {
             
             // MARK: - Save List
             UIAction(title: "Save List", image: nil, handler: { action in
+                /*
                 guard K.ProductFilter.isFiltered else {
                     let alert = UIAlertController(title: "Error", message: "Results too large. Please narrow your search in the filters before proceeding.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -143,7 +160,29 @@ extension  LineListViewController {
                 }))//end alert.addAction...[OK]
                 
                 self.present(alert, animated: true)
+                 */
+                
+                let alert = UIAlertController(title: "Under Construction", message: "Coming soon!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+            }),
+            
+            
+            // MARK: - Select All
+            UIAction(title: "Select All", image: nil, handler: { action in
+                let _ = K.getFilteredItemsIfFiltered.map({ $0.isRemoved = true })
+                
+                self.collectionView.reloadData()
+            }),
+            
+            
+            // MARK: - Deselect All
+            UIAction(title: "Deselect All", image: nil, handler: { action in
+                let _ = K.getFilteredItemsIfFiltered.map({ $0.isRemoved = false })
+                
+                self.collectionView.reloadData()
             })
+
         ]
         
         rightMenu.menu = UIMenu(title: "Settings", image: nil, options: .displayInline, children: menuItems)

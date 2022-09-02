@@ -36,7 +36,7 @@ class LineListViewController: UIViewController,
     //Need these to update the anchors when the device orientation changes!! And it seems to work!
     var collectionViewWidthAnchor: NSLayoutConstraint!
     var collectionViewHeightAnchor: NSLayoutConstraint!
-    var numberOfTimesSetAnchorCalled = 0
+//    var numberOfTimesSetAnchorCalled = 0
     
     var noResultsLabel: UILabel = {
         let label = UILabel()
@@ -137,15 +137,18 @@ class LineListViewController: UIViewController,
         setupRightMenu()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(orientationDidChange(_:)),
+//                                               name: UIDevice.orientationDidChangeNotification,
+//                                               object: nil)
+//    }
     
     @discardableResult private func setCollectionViewWidthAndHeightAnchors() -> Bool {
         let widthAnchor = (CollectionCell2.collectionCellWidth * CollectionCell2.itemsPerRow) + ((1.5 * CollectionCell2.itemsPerRow) * CollectionCell2.collectionCellPadding)
-        let viewBounds = (UIDevice.current.userInterfaceIdiom == .pad && numberOfTimesSetAnchorCalled > 0) ? view.bounds.height : view.bounds.width
+        let viewBounds = min(view.bounds.width, view.bounds.height)// (UIDevice.current.userInterfaceIdiom == .pad && numberOfTimesSetAnchorCalled > 0) ? view.bounds.height : view.bounds.width
         let scale = viewBounds / widthAnchor
                 
         collectionView.transform = CGAffineTransform(scaleX: scale, y: scale)
@@ -153,33 +156,33 @@ class LineListViewController: UIViewController,
         collectionViewWidthAnchor = collectionView.widthAnchor.constraint(equalToConstant: widthAnchor)
         collectionViewHeightAnchor = collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1 / scale)
         
-        numberOfTimesSetAnchorCalled += 1
-        
-        print("view.bounds(width: \(view.bounds.width), height: \(view.bounds.height)), widthAnchor: \(widthAnchor), scale: \(scale), numberOfTimesSetAnchorCalled: \(numberOfTimesSetAnchorCalled)")
+//        numberOfTimesSetAnchorCalled += 1
+//
+//        print("view.bounds(width: \(view.bounds.width), height: \(view.bounds.height)), widthAnchor: \(widthAnchor), scale: \(scale), numberOfTimesSetAnchorCalled: \(numberOfTimesSetAnchorCalled)")
 
         return true
     }
 
-    @objc private func orientationDidChange(_ notification: NSNotification) {
-        NSLayoutConstraint.deactivate([collectionViewWidthAnchor, collectionViewHeightAnchor])
-        
-        if setCollectionViewWidthAndHeightAnchors() {
-            NSLayoutConstraint.activate([collectionViewWidthAnchor, collectionViewHeightAnchor])
-        }
-          
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                CollectionCell2.itemsPerRow = windowScene.interfaceOrientation.isLandscape ? 3 : 6
-            }
-            
-            if windowScene.interfaceOrientation.isLandscape {
-                print("I am landscape")
-            }
-            else {
-                print("Portraiture")
-            }
-        }
-    }
+//    @objc private func orientationDidChange(_ notification: NSNotification) {
+//        NSLayoutConstraint.deactivate([collectionViewWidthAnchor, collectionViewHeightAnchor])
+//
+//        if setCollectionViewWidthAndHeightAnchors() {
+//            NSLayoutConstraint.activate([collectionViewWidthAnchor, collectionViewHeightAnchor])
+//        }
+//
+//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+//            if UIDevice.current.userInterfaceIdiom == .phone {
+//                CollectionCell2.itemsPerRow = windowScene.interfaceOrientation.isLandscape ? 3 : 6
+//            }
+//
+//            if windowScene.interfaceOrientation.isLandscape {
+//                print("I am landscape")
+//            }
+//            else {
+//                print("Portraiture")
+//            }
+//        }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -190,13 +193,13 @@ class LineListViewController: UIViewController,
     // MARK: - Orientation Transition
       
     //Is this even needed anymore???
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(alongsideTransition: { _ in
-            self.collectionView.collectionViewLayout.invalidateLayout()
-        }, completion: nil)
-    }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//
+//        coordinator.animate(alongsideTransition: { _ in
+//            self.collectionView.collectionViewLayout.invalidateLayout()
+//        }, completion: nil)
+//    }
 
     
     // MARK: - Navigation

@@ -110,23 +110,29 @@
                                             <constraint firstAttribute="height" constant="10" id="9Bz-d9-gib"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ihe-wE-3sZ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ihe-wE-3sZ">
                                         <rect key="frame" x="0.0" y="10" width="200" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2XL: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="crl-Wq-hCU" userLabel="LabelSize" customClass="CollectionCellLabel" customModule="Workbook100" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="33" height="100"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00000-00000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="5sJ-X8-e2B" userLabel="LabelSKU" customClass="CollectionCellLabel" customModule="Workbook100" customModuleProvider="target">
-                                                <rect key="frame" x="33" y="0.0" width="92" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="39.5" height="100"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QOH: 3,472" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="HZj-xP-Xw5" userLabel="LabelQOH" customClass="CollectionCellLabel" customModule="Workbook100" customModuleProvider="target">
-                                                <rect key="frame" x="125" y="0.0" width="75" height="100"/>
+                                                <rect key="frame" x="39.5" y="0.0" width="90" height="100"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Status: 3,725" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="5sJ-X8-e2B" userLabel="LabelSKU" customClass="CollectionCellLabel" customModule="Workbook100" customModuleProvider="target">
+                                                <rect key="frame" x="129.5" y="0.0" width="29" height="100"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gj-tO-WLY" customClass="CollectionCellLabel" customModule="Workbook100" customModuleProvider="target">
+                                                <rect key="frame" x="158.5" y="0.0" width="41.5" height="100"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -151,8 +157,9 @@
                 <outlet property="labelEssential" destination="79B-fP-gPt" id="lBQ-F1-ze1"/>
                 <outlet property="labelNew" destination="iZn-ry-Srb" id="NH6-RR-BqW"/>
                 <outlet property="labelQOH" destination="HZj-xP-Xw5" id="Eg1-7F-9cu"/>
-                <outlet property="labelSKU" destination="5sJ-X8-e2B" id="BEW-Ma-Cog"/>
+                <outlet property="labelROS" destination="8gj-tO-WLY" id="eqR-fu-x43"/>
                 <outlet property="labelSize" destination="crl-Wq-hCU" id="92o-BO-t9b"/>
+                <outlet property="labelStatus" destination="5sJ-X8-e2B" id="BEW-Ma-Cog"/>
                 <outlet property="labelSubtitle" destination="m3y-dp-9sB" id="ju8-7E-RoR"/>
                 <outlet property="labelTitle" destination="Gcr-dI-mbO" id="Svw-Tv-J1J"/>
                 <outlet property="productImage" destination="kXn-eM-8Yu" id="DFu-TR-se3"/>
