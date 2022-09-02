@@ -230,7 +230,7 @@ extension LineListDetailTVC2 {
 //            }
 //            
 //            return defaultHeight
-        case 4:
+        case 5:
             return imageSize
         default:
             return defaultHeight
