@@ -32,7 +32,7 @@ class CollectionCell2: UICollectionViewCell {
     static let collectionCellWidth: CGFloat = 180
     static var collectionCellHeight: CGFloat { collectionCellWidth * 4 / 2 }
     static var collectionCellPadding: CGFloat = 8
-    static var itemsPerRow: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
+    static var itemsPerRow: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 4 : 6
     
     
     // MARK: - Initialization

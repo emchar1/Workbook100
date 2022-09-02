@@ -25,7 +25,7 @@ class CollectionCellGloves: UICollectionViewCell {
     static let collectionCellHeight: CGFloat = 180
     static var collectionCellWidth: CGFloat { collectionCellHeight * 3 / 2 }
     static var collectionCellPadding: CGFloat = 8
-    static var itemsPerRow: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
+    static var itemsPerRow: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 4 : 6
     
     
     // MARK: - Initialization
