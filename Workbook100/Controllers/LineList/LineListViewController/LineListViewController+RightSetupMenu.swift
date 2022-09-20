@@ -143,16 +143,16 @@ extension  LineListViewController {
             }),
             
             
-            // MARK: - Select All
-            UIAction(title: "Select All", image: nil, handler: { action in
+            // MARK: - Check All
+            UIAction(title: "Check All", image: UIImage(systemName: "xmark.square"), attributes: .destructive, handler: { action in
                 let _ = K.getFilteredItemsIfFiltered.map({ $0.isRemoved = true })
                 
                 self.collectionView.reloadData()
             }),
             
             
-            // MARK: - Deselect All
-            UIAction(title: "Deselect All", image: nil, handler: { action in
+            // MARK: - Uncheck All
+            UIAction(title: "Uncheck All", image: UIImage(systemName: "square"), attributes: .destructive, handler: { action in
                 let _ = K.getFilteredItemsIfFiltered.map({ $0.isRemoved = false })
                 
                 self.collectionView.reloadData()
