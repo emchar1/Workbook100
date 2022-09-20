@@ -7,6 +7,7 @@
 
 import UIKit
 import MessageUI
+import Firebase
 
 protocol LineListViewControllerDelegate: AnyObject {
     func expandPanel()
@@ -32,6 +33,13 @@ class LineListViewController: UIViewController,
     @IBOutlet weak var cancelMultiButton: UIBarButtonItem!
     
     weak var delegate: LineListViewControllerDelegate?
+    
+    //Firebase
+    var collectionRef: CollectionReference!
+    var listener: ListenerRegistration!
+    var docRef: DocumentReference!
+    var docData: [String: Any]!
+    var lineLists = [String]()
     
     //Need these to update the anchors when the device orientation changes!! And it seems to work!
     var collectionViewWidthAnchor: NSLayoutConstraint!
@@ -134,6 +142,7 @@ class LineListViewController: UIViewController,
                                      noResultsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
 
 //        collectionView.reloadData()
+        initializeFirestore()
         setupRightMenu()
     }
 
@@ -187,6 +196,37 @@ class LineListViewController: UIViewController,
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("Memory warning called!")
+    }
+    
+    private func initializeFirestore() {
+        collectionRef = Firestore.firestore().collection(FIRManager.FIRLineLists.lineLists)
+        docRef = Firestore.firestore().collection(FIRManager.FIRLineLists.lineLists).document("Test")
+        docData = [:]
+        
+        listener = collectionRef.addSnapshotListener { snapshot, error in
+            guard error == nil else { return print("Error getting line list documents: \(error!)") }
+            
+            self.lineLists = []
+            
+            for document in snapshot!.documents {
+                self.lineLists.append(document.documentID)
+            }
+        }
+        
+//        collectionRef.getDocuments { snapshot, error in
+//            guard error == nil else { return }
+//
+//            for document in snapshot!.documents {
+//                let data = document.data()
+//
+//                print(data)
+//            }
+//        }
+    }
+    
+    deinit {
+        listener.remove()
+        print("Remove")
     }
     
     

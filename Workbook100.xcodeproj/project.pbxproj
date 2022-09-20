@@ -63,6 +63,7 @@
 		EAD2C0E6287E78F6002A01F1 /* CollectionCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD2C0E5287E78F6002A01F1 /* CollectionCell2.xib */; };
 		EAD2C0E8287E7B06002A01F1 /* CollectionCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2C0E7287E7B06002A01F1 /* CollectionCell2.swift */; };
 		EAD957522819E1EF00D18200 /* CollectionCellPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD957512819E1EF00D18200 /* CollectionCellPage.swift */; };
+		EADE5CC528D841A80088541B /* LineListFIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE5CC428D841A80088541B /* LineListFIR.swift */; };
 		EAE6473128149E5500FBE6C3 /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6473028149E5500FBE6C3 /* Extension+Array.swift */; };
 		EAE64735281799DA00FBE6C3 /* WorkbookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE64734281799DA00FBE6C3 /* WorkbookController.swift */; };
 		EAE647372817ADA500FBE6C3 /* WorkbookController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE647362817ADA500FBE6C3 /* WorkbookController+DragDrop.swift */; };
@@ -132,6 +133,7 @@
 		EAD2C0E5287E78F6002A01F1 /* CollectionCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell2.xib; sourceTree = "<group>"; };
 		EAD2C0E7287E7B06002A01F1 /* CollectionCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell2.swift; sourceTree = "<group>"; };
 		EAD957512819E1EF00D18200 /* CollectionCellPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellPage.swift; sourceTree = "<group>"; };
+		EADE5CC428D841A80088541B /* LineListFIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineListFIR.swift; sourceTree = "<group>"; };
 		EAE6473028149E5500FBE6C3 /* Extension+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Array.swift"; sourceTree = "<group>"; };
 		EAE64734281799DA00FBE6C3 /* WorkbookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbookController.swift; sourceTree = "<group>"; };
 		EAE647362817ADA500FBE6C3 /* WorkbookController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkbookController+DragDrop.swift"; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 		EAA0CF882769576900943912 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EADE5CC328D841920088541B /* LineLists */,
 				EA38B4E028232E480030269A /* Workbook */,
 				EA2E38BD27F2E3F500122877 /* Constants */,
 				EA8914DF27DC038300C8D8D3 /* Category.swift */,
@@ -364,6 +367,14 @@
 				EA38B4DE2820E7000030269A /* BackgroundSupplementaryView.swift */,
 			);
 			path = ProductCategories;
+			sourceTree = "<group>";
+		};
+		EADE5CC328D841920088541B /* LineLists */ = {
+			isa = PBXGroup;
+			children = (
+				EADE5CC428D841A80088541B /* LineListFIR.swift */,
+			);
+			path = LineLists;
 			sourceTree = "<group>";
 		};
 		EAE647322817999600FBE6C3 /* LineList */ = {
@@ -523,6 +534,7 @@
 				EAB5FE182832122D000DD5C8 /* ImagePicker.swift in Sources */,
 				EA38B4E9282AE31C0030269A /* CollectionCell+Stack.swift in Sources */,
 				EAB5FE1A283452F4000DD5C8 /* CollectionCellImage.swift in Sources */,
+				EADE5CC528D841A80088541B /* LineListFIR.swift in Sources */,
 				EAE64735281799DA00FBE6C3 /* WorkbookController.swift in Sources */,
 				EA3559D8283718BE00A7B2E6 /* TextEntryController.swift in Sources */,
 				EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */,

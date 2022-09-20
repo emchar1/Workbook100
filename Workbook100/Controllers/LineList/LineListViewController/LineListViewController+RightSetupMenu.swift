@@ -50,7 +50,7 @@ extension  LineListViewController {
                                         "ROS"]]
                 
                 for item in K.getFilteredItemsIfFiltered {
-                    guard !item.isRemoved else { continue}
+                    guard !item.isRemoved else { continue }
                     
                     var qoh = 0
                     var status = 0
@@ -97,14 +97,7 @@ extension  LineListViewController {
             
             // MARK: - Save List
             UIAction(title: "Save List", image: nil, handler: { action in
-                /*
-                guard K.ProductFilter.isFiltered else {
-                    let alert = UIAlertController(title: "Error", message: "Results too large. Please narrow your search in the filters before proceeding.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true)
-                    
-                    return
-                }
+                var savedItems = [Any]()
                 
                 let alert = UIAlertController(title: "Save List", message: "Enter a name for your list:", preferredStyle: .alert)
                 alert.addTextField()
@@ -115,55 +108,37 @@ extension  LineListViewController {
                     
                     guard textString.count > 0 else { return }
                     
-                    
-                    let savingLabel = UILabel()
-                    savingLabel.text = "Saving List...\n\nThis may take a while"
-                    savingLabel.textAlignment = .center
-                    savingLabel.textColor = .white
-                    savingLabel.numberOfLines = 0
-                    savingLabel.font = UIFont.workbookNoimg
-                    savingLabel.backgroundColor = .black
-                    savingLabel.alpha = 1.0
-                    savingLabel.layer.cornerRadius = 8
-                    savingLabel.clipsToBounds = true
-                    savingLabel.translatesAutoresizingMaskIntoConstraints = false
-                    self.view.addSubview(savingLabel)
-                    NSLayoutConstraint.activate([savingLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                                                 savingLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-                                                 savingLabel.widthAnchor.constraint(equalToConstant: 200),
-                                                 savingLabel.heightAnchor.constraint(equalToConstant: 100)])
-                    let spinner = ActivitySpinner()
-                    spinner.startSpinner(in: self.view)
+                    self.showHUD(label: "Saving List...")
 
-                    //The bulk of the code needs to happen here!
-                    for (index, item) in K.getFilteredItemsIfFiltered.enumerated() {
-                        if item.savedLists != nil {
-                            item.savedLists!.append(textString)
-                        }
-                        else {
-                            item.savedLists = [textString]
-                        }
-                        
-                        FIRManager.updateFirebaseRecord(item: [FIRManager.FIR.savedLists: item.savedLists],
-                                                        databaseReference: Database.database().reference().child(item.hashNeedThis)) {
-                            if index >= (K.getFilteredItemsIfFiltered.count - 1) {
-                                UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseInOut, animations: {
-                                    savingLabel.text = "List Saved!"
-                                    savingLabel.alpha = 0
-                                    spinner.stopSpinner()
-                                }, completion: { _ in
-                                    savingLabel.removeFromSuperview()
-                                })
-                            }
-                        }//end FIRManager.updateFirebaseRecord()
-                    }//end for(index, item)
+                    for (_, item) in K.getFilteredItemsIfFiltered.enumerated() {
+//                        savedItems.append(HashNeedThis(hash: item.hashNeedThis, isExcluded: item.isRemoved))
+                        savedItems.append([LineListNaming.hash: item.hashNeedThis, LineListNaming.isExcluded: item.isRemoved])
+                    }
+                    
+                    if let alert = alert, let textFields = alert.textFields, let text = textFields[0].text {
+                        self.docRef = Firestore.firestore().collection(FIRManager.FIRLineLists.lineLists).document(text)
+                        self.docData["hashNeedThis"] = savedItems
+                        self.docRef.setData(self.docData)
+                    }
                 }))//end alert.addAction...[OK]
-                
+                                
                 self.present(alert, animated: true)
-                 */
+            }),
+            
+            
+            // MARK: - Load List
+            UIAction(title: "Load List", image: nil, handler: { action in
+                let alert = UIAlertController(title: "Load List", message: "Select a list to load", preferredStyle: .alert)
                 
-                let alert = UIAlertController(title: "Under Construction", message: "Coming soon!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                for lineList in self.lineLists {
+                    alert.addAction(UIAlertAction(title: lineList, style: .default, handler: { action in
+                        self.getItems(lineList: lineList)
+                        self.showHUD(label: "Loading List...")
+                    }))
+                }
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                
                 self.present(alert, animated: true)
             }),
             
@@ -186,5 +161,65 @@ extension  LineListViewController {
         ]
         
         rightMenu.menu = UIMenu(title: "Settings", image: nil, options: .displayInline, children: menuItems)
+    }
+    
+    
+    // MARK: - Helper Functions
+    
+    private func showHUD(label: String) {
+        let hudLabel = UILabel()
+        hudLabel.text = label
+        hudLabel.textAlignment = .center
+        hudLabel.textColor = .white
+        hudLabel.numberOfLines = 0
+        hudLabel.font = UIFont.workbookNoimg
+        hudLabel.backgroundColor = .black
+        hudLabel.alpha = 1.0
+        hudLabel.layer.cornerRadius = 8
+        hudLabel.clipsToBounds = true
+        hudLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(hudLabel)
+        NSLayoutConstraint.activate([hudLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                                     hudLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                                     hudLabel.widthAnchor.constraint(equalToConstant: 200),
+                                     hudLabel.heightAnchor.constraint(equalToConstant: 100)])
+        
+        let spinner = ActivitySpinner()
+        spinner.startSpinner(in: self.view)
+        
+        UIView.animate(withDuration: 0.5, delay: 2.0, options: [], animations: {
+            hudLabel.alpha = 0
+            
+        }, completion: { _ in
+            spinner.stopSpinner()
+            hudLabel.removeFromSuperview()
+        })
+    }
+    
+    private func getItems(lineList: String) {
+        docRef = collectionRef.document(lineList)
+        
+        docRef.getDocument { snapshot, error in
+            guard error == nil else { return print("Error getting snapshot: \(error!)") }
+            
+            do {
+                let lineListFIR: LineListFIR = try snapshot!.data(as: LineListFIR.self)
+                
+                K.filteredItems = []
+                                
+                for hashNeedThis in lineListFIR.hashNeedThis {
+                    let itemCheck = K.items.filter({ $0.hashNeedThis == hashNeedThis.hash })[0]
+                    itemCheck.isRemoved = hashNeedThis.isExcluded
+                    
+                    K.filteredItems.append(itemCheck)
+                }
+                
+                self.collectionView.reloadData()
+            }
+            catch {
+                print(error)
+            }
+        }
     }
 }

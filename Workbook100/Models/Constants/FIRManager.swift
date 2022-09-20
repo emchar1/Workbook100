@@ -14,6 +14,9 @@ struct FIRManager {
 //            print("Initialization Complete")
 //        }
 //    }
+    struct FIRLineLists {
+        static let lineLists = "Line Lists"
+    }
     
     struct FIRWorkbooks {
         static let collection = "Workbooks"
