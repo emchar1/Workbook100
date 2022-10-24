@@ -18,14 +18,15 @@ class WorkbookController: UIViewController,
                           UIPopoverPresentationControllerDelegate,
                           ProductListControllerDelegate,
                           ImagePickerDelegate,
-                          TextEntryControllerDelegate {
+                          TextEntryControllerDelegate
+{
     
     // MARK: - Properties
     
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var loadSaveButton: UIBarButtonItem!
     @IBOutlet weak var addSectionButton: UIBarButtonItem!
     
-    let workbookName = "SP23 Apparel-3"
+    let workbookName = "SP23 Apparel"
     var collectionView: UICollectionView!
     var imagePicker: ImagePicker!
     var workbookSections: [SectionModel]!
@@ -38,8 +39,11 @@ class WorkbookController: UIViewController,
 //                                   [.purple, .magenta, .systemPink]]
     
     //Firebase
+    var collectionRef: CollectionReference!
+    var listener: ListenerRegistration!
     var docRef: DocumentReference!
     var docData: [String: Any]!
+    var workbookList = [String]()
     
     
     // MARK: - Initialization
@@ -51,7 +55,8 @@ class WorkbookController: UIViewController,
 
         initializeFirestore()
         initializeCollectionView()
-        initializeSections()
+        loadWorkbook()
+        addLoadSaveMenu()
         
         collectionView.layoutSubviews()
         
@@ -62,8 +67,19 @@ class WorkbookController: UIViewController,
     }
     
     private func initializeFirestore() {
+        collectionRef = Firestore.firestore().collection(FIRManager.FIRWorkbooks.collection)
         docRef = Firestore.firestore().collection(FIRManager.FIRWorkbooks.collection).document(workbookName)
         docData = [:]
+        
+        listener = collectionRef.addSnapshotListener { snapshot, error in
+            guard error == nil else { return print("Error getting workbook list: \(error!)") }
+            
+            self.workbookList = []
+            
+            for document in snapshot!.documents {
+                self.workbookList.append(document.documentID)
+            }
+        }
     }
     
     private func initializeCollectionView() {
@@ -99,7 +115,7 @@ class WorkbookController: UIViewController,
         view.addSubview(collectionView)
     }
         
-    private func initializeSections() {
+    private func loadWorkbook() {
         //Prevents crash while Firestore is loading the doc...
         workbookSections = []
         
@@ -114,7 +130,7 @@ class WorkbookController: UIViewController,
             do {
                 let sectionFIR: SectionFIR = try snapshot.data(as: SectionFIR.self)
                 
-                self.initializeSectionsHelper(sectionFIR: sectionFIR)
+                self.loadWorkbookHelper(sectionFIR: sectionFIR)
             }
             catch {
                 print("Error dowloading Section Firestore data. Creating new workbook of size_1x1: \(error)")
@@ -124,7 +140,7 @@ class WorkbookController: UIViewController,
         }
     }
     
-    private func initializeSectionsHelper(sectionFIR: SectionFIR) {
+    private func loadWorkbookHelper(sectionFIR: SectionFIR) {
         for (index, sectionData) in sectionFIR.sections.enumerated() {
             let section = SectionModel(id: index, type: SectionType(rawValue: sectionData.type) ?? .size_1x1, data: sectionData.data)
             
@@ -137,11 +153,13 @@ class WorkbookController: UIViewController,
                 self.workbookSections.sort { $0.id < $1.id }
                 
                 self.collectionView.reloadData()
+                self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             })
         }
     }
     
-//    @objc private func orientationDidChange(_ notification: NSNotification) {
+    
+    //    @objc private func orientationDidChange(_ notification: NSNotification) {
 ////        for workbookSection in workbookSections {
 ////            for comparisonValue in workbookSection.data {
 ////                guard let model = comparisonValue as? CollectionModel else { continue }
@@ -177,51 +195,132 @@ class WorkbookController: UIViewController,
     
     // MARK: - UI Bar Button Items
     
-    @IBAction func saveWorkbook(_ sender: UIBarButtonItem) {
-        var sectionData: [Any] = []
-        
-        for (iindex, section) in workbookSections.enumerated() {
-            var dataData: [Any] = []
-
-            for (jindex, datum) in section.data.enumerated() {
-                switch datum {
-                case is SectionPlaceholder:
-                    dataData.append(SectionModel.sectionSectionPlaceholder + "\((datum as! SectionPlaceholder).rawValue)")
-                case is UIImage:
-                    let imageString = UUID().uuidString + ".png"
-                    let imageRef = Storage.storage().reference().child("\((datum as! UIImage).pngData()!)")
-                    
-                    imageRef.getData(maxSize: SectionModel.maxImageSize * SectionModel.mb) { (data, error) in
-                        if error == nil {
-                            print("Image already found!")
-                        }
-                        else {
-                            self.putInStorage(withData: (datum as! UIImage).pngData(), forFilename: imageString, contentType: "image/png")
-                            print("Image not found!!")
-                        }
-                    }
-
-                    dataData.append(SectionModel.sectionImage + imageString)
-                case is SectionText:
-                    let datumText = datum as! SectionText
-                    dataData.append(SectionModel.sectionText + datumText.title + "|" + datumText.description)
-                case is CollectionModel:
-                    dataData.append(SectionModel.sectionItem + (workbookSections[iindex].data[jindex] as! CollectionModel).skuCode)
-                default:
-                    print("Unknown datum")
-                }
-            }
+    private func addLoadSaveMenu() {
+        let menuItems: [UIAction] = [
+            UIAction(title: "New", image: nil,  handler: { action in
+                self.newMenuSelected()
+            }),
             
-            sectionData.append([SectionNaming.type: section.type.rawValue, SectionNaming.data: dataData])
-        }
+            UIAction(title: "Load", image: nil, handler: { action in
+                self.loadMenuSelected()
+            }),
+            
+            UIAction(title: "Save", image: nil, handler: { action in
+                self.saveMenuSelected()
+            })
+        ]
         
-        docData[SectionNaming.sections] = sectionData
-        docRef.setData(docData)
-        
-        print("Workbook saved!")
+        loadSaveButton.menu = UIMenu(title: "Create Workbook", image: nil, options: .displayInline, children: menuItems)
     }
     
-    @IBAction func addSection(_ sender: UIBarButtonItem) {
+    private func newMenuSelected() {
+        
+    }
+    
+    private func loadMenuSelected() {
+        let alert = UIAlertController(title: "Load Workbook", message: "Select a Workbook to load", preferredStyle: .alert)
+        
+        for workbook in self.workbookList {
+            alert.addAction(UIAlertAction(title: workbook, style: .default, handler: { action in
+                self.docRef = Firestore.firestore().collection(FIRManager.FIRWorkbooks.collection).document(workbook)
+                self.loadWorkbook()
+                self.showHUD(label: "Loading Workbook...")
+            }))
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(alert, animated: true)
+    }
+    
+    private func saveMenuSelected() {
+        let alert = UIAlertController(title: "Save Workbook", message: "Save changes to \(docRef.documentID)?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { action in
+            var sectionData: [Any] = []
+            
+            for (iindex, section) in self.workbookSections.enumerated() {
+                var dataData: [Any] = []
+
+                for (jindex, datum) in section.data.enumerated() {
+                    switch datum {
+                    case is SectionPlaceholder:
+                        dataData.append(SectionModel.sectionSectionPlaceholder + "\((datum as! SectionPlaceholder).rawValue)")
+                    case is UIImage:
+                        let imageString = UUID().uuidString + ".png"
+                        let imageRef = Storage.storage().reference().child("\((datum as! UIImage).pngData()!)")
+                        
+                        imageRef.getData(maxSize: SectionModel.maxImageSize * SectionModel.mb) { (data, error) in
+                            if error == nil {
+                                print("Image already found!")
+                            }
+                            else {
+                                self.putInStorage(withData: (datum as! UIImage).pngData(), forFilename: imageString, contentType: "image/png")
+                                print("Image not found!!")
+                            }
+                        }
+
+                        dataData.append(SectionModel.sectionImage + imageString)
+                    case is SectionText:
+                        let datumText = datum as! SectionText
+                        dataData.append(SectionModel.sectionText + datumText.title + "|" + datumText.description)
+                    case is CollectionModel:
+                        dataData.append(SectionModel.sectionItem + (self.workbookSections[iindex].data[jindex] as! CollectionModel).skuCode)
+                    default:
+                        print("Unknown datum")
+                    }
+                }
+                
+                sectionData.append([SectionNaming.type: section.type.rawValue, SectionNaming.data: dataData])
+            }
+            
+            self.docData[SectionNaming.sections] = sectionData
+            self.docRef.setData(self.docData)
+            
+            self.showHUD(label: "Saving Workbook...")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Don't Save", style: .cancel))
+        
+        present(alert, animated: true)
+    }
+    
+    private func showHUD(label: String) {
+        let hudLabel = UILabel()
+        hudLabel.text = label
+        hudLabel.textAlignment = .center
+        hudLabel.textColor = .white
+        hudLabel.numberOfLines = 0
+        hudLabel.font = UIFont.workbookNoimg
+        hudLabel.backgroundColor = .black
+        hudLabel.alpha = 1.0
+        hudLabel.layer.cornerRadius = 8
+        hudLabel.clipsToBounds = true
+        hudLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(hudLabel)
+        NSLayoutConstraint.activate([hudLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                                     hudLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                                     hudLabel.widthAnchor.constraint(equalToConstant: 200),
+                                     hudLabel.heightAnchor.constraint(equalToConstant: 100)])
+        
+        let spinner = ActivitySpinner()
+        spinner.startSpinner(in: self.view)
+        
+        UIView.animate(withDuration: 0.5, delay: 2.0, options: [], animations: {
+            hudLabel.alpha = 0
+            
+        }, completion: { _ in
+            spinner.stopSpinner()
+            hudLabel.removeFromSuperview()
+        })
+    }
+    
+    //I had to unlink this because adding an action to the button will prevent tapping to show the UIMenu.
+    @IBAction func loadSavePressed(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBAction func addSectionPressed(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Add Section", message: "Select a Section to Add:", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "One by One", style: .default, handler: { _ in
@@ -251,6 +350,12 @@ class WorkbookController: UIViewController,
         alertController.addAction(UIAlertAction(title: "(Three by Three) by Two", style: .default, handler: { _ in
             if let highestSection = (self.workbookSections.max { first, second in first.id < second.id }) {
                 self.didAddSection(id: highestSection.id, type: .size_3x3x2)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Two by (Three by Three)", style: .default, handler: { _ in
+            if let highestSection = (self.workbookSections.max { first, second in first.id < second.id }) {
+                self.didAddSection(id: highestSection.id, type: .size_2x3x3)
             }
         }))
 
@@ -439,6 +544,7 @@ extension WorkbookController {
             case .size_2x1reversed: return self.layoutSection(widthCount: 2, heightCount: 1, sectionType: .size_2x1reversed, padding: 0)
             case .size_6x3: return self.layoutSection(widthCount: 6, heightCount: 3, sectionType: .size_6x3)
             case .size_3x3x2: return self.layoutSectionWithSub()
+            case .size_2x3x3: return self.layoutSectionWithSub(reversed: true)
             }
         }
         
@@ -482,7 +588,7 @@ extension WorkbookController {
         return section
     }
     
-    private func layoutSectionWithSub(padding: CGFloat = 8) -> NSCollectionLayoutSection {
+    private func layoutSectionWithSub(reversed: Bool = false, padding: CGFloat = 8) -> NSCollectionLayoutSection {
         
         let layoutMainItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
         let layoutMainItem = NSCollectionLayoutItem(layoutSize: layoutMainItemSize)
@@ -499,7 +605,7 @@ extension WorkbookController {
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitem: layoutSubGroup, count: 3)
         
         let layoutMainGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(SectionModel.aspectRatio))
-        let layoutMainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutMainGroupSize, subitems: [layoutGroup, layoutMainItem])
+        let layoutMainGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutMainGroupSize, subitems: reversed ? [layoutMainItem, layoutGroup] : [layoutGroup, layoutMainItem])
 
         let section = NSCollectionLayoutSection(group: layoutMainGroup)
         section.contentInsets = setContentInsets(padding: SectionModel.backgroundPadding + 0)

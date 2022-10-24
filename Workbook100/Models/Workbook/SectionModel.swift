@@ -17,6 +17,7 @@ enum SectionType: String, CaseIterable {
     case size_2x1reversed
     case size_6x3
     case size_3x3x2
+    case size_2x3x3
 }
 
 /**
@@ -83,6 +84,8 @@ final class SectionModel: NSObject {
             data = Array(repeating: .item, count: 18)
         case .size_3x3x2:
             data = Array(repeating: .item, count: 9) + [.photo]
+        case .size_2x3x3:
+            data = [.text] + Array(repeating: .item, count: 9)
         }
         
         self.init(id: id, type: type, data: data)
