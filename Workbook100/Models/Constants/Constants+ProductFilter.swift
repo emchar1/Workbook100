@@ -10,7 +10,7 @@ import Foundation
 extension K {
     struct ProductFilter {
         static let wildcard = "[All]"
-        static let lineListDefault = "2W Distributor"
+        static let lineListDefault = "[All]"
         static let segementedBoth = 0
         static let segementedOn = 1
         static let segementedOff = 2
@@ -40,17 +40,18 @@ extension K {
         static var selectedSeasonsCarried: [String] = [wildcard]
         
         static var isFiltered: Bool {
-            return !(selectedLineList == wildcard &&
-                     selectedNew == segementedBoth &&
-                     selectedEssential == segementedBoth &&
-                     selectedCollection == wildcard &&
-                     selectedSeasonsCarried == [wildcard] &&
-                     selectedProductCategory == [wildcard] &&
-                     selectedProductType == [wildcard] &&
-                     selectedProductSubtype == [wildcard] &&
-                     selectedDivision == [wildcard] &&
-                     selectedProductClass == [wildcard] &&
-                     selectedProductDetails == [wildcard])
+            return true
+//            return !(selectedLineList == wildcard &&
+//                     selectedNew == segementedBoth &&
+//                     selectedEssential == segementedBoth &&
+//                     selectedCollection == wildcard &&
+//                     selectedSeasonsCarried == [wildcard] &&
+//                     selectedProductCategory == [wildcard] &&
+//                     selectedProductType == [wildcard] &&
+//                     selectedProductSubtype == [wildcard] &&
+//                     selectedDivision == [wildcard] &&
+//                     selectedProductClass == [wildcard] &&
+//                     selectedProductDetails == [wildcard])
         }
         
         

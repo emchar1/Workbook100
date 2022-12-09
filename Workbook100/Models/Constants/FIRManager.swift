@@ -287,7 +287,10 @@ struct FIRManager {
                                                savedLists: obj[FIRManager.FIR.savedLists] as? [String],
                                                isRemoved: (obj[FIRManager.FIR.isRemoved] as? String ?? "FALSE") == "TRUE")
                     
-                    //Populate items
+                    //Populate items, but not items with 0 quantities
+                    // FIXME: - Do I want this guard statement here, filtering out 0 quantities???
+                    guard item.sizes[0].qoh ?? 0 > 0 else { continue }
+                    
                     K.items.append(item)
                     allItems.append(item)
                     
