@@ -509,12 +509,12 @@ extension LineListViewController {
         
                 
         //Show a "No results found" label if the filtered list is empty
-        if K.ProductFilter.isFiltered {
+//        if K.ProductFilter.isFiltered {
             noResultsLabel.isHidden = !K.filteredItems.isEmpty
-        }
-        else {
-            noResultsLabel.isHidden = true
-        }
+//        }
+//        else {
+//            noResultsLabel.isHidden = true
+//        }
         
         collectionView.reloadData()
         delegate?.collapsePanel()

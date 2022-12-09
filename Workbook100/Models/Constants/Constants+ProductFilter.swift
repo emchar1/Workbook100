@@ -39,6 +39,7 @@ extension K {
         static var selectedProductDetails: [String] = [wildcard]
         static var selectedSeasonsCarried: [String] = [wildcard]
         
+        // FIXME: - Not sure what the repercussions on making isFiltered TRUE always is but I had to do this becase the Load List right menu wasn't filtering if all the filters were cleared...
         static var isFiltered: Bool {
             return true
 //            return !(selectedLineList == wildcard &&

@@ -15,7 +15,9 @@ struct K {
      Property that determines which array to return, based on if filters have been set.
      */
     static var getFilteredItemsIfFiltered: [CollectionModel] {
-        ProductFilter.isFiltered ? filteredItems : items
+//        print("ProductFilter.isFiltered: \(ProductFilter.isFiltered)")
+//        return ProductFilter.isFiltered ? filteredItems : items
+        filteredItems
     }
     
     /**
