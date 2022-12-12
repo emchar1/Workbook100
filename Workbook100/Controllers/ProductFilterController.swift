@@ -283,8 +283,10 @@ extension ProductFilterController {
         case FilterItem.lineList.rawValue:
             self.resetFilters(clear: true)
             self.selectedLineList = selectedItems[0]
-        case FilterItem.collection.rawValue: self.selectedCollection = selectedItems[0]
-        case FilterItem.seasonsCarried.rawValue: self.selectedSeasonsCarried = selectedItems
+        case FilterItem.collection.rawValue:
+            self.selectedCollection = selectedItems[0]
+        case FilterItem.seasonsCarried.rawValue:
+            self.selectedSeasonsCarried = selectedItems
         case FilterItem.productCategory.rawValue:
             self.selectedProductCategory = selectedItems
             resetFilterSpecific(productType: true, productSubtype: true, productClass: true)
@@ -294,9 +296,12 @@ extension ProductFilterController {
         case FilterItem.productSubtype.rawValue:
             self.selectedProductSubtype = selectedItems
             resetFilterSpecific(productType: false, productSubtype: false, productClass: true)
-        case FilterItem.division.rawValue: self.selectedDivision = selectedItems
-        case FilterItem.productClass.rawValue: self.selectedProductClass = selectedItems
-        case FilterItem.productDetails.rawValue: self.selectedProductDetails = selectedItems
+        case FilterItem.division.rawValue:
+            self.selectedDivision = selectedItems
+        case FilterItem.productClass.rawValue:
+            self.selectedProductClass = selectedItems
+        case FilterItem.productDetails.rawValue:
+            self.selectedProductDetails = selectedItems
         default: print("Wrong selection!")
         }
     }

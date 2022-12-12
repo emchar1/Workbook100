@@ -252,7 +252,7 @@ class LineListViewController: UIViewController,
             let controller = nc.topViewController as! LineListDetailTVC2
 
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                let itemForProductCategory = K.getFilteredItemsIfFiltered.filter {
+                let itemForProductCategory = K.filteredItems.filter {
                     $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
                 }
 
@@ -274,7 +274,7 @@ extension LineListViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard !K.ProductFilter.selectionProductCategory.isEmpty else { return UICollectionViewCell() }
 
-        let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+        let itemForCategory = K.filteredItems.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
         }
 
@@ -325,7 +325,7 @@ extension LineListViewController {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard !K.ProductFilter.selectionProductCategory.isEmpty else { return 0 }
         
-        let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+        let itemForCategory = K.filteredItems.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[section]
         }
 
@@ -348,7 +348,7 @@ extension LineListViewController {
     //Delegate Flow Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+        let itemForCategory = K.filteredItems.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
         }
         
@@ -385,7 +385,7 @@ extension LineListViewController {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        let itemForCategory = K.getFilteredItemsIfFiltered.filter {
+        let itemForCategory = K.filteredItems.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[section]
         }
 

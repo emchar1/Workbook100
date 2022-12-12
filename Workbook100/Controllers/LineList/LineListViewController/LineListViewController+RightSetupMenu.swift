@@ -49,7 +49,7 @@ extension  LineListViewController {
                                         "Status",
                                         "ROS"]]
                 
-                for item in K.getFilteredItemsIfFiltered {
+                for item in K.filteredItems {
                     guard !item.isRemoved else { continue }
                     
                     var qoh = 0
@@ -110,7 +110,7 @@ extension  LineListViewController {
                     
                     self.showHUD(label: "Saving List...")
 
-                    for (_, item) in K.getFilteredItemsIfFiltered.enumerated() {
+                    for (_, item) in K.filteredItems.enumerated() {
 //                        savedItems.append(HashNeedThis(hash: item.hashNeedThis, isExcluded: item.isRemoved))
                         savedItems.append([LineListNaming.hash: item.hashNeedThis, LineListNaming.isExcluded: item.isRemoved])
                     }
@@ -145,7 +145,7 @@ extension  LineListViewController {
             
             // MARK: - Check All
             UIAction(title: "Check All", image: UIImage(systemName: "xmark.square"), attributes: .destructive, handler: { action in
-                let _ = K.getFilteredItemsIfFiltered.map({ $0.isRemoved = true })
+                let _ = K.filteredItems.map({ $0.isRemoved = true })
                 
                 self.collectionView.reloadData()
             }),
@@ -153,7 +153,7 @@ extension  LineListViewController {
             
             // MARK: - Uncheck All
             UIAction(title: "Uncheck All", image: UIImage(systemName: "square"), attributes: .destructive, handler: { action in
-                let _ = K.getFilteredItemsIfFiltered.map({ $0.isRemoved = false })
+                let _ = K.filteredItems.map({ $0.isRemoved = false })
                 
                 self.collectionView.reloadData()
             })

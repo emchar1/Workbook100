@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ Represents a filter item used in the left menu.
+ */
 class Category<T> {
     var value: T
     var children: [Category] = []
