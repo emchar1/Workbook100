@@ -14,15 +14,16 @@ protocol ProductListControllerDelegate {
 class ProductListController: UIViewController {
     let tableView = UITableView()
     var delegate: ProductListControllerDelegate?
-    var allItems: [CollectionModel]!
+//    var allItems: [CollectionModel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        allItems = K.items.filter { model in
-            // FIXME: - WTF is this???
-            model.lineList == K.ProductFilter.wildcard
-        }
+//        allItems = K.items.filter { model in
+//            // FIXME: - WTF is this???
+//            model.lineList == K.ProductFilter.wildcard
+//        }
+//        allItems = K.items
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -49,7 +50,7 @@ extension ProductListController: UITableViewDataSource, UITableViewDelegate {
         
         guard !K.ProductFilter.selectionProductCategory.isEmpty else { return 0 }
         
-        let itemForCategory = allItems.filter {
+        let itemForCategory = K.items.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[section]
         }
 
@@ -59,7 +60,7 @@ extension ProductListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard !K.ProductFilter.selectionProductCategory.isEmpty else { return UITableViewCell() }
 
-        let itemForCategory = allItems.filter {
+        let itemForCategory = K.items.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
         }
         
@@ -77,7 +78,7 @@ extension ProductListController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let itemForCategory = allItems.filter {
+        let itemForCategory = K.items.filter {
             $0.productCategory == K.ProductFilter.selectionProductCategory[indexPath.section]
         }
 

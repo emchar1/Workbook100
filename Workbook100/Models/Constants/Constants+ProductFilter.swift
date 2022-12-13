@@ -57,7 +57,7 @@ extension K {
         
         
         // MARK: - Binary Tree Filter List
-        
+        /*
         static var categories: Category<String> {
             let collection = Category("2023 - Spring")
             
@@ -366,5 +366,6 @@ extension K {
 
             return collection
         }//end static var categories
+         */
     }//end struct ProductFilter
 }//end extension K

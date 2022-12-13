@@ -183,12 +183,13 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                     controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productType.rawValue:
-                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()) {
-                    controller.selections = [K.ProductFilter.wildcard] + selectedProductCategory.getChildren()
-                }
-                else {
-                    controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductType
-                }
+                // FIXME: - GETTING RID OF THAT STUPID BINARY TREE. MAKE SOMETHING SIMPLER, LIKE PIVOT TABLE
+                //                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()) {
+                //                    controller.selections = [K.ProductFilter.wildcard] + selectedProductCategory.getChildren()
+                //                }
+                //                else {
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductType
+                //                }
                 
                 controller.selectedItems = self.selectedProductType
                 controller.navigationItem.title! += " Product Type"
@@ -197,13 +198,13 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                     controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productSubtype.rawValue:
-                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()),
-                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == self.selectedProductType.joined() }) {
-                    controller.selections = [K.ProductFilter.wildcard] + selectedProductType.getChildren()
-                }
-                else {
-                    controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductSubtype
-                }
+                //                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()),
+                //                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == self.selectedProductType.joined() }) {
+                //                    controller.selections = [K.ProductFilter.wildcard] + selectedProductType.getChildren()
+                //                }
+                //                else {
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductSubtype
+                //                }
                 
                 controller.selectedItems = self.selectedProductSubtype
                 controller.navigationItem.title! += " Product Subtype"
@@ -220,14 +221,14 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
                     controller.startSpinner(in: controller.view, offset: CGPoint(x: 0, y: spinnerOffset))
                 }
             case FilterItem.productClass.rawValue:
-                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()),
-                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == self.selectedProductType.joined() }),
-                   let selectedProductSubtype = selectedProductType.children.first(where: { $0.value == self.selectedProductSubtype.joined() }) {
-                    controller.selections = [K.ProductFilter.wildcard] + selectedProductSubtype.getChildren()
-                }
-                else {
-                    controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductClass
-                }
+                //                if let selectedProductCategory = K.ProductFilter.categories.search(self.selectedProductCategory.joined()),
+                //                   let selectedProductType = selectedProductCategory.children.first(where: { $0.value == self.selectedProductType.joined() }),
+                //                   let selectedProductSubtype = selectedProductType.children.first(where: { $0.value == self.selectedProductSubtype.joined() }) {
+                //                    controller.selections = [K.ProductFilter.wildcard] + selectedProductSubtype.getChildren()
+                //                }
+                //                else {
+                controller.selections = [K.ProductFilter.wildcard] + K.ProductFilter.selectionProductClass
+                //                }
                 
                 controller.selectedItems = self.selectedProductClass
                 controller.navigationItem.title! += " Product Class"
@@ -271,7 +272,25 @@ class ProductFilterController: UITableViewController, ProductSubFilterController
         //Do the deselect AFTER everthing else!!!
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
+    
+    // MARK: - Hide a TableView Section
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 || section == 3 || section == 10 {
+            return CGFloat.leastNonzeroMagnitude
+        }
+        
+        return tableView.sectionHeaderHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 || section == 3 || section == 10 {
+            return 0
+        }
+        
+        return 1
+    }
 }
 
 
@@ -281,7 +300,7 @@ extension ProductFilterController {
     func didSelectItems(selectedItems: [String]) {
         switch self.selectedSection {
         case FilterItem.lineList.rawValue:
-            self.resetFilters(clear: true)
+//            self.resetFilters(clear: true)
             self.selectedLineList = selectedItems[0]
         case FilterItem.collection.rawValue:
             self.selectedCollection = selectedItems[0]
@@ -289,13 +308,13 @@ extension ProductFilterController {
             self.selectedSeasonsCarried = selectedItems
         case FilterItem.productCategory.rawValue:
             self.selectedProductCategory = selectedItems
-            resetFilterSpecific(productType: true, productSubtype: true, productClass: true)
+//            resetFilterSpecific(productType: true, productSubtype: true, productClass: true)
         case FilterItem.productType.rawValue:
             self.selectedProductType = selectedItems
-            resetFilterSpecific(productType: false, productSubtype: true, productClass: true)
+//            resetFilterSpecific(productType: false, productSubtype: true, productClass: true)
         case FilterItem.productSubtype.rawValue:
             self.selectedProductSubtype = selectedItems
-            resetFilterSpecific(productType: false, productSubtype: false, productClass: true)
+//            resetFilterSpecific(productType: false, productSubtype: false, productClass: true)
         case FilterItem.division.rawValue:
             self.selectedDivision = selectedItems
         case FilterItem.productClass.rawValue:
@@ -306,11 +325,11 @@ extension ProductFilterController {
         }
     }
     
-    private func resetFilterSpecific(productType: Bool, productSubtype: Bool, productClass: Bool) {
-        let resetFilters = [K.ProductFilter.wildcard]
-
-        if productType { self.selectedProductType = resetFilters }
-        if productSubtype { self.selectedProductSubtype = resetFilters }
-        if productClass { self.selectedProductClass = resetFilters }
-    }
+//    private func resetFilterSpecific(productType: Bool, productSubtype: Bool, productClass: Bool) {
+//        let resetFilters = [K.ProductFilter.wildcard]
+//
+//        if productType { self.selectedProductType = resetFilters }
+//        if productSubtype { self.selectedProductSubtype = resetFilters }
+//        if productClass { self.selectedProductClass = resetFilters }
+//    }
 }

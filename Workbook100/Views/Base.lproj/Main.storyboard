@@ -1429,7 +1429,7 @@
                             <tableViewSection headerTitle="Line List (Debug)" id="jgQ-nn-xVi">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Thk-Ab-5DD">
-                                        <rect key="frame" x="20" y="1480.6666666666667" width="350" height="44"/>
+                                        <rect key="frame" x="20" y="1522" width="350" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Thk-Ab-5DD" id="CzP-K3-KVC">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="44"/>
