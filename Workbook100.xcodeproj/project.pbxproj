@@ -48,6 +48,8 @@
 		EA7A6CF3284736EF00058673 /* SectionFIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7A6CF2284736EF00058673 /* SectionFIR.swift */; };
 		EA8914E027DC038300C8D8D3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8914DF27DC038300C8D8D3 /* Category.swift */; };
 		EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91E071279366DC00DE630E /* ContainerViewController.swift */; };
+		EA95D1A829498D8C0061059C /* UsersTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA95D1A729498D8C0061059C /* UsersTableVC.swift */; };
+		EA95D1AA294991610061059C /* UsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA95D1A9294991610061059C /* UsersCell.swift */; };
 		EAA0CF752769573F00943912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF742769573F00943912 /* AppDelegate.swift */; };
 		EAA0CF772769573F00943912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF762769573F00943912 /* SceneDelegate.swift */; };
 		EAA0CF792769573F00943912 /* LineListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0CF782769573F00943912 /* LineListViewController.swift */; };
@@ -116,6 +118,8 @@
 		EA7A6CF2284736EF00058673 /* SectionFIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFIR.swift; sourceTree = "<group>"; };
 		EA8914DF27DC038300C8D8D3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EA91E071279366DC00DE630E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		EA95D1A729498D8C0061059C /* UsersTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableVC.swift; sourceTree = "<group>"; };
+		EA95D1A9294991610061059C /* UsersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCell.swift; sourceTree = "<group>"; };
 		EAA0CF712769573F00943912 /* Workbook100.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workbook100.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA0CF742769573F00943912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAA0CF762769573F00943912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -357,6 +361,8 @@
 				EAB133DF27A47BFD007F6553 /* LineListViewController+DragDrop.swift */,
 				EAB133E227A47CAD007F6553 /* LineListViewController+MailCompose.swift */,
 				EA2E388927EFC41E00122877 /* LineListViewController+RightSetupMenu.swift */,
+				EA95D1A729498D8C0061059C /* UsersTableVC.swift */,
+				EA95D1A9294991610061059C /* UsersCell.swift */,
 			);
 			path = LineListViewController;
 			sourceTree = "<group>";
@@ -549,12 +555,14 @@
 				EA2E388A27EFC41E00122877 /* LineListViewController+RightSetupMenu.swift in Sources */,
 				EA2E38AF27F2DD7100122877 /* Extension+UICollectionViewCell.swift in Sources */,
 				EA2E38B527F2DDF600122877 /* Extension+String.swift in Sources */,
+				EA95D1A829498D8C0061059C /* UsersTableVC.swift in Sources */,
 				EA91E072279366DD00DE630E /* ContainerViewController.swift in Sources */,
 				EA38B4E628250BF60030269A /* ProductListCell.swift in Sources */,
 				EA7A6CF3284736EF00058673 /* SectionFIR.swift in Sources */,
 				EA0AB09227CDB64A000D7D37 /* ActivitySpinner.swift in Sources */,
 				EAD957522819E1EF00D18200 /* CollectionCellPage.swift in Sources */,
 				EA2E387E27E9A74900122877 /* ImageViewCollectionCell.swift in Sources */,
+				EA95D1AA294991610061059C /* UsersCell.swift in Sources */,
 				EA53FF9D276D211000D22042 /* ImageLoader.swift in Sources */,
 				EA22D4E227759DA4006C12CF /* CollectionModel.swift in Sources */,
 				EAA0CF772769573F00943912 /* SceneDelegate.swift in Sources */,
