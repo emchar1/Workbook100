@@ -24,10 +24,15 @@ class CollectionCell: UICollectionViewCell {
     private var spinner = ActivitySpinner()
     private var model: CollectionModel!
     
-    //Dimensions
+    //Dimensions OLD
 //    static let collectionCellWidth: CGFloat = 1
 //    static var collectionCellHeight: CGFloat { collectionCellWidth / 0.65 }
 //    static var itemsPerRow: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 3 : 6
+    
+    static let collectionCellWidth: CGFloat = 180
+    static var collectionCellHeight: CGFloat { collectionCellWidth * 4 / 2 }
+    static var collectionCellPadding: CGFloat = 8
+    static var itemsPerRow: CGFloat = (UIScreen.main.traitCollection.horizontalSizeClass == .compact) ? 4 : 6
     
     
     // MARK: - Initialization

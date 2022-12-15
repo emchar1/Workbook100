@@ -72,7 +72,7 @@ class LineListViewController: UIViewController,
     }
     
     let collectionView: UICollectionView = {
-        let padding: CGFloat = CollectionCell2.collectionCellPadding
+        let padding: CGFloat = CollectionCell.collectionCellPadding
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
@@ -80,7 +80,7 @@ class LineListViewController: UIViewController,
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UINib(nibName: CollectionCell2.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCell2.reuseID)
+        collectionView.register(UINib(nibName: CollectionCell.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCell.reuseID)
         collectionView.register(UINib(nibName: CollectionCellGloves.reuseID, bundle: nil), forCellWithReuseIdentifier: CollectionCellGloves.reuseID)
         collectionView.register(CollectionCellBlank.self, forCellWithReuseIdentifier: CollectionCellBlank.reuseID)
         collectionView.register(CollectionHeaderView.self,
@@ -156,7 +156,7 @@ class LineListViewController: UIViewController,
 //    }
     
     @discardableResult private func setCollectionViewWidthAndHeightAnchors() -> Bool {
-        let widthAnchor = (CollectionCell2.collectionCellWidth * CollectionCell2.itemsPerRow) + ((1.5 * CollectionCell2.itemsPerRow) * CollectionCell2.collectionCellPadding)
+        let widthAnchor = (CollectionCell.collectionCellWidth * CollectionCell.itemsPerRow) + ((1.5 * CollectionCell.itemsPerRow) * CollectionCell.collectionCellPadding)
         let viewBounds = min(view.bounds.width, view.bounds.height)// (UIDevice.current.userInterfaceIdiom == .pad && numberOfTimesSetAnchorCalled > 0) ? view.bounds.height : view.bounds.width
         let scale = viewBounds / widthAnchor
                 
@@ -297,7 +297,7 @@ extension LineListViewController {
             if (itemForCategory[indexPath.row].productCategory.count) > 0 {
             //Uncomment this for flat CollectionView (no product category headers)
 //            if (K.getFilteredItemsIfFiltered[indexPath.row].productCategory.count) > 0 {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell2.reuseID, for: indexPath) as! CollectionCell2
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.reuseID, for: indexPath) as! CollectionCell
 
                 //Uncomment this for flat CollectionView (no product category headers)
 //                cell.model = K.getFilteredItemsIfFiltered[indexPath.row]
@@ -356,7 +356,7 @@ extension LineListViewController {
 //        case "Gloves":
 //            return CGSize(width: CollectionCellGloves.collectionCellWidth, height: CollectionCellGloves.collectionCellHeight)
         default:
-            return CGSize(width: CollectionCell2.collectionCellWidth, height: CollectionCell2.collectionCellHeight)
+            return CGSize(width: CollectionCell.collectionCellWidth, height: CollectionCell.collectionCellHeight)
         }
     }
     
