@@ -213,7 +213,7 @@ extension LineListDetailTVC2 {
         switch section {
         //can't return 0!! must return CGFloat.leastNonzeroMagnitude!!!!
         case 1: return CGFloat.leastNonzeroMagnitude
-        case 2: return CGFloat.leastNonzeroMagnitude
+//        case 2: return CGFloat.leastNonzeroMagnitude
         case 6: return CGFloat.leastNonzeroMagnitude
         default: return tableView.sectionHeaderHeight
         }

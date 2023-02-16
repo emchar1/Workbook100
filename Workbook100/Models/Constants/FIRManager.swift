@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import UIKit
 
 struct FIRManager {
 //    static var initializationRequested = false
@@ -289,7 +290,7 @@ struct FIRManager {
                     
                     //Populate items, but not items with 0 quantities
                     // FIXME: - Do I want this guard statement here, filtering out 0 quantities???
-                    guard item.sizes[0].qoh ?? 0 > 0 else { continue }
+//                    guard item.sizes[0].qoh ?? 0 > 0 else { continue }
                     
                     K.items.append(item)
                     allItems.append(item)
@@ -409,4 +410,20 @@ struct FIRManager {
         K.ProductFilter.selectionSeasonsCarried.sort()
     }
     
+    
+    
+    // MARK: - Storage Reference
+    
+    static func getLineArtFromStorage(sku: String) -> UIImage? {
+        let imageRef = Storage.storage().reference().child("FA23").child(sku + ".tif")
+
+//        let metadata = StorageMetadata()
+//        metadata.contentType = "image/tif"
+        
+        let imageView = UIImageView()
+//        imageView.sd_setImage(with: imageRef)
+        
+        
+        return nil
+    }
 }
